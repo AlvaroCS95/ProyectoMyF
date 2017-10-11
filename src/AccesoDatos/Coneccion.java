@@ -1,8 +1,4 @@
-//Hoola
 
-//Nueva modificacion
-//Nueva modificacion
-//Nueva modificacion
 
 package AccesoDatos;
 import UI.IngresoAlSistema;
