@@ -1,5 +1,3 @@
-//Hoola
-
 package AccesoDatos;
 import UI.IngresoAlSistema;
 import java.sql.Connection;
