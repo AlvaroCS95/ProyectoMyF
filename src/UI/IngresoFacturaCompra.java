@@ -19,9 +19,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     
     public IngresoFacturaCompra() {
         initComponents();
-//        ListarProveedores();
-//        ListarTiposDePago();
-//        scroll_IngresoFacturaCompra.getVerticalScrollBar().setUnitIncrement(15);
+        ListarProveedores();
+        ListarTiposDePago();
+        scroll_IngresoFacturaCompra.getVerticalScrollBar().setUnitIncrement(15);
     }
     
     public void IngresarFacturaCompra() {
@@ -258,11 +258,12 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtMontoCancelado_IngresarFacturaCompra = new javax.swing.JTextField();
         txtPlazoDias_IngresarFacturaCompra = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTIngresoDetalleFacturaCompra = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         boton_ListoDatosFacturaCompra = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCodigoDetalleFactura = new javax.swing.JTextField();
+        JBBuscarParaAgregarDetalle = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setAutoscrolls(true);
         setPreferredSize(new java.awt.Dimension(990, 631));
@@ -412,7 +413,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtPlazoDias_IngresarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
         panel_IngreosFacturaCompra.add(txtPlazoDias_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, 170, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTIngresoDetalleFacturaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -420,7 +421,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 "Código", "Nombre del producto", "Precio base", "Cantidad", "UME"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(JTIngresoDetalleFacturaCompra);
 
         panel_IngreosFacturaCompra.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 810, 960, 210));
 
@@ -431,11 +432,15 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         boton_ListoDatosFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         panel_IngreosFacturaCompra.add(boton_ListoDatosFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, -1, -1));
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(6, 23));
-        panel_IngreosFacturaCompra.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 740, 160, -1));
+        txtCodigoDetalleFactura.setPreferredSize(new java.awt.Dimension(6, 23));
+        panel_IngreosFacturaCompra.add(txtCodigoDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 740, 160, -1));
 
-        jButton1.setText("Buscar");
-        panel_IngreosFacturaCompra.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 740, -1, -1));
+        JBBuscarParaAgregarDetalle.setText("Buscar");
+        panel_IngreosFacturaCompra.add(JBBuscarParaAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 740, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel9.setText("Código:");
+        panel_IngreosFacturaCompra.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 740, -1, -1));
 
         scroll_IngresoFacturaCompra.setViewportView(panel_IngreosFacturaCompra);
 
@@ -473,13 +478,14 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     }//GEN-LAST:event_txtMontoDeCompra_IngresarFacturaCompraKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBBuscarParaAgregarDetalle;
+    private javax.swing.JTable JTIngresoDetalleFacturaCompra;
     private javax.swing.JButton boton_ListoDatosFacturaCompra;
     public static javax.swing.JButton btAceptar_IngresarFacturaCompra;
     public static javax.swing.JButton btLimpiar_IngresarFacturaCompra;
     public static javax.swing.JComboBox cbxProveedor_IngresarFacturaCompra;
     private javax.swing.JComboBox cbxTipoCompra_IngresarFacturaCompra;
     private javax.swing.JComboBox cbxTipoPago_FacturaCompra;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDCFecha_Compra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -497,11 +503,11 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panel_IngreosFacturaCompra;
     private javax.swing.JScrollPane scroll_IngresoFacturaCompra;
+    private javax.swing.JTextField txtCodigoDetalleFactura;
     private javax.swing.JTextField txtMontoCancelado_IngresarFacturaCompra;
     public static javax.swing.JTextField txtMontoDeCompra_IngresarFacturaCompra;
     private javax.swing.JTextField txtN_Entrega;
