@@ -326,7 +326,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, -1, -1));
 
         txt_IngresoFormaBusqueda.setEnabled(false);
-        add(txt_IngresoFormaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 150, 20));
+        add(txt_IngresoFormaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 150, 30));
 
         jb_Buscar.setText("Buscar");
         jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
