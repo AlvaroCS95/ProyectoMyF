@@ -160,7 +160,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                     return true;
                 }
             }
-//            JOptionPane.showMessageDialog(null, plazoDias);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error");
@@ -815,7 +814,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAgregarAlaListaAgregarProductoALaLista
 
     private void cbxImprime_PuntoDeVentaSeleccionarImprimirFactura(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxImprime_PuntoDeVentaSeleccionarImprimirFactura
-        JOptionPane.showMessageDialog(null, "Hola");
+//        JOptionPane.showMessageDialog(null, "Hola");
     }//GEN-LAST:event_cbxImprime_PuntoDeVentaSeleccionarImprimirFactura
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

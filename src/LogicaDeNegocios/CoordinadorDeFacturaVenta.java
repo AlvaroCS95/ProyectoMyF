@@ -76,7 +76,6 @@ public class CoordinadorDeFacturaVenta {
             float montoCancelado) {
         
         FacturaDeVenta nuevaFactura = new FacturaDeVenta();
-        JOptionPane.showMessageDialog(null, nuReferencia);
         nuevaFactura.CrearFacturaVentaCredito(monto, idCliente, idTipoPago, nuReferencia, plazoDias, montoCancelado);
         GestorFacturaVenta gestor = new GestorFacturaVenta();
         gestor.CrearFacturaVentaCredito(nuevaFactura);
