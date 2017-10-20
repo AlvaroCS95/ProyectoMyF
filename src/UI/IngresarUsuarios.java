@@ -254,7 +254,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
    public boolean VerificarCamposVacios() {
 
         if (txtPrimerNombre_IngresarUsuario.getText().equals("")
-                || txtSegundoNombre_IngresarUsuario.getText().equals("")
                 || txtPrimerNombre_IngresarUsuario.getText().equals("")
                 || txtSegundoApellido_IngresarUsuario.getText().equals("")
                 || txtCedula_IngresarUsuario.getText().equals("")
