@@ -145,17 +145,17 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
     public void EliminarProveedor(JTable Lista) {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un proveedor de la lista.");
         } else {
             String Estado = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
             if (Estado.equals("Inactivo")) {
-                JOptionPane.showMessageDialog(null, "El cliente seleccionado ha sido eliminado" + "\n"
+                JOptionPane.showMessageDialog(null, "El proveedor seleccionado ha sido eliminado" + "\n"
                         + "con anterioridad");
             } else {
                 String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
                 String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el cliente: " + NombreClienteSeleccionadoAEliminar
-                        + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar cliente");
+                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el proveedor: " + NombreClienteSeleccionadoAEliminar
+                        + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar proveedor");
                 if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
 
                     CoordinadorDeProveedores elCoordinadorDeProveedores = new CoordinadorDeProveedores();
@@ -198,7 +198,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
     public void ActivarProveedor() throws SQLException, ClassNotFoundException {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un proveedor de la lista.");
         } else {
             String Estado = TablaBuscarProveedores_BuscarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
             if (Estado.equals("Activo")) {

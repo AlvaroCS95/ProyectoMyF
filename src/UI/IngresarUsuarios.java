@@ -8,6 +8,7 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeUsuarios;
 import Modelos.Usuario;
 import static UI.ListarUsuarios.VisualizarUsuarios;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -283,25 +284,32 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             return;
         } else {
             try {
+                 ResultSet Respuesta; 
                 Cedula = txtCedula_IngresarUsuario.getText();
                 PrimerNombreUsuario = txtPrimerNombre_IngresarUsuario.getText();
                 SegundoNombreUsuario = txtSegundoNombre_IngresarUsuario.getText();
                 PrimerApellido = txtPrimerApellido_IngresarUsuario.getText();
                 SegundoApellido = txtSegundoApellido_IngresarUsuario.getText();
                 NombreUsuario = txtNombreUsuario_IngresarUsuario.getText();
-
+                
                 char[] contraseña = IngresarUsuarios.jpwsContraseña_IngresarUsuario.getPassword();
                 ClaveUsuario = new String(contraseña);
                 CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
                 Usuario elUsuario = new Usuario(NombreUsuario, ClaveUsuario, Cedula, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido);
-                if (elCoordinadorDeUsuarios.AgregarUsuario(elUsuario) == true) {
-                    JOptionPane.showMessageDialog(null, "Usuario insertado exitosamente");
-                    LimpiarCampos();
-                    VisualizarUsuarios();
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error en la inserción");
+                 Respuesta=elCoordinadorDeUsuarios.AgregarUsuario(elUsuario);
+                if(Respuesta.next()){
+                    if(Respuesta.getString(1).equals("1")){
+                        JOptionPane.showMessageDialog(null,"Se ingreso el usuario exitosamente");
+                        LimpiarCampos();
+                        dispose();
+                        ListarUsuarios.VisualizarUsuarios();
+                        
+                    }else {
+                        JOptionPane.showMessageDialog(null,"Error en la insercion:\nPosibles causas:\n1) No tiene permisos para ejecutar esta acción.\n"
+                                + "2) El usuario ha sido registrado con anterioridad. \nComuniquese con el administrador.","Error en la insercion",JOptionPane.ERROR_MESSAGE);
+                    }
                 }
+               
             } catch (Exception e) {
             }
         }

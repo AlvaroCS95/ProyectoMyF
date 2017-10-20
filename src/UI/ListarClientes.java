@@ -73,7 +73,7 @@ public class ListarClientes extends javax.swing.JPanel {
         jLabel52.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(0, 102, 112));
         jLabel52.setText("Clientes");
-        add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 137, -1));
+        add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 137, -1));
 
         jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator10.setAlignmentX(5.0F);
@@ -117,7 +117,7 @@ public class ListarClientes extends javax.swing.JPanel {
 
         jLabel50.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel50.setText("Lista de Clientes Activos");
-        add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, -1, -1));
+        add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
 
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator11.setAlignmentX(5.0F);

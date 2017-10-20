@@ -299,7 +299,7 @@ public void LimpiarCampos() {
         }
         return false;
     }
-  public void IngresarUsuario() {
+  public void IngresarCliente() {
         if (VerificarCamposVacios() == true) {
 
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
@@ -319,7 +319,7 @@ public void LimpiarCampos() {
                 if (elCoordinadorDeClientes.AgregarCliente(elCliente) == true) {
                     JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
                     LimpiarCampos();
-                     ListarClientes.VisualizarClientes(TablaListarClientes_ListarClientes); 
+                    ListarClientes.VisualizarClientes(TablaListarClientes_ListarClientes); 
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la inserción");
@@ -343,7 +343,7 @@ public void LimpiarCampos() {
     }//GEN-LAST:event_cbxNivel_IngresarClienteActionPerformed
 
     private void btAceptar_IngresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarClienteActionPerformed
-        IngresarUsuario();
+        IngresarCliente();
     }//GEN-LAST:event_btAceptar_IngresarClienteActionPerformed
 
     private void btLimpiar_IngresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarClienteActionPerformed
