@@ -215,7 +215,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
                 String clasificacion = (String) Tabla1_ActualizacionProductos.getValueAt(Tabla1_ActualizacionProductos.getSelectedRow(), 2);
                 CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
                 elProductoAEditar.setIdClasificacion(elCoordinador.ObtenerIdClasificacion(clasificacion));
-                elProductoAEditar.setExistencias((int) Tabla1_ActualizacionProductos.getValueAt(Tabla1_ActualizacionProductos.getSelectedRow(), 3));
+                elProductoAEditar.setExistencias((float) Tabla1_ActualizacionProductos.getValueAt(Tabla1_ActualizacionProductos.getSelectedRow(), 3));
                 elProductoAEditar.setPrecio((float) Tabla1_ActualizacionProductos.getValueAt(Tabla1_ActualizacionProductos.getSelectedRow(), 4));
                 String UME = (String) Tabla1_ActualizacionProductos.getValueAt(Tabla1_ActualizacionProductos.getSelectedRow(), 5);
                 elProductoAEditar.setIdUME(elCoordinador.ObtenerIdUME(UME));
@@ -601,7 +601,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
                 btEditartb1_VisualizarProductosActionPerformed(evt);
             }
         });
-        add(btEditartb1_VisualizarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 100, 50, 45));
+        add(btEditartb1_VisualizarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 100, 50, 50));
 
         panelOculto_VisualizarProductos.setVisible(false);
 
