@@ -27,6 +27,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
 
    
@@ -53,7 +54,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         btAceptar_IngresarUsuario = new javax.swing.JButton();
         txtPrimerNombre_IngresarUsuario = new javax.swing.JTextField();
         btLimpiar_IngresarUsuario = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,8 +123,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,8 +172,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                                 .addComponent(txtCedula_IngresarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(54, 54, 54)
                         .addComponent(btAceptar_IngresarUsuario)
                         .addGap(41, 41, 41)
                         .addComponent(btLimpiar_IngresarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -235,8 +231,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btAceptar_IngresarUsuario)
-                    .addComponent(btLimpiar_IngresarUsuario)
-                    .addComponent(jButton1))
+                    .addComponent(btLimpiar_IngresarUsuario))
                 .addGap(25, 25, 25))
         );
 
@@ -251,6 +246,23 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         txtNombreUsuario_IngresarUsuario.setText("");
         jpwsContraseña_IngresarUsuario.setText("");
     }
+  public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
    public boolean VerificarCamposVacios() {
 
         if (txtPrimerNombre_IngresarUsuario.getText().equals("")
@@ -311,7 +323,6 @@ public class IngresarUsuarios extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_IngresarUsuario;
     public static javax.swing.JButton btLimpiar_IngresarUsuario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

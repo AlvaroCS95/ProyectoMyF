@@ -101,7 +101,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         });
         menuFiltro.add(Activar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel49.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel49.setText("Filtrar clientes ");

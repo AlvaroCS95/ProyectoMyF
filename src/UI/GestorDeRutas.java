@@ -31,7 +31,8 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
         initComponents();
         InicailaizarTablaRutas();
-        InicializarFiltroClientes(TableListarBusqueda_GestorDeRutas);
+        InicializarFiltroClientes(TableListarBuscarClientes);
+        InicializarFiltroCamiones(TableListarBuscarCamiones);
         VisualizarTodasLasRutas();
     }
 
@@ -45,7 +46,8 @@ public class GestorDeRutas extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "La ruta se inserto correctamente");
 
                 VisualizarRutas();
-                LimpiarCampos();
+                VisualizarTodasLasRutas();
+                LimpiarCampos();               
             } else {
                 JOptionPane.showMessageDialog(null, "Error en la inserción");
             }
@@ -151,34 +153,19 @@ public class GestorDeRutas extends javax.swing.JPanel {
         trsFiltro.setRowFilter(RowFilter.regexFilter(txtBuscarRuta_GestorDeRuta.getText(), columnaABuscar));
     }
 
-    public static void Busqueda() {
 
-        if (cbxOpcionesFiltrar_GestorDeRutas.getSelectedItem() == "Clientes") {
-            opcionFiltro = false;
-            ListarClientesPorBusqueda();
-
-        }
-
-        if (cbxOpcionesFiltrar_GestorDeRutas.getSelectedItem() == "Camiones") {
-            opcionFiltro = true;
-            ListarCamionesPorBusqueda();
-        }
-
-    }
 
     public static void BuscarRuta() {
 
-        txtBuscarRuta_GestorDeRuta.addKeyListener(new KeyAdapter() {
+         txtBuscarRuta_GestorDeRuta.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 String cadena = (txtBuscarRuta_GestorDeRuta.getText());
                 txtBuscarRuta_GestorDeRuta.setText(cadena);
 
                 filtro();
-
-                char tecla = e.getKeyChar();
-                if (tecla == KeyEvent.VK_ENTER) {
-                    Busqueda();
-                }
+ListarClientesPorBusqueda();
+ ListarCamionesPorBusqueda();
+              
             }
         });
         trsFiltro = new TableRowSorter(TableBuscarRutas_GestorDeRutas.getModel());
@@ -255,18 +242,19 @@ public class GestorDeRutas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        TableListarBusqueda_GestorDeRutas = new javax.swing.JTable();
+        TableListarBuscarCamiones = new javax.swing.JTable();
         txtNombreRuta_GestorRuta = new javax.swing.JTextField();
         Titulo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cbxOpcionesFiltrar_GestorDeRutas = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableListarRutas_GestorDeRutas = new javax.swing.JTable();
         txtBuscarRuta_GestorDeRuta = new javax.swing.JTextField();
         btnAceptar_GestorRutas = new javax.swing.JButton();
-        NombreRuta = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtDescripcion_GestorRuta = new javax.swing.JTextArea();
+        Titulo1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TableListarBuscarClientes = new javax.swing.JTable();
 
         MenuListar.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -403,7 +391,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
         jLabel4.setText("Descripcion");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
-        TableListarBusqueda_GestorDeRutas.setModel(new javax.swing.table.DefaultTableModel(
+        TableListarBuscarCamiones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -414,27 +402,18 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane3.setViewportView(TableListarBusqueda_GestorDeRutas);
+        jScrollPane3.setViewportView(TableListarBuscarCamiones);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 371, 241));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 371, 130));
         add(txtNombreRuta_GestorRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 270, -1));
 
         Titulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        Titulo.setText("Clientes de la ruta:");
-        add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 208, -1));
+        Titulo.setText("Camiones");
+        add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setText("Lista de rutas activas");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
-
-        cbxOpcionesFiltrar_GestorDeRutas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cbxOpcionesFiltrar_GestorDeRutas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Clientes", "Camiones" }));
-        cbxOpcionesFiltrar_GestorDeRutas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filtarBusqueda(evt);
-            }
-        });
-        add(cbxOpcionesFiltrar_GestorDeRutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 240, 122, -1));
 
         TableListarRutas_GestorDeRutas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -455,7 +434,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TableListarRutas_GestorDeRutas);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 371, 312));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 500, 312));
 
         txtBuscarRuta_GestorDeRuta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -472,15 +451,30 @@ public class GestorDeRutas extends javax.swing.JPanel {
         });
         add(btnAceptar_GestorRutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 50, -1));
 
-        NombreRuta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        NombreRuta.setText("Ruta");
-        add(NombreRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 188, 28));
-
         txtDescripcion_GestorRuta.setColumns(20);
         txtDescripcion_GestorRuta.setRows(5);
         jScrollPane4.setViewportView(txtDescripcion_GestorRuta);
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 270, 58));
+
+        Titulo1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Titulo1.setText("Clientes");
+        add(Titulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 240, 80, -1));
+
+        TableListarBuscarClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(TableListarBuscarClientes);
+
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, 371, 110));
     }// </editor-fold>//GEN-END:initComponents
        public void LimpiarCampos() {
         txtNombreRuta_GestorRuta.setText("");
@@ -518,7 +512,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
     public static void ListarClientesPorBusqueda() {
         try {
-            InicializarFiltroClientes(TableListarBusqueda_GestorDeRutas);
+            InicializarFiltroClientes(TableListarBuscarClientes);
 
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
             if (txtBuscarRuta_GestorDeRuta.getText().equals("")) {
@@ -546,14 +540,14 @@ public class GestorDeRutas extends javax.swing.JPanel {
                 return;
             }
             while (resultadoConsulta.next()) {
-                NombreRuta.setText(txtBuscarRuta_GestorDeRuta.getText());
+               
                 for (int i = 0; i < modeloVerClientes.getColumnCount(); i++) {
 
                     filas[i] = resultadoConsulta.getObject(i + 1);
 
                 }
                 modeloVerClientes.addRow(filas);
-                TableListarBusqueda_GestorDeRutas.setModel(modeloVerClientes);
+                TableListarBuscarClientes.setModel(modeloVerClientes);
 
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -563,7 +557,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
     public static void ListarCamionesPorBusqueda() {
         try {
-            InicializarFiltroCamiones(TableListarBusqueda_GestorDeRutas);
+            InicializarFiltroCamiones(TableListarBuscarCamiones);
 
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
             if (txtBuscarRuta_GestorDeRuta.getText().equals("")) {
@@ -582,14 +576,14 @@ public class GestorDeRutas extends javax.swing.JPanel {
                 return;
             }
             while (resultadoConsulta.next()) {
-                NombreRuta.setText(txtBuscarRuta_GestorDeRuta.getText());
+               
                 for (int i = 0; i < modeloVerCamiones.getColumnCount(); i++) {
 
                     filas[i] = resultadoConsulta.getObject(i + 1);
 
                 }
                 modeloVerCamiones.addRow(filas);
-                TableListarBusqueda_GestorDeRutas.setModel(modeloVerCamiones);
+                TableListarBuscarCamiones.setModel(modeloVerCamiones);
 
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -614,10 +608,6 @@ public class GestorDeRutas extends javax.swing.JPanel {
     private void tipoDeBusqueda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDeBusqueda
 
     }//GEN-LAST:event_tipoDeBusqueda
-
-    private void filtarBusqueda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtarBusqueda
-        Busqueda();
-    }//GEN-LAST:event_filtarBusqueda
 
     private void EliminarRuta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarRuta
         int id = (int) TableListarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
@@ -679,7 +669,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
     private void txtBuscarRuta_GestorDeRutaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRuta_GestorDeRutaKeyTyped
         BuscarRuta();
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtBuscarRuta_GestorDeRutaKeyTyped
 
     private void ActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActivarActionPerformed
@@ -705,15 +695,15 @@ public class GestorDeRutas extends javax.swing.JPanel {
     private javax.swing.JMenuItem Asignar1;
     private javax.swing.JPopupMenu MenuBuscar;
     private javax.swing.JPopupMenu MenuListar;
-    public static javax.swing.JLabel NombreRuta;
     public static javax.swing.JTable TableBuscarRutas_GestorDeRutas;
-    public static javax.swing.JTable TableListarBusqueda_GestorDeRutas;
+    public static javax.swing.JTable TableListarBuscarCamiones;
+    public static javax.swing.JTable TableListarBuscarClientes;
     public static javax.swing.JTable TableListarRutas_GestorDeRutas;
     public static javax.swing.JLabel Titulo;
+    public static javax.swing.JLabel Titulo1;
     public static javax.swing.JButton btnAceptar_GestorRutas;
     public static javax.swing.JButton btnLimpiar_GestorRutas;
     public static javax.swing.JComboBox cbxOpcionesBuscarRuta_GestorDeRutas;
-    public static javax.swing.JComboBox cbxOpcionesFiltrar_GestorDeRutas;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -723,6 +713,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JMenuItem menuEditar_GestorRutas;
     public static javax.swing.JMenuItem menuEditar_GestorRutas1;

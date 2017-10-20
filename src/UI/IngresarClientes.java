@@ -29,10 +29,28 @@ public class IngresarClientes extends javax.swing.JDialog {
        
         initComponents();
          setLocationRelativeTo(null);
+         cerrar();
     }
 
   
     @SuppressWarnings("unchecked")
+    public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -57,7 +75,6 @@ public class IngresarClientes extends javax.swing.JDialog {
         btLimpiar_IngresarCliente = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtNombreLocal_IngresarCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,21 +154,12 @@ public class IngresarClientes extends javax.swing.JDialog {
         txtNombreLocal_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreLocal_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(335, 335, 335)
-                .addComponent(jButton1)
-                .addGap(70, 70, 70)
+                .addGap(470, 470, 470)
                 .addComponent(btLimpiar_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(btAceptar_IngresarCliente)
@@ -209,8 +217,7 @@ public class IngresarClientes extends javax.swing.JDialog {
                 .addContainerGap(426, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btAceptar_IngresarCliente)
-                    .addComponent(btLimpiar_IngresarCliente)
-                    .addComponent(jButton1))
+                    .addComponent(btLimpiar_IngresarCliente))
                 .addGap(20, 20, 20))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -343,18 +350,6 @@ public void LimpiarCampos() {
         LimpiarCampos();        // TODO add your handling code here:
     }//GEN-LAST:event_btLimpiar_IngresarClienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int Decision = JOptionPane.showConfirmDialog(
-            null,
-            "Desea salir de esta ventana",
-            "Salir",
-            JOptionPane.YES_NO_OPTION);
-
-        if (Decision == JOptionPane.YES_OPTION) {
-            dispose();
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -363,7 +358,6 @@ public void LimpiarCampos() {
     public static javax.swing.JButton btAceptar_IngresarCliente;
     public static javax.swing.JButton btLimpiar_IngresarCliente;
     public static javax.swing.JComboBox cbxNivel_IngresarCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

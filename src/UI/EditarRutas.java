@@ -20,6 +20,7 @@ public class EditarRutas extends javax.swing.JDialog {
         txtNombreRuta_GestorRuta.setText(NombreRuta);
         txtDescripcion_GestorRuta.setText(DescripcionRuta);
         setLocationRelativeTo(null);
+        cerrar();
     }
 
    
@@ -30,7 +31,6 @@ public class EditarRutas extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         btnAceptar_GestorRutas = new javax.swing.JButton();
         txtNombreRuta_GestorRuta = new javax.swing.JTextField();
-        btnCancelar_GestorRutas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnLimpiar_GestorRutas1 = new javax.swing.JButton();
@@ -46,13 +46,6 @@ public class EditarRutas extends javax.swing.JDialog {
         btnAceptar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptar_GestorRutasingresarRutas(evt);
-            }
-        });
-
-        btnCancelar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        btnCancelar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelar_GestorRutasActionPerformed(evt);
             }
         });
 
@@ -94,7 +87,6 @@ public class EditarRutas extends javax.swing.JDialog {
                             .addComponent(txtNombreRuta_GestorRuta))
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancelar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
@@ -102,29 +94,24 @@ public class EditarRutas extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel2)
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtNombreRuta_GestorRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addComponent(btnAceptar_GestorRutas)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpiar_GestorRutas1)
-                        .addGap(21, 21, 21)
-                        .addComponent(btnCancelar_GestorRutas)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar_GestorRutas1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNombreRuta_GestorRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,21 +126,29 @@ public class EditarRutas extends javax.swing.JDialog {
        txtNombreRuta_GestorRuta.setText("");
     }//GEN-LAST:event_btnLimpiar_GestorRutas1ActionPerformed
 
-    private void btnCancelar_GestorRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar_GestorRutasActionPerformed
-        int dialogResult = JOptionPane.showConfirmDialog (null, "Desea cancelar la operación");
-if(dialogResult == JOptionPane.YES_OPTION){
-  dispose();
-}
-    }//GEN-LAST:event_btnCancelar_GestorRutasActionPerformed
-
     /**
      * @param args the command line arguments
      */
- 
+ public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnAceptar_GestorRutas;
-    public static javax.swing.JButton btnCancelar_GestorRutas;
     public static javax.swing.JButton btnLimpiar_GestorRutas1;
     public static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

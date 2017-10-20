@@ -34,8 +34,25 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         InicializarFiltroClientes(TablaAsignarCliente);
 
         TipoDeFiltro();
+        cerrar();
     }
+public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
 
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarCamiones.panelHabilitado=false;
+            dispose();
+        }
+            }
+        });
+}
     public void AgregarTablaCamion() {
 
         if (SeleccionDeFila == false) {
@@ -150,7 +167,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         btnLimpiar_GestorRutas1 = new javax.swing.JButton();
         btnAceptar_GestorRutas = new javax.swing.JButton();
-        btnCancelar_GestorRutas = new javax.swing.JButton();
         cbxOpcionesFiltrar = new javax.swing.JComboBox();
 
         AgregarCamion.setText("Asignar");
@@ -177,7 +193,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         });
         menuCamiones.add(RemoverCamiones);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Selecciones los Clientes o/y Camiones que desea asignar a la ruta");
@@ -265,13 +281,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
             }
         });
 
-        btnCancelar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        btnCancelar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelar_GestorRutasActionPerformed(evt);
-            }
-        });
-
         cbxOpcionesFiltrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         cbxOpcionesFiltrar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Clientes", "Camiones" }));
         cbxOpcionesFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -288,32 +297,30 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(Asignados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Asignados)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(81, 81, 81))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(34, 34, 34)
-                                    .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(33, 33, 33)))
-                            .addComponent(btnCancelar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 669, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -332,7 +339,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                     .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(Asignados))
@@ -343,7 +351,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCancelar_GestorRutas, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(29, 29, 29))
         );
@@ -366,13 +373,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
             Logger.getLogger(AsignacionesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAceptar_GestorRutasingresarRutas
-
-    private void btnCancelar_GestorRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar_GestorRutasActionPerformed
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Desea cancelar la operación");
-        if (dialogResult == JOptionPane.YES_OPTION) {
-            dispose();
-        }
-    }//GEN-LAST:event_btnCancelar_GestorRutasActionPerformed
 
     private void TablaAsignacionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionesMousePressed
         FilaSeleccionadaParaEliminar = TablaAsignaciones.getSelectedRow();
@@ -431,7 +431,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     public static javax.swing.JTable TablaAsignarCamion;
     public static javax.swing.JTable TablaAsignarCliente;
     public static javax.swing.JButton btnAceptar_GestorRutas;
-    public static javax.swing.JButton btnCancelar_GestorRutas;
     public static javax.swing.JButton btnLimpiar_GestorRutas1;
     public static javax.swing.JComboBox cbxOpcionesFiltrar;
     private javax.swing.JLabel jLabel1;

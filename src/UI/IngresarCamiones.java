@@ -7,6 +7,7 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeCamion;
 import Modelos.Camion;
+import static UI.ListarCamiones.TablaListarCamiones_ListarCamiones;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -29,8 +30,25 @@ public class IngresarCamiones extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
+public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
 
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     public boolean VerificarEspacios() {
 
         if (txtNumeroDePlaca_IngresarCamion.getText().equals("")
@@ -275,6 +293,7 @@ public void IngresarCamion() throws ClassNotFoundException, SQLException {
             if (elCoordinadorDeCamion.InsertarCamion(elCamion) == true) {
                 JOptionPane.showMessageDialog(null, "El camion ha sido insertado exitosamente");
                 LimpiarCampos();
+                 ListarCamiones.VisualizarCamion(TablaListarCamiones_ListarCamiones); 
             } else {
                 JOptionPane.showMessageDialog(null, "Error en la insercion");
             }

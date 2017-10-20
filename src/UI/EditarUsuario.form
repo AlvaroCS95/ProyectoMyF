@@ -64,9 +64,7 @@
                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="87" pref="87" max="-2" attributes="0"/>
                       <Component id="txtCedula_EditarUsuario" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace min="85" pref="85" max="-2" attributes="0"/>
-                      <Component id="btCancelar_EditarUsuario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
                       <Component id="btAceptar_EditarUsuario" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="48" pref="48" max="-2" attributes="0"/>
                       <Component id="btLimpiar_EditarUsuario" min="-2" pref="64" max="-2" attributes="0"/>
@@ -154,7 +152,6 @@
                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="txtCedula_EditarUsuario" min="-2" max="-2" attributes="0"/>
-                  <Component id="btCancelar_EditarUsuario" min="-2" max="-2" attributes="0"/>
                   <Component id="btAceptar_EditarUsuario" min="-2" max="-2" attributes="0"/>
                   <Component id="btLimpiar_EditarUsuario" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -290,20 +287,6 @@
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="btCancelar_EditarUsuario">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/Delete_Icon_32.png"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Oprima para cancelar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelar_EditarUsuarioActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

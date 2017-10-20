@@ -260,7 +260,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         });
         menuBuscar.add(Activar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel52.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(0, 102, 112));

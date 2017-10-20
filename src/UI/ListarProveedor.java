@@ -140,6 +140,8 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         });
         MenuProveedor.add(Editar);
 
+        setPreferredSize(new java.awt.Dimension(990, 690));
+
         TablaListarProveedores_ListarProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

@@ -63,15 +63,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="btLimpiar_EditarProveedor" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
-                              <Component id="btCancelar_EditarProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btAceptar_EditarProveedor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btLimpiar_EditarProveedor" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
+                          <Component id="btAceptar_EditarProveedor" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jSeparator7" alignment="0" min="-2" pref="471" max="-2" attributes="0"/>
               </Group>
@@ -127,8 +122,6 @@
                       <Component id="btLimpiar_EditarProveedor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="btAceptar_EditarProveedor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="btCancelar_EditarProveedor" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="36" max="32767" attributes="0"/>
@@ -205,20 +198,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Editar de proveedor"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btCancelar_EditarProveedor">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Imagenes/Delete_Icon_32.png"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Oprima para cancelar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelar_EditarProveedorActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDireccion_EditarProveedor">
       <Properties>

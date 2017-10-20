@@ -87,7 +87,7 @@ public class BuscarCamiones extends javax.swing.JDialog {
         });
         menuFiltrar.add(Activar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         TablaBuscarCamiones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

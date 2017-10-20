@@ -33,6 +33,7 @@ public class CambiarContraseña extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
 
     /**
@@ -56,7 +57,7 @@ public class CambiarContraseña extends javax.swing.JDialog {
         VerContraseña = new javax.swing.JLabel();
         VerContraseñaNueva = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Cambio de contraseña");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -181,7 +182,23 @@ public class CambiarContraseña extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
 
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     private void btCancelar_CambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_CambiarContraseñaActionPerformed
         int Decision = JOptionPane.showConfirmDialog(
                 null,

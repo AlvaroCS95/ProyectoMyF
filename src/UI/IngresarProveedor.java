@@ -20,6 +20,7 @@ public class IngresarProveedor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
 
   
@@ -196,6 +197,23 @@ public void Limpiar() {
         txtTelefono_IngresarProveedor.setText("");
 
     }
+public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
 public boolean VerificaCamposVacios() {
         if (txtCedulaJuridica_IngresarProveedor.getText().equals("")
                 || txtCorreo_IngresarProveedor.getText().equals("")

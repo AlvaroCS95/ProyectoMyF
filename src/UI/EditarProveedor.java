@@ -32,6 +32,7 @@ public class EditarProveedor extends javax.swing.JDialog {
         this.Telefono = telefono;
         setLocationRelativeTo(null);
         cargarDatos();
+        cerrar();
     }
 
     @SuppressWarnings("unchecked")
@@ -45,7 +46,6 @@ public class EditarProveedor extends javax.swing.JDialog {
         btAceptar_EditarProveedor = new javax.swing.JButton();
         btLimpiar_EditarProveedor = new javax.swing.JButton();
         jLabel57 = new javax.swing.JLabel();
-        btCancelar_EditarProveedor = new javax.swing.JButton();
         txtDireccion_EditarProveedor = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         txtTelefono_EditarProveedor = new javax.swing.JTextField();
@@ -81,14 +81,6 @@ public class EditarProveedor extends javax.swing.JDialog {
 
         jLabel57.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel57.setText("Editar de proveedor");
-
-        btCancelar_EditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        btCancelar_EditarProveedor.setToolTipText("Oprima para cancelar");
-        btCancelar_EditarProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelar_EditarProveedorActionPerformed(evt);
-            }
-        });
 
         txtDireccion_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDireccion_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
@@ -146,12 +138,9 @@ public class EditarProveedor extends javax.swing.JDialog {
                                 .addComponent(txtTelefono_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btLimpiar_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btCancelar_EditarProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btAceptar_EditarProveedor)
-                                .addGap(1, 1, 1))))
+                            .addComponent(btLimpiar_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btAceptar_EditarProveedor))
+                        .addGap(1, 1, 1))
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
@@ -173,9 +162,7 @@ public class EditarProveedor extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(jLabel54))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCorreo_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCorreo_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel59)
@@ -195,9 +182,7 @@ public class EditarProveedor extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btLimpiar_EditarProveedor)
                         .addGap(59, 59, 59)
-                        .addComponent(btAceptar_EditarProveedor)
-                        .addGap(46, 46, 46)
-                        .addComponent(btCancelar_EditarProveedor)))
+                        .addComponent(btAceptar_EditarProveedor)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -211,7 +196,23 @@ public class EditarProveedor extends javax.swing.JDialog {
         txtTelefono_EditarProveedor.setText("");
 
     }
+public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
 
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     public void cargarDatos() {
         txtCedulaJuridica_EditarProveedor.setText(Cedula);
         txtNombre_EditarProveedor.setText(Nombre);
@@ -261,10 +262,6 @@ public class EditarProveedor extends javax.swing.JDialog {
             }
         }
     }
-    private void btCancelar_EditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_EditarProveedorActionPerformed
-
-    }//GEN-LAST:event_btCancelar_EditarProveedorActionPerformed
-
     private void btAceptar_EditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarProveedorActionPerformed
         try {
             editarProveedor();        // TODO add your handling code here:
@@ -279,7 +276,6 @@ public class EditarProveedor extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_EditarProveedor;
-    public static javax.swing.JButton btCancelar_EditarProveedor;
     public static javax.swing.JButton btLimpiar_EditarProveedor;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;

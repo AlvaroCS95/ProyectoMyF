@@ -48,10 +48,27 @@ public class EditarCliente extends javax.swing.JDialog {
         initComponents();
         JOptionPane.showMessageDialog(null, NivelDeCliente);
         CargarDatos();
-
+cerrar();
     }
 
     @SuppressWarnings("unchecked")
+    public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -62,7 +79,6 @@ public class EditarCliente extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         txtCedula_EditarCliente = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        btCancelar_EditarUsuario = new javax.swing.JButton();
         txtPrimerNombre_EditarCliente = new javax.swing.JTextField();
         btAceptar_EditarUsuario = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
@@ -76,7 +92,7 @@ public class EditarCliente extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         txtNombreLocal_EditarCliente = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel23.setText("Nivel de cliente");
@@ -99,14 +115,6 @@ public class EditarCliente extends javax.swing.JDialog {
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setAlignmentX(5.0F);
-
-        btCancelar_EditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        btCancelar_EditarUsuario.setToolTipText("Oprima para cancelar");
-        btCancelar_EditarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelar_EditarUsuarioActionPerformed(evt);
-            }
-        });
 
         txtPrimerNombre_EditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerNombre_EditarCliente.setForeground(new java.awt.Color(0, 102, 102));
@@ -196,9 +204,7 @@ public class EditarCliente extends javax.swing.JDialog {
                         .addComponent(jLabel22)
                         .addGap(87, 87, 87)
                         .addComponent(txtCedula_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(btCancelar_EditarUsuario)
-                        .addGap(49, 49, 49)
+                        .addGap(199, 199, 199)
                         .addComponent(btAceptar_EditarUsuario)
                         .addGap(48, 48, 48)
                         .addComponent(btLimpiar_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -255,7 +261,6 @@ public class EditarCliente extends javax.swing.JDialog {
                         .addGap(3, 3, 3)
                         .addComponent(jLabel22))
                     .addComponent(txtCedula_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCancelar_EditarUsuario)
                     .addComponent(btAceptar_EditarUsuario)
                     .addComponent(btLimpiar_EditarUsuario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -380,25 +385,12 @@ public int nivel() {
         }
     }//GEN-LAST:event_cbxNivel_EditarClienteActionPerformed
 
-    private void btCancelar_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_EditarUsuarioActionPerformed
-        int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
-
-        if (Decision == JOptionPane.YES_OPTION) {
-            dispose();
-        }
-    }//GEN-LAST:event_btCancelar_EditarUsuarioActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_EditarUsuario;
-    private javax.swing.JButton btCancelar_EditarUsuario;
     public static javax.swing.JButton btLimpiar_EditarUsuario;
     public static javax.swing.JComboBox cbxNivel_EditarCliente;
     private javax.swing.JLabel jLabel14;

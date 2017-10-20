@@ -268,7 +268,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         });
         menuFiltar.add(Activar);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         TablaBuscarProveedores_BuscarProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

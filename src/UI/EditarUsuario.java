@@ -43,11 +43,29 @@ public class EditarUsuario extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         CargarDatos();
+        cerrar();
     }
 
     EditarUsuario(Object object, boolean b, String Cedula, String Nombre, String Nombre0, String Direccion, String correo, String Nombre1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
  public void CargarDatos(){
     
         txtCedula_EditarUsuario.setText(Cedula);
@@ -98,7 +116,6 @@ public void LimpiarCampos() {
         txtSegundoApellido_EditarUsuario = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtCedula_EditarUsuario = new javax.swing.JTextField();
-        btCancelar_EditarUsuario = new javax.swing.JButton();
         btAceptar_EditarUsuario = new javax.swing.JButton();
         btLimpiar_EditarUsuario = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
@@ -149,14 +166,6 @@ public void LimpiarCampos() {
         txtCedula_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedula_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
         txtCedula_EditarUsuario.setEnabled(false);
-
-        btCancelar_EditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
-        btCancelar_EditarUsuario.setToolTipText("Oprima para cancelar");
-        btCancelar_EditarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelar_EditarUsuarioActionPerformed(evt);
-            }
-        });
 
         btAceptar_EditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_EditarUsuario.setToolTipText("Oprimir para guardar usuario");
@@ -240,9 +249,7 @@ public void LimpiarCampos() {
                         .addComponent(jLabel22)
                         .addGap(87, 87, 87)
                         .addComponent(txtCedula_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(btCancelar_EditarUsuario)
-                        .addGap(49, 49, 49)
+                        .addGap(199, 199, 199)
                         .addComponent(btAceptar_EditarUsuario)
                         .addGap(48, 48, 48)
                         .addComponent(btLimpiar_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -310,7 +317,6 @@ public void LimpiarCampos() {
                         .addGap(3, 3, 3)
                         .addComponent(jLabel22))
                     .addComponent(txtCedula_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCancelar_EditarUsuario)
                     .addComponent(btAceptar_EditarUsuario)
                     .addComponent(btLimpiar_EditarUsuario))
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -318,18 +324,6 @@ public void LimpiarCampos() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelar_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_EditarUsuarioActionPerformed
-        int Decision = JOptionPane.showConfirmDialog(
-            null,
-            "Desea salir de esta ventana",
-            "Salir",
-            JOptionPane.YES_NO_OPTION);
-
-        if (Decision == JOptionPane.YES_OPTION) {
-            // JTPGestor.setSelectedIndex(0);
-        }
-    }//GEN-LAST:event_btCancelar_EditarUsuarioActionPerformed
 
     private void btAceptar_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarUsuarioActionPerformed
         if (VerificarCamposVacios() == true) {
@@ -396,7 +390,6 @@ public void LimpiarCampos() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_EditarUsuario;
-    public static javax.swing.JButton btCancelar_EditarUsuario;
     public static javax.swing.JButton btLimpiar_EditarUsuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -48,9 +48,27 @@ public class EditarCamion extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         cargarDatos();
+        cerrar();
     }
 
     @SuppressWarnings("unchecked")
+    public void cerrar(){
+addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                 int Decision = JOptionPane.showConfirmDialog(
+                null,
+                "Desea salir de esta ventana",
+                "Salir",
+                JOptionPane.YES_NO_OPTION);
+
+        if (Decision == JOptionPane.YES_OPTION) {
+            ListarUsuarios.panel=false;
+            dispose();
+        }
+            }
+        });
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -74,7 +92,7 @@ public class EditarCamion extends javax.swing.JDialog {
         jLabel30 = new javax.swing.JLabel();
         btLimpiar_EditarCamion = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(732, 412));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
