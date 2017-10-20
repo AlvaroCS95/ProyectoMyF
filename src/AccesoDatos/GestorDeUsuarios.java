@@ -18,26 +18,24 @@ public class GestorDeUsuarios extends Coneccion {
 
     }
 
-    public boolean InsertarUsuario(Usuario elUsuario) throws SQLException, ClassNotFoundException {
+    public ResultSet InsertarUsuario(Usuario elUsuario) throws SQLException, ClassNotFoundException {
 
         EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+        consulta = conexion.createStatement();
         try {
-
-            llamadaAlMetodo = conexion.prepareCall("{call IngresarUsuario (?,?,?,?,?,?,?)}");
-            llamadaAlMetodo.setString(1, elUsuario.getCedula());
-            llamadaAlMetodo.setString(2, elUsuario.getPrimerNombre());
-            llamadaAlMetodo.setString(3, elUsuario.getSegundoNombre());
-            llamadaAlMetodo.setString(4, elUsuario.getPrimerApellido());
-            llamadaAlMetodo.setString(5, elUsuario.getSegundoApellido());
-            llamadaAlMetodo.setString(6, elUsuario.getNombreUsuario());
-            llamadaAlMetodo.setString(7, elUsuario.getContraseña());
-            llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
-
+            resultadoConsulta = consulta.executeQuery("call IngresarUsuario"
+                    + "('" + elUsuario.getCedula() + "','" + elUsuario.getPrimerNombre()
+                    + "','" + elUsuario.getSegundoNombre() + "','" + elUsuario.getPrimerApellido() + "','"+elUsuario.getSegundoApellido()
+                    +"','"+elUsuario.getNombreUsuario()+"','"+elUsuario.getContraseña()+"');");
+            return resultadoConsulta;
+            
+           
         } catch (Exception e) {
 
-            return false;
+           return resultadoConsulta;
+           
         }
 
     }

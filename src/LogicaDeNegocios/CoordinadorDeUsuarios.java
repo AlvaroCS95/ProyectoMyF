@@ -10,8 +10,8 @@ public class CoordinadorDeUsuarios {
     public CoordinadorDeUsuarios() {
     }
 
-    public boolean AgregarUsuario(Usuario elUsuario) throws ClassNotFoundException, SQLException {
-        boolean Respuesta;
+    public ResultSet AgregarUsuario(Usuario elUsuario) throws ClassNotFoundException, SQLException {
+        ResultSet Respuesta;
         GestorDeUsuarios elGestorDeUsuarios = new GestorDeUsuarios();
 
         Respuesta = elGestorDeUsuarios.InsertarUsuario(elUsuario);
