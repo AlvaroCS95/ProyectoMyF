@@ -1,5 +1,5 @@
 //Edicion desde web
-//Edicion desde PC
+
 package AccesoDatos;
 import UI.IngresoAlSistema;
 import java.sql.Connection;
