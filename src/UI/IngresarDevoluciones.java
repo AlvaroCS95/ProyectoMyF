@@ -520,9 +520,9 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         String CodigoDelProducto = "";
         String NombreDelProducto = "";
-        int NuevaCantidadaRestante = 0;
+        float NuevaCantidadaRestante = 0;
 
-        int Cantidad = 0;
+        float Cantidad = 0;
         if (SeleccionDesechado == false) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Primero seleccione un producto que quiere quitar de desechos");
@@ -531,12 +531,12 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             try {
                 CodigoDelProducto = TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionadaDesechado, 0).toString();
                 NombreDelProducto = TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionadaDesechado, 1).toString();
-                Cantidad = Integer.parseInt(TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionadaDesechado, 2).toString());
+                Cantidad = Float.parseFloat(TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionadaDesechado, 2).toString());
                 int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿esta seguro que desea quitar a: " + NombreDelProducto + " de desechos?", "Quitar producto Producto");
                 if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
                     if (quitarFila(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados, FilaSeleccionadaDesechado) == true) {
                         int FilaDelProductoAAgregar = DevolverFilaDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
-                        int CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
+                        float CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
                         NuevaCantidadaRestante = CantidadRestante + Cantidad;
                         TablaDetalleFacturaDeVenta_Devoluciones.setValueAt(NuevaCantidadaRestante, FilaDelProductoAAgregar, 3);
                     } else {
@@ -566,10 +566,10 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         String CodigoDelProducto = "";
         String NombreDelProducto = "";
-        int Cantidad = 0;
-        int CantidadMaxima = 0;
-        int CantidadVendidaParaComprar = 0;
-        int CantidadRestanteParaComparar = 0;
+        float Cantidad = 0;
+        float CantidadMaxima = 0;
+        float CantidadVendidaParaComprar = 0;
+        float CantidadRestanteParaComparar = 0;
 
         if (SeleccionDetalleFactura == false) {
             getToolkit().beep();
@@ -589,8 +589,8 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     try {
                         CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
                         NombreDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 1).toString();
-                        Cantidad = Integer.parseInt(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 2).toString());
-                        CantidadMaxima = Integer.parseInt(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 3).toString());
+                        Cantidad = Float.parseFloat(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 2).toString());
+                        CantidadMaxima = Float.parseFloat(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 3).toString());
                     } catch (Exception e) {
                     }
                     String NumeroFactura = txtNFactura_IngresarDevoluciones.getText();
@@ -605,9 +605,9 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         String CodigoDelProducto = "";
         String NombreDelProducto = "";
-        int NuevaCantidadaRestante = 0;
+        float NuevaCantidadaRestante = 0;
 
-        int Cantidad = 0;
+        float Cantidad = 0;
         if (SeleccionReintegro == false) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Primero seleccione un producto que quiere quitar de reintegros");
@@ -616,12 +616,12 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             try {
                 CodigoDelProducto = TablaReintegro_Devoluciones.getValueAt(FilaSeleccionadaReintegro, 0).toString();
                 NombreDelProducto = TablaReintegro_Devoluciones.getValueAt(FilaSeleccionadaReintegro, 1).toString();
-                Cantidad = Integer.parseInt(TablaReintegro_Devoluciones.getValueAt(FilaSeleccionadaReintegro, 2).toString());
+                Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(FilaSeleccionadaReintegro, 2).toString());
                 int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿esta seguro que desea quitar a: " + NombreDelProducto + " de reintegros?", "Quitar producto Producto");
                 if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
                     if (quitarFila(TablaReintegro_Devoluciones, ModeloProductosReintegrados, FilaSeleccionadaReintegro) == true) {
                         int FilaDelProductoAAgregar = DevolverFilaDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
-                        int CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
+                        float CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto);
                         NuevaCantidadaRestante = CantidadRestante + Cantidad;
                         TablaDetalleFacturaDeVenta_Devoluciones.setValueAt(NuevaCantidadaRestante, FilaDelProductoAAgregar, 3);
                     } else {
@@ -638,10 +638,10 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
     private void btAgegarReintegro_DevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgegarReintegro_DevolucionesActionPerformed
         // TODO add your handling code here:
-        String CodigoDelProducto = "";
+          String CodigoDelProducto = "";
         String NombreDelProducto = "";
-        int Cantidad = 0;
-        int CantidadMaxima = 0;
+        float Cantidad = 0;
+        float CantidadMaxima = 0;
 
         if (SeleccionDetalleFactura == false) {
             getToolkit().beep();
@@ -662,8 +662,8 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     try {
                         CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
                         NombreDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 1).toString();
-                        Cantidad = Integer.parseInt(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 2).toString());
-                        CantidadMaxima = Integer.parseInt(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 3).toString());
+                        Cantidad = Float.parseFloat(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 2).toString());
+                        CantidadMaxima = Float.parseFloat(TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 3).toString());
                     } catch (Exception e) {
                     }
                     try {
@@ -676,8 +676,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
             }//fin else si exite el producto
         }//fin else seleccion factura
-
-
     }//GEN-LAST:event_btAgegarReintegro_DevolucionesActionPerformed
 
     private void TablaReintegro_DevolucionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaReintegro_DevolucionesKeyPressed
@@ -692,16 +690,16 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         String NombreProducto = "";
         String CodigoProducto = "";
-        int CantidadIngresada = 0;
-        int CantidadActual = 0;
-        int CantidadAModificar = 0;
-        int DiferenciaEntreCantidades = 0;
-        int CantidadMaximaParaEditar = 0;
-        int CantidadRestante = 0;
+        float CantidadIngresada = 0;
+        float CantidadActual = 0;
+        float CantidadAModificar = 0;
+        float DiferenciaEntreCantidades = 0;
+        float CantidadMaximaParaEditar = 0;
+        float CantidadRestante = 0;
         int FilaSeleccionada = TablaReintegro_Devoluciones.getSelectedRow();
         NombreProducto = TablaReintegro_Devoluciones.getValueAt(FilaSeleccionada, 1).toString();
         CodigoProducto = TablaReintegro_Devoluciones.getValueAt(FilaSeleccionada, 0).toString();
-        CantidadActual = Integer.parseInt(TablaReintegro_Devoluciones.getValueAt(FilaSeleccionada, 2).toString());
+        CantidadActual = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(FilaSeleccionada, 2).toString());
         CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoProducto);
         CantidadMaximaParaEditar = CantidadActual + CantidadRestante;
         
@@ -712,7 +710,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿esta seguro que desea editar a: " + NombreProducto + "?", "Editar Producto");
             if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
                 try {
-                    CantidadIngresada = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad que desea actualizar"
+                    CantidadIngresada = Float.parseFloat(JOptionPane.showInputDialog("Ingrese la cantidad que desea actualizar"
                             + "\nRecuerde que la cantidad máxima para ingresar es: " + CantidadMaximaParaEditar + "            "));
 
                     if (CantidadIngresada > CantidadMaximaParaEditar || CantidadIngresada == 0 || CantidadActual == CantidadIngresada) {
@@ -746,16 +744,16 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         // TODO add your handling code here:
         String NombreProducto = "";
         String CodigoProducto = "";
-        int CantidadIngresada = 0;
-        int CantidadActual = 0;
-        int CantidadAModificar = 0;
-        int DiferenciaEntreCantidades = 0;
-        int CantidadMaximaParaEditar = 0;
-        int CantidadRestante = 0;
+        float CantidadIngresada = 0;
+        float CantidadActual = 0;
+        float CantidadAModificar = 0;
+        float DiferenciaEntreCantidades = 0;
+        float CantidadMaximaParaEditar = 0;
+        float CantidadRestante = 0;
         int FilaSeleccionada = TablaProductosDesechados_Devoluciones.getSelectedRow();
         NombreProducto = TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionada, 1).toString();
         CodigoProducto = TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionada, 0).toString();
-        CantidadActual = Integer.parseInt(TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionada, 2).toString());
+        CantidadActual = Float.parseFloat(TablaProductosDesechados_Devoluciones.getValueAt(FilaSeleccionada, 2).toString());
         CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoProducto);
         CantidadMaximaParaEditar = CantidadActual + CantidadRestante;
 
@@ -763,7 +761,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿esta seguro que desea editar a: " + NombreProducto + "?", "Editar Producto");
             if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
                 try {
-                    CantidadIngresada = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad que desea actualizar"
+                    CantidadIngresada = Float.parseFloat(JOptionPane.showInputDialog("Ingrese la cantidad que desea actualizar"
                             + "\nRecuerde que la cantidad máxima para ingresar es: " + CantidadMaximaParaEditar + "        "));
 
                     if (CantidadIngresada > CantidadMaximaParaEditar || CantidadIngresada == 0 || CantidadActual == CantidadIngresada) {
@@ -895,13 +893,13 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         return ExisteProducto;
     }
 
-    private int BuscarCantidadRestanteDeUnProducto(JTable TablaABuscar, String CodigoProductoABuscar) {
-        int CantidadRestante = 0;
+    private float BuscarCantidadRestanteDeUnProducto(JTable TablaABuscar, String CodigoProductoABuscar) {
+        float CantidadRestante = 0;
         String CodigoProductoEnLaTabla = "";
         for (int contador = 0; contador < TablaABuscar.getRowCount(); contador++) {
             CodigoProductoEnLaTabla = TablaABuscar.getValueAt(contador, 0).toString();
             if (CodigoProductoEnLaTabla.equals(CodigoProductoABuscar)) {
-                CantidadRestante = Integer.parseInt(TablaABuscar.getValueAt(contador, 3).toString());
+                CantidadRestante = Float.parseFloat(TablaABuscar.getValueAt(contador, 3).toString());
 
             }
         }

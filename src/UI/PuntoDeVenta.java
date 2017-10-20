@@ -439,12 +439,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public void CrearFacturaDeVentaContado() {
-        float totalVendido;
+        // totalVendido;
         int idCliente, idTipoPago;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-
-        totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
+        String totalParaCambiar=txtTotalAPagar_PuntoDeVenta.getText();
+        totalParaCambiar=totalParaCambiar.replace(",", ".");       
+        float totalVendido = Float.parseFloat(totalParaCambiar);
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();

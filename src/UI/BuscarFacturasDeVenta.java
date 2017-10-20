@@ -96,7 +96,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero Factura", "Fecha Venta", "Fecha Ingreso", "Monto Vendido", "Nombre Usuario", "Nombre Local"
+                "Numero Factura", "Fecha Venta", "Monto Vendido", "Nombre Usuario", "Nombre Local"
             }
         ));
         TablaFacturaVentas_Devoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,7 +217,6 @@ int FilaSeleccionada;
            
             modelo.addColumn("N° Factura");
             modelo.addColumn("Fecha Venta");
-            modelo.addColumn("Fecha Ingreso");
             modelo.addColumn("Monto de Venta");
             modelo.addColumn("Nombre Usuario");
             modelo.addColumn("Nombre Local");
@@ -258,7 +257,6 @@ int FilaSeleccionada;
            
             modelo.addColumn("N° Factura");
             modelo.addColumn("Fecha Venta");
-            modelo.addColumn("Fecha Ingreso");
             modelo.addColumn("Monto de Venta");
             modelo.addColumn("Nombre Usuario");
             modelo.addColumn("Nombre Local");
@@ -294,13 +292,13 @@ int FilaSeleccionada;
         int fila = FilaSeleccionada;
                   IngresarDevoluciones.txtNFactura_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 0).toString());
                   //IngresarDevoluciones.txtNFactura_IngresarDevoluciones.setEnabled(true);
-                  IngresarDevoluciones.txtNombreLocal_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 5).toString());
+                  IngresarDevoluciones.txtNombreLocal_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 4).toString());
                    //IngresarDevoluciones.txtNombreLocal_IngresarDevoluciones.setEnabled(true);
                   IngresarDevoluciones.txtFechaDeVenta_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 1).toString());
                    //IngresarDevoluciones.txtFechaDeVenta_IngresarDevoluciones.setEnabled(true);
-                  IngresarDevoluciones.txtMontoDeVenta_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 3).toString());
+                  IngresarDevoluciones.txtMontoDeVenta_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 2).toString());
                    //IngresarDevoluciones.txtMontoDeVenta_IngresarDevoluciones.setEnabled(true);
-                  IngresarDevoluciones.txtNombreUsuario_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 4).toString());
+                  IngresarDevoluciones.txtNombreUsuario_IngresarDevoluciones.setText(TablaFacturaVentas_Devoluciones.getValueAt(fila, 3).toString());
                    //IngresarDevoluciones.txtNombreUsuario_IngresarDevoluciones.setEnabled(true);
                   //insertar en la tabla
                   try {

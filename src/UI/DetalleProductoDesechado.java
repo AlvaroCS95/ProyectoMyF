@@ -20,9 +20,9 @@ public class DetalleProductoDesechado extends javax.swing.JFrame {
     public static String NumeroFactura="";
     public static String CodigoProducto="";
     public static String NombreProducto="";
-    public static int CantidadVendida=0;
-    public static int CantidadParaDesechar=0;
-    public static int CantidadMaximaParaVender=0;
+    public static float CantidadVendida=0;
+    public static float CantidadParaDesechar=0;
+    public static float CantidadMaximaParaVender=0;
     /**
      * Creates new form DetalleProductoDesechado
      */
@@ -30,7 +30,7 @@ public class DetalleProductoDesechado extends javax.swing.JFrame {
         initComponents();
     }
 
-    public DetalleProductoDesechado(String NumeroFactura,String CodigoProducto,String NombreProducto,int CantidadVendida,int CantidadMaximaParaVender) {
+    public DetalleProductoDesechado(String NumeroFactura,String CodigoProducto,String NombreProducto,float CantidadVendida,float CantidadMaximaParaVender) {
        initComponents();
         this.NumeroFactura=NumeroFactura;
         this.CodigoProducto=CodigoProducto;
@@ -443,7 +443,7 @@ String CantidadParaDesecharString;
         }
       
     }//GEN-LAST:event_txtCantidadParaDevolver_DetalleDesechoKeyTyped
- private void AgregarProductosADesecho(String CodigoProducto,String NombreProducto,int Cantidad, String Detalle)
+ private void AgregarProductosADesecho(String CodigoProducto,String NombreProducto,float Cantidad, String Detalle)
       throws SQLException// metodo para mostrar la tabla co un parametro que tendra el resultado de la peticion
    {
        
@@ -454,8 +454,8 @@ String CantidadParaDesecharString;
        try {
         
                IngresarDevoluciones.ModeloProductosDesechados.addRow(new Object[]{CodigoProducto,NombreProducto,Cantidad,Detalle});
-               int CantidadRestante=Integer.parseInt(IngresarDevoluciones.TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(IngresarDevoluciones.FilaSeleccionadaDetalleFactura, 3).toString());
-               int ReusltadoResta=CantidadRestante-Cantidad;
+               float CantidadRestante=Float.parseFloat(IngresarDevoluciones.TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(IngresarDevoluciones.FilaSeleccionadaDetalleFactura, 3).toString());
+               float ReusltadoResta=CantidadRestante-Cantidad;
                IngresarDevoluciones.TablaDetalleFacturaDeVenta_Devoluciones.setValueAt(ReusltadoResta, IngresarDevoluciones.FilaSeleccionadaDetalleFactura, 3);
        } catch (Exception e) {
        }
