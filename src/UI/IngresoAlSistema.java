@@ -78,7 +78,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         txtNombreUsario_IngresoAlSistema.setText("root");
         txtNombreUsario_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su nombre de usuario");
 
-        pswContraseña_IngresoAlSistema.setText("2895");
+        pswContraseña_IngresoAlSistema.setText("-cmc19961410");
         pswContraseña_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su contraseña");
         pswContraseña_IngresoAlSistema.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -128,9 +128,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
                             .addComponent(lbUsuario_IngresoAlSistema, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(pswContraseña_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pswContraseña_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombreUsario_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(MostrarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,10 +147,11 @@ public class IngresoAlSistema extends javax.swing.JFrame {
                             .addComponent(txtNombreUsario_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbUsuario_IngresoAlSistema))
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pswContraseña_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbContraseña_IngresoAlSistema)
-                            .addComponent(MostrarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MostrarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(pswContraseña_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbContraseña_IngresoAlSistema)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(btIngresar_IngresoAlSistema)))
                 .addGap(34, 34, 34))

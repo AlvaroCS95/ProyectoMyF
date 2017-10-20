@@ -55,10 +55,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                  <Component id="pswContraseña_IngresoAlSistema" min="-2" pref="260" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="pswContraseña_IngresoAlSistema" alignment="1" min="-2" pref="260" max="-2" attributes="0"/>
                               <Component id="txtNombreUsario_IngresoAlSistema" alignment="1" min="-2" pref="261" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -84,10 +81,12 @@
                               <Component id="lbUsuario_IngresoAlSistema" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="pswContraseña_IngresoAlSistema" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="lbContraseña_IngresoAlSistema" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="MostrarContraseña" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="pswContraseña_IngresoAlSistema" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="lbContraseña_IngresoAlSistema" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace pref="58" max="32767" attributes="0"/>
                           <Component id="btIngresar_IngresoAlSistema" min="-2" max="-2" attributes="0"/>
@@ -113,7 +112,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="pswContrase&#xf1;a_IngresoAlSistema">
           <Properties>
-            <Property name="text" type="java.lang.String" value="2895"/>
+            <Property name="text" type="java.lang.String" value="-cmc19961410"/>
             <Property name="toolTipText" type="java.lang.String" value="Ingrese AQU&#xcd; su contrase&#xf1;a"/>
           </Properties>
           <Events>
