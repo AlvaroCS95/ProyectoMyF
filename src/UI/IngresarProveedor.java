@@ -219,7 +219,7 @@ public void IngresarProveedor() throws ClassNotFoundException {
             Direccion = txtDireccion_IngresarProveedor.getText();
             Telefono = txtTelefono_IngresarProveedor.getText();
             CoordinadorDeProveedores elCoordinadorDeProveedores = new CoordinadorDeProveedores();
-            Proveedor elProveedor = new Proveedor(Nombre, Direccion, Correo, Cedula, Telefono);
+            Proveedor elProveedor = new Proveedor(Cedula, Nombre, Direccion, Correo, Telefono);
             if (elCoordinadorDeProveedores.InsertarProveedor(elProveedor) == true) {
                 JOptionPane.showMessageDialog(null, "Proveedor insertado con exito");
                 Limpiar();
