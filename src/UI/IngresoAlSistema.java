@@ -78,7 +78,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         txtNombreUsario_IngresoAlSistema.setText("root");
         txtNombreUsario_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su nombre de usuario");
 
-        pswContraseña_IngresoAlSistema.setText("-cmc19961410");
+        pswContraseña_IngresoAlSistema.setText("2895");
         pswContraseña_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su contraseña");
         pswContraseña_IngresoAlSistema.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

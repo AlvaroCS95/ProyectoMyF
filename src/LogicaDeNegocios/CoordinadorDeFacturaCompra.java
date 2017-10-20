@@ -2,6 +2,7 @@ package LogicaDeNegocios;
 
 import AccesoDatos.GestorFacturaDeCompra;
 import Modelos.FacturaDeCompra;
+import Modelos.Producto;
 import UI.EditarFacturaDeCompra;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -172,4 +173,33 @@ public class CoordinadorDeFacturaCompra {
         }
     }
 
+    public ResultSet BuscarParaAgregarDetalle(String codigo) {
+
+        GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
+        resultado = gestor.BuscarProductoParaAgregarDetalle(codigo);
+        try {
+            if (!resultado.next()) {
+                resultado = null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+
+    public boolean AgregarDetalle(Producto NuevoDetalle) {
+        GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
+        ResultSet resultado = gestor.AgregarDetalleFacturaCompra(NuevoDetalle);
+        try {
+            if (resultado.next()) {
+                if (resultado.getString(1).equals("2")) {
+                    return true;
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

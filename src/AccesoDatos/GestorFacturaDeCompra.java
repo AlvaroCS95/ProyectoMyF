@@ -1,6 +1,7 @@
 package AccesoDatos;
 
 import Modelos.FacturaDeCompra;
+import Modelos.Producto;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -264,7 +265,7 @@ public class GestorFacturaDeCompra extends Coneccion {
     }
 
     public ResultSet ListarFacturasUltimoMes() {
-try {
+        try {
             EstablecerConexion();
             consulta = conexion.createStatement();
             resultadoConsulta = consulta.executeQuery("CALL ListarFacturasDeCompraDelMes");
@@ -280,4 +281,36 @@ try {
         return resultadoConsulta;
     }
 
+    public ResultSet BuscarProductoParaAgregarDetalle(String codigo) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL BuscarProductoParaAgregarDetalle('" + codigo + "');");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return resultadoConsulta;
+    }
+    
+    public ResultSet AgregarDetalleFacturaCompra(Producto nuevoProducto){
+        try {
+            EstablecerConexion();
+            llamadaAlMetodo = conexion.prepareCall("CALL AgregarDetalleFacturaCompra(?, ?, ?);");
+            llamadaAlMetodo.setString(1, nuevoProducto.getCodigo());
+            llamadaAlMetodo.setFloat(2, nuevoProducto.getExistencias());
+            llamadaAlMetodo.setFloat(3, nuevoProducto.getPrecio());
+            llamadaAlMetodo.execute();
+            resultadoConsulta = llamadaAlMetodo.getResultSet();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
+    
 }

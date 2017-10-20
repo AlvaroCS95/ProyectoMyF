@@ -693,11 +693,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 115, 20));
 
         txtCodigoDelProducto_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        txtCodigoDelProducto_PuntoDeVenta.setText("60");
         add(txtCodigoDelProducto_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 191, 31));
 
         txtCantidadDeProducto_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        txtCantidadDeProducto_PuntoDeVenta.setText("1");
         add(txtCantidadDeProducto_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 120, 31));
 
         jButtonAgregarAlaLista.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
