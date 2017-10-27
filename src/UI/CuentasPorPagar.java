@@ -103,6 +103,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
 
             }
         ));
+        tbCuentasPorPagar.setComponentPopupMenu(menu);
         jScrollPane1.setViewportView(tbCuentasPorPagar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -116,8 +117,8 @@ public class CuentasPorPagar extends javax.swing.JPanel {
                         .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1012, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -14,8 +14,8 @@ import javax.swing.table.TableRowSorter;
 public class VisualizarProductos extends javax.swing.JPanel {
 
     private TableRowSorter trsFiltro;
-    Object[] filas;
-    DefaultTableModel modelo;
+   static Object[] filas;
+   static DefaultTableModel modelo;
 
     public VisualizarProductos() {
 
@@ -414,7 +414,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
 
     }
 
-    public void VisualizarTodosProductos() {
+    public static void VisualizarTodosProductos() {
         try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
@@ -455,7 +455,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
 
     }
 
-    public void VisualizarProductos(String Filtro) {
+    public static void VisualizarProductos(String Filtro) {
         try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
@@ -736,8 +736,8 @@ public class VisualizarProductos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Tabla1_ActualizacionProductos;
-    private javax.swing.JTable Tabla2_ActualizacionProductos;
+    public static javax.swing.JTable Tabla1_ActualizacionProductos;
+    public static javax.swing.JTable Tabla2_ActualizacionProductos;
     private javax.swing.JButton btActualizar_VisualizarProductos;
     private javax.swing.JButton btBuscar_VisualizarProductos;
     private javax.swing.JButton btEditartb1_VisualizarProductos;
@@ -745,15 +745,15 @@ public class VisualizarProductos extends javax.swing.JPanel {
     private javax.swing.JButton btEliminartb1_VisualizarProductos;
     private javax.swing.JButton btEliminartb2_VisualizarProductos;
     private javax.swing.JComboBox<String> cmbxFiltrar1_VisualizarProductos;
-    private javax.swing.JComboBox<String> cmbxFiltrar2_VisualizarProductos;
-    private javax.swing.JComboBox<String> cmbxFiltrar2_VisualizarProductos1;
+    public static javax.swing.JComboBox<String> cmbxFiltrar2_VisualizarProductos;
+    public static javax.swing.JComboBox<String> cmbxFiltrar2_VisualizarProductos1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel panelOculto_VisualizarProductos;
-    private javax.swing.JTextField txtBuscarExistencias_VisualizarProductos;
-    private javax.swing.JTextField txtBuscar_VisualizarProductos;
+    public static javax.swing.JTextField txtBuscarExistencias_VisualizarProductos;
+    public static javax.swing.JTextField txtBuscar_VisualizarProductos;
     // End of variables declaration//GEN-END:variables
 }

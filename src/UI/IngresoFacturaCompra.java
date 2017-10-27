@@ -19,9 +19,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     int tx_idProveedor, tx_idTipoPago, tx_nDeReferencia, plazoDias;
     boolean tx_tipoDeCompra;
     float tx_montoTotal, montoCanclado;
-    ArrayList<Object> listaParaMostrar = new ArrayList<>();
+  static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
     ResultSet resultadoConsulta;
-    DefaultTableModel modelo;
+   static DefaultTableModel modelo;
     static Object[] filas;
 
     public IngresoFacturaCompra() {
@@ -85,7 +85,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
     }
 
-    public void ListarProveedores() {
+    public static void ListarProveedores() {
         listaParaMostrar.clear();
 
         cbxProveedor_IngresarFacturaCompra.removeAllItems();
@@ -99,7 +99,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
     }
 
-    public void ListarTiposDePago() {
+    public static void ListarTiposDePago() {
         listaParaMostrar.clear();
 
         cbxTipoPago_FacturaCompra.removeAllItems();
@@ -608,7 +608,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     public static javax.swing.JButton btLimpiar_IngresarFacturaCompra;
     public static javax.swing.JComboBox cbxProveedor_IngresarFacturaCompra;
     private javax.swing.JComboBox cbxTipoCompra_IngresarFacturaCompra;
-    private javax.swing.JComboBox cbxTipoPago_FacturaCompra;
+    public static javax.swing.JComboBox cbxTipoPago_FacturaCompra;
     private com.toedter.calendar.JDateChooser jDCFecha_Compra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -631,7 +631,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panel_IngreosFacturaCompra;
-    private javax.swing.JScrollPane scroll_IngresoFacturaCompra;
+    public static javax.swing.JScrollPane scroll_IngresoFacturaCompra;
     private javax.swing.JTextField txtCantidadDetalleFactura;
     private javax.swing.JTextField txtCodigoDetalleFactura;
     private javax.swing.JTextField txtMontoCancelado_IngresarFacturaCompra;

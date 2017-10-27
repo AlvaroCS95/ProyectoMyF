@@ -19,7 +19,7 @@ public class ListarProveedor extends javax.swing.JPanel {
   public static boolean panelHabilitado=false;
     public ListarProveedor() {
         initComponents();
-//        VisualizarProveedores();
+//       
     }
 
      public  static void VisualizarProveedores() {

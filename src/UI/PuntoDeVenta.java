@@ -14,7 +14,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     DefaultTableModel modelo;
     boolean imprimirFactura;
     ArrayList<Object> lista = new ArrayList<>();
-    ArrayList<Object> listaParaMostrar = new ArrayList<>();
+   static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
     int fila, tipoDeVenta = 2;
     DecimalFormat formato = new DecimalFormat("#.00");
 
@@ -422,7 +422,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         }
     }
 
-    public void ListarTiposDePago() {
+    public static void ListarTiposDePago() {
 
         listaParaMostrar.clear();
 
@@ -858,7 +858,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public static javax.swing.JLabel Hora;
     public static javax.swing.JTable TablaFacturacion_PuntoDeVenta;
     public static javax.swing.JComboBox<String> cbxImprime_PuntoDeVenta;
-    private javax.swing.JComboBox cmbxFormaDePago_PuntoDeVenta;
+    public static javax.swing.JComboBox cmbxFormaDePago_PuntoDeVenta;
     private javax.swing.JComboBox cmbxTipoVenta_PuntoDeVenta;
     private javax.swing.JButton jButton2;
     public static javax.swing.JButton jButtonAgregarAlaLista;
@@ -877,7 +877,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel98;
     public static javax.swing.JLabel jLabelImprime;
-    private javax.swing.JSpinner jSDiasPlazo_PuntoDeVenta;
+    public static javax.swing.JSpinner jSDiasPlazo_PuntoDeVenta;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem jmIAgregarDescuento;

@@ -16,7 +16,7 @@ public class IngresarProductos extends javax.swing.JPanel {
 //        ListarClasificaciones();
     }
 
-    public void ListarClasificaciones() {
+    public static void ListarClasificaciones() {
         try {
             CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
             ResultSet resultadoConsulta = elCoordinador.ListarClasificaciones();
@@ -111,7 +111,7 @@ public class IngresarProductos extends javax.swing.JPanel {
         }
     }
 
-    public void ListarUMES() {
+    public static void ListarUMES() {
         try {
             CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
             ResultSet resultadoConsulta = elCoordinador.ListarUMES();
@@ -351,8 +351,8 @@ public class IngresarProductos extends javax.swing.JPanel {
     private javax.swing.JButton btIngClasificacion_IngresarProductos;
     private javax.swing.JButton btIngUME_IngresarProductos;
     public static javax.swing.JButton btLimpiar_IngresarInventario;
-    private javax.swing.JComboBox<String> cmbxClasificacion_IngresarProductos;
-    private javax.swing.JComboBox<String> cmbxUME_IngresarProductos;
+    public static javax.swing.JComboBox<String> cmbxClasificacion_IngresarProductos;
+    public static javax.swing.JComboBox<String> cmbxUME_IngresarProductos;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;

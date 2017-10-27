@@ -29,12 +29,12 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.idRuta = id;
-//        RutaDeAsignacion.setText(Nombre);
-//        InicializarFiltroCamiones(TablaAsignarCamion);
-//        InicializarFiltroClientes(TablaAsignarCliente);
-//
-//        TipoDeFiltro();
-//        cerrar();
+        RutaDeAsignacion.setText(Nombre);
+        InicializarFiltroCamiones(TablaAsignarCamion);
+        InicializarFiltroClientes(TablaAsignarCliente);
+
+        TipoDeFiltro();
+        cerrar();
     }
 public void cerrar(){
 addWindowListener(new java.awt.event.WindowAdapter() {

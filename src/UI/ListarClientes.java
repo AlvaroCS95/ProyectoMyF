@@ -25,7 +25,7 @@ public class ListarClientes extends javax.swing.JPanel {
 
     public ListarClientes() {
         initComponents();
-//        VisualizarClientes(TablaListarClientes_ListarClientes);
+//       
 
     }
 

@@ -12,9 +12,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
-    ArrayList<Object> listaParaMostrar = new ArrayList<>();
-    Object[] filas;
-    DefaultTableModel modelo;
+  static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
+   static Object[] filas;
+  static  DefaultTableModel modelo;
     ResultSet resultadoConsulta;
     int tipoBusqueda;
     boolean sentinela;
@@ -37,7 +37,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         return false;
     }
 
-    public void EstablecerModelo(ResultSet lista) {
+    public static  void EstablecerModelo(ResultSet lista) {
 
         modelo = new DefaultTableModel();
         modelo.addColumn("N° Factura");
@@ -83,7 +83,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
     }
 
-    public void ListarFacturasDelUltimoMes() {
+    public static void ListarFacturasDelUltimoMes() {
         jLTitulo.setText("Se está mostrando las facturas de compra del ultimo mes.");
         jbListarFacturas.setText("Listar todas las facturas");
 
@@ -394,11 +394,11 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbx_SeleccionBusqueda;
-    private javax.swing.JLabel jLTitulo;
+    public static javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbListarFacturas;
+    public static javax.swing.JButton jbListarFacturas;
     private javax.swing.JButton jb_Buscar;
     private com.toedter.calendar.JDateChooser jdc_FechaDesde;
     private com.toedter.calendar.JDateChooser jdc_FechaHasta;
@@ -408,7 +408,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     private javax.swing.JMenuItem jmIEditar;
     private javax.swing.JMenuItem jmIEliminar;
     private javax.swing.JPopupMenu jppEditarFactura;
-    private javax.swing.JTable jt_ListarFacturasDeCompra;
+    public static javax.swing.JTable jt_ListarFacturasDeCompra;
     private javax.swing.JTextField txt_IngresoFormaBusqueda;
     // End of variables declaration//GEN-END:variables
 }
