@@ -12,8 +12,8 @@ public class IngresarProductos extends javax.swing.JPanel {
 
     public IngresarProductos() {
         initComponents();
-        ListarUMES();
-        ListarClasificaciones();
+//        ListarUMES();
+//        ListarClasificaciones();
     }
 
     public void ListarClasificaciones() {

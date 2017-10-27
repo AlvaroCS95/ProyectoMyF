@@ -30,10 +30,10 @@ public class GestorDeRutas extends javax.swing.JPanel {
     public GestorDeRutas() {
 
         initComponents();
-        InicailaizarTablaRutas();
-        InicializarFiltroClientes(TableListarBuscarClientes);
-        InicializarFiltroCamiones(TableListarBuscarCamiones);
-        VisualizarTodasLasRutas();
+//        InicailaizarTablaRutas();
+//        InicializarFiltroClientes(TableListarBuscarClientes);
+//        InicializarFiltroCamiones(TableListarBuscarCamiones);
+//        VisualizarTodasLasRutas();
     }
 
     public void IngresarRuta() throws ClassNotFoundException, SQLException {

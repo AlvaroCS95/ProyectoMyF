@@ -20,9 +20,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public PuntoDeVenta() {
         initComponents();
-        ListarTiposDePago();
-        ((DefaultEditor) jSDiasPlazo_PuntoDeVenta.getEditor()).getTextField().setEditable(false);
-        jSDiasPlazo_PuntoDeVenta.setEnabled(false);
+//        ListarTiposDePago();
+//        ((DefaultEditor) jSDiasPlazo_PuntoDeVenta.getEditor()).getTextField().setEditable(false);
+//        jSDiasPlazo_PuntoDeVenta.setEnabled(false);
 
     }
 

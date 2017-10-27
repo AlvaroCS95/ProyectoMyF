@@ -22,7 +22,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     public ListarFacturasDeCompra() {
 
         initComponents();
-        ListarFacturasDelUltimoMes();
+//        ListarFacturasDelUltimoMes();
 
     }
 

@@ -23,7 +23,7 @@ public class ListarUsuarios extends javax.swing.JPanel {
 
     public ListarUsuarios() {
         initComponents();
-        VisualizarUsuarios();
+//        VisualizarUsuarios();
 
     }
 

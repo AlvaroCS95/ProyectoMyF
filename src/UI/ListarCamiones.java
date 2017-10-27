@@ -21,7 +21,7 @@ public class ListarCamiones extends javax.swing.JPanel {
 
     public ListarCamiones() {
         initComponents();
-        VisualizarCamion(TablaListarCamiones_ListarCamiones);
+//        VisualizarCamion(TablaListarCamiones_ListarCamiones);
     }
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {

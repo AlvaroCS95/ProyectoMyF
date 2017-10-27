@@ -1,7 +1,13 @@
 package UI;
 
 import java.awt.Dimension;
-
+import UI.CuentasPorPagar;
+import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
+import static UI.CuentasPorPagar.tbCuentasPorPagar;
+import static UI.ListarClientes.TablaListarClientes_ListarClientes;
+import static UI.ListarClientes.VisualizarClientes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class Inicio extends javax.swing.JFrame {
 
     Dimension dim;
@@ -23,6 +29,7 @@ public class Inicio extends javax.swing.JFrame {
         puntoDeVenta1 = new UI.PuntoDeVenta();
         ingresoFacturaCompra1 = new UI.IngresoFacturaCompra();
         listarFacturasDeCompra1 = new UI.ListarFacturasDeCompra();
+        cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
         ingresarProductos1 = new UI.IngresarProductos();
         visualizarProductos1 = new UI.VisualizarProductos();
@@ -33,19 +40,34 @@ public class Inicio extends javax.swing.JFrame {
         listarUsuarios1 = new UI.ListarUsuarios();
         JTProveedores = new javax.swing.JTabbedPane();
         listarProveedor1 = new UI.ListarProveedor();
-        JTRutas = new javax.swing.JTabbedPane();
         JTCamiones = new javax.swing.JTabbedPane();
         listarCamiones1 = new UI.ListarCamiones();
+        JTRutas = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("FrameInicio"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        JTInicio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        JTFacturacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+
         puntoDeVenta1.setPreferredSize(new java.awt.Dimension(1300, 610));
         JTFacturacion.addTab("Facturación", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png")), puntoDeVenta1); // NOI18N
         JTFacturacion.addTab("Facturas de compra", ingresoFacturaCompra1);
         JTFacturacion.addTab("Lista de facturas de compra", listarFacturasDeCompra1);
+
+        cuentasPorPagar1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cuentasPorPagar1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        JTFacturacion.addTab("Cuentas por pagar", cuentasPorPagar1);
 
         JTInicio.addTab("Facturación", JTFacturacion);
 
@@ -55,6 +77,15 @@ public class Inicio extends javax.swing.JFrame {
 
         JTInicio.addTab("Inventario", JTInventario);
 
+        listarClientes1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                listarClientes1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         JTClientes.addTab("Lista de clientes", listarClientes1);
 
         JTInicio.addTab("Clientes", JTClientes);
@@ -66,16 +97,28 @@ public class Inicio extends javax.swing.JFrame {
         JTProveedores.addTab("Lista de proveedores", listarProveedor1);
 
         JTInicio.addTab("Proveedores", JTProveedores);
-        JTInicio.addTab("Rutas", JTRutas);
 
         JTCamiones.addTab("Lista de camiones", listarCamiones1);
 
         JTInicio.addTab("Camiones", JTCamiones);
+        JTInicio.addTab("Rutas", JTRutas);
 
         getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cuentasPorPagar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cuentasPorPagar1AncestorAdded
+        try {
+            VisualizarCuentasPorPagar(tbCuentasPorPagar);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cuentasPorPagar1AncestorAdded
+
+    private void listarClientes1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listarClientes1AncestorAdded
+         VisualizarClientes(TablaListarClientes_ListarClientes);
+    }//GEN-LAST:event_listarClientes1AncestorAdded
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane JTCamiones;
@@ -86,6 +129,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane JTProveedores;
     private javax.swing.JTabbedPane JTRutas;
     private javax.swing.JTabbedPane JTUsuarios;
+    private UI.CuentasPorPagar cuentasPorPagar1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
     private UI.IngresarProductos ingresarProductos1;
     private UI.IngresoFacturaCompra ingresoFacturaCompra1;
