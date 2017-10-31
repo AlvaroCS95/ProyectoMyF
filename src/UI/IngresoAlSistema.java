@@ -1,6 +1,7 @@
 package UI;
 
 import AccesoDatos.Coneccion;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import javax.swing.Icon;
@@ -19,6 +20,8 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         indicador = false;
         this.setTitle("Login de usuario");
+         setIconImage(Toolkit.getDefaultToolkit().getImage
+        (this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
 
     }
 

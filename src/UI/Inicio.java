@@ -24,6 +24,7 @@ import static UI.ListarUsuarios.VisualizarUsuarios;
 import static UI.PuntoDeVenta.ListarTiposDePago;
 import static UI.PuntoDeVenta.jSDiasPlazo_PuntoDeVenta;
 import static UI.VisualizarProductos.VisualizarTodosProductos;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JSpinner;
@@ -38,6 +39,8 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         setSize(dim.width, dim.height - 40);
         this.setTitle("Bienvenido:  " + NombreUsuario + ".");
+         setIconImage(Toolkit.getDefaultToolkit().getImage
+        (this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
 
     }
 
