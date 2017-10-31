@@ -255,7 +255,7 @@ ListarClientesPorBusqueda();
 
         MenuListar.setBackground(new java.awt.Color(0, 0, 102));
 
-        menuEditar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar16.png"))); // NOI18N
+        menuEditar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar_3.png"))); // NOI18N
         menuEditar_GestorRutas.setText("Editar");
         menuEditar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ ListarClientesPorBusqueda();
         });
         add(cbxOpcionesBuscarRuta_GestorDeRutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 50, 84, -1));
 
-        btnLimpiar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
+        btnLimpiar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Limpiar.png"))); // NOI18N
         btnLimpiar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar_GestorRutasActionPerformed(evt);
@@ -440,7 +440,7 @@ ListarClientesPorBusqueda();
         });
         add(txtBuscarRuta_GestorDeRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, 371, 28));
 
-        btnAceptar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
+        btnAceptar_GestorRutas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check.png"))); // NOI18N
         btnAceptar_GestorRutas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresarRutas(evt);

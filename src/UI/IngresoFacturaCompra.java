@@ -26,9 +26,6 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
     public IngresoFacturaCompra() {
         initComponents();
-//        ListarProveedores();
-//        ListarTiposDePago();
-//        scroll_IngresoFacturaCompra.getVerticalScrollBar().setUnitIncrement(15);
     }
 
     public void IngresarFacturaCompra() {
