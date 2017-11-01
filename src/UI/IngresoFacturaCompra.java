@@ -19,9 +19,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     int tx_idProveedor, tx_idTipoPago, tx_nDeReferencia, plazoDias;
     boolean tx_tipoDeCompra;
     float tx_montoTotal, montoCanclado;
-  static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
+    static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     ResultSet resultadoConsulta;
-   static DefaultTableModel modelo;
+    static DefaultTableModel modelo;
     static Object[] filas;
 
     public IngresoFacturaCompra() {
@@ -57,6 +57,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "¡Factura N° "
                         + tx_idFacturaCompra + " ha sido agregada exitosamente!");
+                EstablecerDatosDeFactura("# "+txtNumeroDeFactura_IngresarFacturaCompra.getText());
                 LimpiarCampos();
 
             } else {
@@ -64,6 +65,11 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             }
 
         }
+    }
+
+    public void EstablecerDatosDeFactura(String factura) {
+        jLDetalles.setText("Ingreso de los detalles de la factura  de compra "
+                + factura);
     }
 
     public void LimpiarCampos() {
@@ -233,7 +239,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 resultadoConsulta = coordinador.BuscarParaAgregarDetalle(codigo);
 
                 modelo = (DefaultTableModel) JTIngresoDetalleFacturaCompra.getModel();
-                
+
                 filas = new Object[5];
                 for (int i = 0; i < 3; i++) {
                     filas[i] = resultadoConsulta.getObject(i + 1);
@@ -257,26 +263,54 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
     }
 
+    public boolean VerificarUltimoId() {
+        int ultimoId;
+        CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+        ultimoId = coordinador.ConsultaUltimoIdDeFactura();
+        if (ultimoId != 0) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "<html> La ultima factura ingresada fue: <b>" + ultimoId
+                    + "</b>.\nDesea agregar estos detalles a esa factura?");
+            if (pregunta == JOptionPane.YES_OPTION) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean VerificarTablaVacía() {
+        int cantidadDeArticulos = JTIngresoDetalleFacturaCompra.getRowCount();
+        if (cantidadDeArticulos < 1) {           
+             JOptionPane.showMessageDialog(null, "<html> Primero debe ingresar datos a la tabla para\n"
+                    + "luego agregarlos : <b>"
+                    + "</b>.\nDesea agregar estos detalles a esa factura?");
+            return false;
+        }
+        return true;
+    }
+
     public void IngresarDetalles() {
         try {
-            CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-            int exitos = 0;
-            for (int i = 0; i < JTIngresoDetalleFacturaCompra.getRowCount(); i++) {
-                String codigo = JTIngresoDetalleFacturaCompra.getValueAt(i, 0).toString();
-                float precio = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 3).toString());
-                float cantidad = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 4).toString());
-                Producto NuevoDetalle = new Producto(codigo, "", 0, cantidad, precio, 0);
-                boolean sentinela = coordinador.AgregarDetalle(NuevoDetalle);
-                if (sentinela) {
-                    exitos++;
+            if (VerificarUltimoId() && VerificarTablaVacía()) {
+                CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+                int exitos = 0;
+                for (int i = 0; i < JTIngresoDetalleFacturaCompra.getRowCount(); i++) {
+                    String codigo = JTIngresoDetalleFacturaCompra.getValueAt(i, 0).toString();
+                    float precio = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 3).toString());
+                    float cantidad = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 4).toString());
+                    Producto NuevoDetalle = new Producto(codigo, "", 0, cantidad, precio, 0);
+                    boolean sentinela = coordinador.AgregarDetalle(NuevoDetalle);
+                    if (sentinela) {
+                        exitos++;
+                    }
                 }
-            }
-            if (exitos == JTIngresoDetalleFacturaCompra.getRowCount()) {
-                JOptionPane.showMessageDialog(null, "¡Todos los productos fueron agregados con exito!");
-                LimpiarDetalles();
-            } else {
-                JOptionPane.showMessageDialog(null, "¡Algunos productos no se ingresaron con exito, "
-                        + "por favor verifique los datos!", "¡Atención!", JOptionPane.WARNING_MESSAGE);
+                if (exitos == JTIngresoDetalleFacturaCompra.getRowCount()) {
+                    JOptionPane.showMessageDialog(null, "¡Todos los productos fueron agregados con exito!");
+                    EstablecerDatosDeFactura("");
+                    LimpiarDetalles();
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Algunos productos no se ingresaron con exito, "
+                            + "por favor verifique los datos!", "¡Atención!", JOptionPane.WARNING_MESSAGE);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "¡Ocurrieron errores durante la inserción!"
@@ -285,8 +319,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                     "¡Oh, algo anda mal!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void LimpiarDetalles(){
+
+    public void LimpiarDetalles() {
         txtPrecioDeCompra.setText("");
         txtCantidadDetalleFactura.setText("");
         txtCodigoDetalleFactura.setText("");
@@ -329,7 +363,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtPlazoDias_IngresarFacturaCompra = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTIngresoDetalleFacturaCompra = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
+        jLDetalles = new javax.swing.JLabel();
         boton_ListoDatosFacturaCompra = new javax.swing.JButton();
         txtCodigoDetalleFactura = new javax.swing.JTextField();
         JBBuscarParaAgregarDetalle = new javax.swing.JButton();
@@ -517,9 +551,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         panel_IngreosFacturaCompra.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 1030, 960, 210));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel8.setText("Ingreso de los detalles de la factura  de compra");
-        panel_IngreosFacturaCompra.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 890, 510, -1));
+        jLDetalles.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLDetalles.setText("Ingreso de los detalles de la factura  de compra");
+        panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 890, 720, -1));
 
         boton_ListoDatosFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         boton_ListoDatosFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -607,6 +641,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     private javax.swing.JComboBox cbxTipoCompra_IngresarFacturaCompra;
     public static javax.swing.JComboBox cbxTipoPago_FacturaCompra;
     private com.toedter.calendar.JDateChooser jDCFecha_Compra;
+    private javax.swing.JLabel jLDetalles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -624,7 +659,6 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panel_IngreosFacturaCompra;

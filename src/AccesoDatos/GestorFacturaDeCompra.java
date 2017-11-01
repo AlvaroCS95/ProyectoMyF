@@ -294,8 +294,8 @@ public class GestorFacturaDeCompra extends Coneccion {
 
         return resultadoConsulta;
     }
-    
-    public ResultSet AgregarDetalleFacturaCompra(Producto nuevoProducto){
+
+    public ResultSet AgregarDetalleFacturaCompra(Producto nuevoProducto) {
         try {
             EstablecerConexion();
             llamadaAlMetodo = conexion.prepareCall("CALL AgregarDetalleFacturaCompra(?, ?, ?);");
@@ -304,7 +304,7 @@ public class GestorFacturaDeCompra extends Coneccion {
             llamadaAlMetodo.setFloat(3, nuevoProducto.getPrecio());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -312,5 +312,17 @@ public class GestorFacturaDeCompra extends Coneccion {
         }
         return resultadoConsulta;
     }
-    
+
+    public ResultSet ObtenerUltimoId() {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL ConsultarIdUltimaFacturaCompraIngresada();");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
 }

@@ -202,4 +202,17 @@ public class CoordinadorDeFacturaCompra {
         }
         return false;
     }
+    
+    public int ConsultaUltimoIdDeFactura(){
+        GestorFacturaDeCompra gestor =  new GestorFacturaDeCompra();
+        resultado = gestor.ObtenerUltimoId();
+        try {
+            if (resultado.next()) {            
+                return resultado.getInt(1);// retorn resultado obtenido
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;// No trae nada
+    }
 }
