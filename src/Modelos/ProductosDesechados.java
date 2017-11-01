@@ -12,13 +12,13 @@ package Modelos;
 public class ProductosDesechados {
     int IdDevoluciones;
     String CodigoDelProducto;
-    int CantidadDesechada;
+    float CantidadDesechada;
     String DetalleDesecho;
 
     public ProductosDesechados() {
     }
 
-    public ProductosDesechados(int IdDevoluciones, String CodigoDelProducto, int CantidadDesechada) {
+    public ProductosDesechados(int IdDevoluciones, String CodigoDelProducto, float CantidadDesechada) {
         this.IdDevoluciones = IdDevoluciones;
         this.CodigoDelProducto = CodigoDelProducto;
         this.CantidadDesechada = CantidadDesechada;
@@ -32,7 +32,7 @@ public class ProductosDesechados {
         return CodigoDelProducto;
     }
 
-    public int getCantidadDesechada() {
+    public float getCantidadDesechada() {
         return CantidadDesechada;
     }
 
@@ -48,7 +48,7 @@ public class ProductosDesechados {
         this.CodigoDelProducto = CodigoDelProducto;
     }
 
-    public void setCantidadDesechada(int CantidadDesechada) {
+    public void setCantidadDesechada(float CantidadDesechada) {
         this.CantidadDesechada = CantidadDesechada;
     }
 

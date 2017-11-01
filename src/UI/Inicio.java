@@ -57,6 +57,7 @@ public class Inicio extends javax.swing.JFrame {
         ingresarProductos1 = new UI.IngresarProductos();
         visualizarProductos1 = new UI.VisualizarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
+        visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
         JTClientes = new javax.swing.JTabbedPane();
         listarClientes1 = new UI.ListarClientes();
         JTUsuarios = new javax.swing.JTabbedPane();
@@ -147,6 +148,7 @@ public class Inicio extends javax.swing.JFrame {
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
+        JTInventario.addTab("Visualizar y Editar Devoluciones", visualizarYEditarDevoluciones1);
 
         JTInicio.addTab("Inventario", JTInventario);
 
@@ -302,5 +304,6 @@ public class Inicio extends javax.swing.JFrame {
     private UI.ListarUsuarios listarUsuarios1;
     private UI.PuntoDeVenta puntoDeVenta1;
     private UI.VisualizarProductos visualizarProductos1;
+    private UI.VisualizarYEditarDevoluciones visualizarYEditarDevoluciones1;
     // End of variables declaration//GEN-END:variables
 }

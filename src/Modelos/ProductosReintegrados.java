@@ -12,12 +12,12 @@ package Modelos;
 public class ProductosReintegrados {
     String CodigoProducto;
     int IdDevoluciones;
-    int CantidadReintegrada;
+    float CantidadReintegrada;
 
     public ProductosReintegrados() {
     }
 
-    public ProductosReintegrados(String CodigoProducto, int IdDevoluciones, int CantidadReintegrada) {
+    public ProductosReintegrados(String CodigoProducto, int IdDevoluciones, float CantidadReintegrada) {
         this.CodigoProducto = CodigoProducto;
         this.IdDevoluciones = IdDevoluciones;
         this.CantidadReintegrada = CantidadReintegrada;
@@ -31,7 +31,7 @@ public class ProductosReintegrados {
         return IdDevoluciones;
     }
 
-    public int getCantidadReintegrada() {
+    public float getCantidadReintegrada() {
         return CantidadReintegrada;
     }
 
@@ -43,7 +43,7 @@ public class ProductosReintegrados {
         this.IdDevoluciones = IdDevoluciones;
     }
 
-    public void setCantidadReintegrada(int CantidadReintegrada) {
+    public void setCantidadReintegrada(float CantidadReintegrada) {
         this.CantidadReintegrada = CantidadReintegrada;
     }
     

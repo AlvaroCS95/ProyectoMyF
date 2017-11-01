@@ -405,8 +405,13 @@ int OpcionParaDesechar=0;
             return;
             }else{
                     if(OpcionParaDesechar==1){
-                    
-                    CantidadParaDesechar=Integer.parseInt(txtCantidadParaDevolver_DetalleDesecho.getText());
+                                if(txtCantidadParaDevolver_DetalleDesecho.getText().equals("")){
+                                    
+                                    getToolkit().beep();
+                                    JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad a desechar","ERROR",JOptionPane.ERROR_MESSAGE);
+                                    return;
+                                }else{
+                                CantidadParaDesechar=Integer.parseInt(txtCantidadParaDevolver_DetalleDesecho.getText());
                                 if(CantidadParaDesechar>CantidadMaximaParaVender){
                                    getToolkit().beep();
                                     JOptionPane.showMessageDialog(null, "Solo puede ingresar una cantidad menor a:"
@@ -415,7 +420,8 @@ int OpcionParaDesechar=0;
                                     return;
                                     }else{
                                     AgregarProductosADesecho(CodigoProducto,NombreProducto,CantidadParaDesechar,textAreaDetalleDesecho.getText());
-                                    }
+                                    }}
+                    
                     }
                     else{
                     CantidadParaDesechar=CantidadMaximaParaVender;

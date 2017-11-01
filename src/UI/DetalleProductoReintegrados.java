@@ -354,8 +354,14 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
                 return;
             }else{
                 if(OpcionParaReintegrar==1){
-
-                    CantidadParaReintegrar=Integer.parseInt(txtCantidadParaDevolver_DetalleProductosReintegrado.getText());
+                            if(txtCantidadParaDevolver_DetalleProductosReintegrado.getText().equals("")){
+                            getToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad a reintegrar","ERROR",JOptionPane.ERROR_MESSAGE);
+                        return;
+                            
+                            }else 
+                            
+                            {CantidadParaReintegrar=Integer.parseInt(txtCantidadParaDevolver_DetalleProductosReintegrado.getText());
                     if(CantidadParaReintegrar>CantidadMaximaParaReintegrar){
                         getToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Solo puede ingresar una cantidad menor a:"
@@ -365,7 +371,8 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
                     }else{
                         AgregarProductosAReintegro(CodigoProducto,NombreProducto,CantidadParaReintegrar);
                     }
-                }
+                }}
+                    
                 else{
                     CantidadParaReintegrar=CantidadMaximaParaReintegrar;
                     AgregarProductosAReintegro(CodigoProducto,NombreProducto,CantidadParaReintegrar);

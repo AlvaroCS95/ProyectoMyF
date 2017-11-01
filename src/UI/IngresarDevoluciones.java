@@ -15,6 +15,8 @@ import Modelos.ProductosDesechados;
 import Modelos.ProductosReintegrados;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -473,7 +475,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         CoordinadorDeDevoluciones ElCoordinadorDeDevoluciones = new CoordinadorDeDevoluciones();
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("Seguro que desea ingesar esta devolución", "IngresarTablas");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
-            try {
+            //try {
                 UsuarioActivo = DevolverIdUsuarioActivo();
                 if (VerificarQueAlMenosUnaTablaNoEsteVacia() == true) {
                     JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
@@ -483,28 +485,34 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     LaDevolucionAIngresar.setNumeroFactura(txtNFactura_IngresarDevoluciones.getText());
                     LaDevolucionAIngresar.setValorTotal(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente());
                     LaDevolucionAIngresar.setReintegroAlCliente(ReintegradoAlCliente);
-                    if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                        try {
-                            boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
-                            if (SeIngresoLosDetalles == true) {
-                                JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
-                                LimpiarTablas(TablaReintegro_Devoluciones, ModeloProductosReintegrados);
-                                LimpiarTablas(TablaDetalleFacturaDeVenta_Devoluciones, ModeloDetalleProductos);
-                                LimpiarTablas(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados);
-                                LimpiarCamposDeLaFactura();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "No se puee ingresar los detalles");
+                    try {
+                        if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
+                            try {
+                                boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
+                                if (SeIngresoLosDetalles == true) {
+                                    JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
+                                    LimpiarTablas(TablaReintegro_Devoluciones, ModeloProductosReintegrados);
+                                    LimpiarTablas(TablaDetalleFacturaDeVenta_Devoluciones, ModeloDetalleProductos);
+                                    LimpiarTablas(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados);
+                                    LimpiarCamposDeLaFactura();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "No se puee ingresar los detalles");
+                                }
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
                             }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error en la inserción");
-                    }//fin else se inserto
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error en la inserción");
+                        }//fin else se inserto
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }//fin else si las tablas estan vacias.
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Ocurrio un error a la hora de ingresar las devoluciones, por favor vuelva intentarlo");
-            }
+          //  } catch (Exception e) {
+          //      JOptionPane.showMessageDialog(null, "Ocurrio un error a la hora de ingresar las devoluciones, por favor vuelva intentarlo");
+           // }
 
         } else {
             return;
@@ -1013,11 +1021,11 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     private float RecogerValortotalDeUnaTabla(JTable TablaARecogerPrecios) {
         float PrecioRecogido = 0;
         float PrecioVenta = 0;
-        int Cantidad = 0;
+        float Cantidad = 0;
         String CodigoProducto = "";
         for (int Contador = 0; Contador < TablaARecogerPrecios.getRowCount(); Contador++) {
             CodigoProducto = TablaARecogerPrecios.getValueAt(Contador, 0).toString();
-            Cantidad = Integer.parseInt(TablaARecogerPrecios.getValueAt(Contador, 2).toString());
+            Cantidad = Float.parseFloat(TablaARecogerPrecios.getValueAt(Contador, 2).toString());
             PrecioVenta = DevolverPrecioDeUnProducto(CodigoProducto);
             PrecioRecogido += Cantidad * PrecioVenta;
         }
@@ -1055,7 +1063,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         for (int Contador = 0; Contador < TablaProductosDesechados_Devoluciones.getRowCount(); Contador++) {
 
             ElProductoDesechado.setCodigoDelProducto(TablaProductosDesechados_Devoluciones.getValueAt(Contador, 0).toString());
-            ElProductoDesechado.setCantidadDesechada(Integer.parseInt(TablaProductosDesechados_Devoluciones.getValueAt(Contador, 2).toString()));
+            ElProductoDesechado.setCantidadDesechada(Float.parseFloat(TablaProductosDesechados_Devoluciones.getValueAt(Contador, 2).toString()));
             ElProductoDesechado.setIdDevoluciones(IdDevolucion);
             ElProductoDesechado.setDetalleDesecho(TablaProductosDesechados_Devoluciones.getValueAt(Contador, 3).toString());
             try {
@@ -1076,7 +1084,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         for (int Contador = 0; Contador < TablaReintegro_Devoluciones.getRowCount(); Contador++) {
 
             ElProductosReintegrado.setCodigoProducto(TablaReintegro_Devoluciones.getValueAt(Contador, 0).toString());
-            ElProductosReintegrado.setCantidadReintegrada(Integer.parseInt(TablaReintegro_Devoluciones.getValueAt(Contador, 2).toString()));
+            ElProductosReintegrado.setCantidadReintegrada(Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(Contador, 2).toString()));
             ElProductosReintegrado.setIdDevoluciones(IdDevolucion);
 
             try {

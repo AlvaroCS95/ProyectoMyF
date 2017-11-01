@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Christian
- */
+ */ 
 public class GestorProductoReintegrados extends Coneccion{
      CallableStatement llamadaAlMetodo;
      Connection conect;
