@@ -296,7 +296,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                 ClaveUsuario = new String(contraseña);
                 CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
                 Usuario elUsuario = new Usuario(NombreUsuario, ClaveUsuario, Cedula, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido);
-                 Respuesta=elCoordinadorDeUsuarios.AgregarUsuario(elUsuario);
+                Respuesta=elCoordinadorDeUsuarios.AgregarUsuario(elUsuario);
                 if(Respuesta.next()){
                     if(Respuesta.getString(1).equals("1")){
                         JOptionPane.showMessageDialog(null,"Se ingreso el usuario exitosamente");

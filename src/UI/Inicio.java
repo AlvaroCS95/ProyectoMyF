@@ -119,7 +119,7 @@ public class Inicio extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        JTFacturacion.addTab("Cuentas por pagar", cuentasPorPagar1);
+        JTFacturacion.addTab("Cuentas pendientes", cuentasPorPagar1);
 
         JTInicio.addTab("Facturación", JTFacturacion);
 
