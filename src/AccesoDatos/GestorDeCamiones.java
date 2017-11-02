@@ -5,7 +5,6 @@ import Modelos.Carga;
 import Modelos.DetalleCarga;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -80,6 +79,19 @@ public class GestorDeCamiones extends Coneccion {
         consulta = conexion.createStatement();
         try {
             resultadoConsulta = consulta.executeQuery("call MostrarCamionesActivos ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
+ public ResultSet ListarCargas() throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call MostrarCargas ");
             return resultadoConsulta;
         } catch (SQLException ex) {
             return resultadoConsulta;

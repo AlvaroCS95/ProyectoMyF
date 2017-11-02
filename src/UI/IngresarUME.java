@@ -280,6 +280,7 @@ public class IngresarUME extends javax.swing.JFrame {
 
     private void btAceptar_IngresarUMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarUMEActionPerformed
         IngresarUME();
+        IngresarProductos.ListarUMES();
     }//GEN-LAST:event_btAceptar_IngresarUMEActionPerformed
 
     private void btCancelar_IngresarUMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarUMEActionPerformed

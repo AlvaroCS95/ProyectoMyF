@@ -38,6 +38,10 @@ public class CoordinadorDeCamion {
         GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
         return elGestorDeUsuarios.ListarCamionesActivos();
     }
+      public ResultSet ListarCargas() throws SQLException, ClassNotFoundException {
+        GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
+        return elGestorDeUsuarios.ListarCargas();
+    }
       public ResultSet ListarTodosLosCamiones() throws SQLException, ClassNotFoundException {
         GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
         return elGestorDeUsuarios.ListarTodosLosCamiones();

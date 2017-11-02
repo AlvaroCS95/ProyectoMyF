@@ -291,6 +291,7 @@ public class IngresarClasificacion extends javax.swing.JFrame {
 
     private void btAceptar_IngresarClasificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarClasificacionActionPerformed
         IngresarClasificacion();
+        IngresarProductos.ListarClasificaciones();
     }//GEN-LAST:event_btAceptar_IngresarClasificacionActionPerformed
 
     private void btCancelar_IngresarClasificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarClasificacionActionPerformed
