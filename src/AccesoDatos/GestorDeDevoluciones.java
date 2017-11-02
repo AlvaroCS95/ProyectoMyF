@@ -37,7 +37,7 @@ public class GestorDeDevoluciones extends Coneccion {
             llamadaAlMetodo.setFloat(3, LaDevolucion.getValorTotal());
             llamadaAlMetodo.setFloat(4, LaDevolucion.getReintegroAlCliente());
             llamadaAlMetodo.execute();
-            llamadaAlMetodo.getResultSet();
+            ResultSet Resultado = llamadaAlMetodo.getResultSet();
             llamadaAlMetodo.close();
             return true;
         } catch (Exception e) {

@@ -52,6 +52,7 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         txtCantidadVendida_DetalleProductosReintegrado = new javax.swing.JTextField();
         txtNombreProducto_DetalleProductosReintegrado = new javax.swing.JTextField();
         txtCodigoProducto_DetalleProductosReintegrado = new javax.swing.JTextField();
@@ -102,6 +103,7 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
 
         PanelReintegrarTodo_DetalleProductosReintegrado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        buttonGroup1.add(radiobtReintegrarTodo_DetalleProductosReintegrado);
         radiobtReintegrarTodo_DetalleProductosReintegrado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         radiobtReintegrarTodo_DetalleProductosReintegrado.setText("Reintegrar todo ");
         radiobtReintegrarTodo_DetalleProductosReintegrado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,6 +170,7 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
 
         PaneReintegroParcial_DetalleProductosReintegrado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        buttonGroup1.add(radiobtReintegrarUnaParte_DetalleProductosReintegrado);
         radiobtReintegrarUnaParte_DetalleProductosReintegrado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         radiobtReintegrarUnaParte_DetalleProductosReintegrado.setText("Ingresar la cantidad a reintegrar");
         radiobtReintegrarUnaParte_DetalleProductosReintegrado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -441,6 +444,7 @@ private void AgregarProductosAReintegro(String CodigoProducto,String NombreProdu
     public javax.swing.JPanel PanelReintegrarTodo_DetalleProductosReintegrado;
     public javax.swing.JButton btAceptar_DetalleDesecho;
     public javax.swing.JButton btCancelar_DetalleDesecho;
+    public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;

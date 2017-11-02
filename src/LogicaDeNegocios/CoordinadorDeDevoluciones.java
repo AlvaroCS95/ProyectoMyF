@@ -18,10 +18,10 @@ public class CoordinadorDeDevoluciones {
     
      
     public boolean AgregarDevoluciones(Devolucion LaDevolucion) throws ClassNotFoundException, SQLException {
-        boolean Respuesta;
+        
         GestorDeDevoluciones elGestorDeDevoluciones = new GestorDeDevoluciones();
-        Respuesta = elGestorDeDevoluciones.IngresarDevolucion(LaDevolucion);
-        return Respuesta;
+        return  elGestorDeDevoluciones.IngresarDevolucion(LaDevolucion);
+    
 
     }
     public int DevolverIdDevolucion(String NumeroFactura) throws ClassNotFoundException, SQLException {

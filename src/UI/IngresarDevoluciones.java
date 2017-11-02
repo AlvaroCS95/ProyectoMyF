@@ -485,22 +485,24 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     LaDevolucionAIngresar.setNumeroFactura(txtNFactura_IngresarDevoluciones.getText());
                     LaDevolucionAIngresar.setValorTotal(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente());
                     LaDevolucionAIngresar.setReintegroAlCliente(ReintegradoAlCliente);
+                   
                     try {
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                            try {
-                                boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
-                                if (SeIngresoLosDetalles == true) {
-                                    JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
-                                    LimpiarTablas(TablaReintegro_Devoluciones, ModeloProductosReintegrados);
-                                    LimpiarTablas(TablaDetalleFacturaDeVenta_Devoluciones, ModeloDetalleProductos);
-                                    LimpiarTablas(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados);
-                                    LimpiarCamposDeLaFactura();
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "No se puee ingresar los detalles");
-                                }
-                            } catch (Exception e) {
-                                JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
+                            JOptionPane.showMessageDialog(null, "Se ingreso exitosamente");
+                            // try {
+                            boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
+                            if (SeIngresoLosDetalles == true) {
+                            JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
+                            LimpiarTablas(TablaReintegro_Devoluciones, ModeloProductosReintegrados);
+                            LimpiarTablas(TablaDetalleFacturaDeVenta_Devoluciones, ModeloDetalleProductos);
+                            LimpiarTablas(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados);
+                            LimpiarCamposDeLaFactura();
+                            } else {
+                            JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
                             }
+                            // } catch (Exception e) {
+                            // JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
+                            // }
                         } else {
                             JOptionPane.showMessageDialog(null, "Error en la inserción");
                         }//fin else se inserto
@@ -509,6 +511,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     } catch (SQLException ex) {
                         Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                 }//fin else si las tablas estan vacias.
           //  } catch (Exception e) {
           //      JOptionPane.showMessageDialog(null, "Ocurrio un error a la hora de ingresar las devoluciones, por favor vuelva intentarlo");
@@ -1001,18 +1004,23 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
                 ValorTotalDeLaDevolucion += RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
                 ReintegradoAlCliente = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
+               
             } else {
                 ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
+                ReintegradoAlCliente=0;
+           
             }
 
         } else if (VerificarQueTablaReintegrosNoEstaVacia() == false) {
             if (VerificarQueTablaDesechosNoEstaVacia() == false) {
                 ReintegradoAlCliente = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
-                ValorTotalDeLaDevolucion += RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
-                ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
+                ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
+                ValorTotalDeLaDevolucion += RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
+
             } else {
-                ValorTotalDeLaDevolucion += RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
+                ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
                 ReintegradoAlCliente = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
+               
             }
         }
         return ValorTotalDeLaDevolucion;
@@ -1091,6 +1099,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 Exito = ElCoordinadorDeProductosReintegrados.AgregarProductoReintegrado(ElProductosReintegrado);
             } catch (Exception e) {
                 Exito = false;
+                JOptionPane.showMessageDialog(null, "error aqui");
             }
         }
         return Exito;
