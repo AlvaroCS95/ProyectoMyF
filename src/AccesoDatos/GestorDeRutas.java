@@ -95,7 +95,6 @@ public class GestorDeRutas extends Coneccion{
         EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;
-
         consulta = conexion.createStatement();
         try {
             resultadoConsulta = consulta.executeQuery("call MostarClientesPorRutaNombre('" + nombre + "'); ");

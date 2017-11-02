@@ -164,7 +164,10 @@ public class CoordinadorDeFacturaVenta {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.ListarFacturasDeVentaQueNoTienenDevoluciones();
     }
-
+ public ResultSet ListarFacturasDeVenta() throws SQLException, ClassNotFoundException {
+        GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
+        return elGestorDeFacturasDeVentas.ListarFacturasDeVenta();
+    }
     public ResultSet BuscarFacturaDeVentaQueNoTieneDevolucionPorNumeroDeFactura(String NumeroDeFactura) throws SQLException, ClassNotFoundException {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.BuscarFacturaDeVentaQueNoTieneDevolucionPorNFactura(NumeroDeFactura);
