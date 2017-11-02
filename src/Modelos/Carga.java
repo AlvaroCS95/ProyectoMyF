@@ -1,40 +1,35 @@
-
 package Modelos;
 
-import java.util.Date;
+import java.util.ArrayList;
+
 
 public class Carga {
-    float Cantidad;
-    String Codigo;
-    Date FechaDeCarga;
+    String IdCamion;
 
-    public Carga(float Cantidad, String Codigo, Date FechaDeCarga) {
-        this.Cantidad = Cantidad;
-        this.Codigo = Codigo;
-        this.FechaDeCarga = FechaDeCarga;
+    ArrayList <DetalleCarga> laListaDeCarga;
+
+    public Carga( String IdCamion) {
+       
+        this.IdCamion = IdCamion;
+      
+         laListaDeCarga=new ArrayList();
     }
 
-    public float getCantidad() {
-        return Cantidad;
+    
+
+    public String getIdCamion() {
+        return IdCamion;
     }
 
-    public void setCantidad(float Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setIdCamion(String IdCamion) {
+        this.IdCamion = IdCamion;
     }
 
-    public String getCodigo() {
-        return Codigo;
+    public ArrayList<DetalleCarga> getLaListaDeCarga() {
+        return laListaDeCarga;
     }
 
-    public void setCodigo(String Codigo) {
-        this.Codigo = Codigo;
-    }
-
-    public Date getFechaDeCarga() {
-        return FechaDeCarga;
-    }
-
-    public void setFechaDeCarga(Date FechaDeCarga) {
-        this.FechaDeCarga = FechaDeCarga;
+    public void setLaListaDeCarga(ArrayList<DetalleCarga> laListaDeCarga) {
+        this.laListaDeCarga = laListaDeCarga;
     }
 }

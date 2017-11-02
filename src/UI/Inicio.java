@@ -50,11 +50,9 @@ public class Inicio extends javax.swing.JFrame {
         JTInicio = new javax.swing.JTabbedPane();
         JTFacturacion = new javax.swing.JTabbedPane();
         puntoDeVenta1 = new UI.PuntoDeVenta();
-        ingresoFacturaCompra1 = new UI.IngresoFacturaCompra();
         listarFacturasDeCompra1 = new UI.ListarFacturasDeCompra();
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
-        ingresarProductos1 = new UI.IngresarProductos();
         visualizarProductos1 = new UI.VisualizarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
@@ -66,6 +64,8 @@ public class Inicio extends javax.swing.JFrame {
         listarProveedor1 = new UI.ListarProveedor();
         JTCamiones = new javax.swing.JTabbedPane();
         listarCamiones1 = new UI.ListarCamiones();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ingresarCarga1 = new UI.IngresarCarga();
         gestorDeRutas1 = new UI.GestorDeRutas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,17 +88,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         JTFacturacion.addTab("Facturación", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png")), puntoDeVenta1); // NOI18N
-
-        ingresoFacturaCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                ingresoFacturaCompra1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        JTFacturacion.addTab("Facturas de compra", ingresoFacturaCompra1);
 
         listarFacturasDeCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -125,17 +114,6 @@ public class Inicio extends javax.swing.JFrame {
         JTInicio.addTab("Facturación", JTFacturacion);
 
         JTInventario.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-
-        ingresarProductos1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                ingresarProductos1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        JTInventario.addTab("Ingreso de productos", ingresarProductos1);
 
         visualizarProductos1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -209,6 +187,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         JTCamiones.addTab("Lista de camiones", listarCamiones1);
+
+        jScrollPane1.setViewportView(ingresarCarga1);
+
+        JTCamiones.addTab("Ingresar Cargas", jScrollPane1);
 
         JTInicio.addTab("Camiones", JTCamiones);
 
@@ -294,9 +276,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTabbedPane JTUsuarios;
     private UI.CuentasPorPagar cuentasPorPagar1;
     private UI.GestorDeRutas gestorDeRutas1;
+    private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
-    private UI.IngresarProductos ingresarProductos1;
-    private UI.IngresoFacturaCompra ingresoFacturaCompra1;
+    private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;
     private UI.ListarFacturasDeCompra listarFacturasDeCompra1;

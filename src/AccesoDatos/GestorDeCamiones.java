@@ -1,6 +1,8 @@
 package AccesoDatos;
 
 import Modelos.Camion;
+import Modelos.Carga;
+import Modelos.DetalleCarga;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -97,4 +99,35 @@ public class GestorDeCamiones extends Coneccion {
             return resultadoConsulta;
         }
     }
+     public boolean InsertarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+
+        try {
+            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?)}");
+            llamadaAlMetodo.setString(1, laCarga.getIdCamion());
+    
+            llamadaAlMetodo.execute();
+            llamadaAlMetodo.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+     public boolean InsertarDetalleCarga(DetalleCarga elDetalledeCarga) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+
+        try {
+            llamadaAlMetodo = conexion.prepareCall("{Call IngresarDetalleCarga(?,?)}");
+            llamadaAlMetodo.setString(1, elDetalledeCarga.getIdProducto());
+            llamadaAlMetodo.setFloat(2, elDetalledeCarga.getCantidad());
+            llamadaAlMetodo.execute();
+            llamadaAlMetodo.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+
 }

@@ -12,8 +12,8 @@ public class IngresarProductos extends javax.swing.JPanel {
 
     public IngresarProductos() {
         initComponents();
-//        ListarUMES();
-//        ListarClasificaciones();
+       //ListarUMES();
+       //ListarClasificaciones();
     }
 
     public static void ListarClasificaciones() {
@@ -48,22 +48,7 @@ public class IngresarProductos extends javax.swing.JPanel {
 
     public void IngresarNuevaClsificacion() {
 
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresarClasificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresarClasificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresarClasificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngresarClasificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+    
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IngresarClasificacion().setVisible(true);
@@ -150,22 +135,8 @@ public class IngresarProductos extends javax.swing.JPanel {
     }
 
     public void IngresarNuevoUME() {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IngresarUME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IngresarUME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IngresarUME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IngresarUME.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+     
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IngresarUME().setVisible(true);
@@ -194,14 +165,14 @@ public class IngresarProductos extends javax.swing.JPanel {
         jLabel40 = new javax.swing.JLabel();
         txtCodigo_IngresarInventario = new javax.swing.JTextField();
         txtNombre_IngresarInventario = new javax.swing.JTextField();
-        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<String>();
+        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<>();
         btIngClasificacion_IngresarProductos = new javax.swing.JButton();
         btLimpiar_IngresarInventario = new javax.swing.JButton();
         btAceptar_IngresarInventario = new javax.swing.JButton();
         btCancelar_IngresarInventario = new javax.swing.JButton();
         btActualizar_IngresarProductos = new javax.swing.JButton();
         txtPrecio_IngresarInventario = new javax.swing.JTextField();
-        cmbxUME_IngresarProductos = new javax.swing.JComboBox<String>();
+        cmbxUME_IngresarProductos = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         btIngUME_IngresarProductos = new javax.swing.JButton();
@@ -287,6 +258,11 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         txtPrecio_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrecio_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
+        txtPrecio_IngresarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecio_IngresarInventarioActionPerformed(evt);
+            }
+        });
         txtPrecio_IngresarInventario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecio_IngresarInventarioKeyTyped(evt);
@@ -342,6 +318,10 @@ public class IngresarProductos extends javax.swing.JPanel {
     private void btLimpiar_IngresarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarInventarioActionPerformed
         Limpiar();
     }//GEN-LAST:event_btLimpiar_IngresarInventarioActionPerformed
+
+    private void txtPrecio_IngresarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio_IngresarInventarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecio_IngresarInventarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
