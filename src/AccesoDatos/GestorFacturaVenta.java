@@ -145,7 +145,19 @@ public class GestorFacturaVenta extends Coneccion {
             return resultadoConsulta;
         }
     }
+ public ResultSet ListarFacturasDeVenta() throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
 
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call MostrarFacturasDeVenta(); ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
     public ResultSet BuscarFacturaDeVentaQueTieneDevolucionPorNFactura(String NumeroFactura) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
