@@ -295,7 +295,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/AddIcon.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Reintegro"/>
+        <Property name="text" type="java.lang.String" value="Ingresar Devolucion"/>
         <Property name="toolTipText" type="java.lang.String" value="Oprimir para guardar datos de devoluci&#xf3;n"/>
       </Properties>
       <Events>

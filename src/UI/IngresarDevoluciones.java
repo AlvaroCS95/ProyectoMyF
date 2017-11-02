@@ -142,7 +142,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
         btReintegro_IngresarDevoluciones.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         btReintegro_IngresarDevoluciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AddIcon.png"))); // NOI18N
-        btReintegro_IngresarDevoluciones.setText("Reintegro");
+        btReintegro_IngresarDevoluciones.setText("Ingresar Devolucion");
         btReintegro_IngresarDevoluciones.setToolTipText("Oprimir para guardar datos de devolución");
         btReintegro_IngresarDevoluciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,7 +347,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                         .addComponent(btLimpiar_IngresarDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(btReintegro_IngresarDevoluciones)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -489,7 +489,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     try {
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
                             JOptionPane.showMessageDialog(null, "Se ingreso exitosamente");
-                            // try {
+                             try {
                             boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
                             if (SeIngresoLosDetalles == true) {
                             JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
@@ -500,9 +500,9 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                             } else {
                             JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
                             }
-                            // } catch (Exception e) {
-                            // JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
-                            // }
+                             } catch (Exception e) {
+                             JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
+                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Error en la inserción");
                         }//fin else se inserto
