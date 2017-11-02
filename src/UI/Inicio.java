@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.Timer;
@@ -54,6 +55,9 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
          setIconImage(Toolkit.getDefaultToolkit().getImage
         (this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
          MostrarHora();
+         jMenuBar1.add(Box.createHorizontalGlue()); 
+         jMenuBar1.add(jMenu3);
+         jMenuBar1.add(jMenu4);
 
 
     }
@@ -257,6 +261,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("jMenu4");
+        jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -395,7 +401,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
 
     
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame){
-    
     int OpcionDelUsuario = JOptionPane.showConfirmDialog(null,ConsultaAlUsuario,TituloDelFrame,JOptionPane.YES_NO_OPTION);
     return OpcionDelUsuario;
     };
