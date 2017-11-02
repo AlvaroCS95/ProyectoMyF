@@ -27,6 +27,7 @@ import static UI.VisualizarProductos.VisualizarTodosProductos;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
 public class Inicio extends javax.swing.JFrame {
@@ -67,6 +68,11 @@ public class Inicio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ingresarCarga1 = new UI.IngresarCarga();
         gestorDeRutas1 = new UI.GestorDeRutas();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("FrameInicio"); // NOI18N
@@ -207,6 +213,33 @@ public class Inicio extends javax.swing.JFrame {
 
         getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Salir");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CerrarSesionIcon.png"))); // NOI18N
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ExitIcon.png"))); // NOI18N
+        jMenuItem2.setText("Cerrar Sesion");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -266,6 +299,44 @@ public class Inicio extends javax.swing.JFrame {
     ListarFacturasDelUltimoMes();        // TODO add your handling code here:
     }//GEN-LAST:event_listarFacturasDeCompra1AncestorAdded
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        int OpcionDelUsuario=YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Salir?","Cerrar Salir");
+	if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+           
+       
+        System.exit(0);
+        
+        }
+        else{
+        return;
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        int OpcionDelUsuario=YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea cerrar sesion?","Cerrar sesion");
+        
+        if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+            this.dispose();
+            
+        IngresoAlSistema Login= new IngresoAlSistema();
+        Login.setVisible(true);
+        
+        }
+        else{
+        return;
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    
+    private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame){
+    
+    int OpcionDelUsuario = JOptionPane.showConfirmDialog(null,ConsultaAlUsuario,TituloDelFrame,JOptionPane.YES_NO_OPTION);
+    return OpcionDelUsuario;
+    };
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane JTCamiones;
     private javax.swing.JTabbedPane JTClientes;
@@ -278,6 +349,11 @@ public class Inicio extends javax.swing.JFrame {
     private UI.GestorDeRutas gestorDeRutas1;
     private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;
