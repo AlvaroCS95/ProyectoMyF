@@ -1,0 +1,118 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoAbonoVentas`(in IdCuentaPendiente int(11), in MontoAbono float,
+in TipoPago varchar(20))
+BEGIN
+
+DECLARE saldo float;
+DECLARE Tipo int(11);
+Declare idCuenta int(11);
+START TRANSACTION;
+Set Tipo :=(Select Id from tipopago where TipoDePago=TipoPago);
+Set idCuenta:= (Select IdCuentasPendientes from cuentaspendientes where IdFacturaVenta=IdCuentaPendiente);
+INSERT INTO abono(IdCuentasPendientes, MontodeAbono, FechaDeAbono, TipoDePago)
+VALUES (idCuenta, MontoAbono, NOW(), Tipo);
+
+UPDATE cuentaspendientes SET MontoAdeudado = (MontoAdeudado - MontoAbono), 
+MontoCancelado = (MontoCancelado + MontoAbono) WHERE IdCuentasPendientes = idCuenta;
+
+SET saldo := (SELECT MontoAdeudado FROM cuentaspendientes WHERE IdCuentasPendientes = idCuenta);
+
+IF(saldo = 0)
+THEN
+UPDATE cuentaspendientes SET Estado = 0 where IdCuentasPendientes = idCuenta;
+END IF;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END
+
+*************************************************************************************************************************
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoAbono`(in IdCuentaPendiente int(11), in MontoAbono float,
+in TipoPago varchar(20))
+BEGIN
+
+DECLARE saldo float;
+DECLARE Tipo int(11);
+Declare idCuenta int(11);
+START TRANSACTION;
+Set Tipo :=(Select Id from tipopago where TipoDePago=TipoPago);
+Set idCuenta:= (Select IdCuentasPendientes from cuentaspendientes where IdFacturaCompra=IdCuentaPendiente);
+INSERT INTO abono(IdCuentasPendientes, MontodeAbono, FechaDeAbono, TipoDePago)
+VALUES (idCuenta, MontoAbono, NOW(), Tipo);
+
+UPDATE cuentaspendientes SET MontoAdeudado = (MontoAdeudado - MontoAbono), 
+MontoCancelado = (MontoCancelado + MontoAbono) WHERE IdCuentasPendientes = idCuenta;
+
+SET saldo := (SELECT MontoAdeudado FROM cuentaspendientes WHERE IdCuentasPendientes = idCuenta);
+
+IF(saldo = 0)
+THEN
+UPDATE cuentaspendientes SET Estado = 0 where IdCuentasPendientes = idCuenta;
+END IF;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END
+
+*************************************************************************************************************************
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarDetalleFacturaCompra`(in productoId varchar(20),
+in cantidadComprada float, in precioDeCompra float)
+BEGIN
+
+DECLARE idFac varchar(20);
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+SET idFac = (Select IdFacturaCompra from facturacompra order by FechaIngreso desc limit 1);
+
+INSERT INTO detallefacturacompra (IdFacturaCompra, IdProducto, Cantidad, PrecioCompra)
+VALUES (idFac, productoId, cantidadComprada, precioDeCompra);
+
+UPDATE producto SET Existencias = (Existencias + cantidadComprada) WHERE IdProducto = productoId;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END
+
+*************************************************************************************************************************
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodasLasCuentasPorCobrar`()
+BEGIN
+
+SELECT f.IdFacturaVenta, u.NombreUsuario, f.FechaVenta,c.MontoAdeudado,p.PrimerNombre, 
+f.MontoVenta, c.MontoCancelado,  c.FechaVencimiento FROM
+facturaventa f INNER JOIN persona p INNER JOIN cliente cl INNER JOIN cuentaspendientes c INNER JOIN usuario u WHERE
+(f.IdFacturaVenta=c.IdFacturaVenta) AND (c.TipoCuenta=0) AND (c.Estado=1) AND (f.IdUSuario=u.IdUSuario)
+AND (p.NCedula=cl.NCedula) AND (f.IdCliente = cl.IdCliente);
+
+END
+
+*************************************************************************************************************************
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarIdUltimaFacturaCompraIngresada`()
+BEGIN
+
+SELECT IdFacturaCompra FROM facturacompra  order by FechaIngreso desc limit 1;
+
+END
+
+*************************************************************************************************************************
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesDeFacturaPorID`(in id varchar(20))
+BEGIN
+
+SELECT D.IdProducto, P.Nombre, D.PrecioCompra, D.Cantidad FROM detallefacturacompra AS D 
+INNER JOIN producto AS P ON P.IdProducto = D.IdProducto AND D.IdFacturaCompra = id;
+
+END
+
+*************************************************************************************************************************
