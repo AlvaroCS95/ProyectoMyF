@@ -25,15 +25,26 @@ import static UI.PuntoDeVenta.ListarTiposDePago;
 import static UI.PuntoDeVenta.jSDiasPlazo_PuntoDeVenta;
 import static UI.VisualizarProductos.VisualizarTodosProductos;
 import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.Timer;
 
-public class Inicio extends javax.swing.JFrame {
+public class Inicio extends javax.swing.JFrame implements Runnable{
 
     Dimension dim;
     private UI.GestorDeRutas rutas = new UI.GestorDeRutas();
+    
+   String hora, minutos, segundos, ampm;
+   Calendar calendario;
+   public Timer tiempo;
+   Thread hiloNumeroUno;
 
     public Inicio(String NombreUsuario) {
         dim = getToolkit().getScreenSize();
@@ -42,6 +53,8 @@ public class Inicio extends javax.swing.JFrame {
         this.setTitle("Bienvenido:  " + NombreUsuario + ".");
          setIconImage(Toolkit.getDefaultToolkit().getImage
         (this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
+         MostrarHora();
+
 
     }
 
@@ -73,6 +86,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("FrameInicio"); // NOI18N
@@ -238,6 +253,12 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("jMenu3");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("jMenu4");
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -313,6 +334,48 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    
+    public void run() {
+        Thread ct = Thread.currentThread();
+        while (ct == hiloNumeroUno) {
+            calcula();
+            jMenu4.setText(hora + ":" + minutos + ":" + segundos + " " + ampm);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    public void activar() {
+        tiempo.start();
+    }
+
+    public void MostrarHora() {
+        hiloNumeroUno = new Thread((Runnable) this);
+        hiloNumeroUno.start();
+        Date fechaActual = new Date();
+        DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+        jMenu3.setText(fecha.format(fechaActual));
+    }
+
+    public void calcula() {
+        Calendar calendario = new GregorianCalendar();
+        Date fechaHoraActual = new Date();
+
+        calendario.setTime(fechaHoraActual);
+        ampm = calendario.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+
+        if (ampm.equals("PM")) {
+            int h = calendario.get(Calendar.HOUR_OF_DAY) - 12;
+            hora = h > 9 ? "" + h : "0" + h;
+        } else {
+            hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        }
+        minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
+    }
+    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         
@@ -351,6 +414,8 @@ public class Inicio extends javax.swing.JFrame {
     private UI.IngresarDevoluciones ingresarDevoluciones1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
