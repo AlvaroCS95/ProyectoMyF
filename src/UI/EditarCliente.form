@@ -133,9 +133,9 @@
                       <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="txtCedula_EditarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btAceptar_EditarUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btLimpiar_EditarUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCedula_EditarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>

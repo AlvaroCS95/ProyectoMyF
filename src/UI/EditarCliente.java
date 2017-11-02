@@ -260,9 +260,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel22))
-                    .addComponent(txtCedula_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAceptar_EditarUsuario)
-                    .addComponent(btLimpiar_EditarUsuario))
+                    .addComponent(btLimpiar_EditarUsuario)
+                    .addComponent(txtCedula_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

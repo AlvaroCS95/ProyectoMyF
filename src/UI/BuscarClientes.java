@@ -362,7 +362,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
         String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
         String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-         String Nivel=Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+        String Nivel=Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
         String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
         elClienteAEditar = new EditarCliente(null, true, Nivel,CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,

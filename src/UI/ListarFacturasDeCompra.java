@@ -1,6 +1,7 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaCompra;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -12,11 +13,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
-  static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
-   static Object[] filas;
-  static  DefaultTableModel modelo;
+    static ArrayList<Object> listaParaMostrar = new ArrayList<>();
+    static Object[] filas;
+    static DefaultTableModel modelo;
     ResultSet resultadoConsulta;
-    int tipoBusqueda;
+    int tipoBusqueda, fila;
     boolean sentinela;
 
     public ListarFacturasDeCompra() {
@@ -37,7 +38,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         return false;
     }
 
-    public static  void EstablecerModelo(ResultSet lista) {
+    public static void EstablecerModelo(ResultSet lista) {
 
         modelo = new DefaultTableModel();
         modelo.addColumn("N° Factura");
@@ -231,7 +232,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     }
 
     public void TiposDeLista() {
-        
+
         if (sentinela) {
             ListarFacturasDelUltimoMes();
             sentinela = false;
@@ -241,6 +242,12 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         }
     }
 
+    public void VisualizarDetallesDeFactura() {
+        String nFactura = jt_ListarFacturasDeCompra.getValueAt(fila, 0).toString();
+        CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+        coordinador.ObtenerDetallesDeFactura(nFactura);
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -248,7 +255,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         jppEditarFactura = new javax.swing.JPopupMenu();
         jmIEditar = new javax.swing.JMenuItem();
         jmIEliminar = new javax.swing.JMenuItem();
-        jmIAgregarAbono = new javax.swing.JMenuItem();
+        jmIVerDetalles = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_ListarFacturasDeCompra = new javax.swing.JTable();
         jLTitulo = new javax.swing.JLabel();
@@ -279,8 +286,13 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         });
         jppEditarFactura.add(jmIEliminar);
 
-        jmIAgregarAbono.setText("jMenuItem2");
-        jppEditarFactura.add(jmIAgregarAbono);
+        jmIVerDetalles.setText("Ver detalles de compra");
+        jmIVerDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmIVerDetallesActionPerformed(evt);
+            }
+        });
+        jppEditarFactura.add(jmIVerDetalles);
 
         setPreferredSize(new java.awt.Dimension(990, 631));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -302,6 +314,11 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
             }
         });
         jt_ListarFacturasDeCompra.setComponentPopupMenu(jppEditarFactura);
+        jt_ListarFacturasDeCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_ListarFacturasDeCompraMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_ListarFacturasDeCompra);
         if (jt_ListarFacturasDeCompra.getColumnModel().getColumnCount() > 0) {
             jt_ListarFacturasDeCompra.getColumnModel().getColumn(0).setResizable(false);
@@ -391,6 +408,19 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jmIEliminarActionPerformed
 
+    private void jmIVerDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIVerDetallesActionPerformed
+        VisualizarDetallesDeFactura();
+
+    }//GEN-LAST:event_jmIVerDetallesActionPerformed
+
+    private void jt_ListarFacturasDeCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ListarFacturasDeCompraMouseClicked
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            fila = jt_ListarFacturasDeCompra.getSelectedRow();
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            fila = jt_ListarFacturasDeCompra.getSelectedRow();
+        }
+    }//GEN-LAST:event_jt_ListarFacturasDeCompraMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbx_SeleccionBusqueda;
@@ -404,9 +434,9 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jdc_FechaHasta;
     private javax.swing.JLabel jl_Desde;
     private javax.swing.JLabel jl_Hasta;
-    private javax.swing.JMenuItem jmIAgregarAbono;
     private javax.swing.JMenuItem jmIEditar;
     private javax.swing.JMenuItem jmIEliminar;
+    private javax.swing.JMenuItem jmIVerDetalles;
     private javax.swing.JPopupMenu jppEditarFactura;
     public static javax.swing.JTable jt_ListarFacturasDeCompra;
     private javax.swing.JTextField txt_IngresoFormaBusqueda;

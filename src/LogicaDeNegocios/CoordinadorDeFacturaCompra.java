@@ -3,12 +3,14 @@ package LogicaDeNegocios;
 import AccesoDatos.GestorFacturaDeCompra;
 import Modelos.FacturaDeCompra;
 import Modelos.Producto;
+import UI.DetallesFacturaCompra;
 import UI.EditarFacturaDeCompra;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CoordinadorDeFacturaCompra {
 
@@ -201,5 +203,35 @@ public class CoordinadorDeFacturaCompra {
             Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public int ConsultaUltimoIdDeFactura() {
+        GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
+        resultado = gestor.ObtenerUltimoId();
+        try {
+            if (resultado.next()) {
+                return resultado.getInt(1);// retorn resultado obtenido
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;// No trae nada
+    }
+
+    public void ObtenerDetallesDeFactura(String idFactura) {
+        GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
+        resultado = gestor.ObtenerDetallesDeFactura(idFactura);
+        try {
+            if (resultado.next()) {
+                DetallesFacturaCompra detalles = new DetallesFacturaCompra(null, true);
+                resultado.previous();
+                detalles.LlenarListaDetalles(resultado);
+                detalles.setVisible(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
