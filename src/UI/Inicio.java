@@ -1,11 +1,9 @@
 package UI;
 
 import java.awt.Dimension;
-import UI.CuentasPorPagar;
 import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
 import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
-
 import static UI.IngresarProductos.ListarClasificaciones;
 import static UI.IngresarProductos.ListarUMES;
 import static UI.IngresoFacturaCompra.ListarProveedores;
@@ -33,29 +31,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.Timer;
 
-public class Inicio extends javax.swing.JFrame implements Runnable{
+public class Inicio extends javax.swing.JFrame implements Runnable {
 
     Dimension dim;
-//    UI.GestorDeRutas gestor = new GestorDeRutas();
-   String hora, minutos, segundos, ampm;
-   Calendar calendario;
-   public Timer tiempo;
-   Thread hiloNumeroUno;
+    String hora, minutos, segundos, ampm;
+    Calendar calendario;
+    public Timer tiempo;
+    Thread hiloNumeroUno;
 
     public Inicio(String NombreUsuario) {
         dim = getToolkit().getScreenSize();
         initComponents();
         setSize(dim.width, dim.height - 40);
         this.setTitle("Bienvenido:  " + NombreUsuario + ".");
-         setIconImage(Toolkit.getDefaultToolkit().getImage
-        (this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
-         MostrarHora();
-         jMenuBar1.add(Box.createHorizontalGlue()); 
-         jMenuBar1.add(jMenu3);
-         jMenuBar1.add(jMenu4);
-//         JTInicio.addTab("Gestor de rutas", gestor);
-
-
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/Imagenes/Logo_Ventana_M&f.jpeg")));
+        MostrarHora();
+        jMenuBar1.add(Box.createHorizontalGlue());
+        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu4);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,6 +57,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         JTInicio = new javax.swing.JTabbedPane();
         JTFacturacion = new javax.swing.JTabbedPane();
         puntoDeVenta1 = new UI.PuntoDeVenta();
+        ingresoFacturaCompra1 = new UI.IngresoFacturaCompra();
         listarFacturasDeCompra1 = new UI.ListarFacturas();
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
@@ -110,6 +104,17 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
             }
         });
         JTFacturacion.addTab("Facturación", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png")), puntoDeVenta1); // NOI18N
+
+        ingresoFacturaCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                ingresoFacturaCompra1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        JTFacturacion.addTab("Ingreso de facturas de compra", ingresoFacturaCompra1);
 
         listarFacturasDeCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -228,7 +233,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         });
         JTInicio.addTab("Rutas", gestorDeRutas1);
 
-        getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 700));
+        getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 700));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -314,24 +319,21 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_ingresoFacturaCompra1AncestorAdded
 
     private void listarFacturasDeCompra1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listarFacturasDeCompra1AncestorAdded
-    ListarFacturasDelUltimoMes();        // TODO add your handling code here:
+        ListarFacturasDelUltimoMes();        // TODO add your handling code here:
     }//GEN-LAST:event_listarFacturasDeCompra1AncestorAdded
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        int OpcionDelUsuario=YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Salir?","Cerrar Salir");
-	if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
-           
-       
-        System.exit(0);
-        
-        }
-        else{
-        return;
+        int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Salir?", "Cerrar Salir");
+        if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+
+            System.exit(0);
+
+        } else {
+            return;
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
     public void run() {
         Thread ct = Thread.currentThread();
         while (ct == hiloNumeroUno) {
@@ -372,37 +374,35 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
         segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
     }
-    
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        
-        int OpcionDelUsuario=YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea cerrar sesion?","Cerrar sesion");
-        
+
+        int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea cerrar sesion?", "Cerrar sesion");
+
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
             this.dispose();
-            
-        IngresoAlSistema Login= new IngresoAlSistema();
-        Login.setVisible(true);
-        
-        }
-        else{
-        return;
+
+            IngresoAlSistema Login = new IngresoAlSistema();
+            Login.setVisible(true);
+
+        } else {
+            return;
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void gestorDeRutas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_gestorDeRutas1AncestorAdded
         try {
-            VisualizarRutasActivas()   ;     // TODO add your handling code here:
+            VisualizarRutasActivas();     // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_gestorDeRutas1AncestorAdded
 
-    
-    private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame){
-    int OpcionDelUsuario = JOptionPane.showConfirmDialog(null,ConsultaAlUsuario,TituloDelFrame,JOptionPane.YES_NO_OPTION);
-    return OpcionDelUsuario;
-    };
+    private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
+        int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
+        return OpcionDelUsuario;
+    }
+    ;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane JTCamiones;
@@ -416,6 +416,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
     private UI.GestorDeRutas gestorDeRutas1;
     private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
+    private UI.IngresoFacturaCompra ingresoFacturaCompra1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

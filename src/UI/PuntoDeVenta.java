@@ -1,7 +1,6 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -29,10 +28,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 switch (tipoDeVenta) {
                     case 0: // venta a credito
                         if (AplicarAbono()) {
-                            CrearFacturaVentaCreditoConAbono();
-                            AgregarDetalleAFactura();
-                            ResumenVentaCreditoConAbono();
-                            LimpiarDatos();
+                            if (ExigirAbono()) {
+                                CrearFacturaVentaCreditoConAbono();
+                                AgregarDetalleAFactura();
+                                ResumenVentaCreditoConAbono();
+                                LimpiarDatos();
+                            } 
                         } else {
                             CrearFacturaVentaCreditoSinAbono();
                             AgregarDetalleAFactura();
@@ -157,11 +158,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public boolean AplicarAbono() {
         try {
             if (jCAbonar_PuntoVenta.isSelected()) {
-                if (ExigirAbono()) {
-                    return true;
-                }else{
-                    return false;
-                }
+                return true;
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error");

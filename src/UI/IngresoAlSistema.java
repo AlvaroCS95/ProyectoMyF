@@ -80,10 +80,11 @@ public class IngresoAlSistema extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 246, 255));
 
-        txtNombreUsario_IngresoAlSistema.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtNombreUsario_IngresoAlSistema.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreUsario_IngresoAlSistema.setText("root");
         txtNombreUsario_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su nombre de usuario");
 
+        pswContraseña_IngresoAlSistema.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pswContraseña_IngresoAlSistema.setText("2895");
         pswContraseña_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su contraseña");
         pswContraseña_IngresoAlSistema.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -147,10 +148,12 @@ public class IngresoAlSistema extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombreUsario_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbUsuario_IngresoAlSistema))
-                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbUsuario_IngresoAlSistema)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(txtNombreUsario_IngresoAlSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MostrarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
