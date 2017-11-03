@@ -4,10 +4,11 @@ import static UI.GestorDeRutas.InicializarFiltroCamiones;
 import static UI.ListarCamiones.VisualizarCamion;
 import static UI.ListarClientes.VisualizarClientes;
 import static UI.GestorDeRutas.InicializarFiltroClientes;
-import AccesoDatos.GestorDeRutas;
+
 import LogicaDeNegocios.CoordinadorDeRutas;
 import static UI.GestorDeRutas.modeloVerCamiones;
 import static UI.GestorDeRutas.modeloVerClientes;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,6 +23,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     int idRuta;
     static Object[] filas;
     String NombreRuta;
+    static int contador = 0;
+    static int Asignaciones = 0;
     static boolean opcionFiltro = false;
 
     public AsignacionesDeRuta(java.awt.Frame parent, boolean modal, int id, String Nombre) {
@@ -36,23 +39,25 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         TipoDeFiltro();
         cerrar();
     }
-public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarCamiones.panelHabilitado=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarCamiones.panelHabilitado = false;
+                    dispose();
+                }
             }
         });
-}
+    }
+
     public void AgregarTablaCamion() {
 
         if (SeleccionDeFila == false) {
@@ -85,37 +90,46 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         }
     }
 
-    public void AgregarClientes() throws ClassNotFoundException, SQLException {
-       CoordinadorDeRutas elCoordinador= new CoordinadorDeRutas();
+    public void AgregarClientes(int dia) throws ClassNotFoundException, SQLException {
+
+        CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+
         try {
-            for (int i = 0; i < modeloVerClientes.getColumnCount(); i++) {
-                String cedula = modeloVerClientes.getValueAt(i, 1).toString();
-                JOptionPane.showMessageDialog(null, cedula);
-                ResultSet Respuesta;
-//              //  Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula);
-//                if (Respuesta.next()) {
-//                     JOptionPane.showMessageDialog(null, "Entro");
-//                    if (Respuesta.getString(1).equals("2")) {
-//                        JOptionPane.showMessageDialog(null, "Los clientes han sido asignados");
-//                        InicializarFiltroClientes(TablaAsignarCliente);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Existe un fallo en la asignación");
-//                    }
-//                }
+            if (modeloVerClientes.getRowCount() != 0) {
+                for (int i = 0; i < TablaAsignarCliente.getRowCount(); i++) {
+                    String cedula = TablaAsignarCliente.getValueAt(i, 1).toString();
+                    String Local = TablaAsignarCliente.getValueAt(i, 0).toString();
+                    ResultSet Respuesta;
+                    Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, dia);
+                    try {
+                        if (Respuesta.next()) {
+                            
+                            if (Respuesta.getString(1).equals("2")) {
+                                     contador++;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error en la insercion");
+                            }
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "El local " + Local + "tiene conflictos con los dias de asignación");
+                    }
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese datos para almacenar");
             }
-        } catch (Exception e) {
-            return;
+        } catch (HeadlessException | ClassNotFoundException | SQLException e) {
         }
 
     }
 
     public void AgregarCamiones() {
-        CoordinadorDeRutas elCoordinador= new CoordinadorDeRutas();
+        CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
         try {
             for (int i = 0; i < modeloVerCamiones.getColumnCount(); i++) {
-                
+
                 String placa = modeloVerCamiones.getValueAt(i, 0).toString();
-                
+
                 ResultSet Respuesta;
                 Respuesta = elCoordinador.AgregarCamionARuta(idRuta, placa);
                 if (Respuesta.next()) {
@@ -428,11 +442,37 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         InicializarFiltroCamiones(TablaAsignarCamion);
         InicializarFiltroClientes(TablaAsignarCliente);
     }//GEN-LAST:event_btnLimpiar_GestorRutas1ActionPerformed
+    public void AgregarCliente() throws ClassNotFoundException, SQLException {
 
+        if (Lunes.isSelected()) {
+
+            AgregarClientes(1);
+
+        } else if (Martes.isSelected()) {
+
+            AgregarClientes(2);
+        } else if (Miercoles.isSelected()) {
+
+            AgregarClientes(3);
+        } else if (Juevez.isSelected()) {
+
+            AgregarClientes(4);
+        } else if (Viernes.isSelected()) {
+
+            AgregarClientes(5);
+        } else if (Sabado.isSelected()) {
+
+            AgregarClientes(6);
+        } else if (Domingo.isSelected()) {
+
+            AgregarClientes(7);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
+        }
+    }
     private void btnAceptar_GestorRutasingresarRutas(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar_GestorRutasingresarRutas
         try {
-            AgregarClientes();
-            AgregarCamiones();
+            AgregarCliente();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AsignacionesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -484,7 +524,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
     }//GEN-LAST:event_RemoverCamionesActionPerformed
 
     private void LunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LunesActionPerformed
-        
+
     }//GEN-LAST:event_LunesActionPerformed
 
     /**
