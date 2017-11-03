@@ -305,6 +305,19 @@ public class GestorFacturaVenta extends Coneccion {
         return resultadoConsulta;
     }
     
+    public ResultSet ObtenerDetallesDeFactura(String idFactura) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaVentaPorID('"+idFactura+"');");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
+    
     public int ObtenerUltimaIdFacturaVenta() throws ClassNotFoundException, SQLException {
         int IdUsuarioActivo = 0;
         try {
@@ -322,5 +335,4 @@ public class GestorFacturaVenta extends Coneccion {
         }
         return IdUsuarioActivo;
     }
-
 }

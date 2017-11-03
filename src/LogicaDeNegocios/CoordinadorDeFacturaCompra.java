@@ -1,9 +1,10 @@
 package LogicaDeNegocios;
 
+import UI.DetallesFacturaCompraVenta;
 import AccesoDatos.GestorFacturaDeCompra;
 import Modelos.FacturaDeCompra;
 import Modelos.Producto;
-import UI.DetallesFacturaCompra;
+import UI.DetallesFacturaCompraVenta;
 import UI.EditarFacturaDeCompra;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -222,7 +223,7 @@ public class CoordinadorDeFacturaCompra {
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
         try {
             if (resultado.next()) {
-                DetallesFacturaCompra detalles = new DetallesFacturaCompra(null, true, idFactura);
+                DetallesFacturaCompraVenta detalles = new DetallesFacturaCompraVenta(null, true, idFactura, true);
                 resultado.previous();
                 detalles.LlenarListaDetalles(resultado);
                 detalles.setVisible(true);

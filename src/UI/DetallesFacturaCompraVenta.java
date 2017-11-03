@@ -39,7 +39,7 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
 
     }
 
-    public void LlenarListaDetalles(ResultSet listaDetalles) {
+   public void LlenarListaDetalles(ResultSet listaDetalles) {
         EstablecerModelo();
         filas = new Object[modelo.getColumnCount()];
         try {
@@ -54,6 +54,8 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         }
         jtDetallesFacturaCompra.setModel(modelo);
     }
+
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

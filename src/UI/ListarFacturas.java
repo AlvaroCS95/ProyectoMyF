@@ -311,10 +311,16 @@ public class ListarFacturas extends javax.swing.JPanel {
                 break;
             case 2:// numero de factura
                 if (!txt_IngresoFormaBusqueda.getText().isEmpty()) {
-                    if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
-                        resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
-                    } else {
-                        resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    try {
+                        int codigo = Integer.parseInt(txt_IngresoFormaBusqueda.getText());
+                        if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                            resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        } else {
+                            resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "El número de factura a buscar debe ser númerico.",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar el N° factura de compra para poder"

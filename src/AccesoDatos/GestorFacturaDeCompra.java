@@ -330,7 +330,7 @@ public class GestorFacturaDeCompra extends Coneccion {
         try {
             EstablecerConexion();
             consulta = conexion.createStatement();
-            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaPorID('"+idFactura+"');");
+            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaCompraPorID('"+idFactura+"');");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
