@@ -335,4 +335,22 @@ public class GestorFacturaVenta extends Coneccion {
         }
         return IdUsuarioActivo;
     }
+    
+    public String ObtenerFechaDePagoConDiasDePLazo(int PlazoDias) throws ClassNotFoundException, SQLException {
+        String FechaPago = "";
+        try {
+            EstablecerConexion();
+
+            Statement statement = conexion.createStatement();
+            ResultSet resulset;
+
+            String busca = "call DevuelveElDiaDePagoConPLazoDeDiasAsignado('"+PlazoDias+"')";
+            resulset = statement.executeQuery(busca);
+            while (resulset.next()) {
+                FechaPago = resulset.getString(1);
+            }
+        } catch (Exception e) {
+        }
+        return FechaPago;
+    }
 }

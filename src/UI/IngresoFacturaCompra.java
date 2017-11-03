@@ -281,8 +281,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         int cantidadDeArticulos = JTIngresoDetalleFacturaCompra.getRowCount();
         if (cantidadDeArticulos < 1) {           
              JOptionPane.showMessageDialog(null, "<html> Primero debe ingresar datos a la tabla para\n"
-                    + "luego agregarlos : <b>"
-                    + "</b>.\nDesea agregar estos detalles a esa factura?");
+                    + "luego agregarlos.","¡Error!",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -456,7 +455,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 btAceptar_IngresarDetalleFacturaCompraActionPerformed(evt);
             }
         });
-        panel_IngreosFacturaCompra.add(btAceptar_IngresarDetalleFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 1270, -1, -1));
+        panel_IngreosFacturaCompra.add(btAceptar_IngresarDetalleFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 760, -1, -1));
 
         btLimpiar_IngresarFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_IngresarFacturaCompra.setToolTipText("Oprima para cancelar");
@@ -465,7 +464,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 btLimpiar_IngresarFacturaCompraActionPerformed(evt);
             }
         });
-        panel_IngreosFacturaCompra.add(btLimpiar_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 1270, -1, -1));
+        panel_IngreosFacturaCompra.add(btLimpiar_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 810, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("N° de pedido");
@@ -498,7 +497,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, -1, -1));
 
         jLabel5.setText("* Pagos realizados a travez de cheques, transferencias o tarjeta de credito.");
-        panel_IngreosFacturaCompra.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 600, -1, -1));
+        panel_IngreosFacturaCompra.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, -1, -1));
 
         cbxTipoPago_FacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         cbxTipoPago_FacturaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -549,11 +548,11 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        panel_IngreosFacturaCompra.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 1030, 960, 210));
+        panel_IngreosFacturaCompra.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 880, 960, 300));
 
         jLDetalles.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLDetalles.setText("Ingreso de los detalles de la factura  de compra");
-        panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 890, 720, -1));
+        panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 690, 500, -1));
 
         boton_ListoDatosFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         boton_ListoDatosFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -564,7 +563,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(boton_ListoDatosFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, -1, -1));
 
         txtCodigoDetalleFactura.setPreferredSize(new java.awt.Dimension(6, 23));
-        panel_IngreosFacturaCompra.add(txtCodigoDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 960, 160, -1));
+        panel_IngreosFacturaCompra.add(txtCodigoDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 160, -1));
 
         JBBuscarParaAgregarDetalle.setText("Agregar detalle");
         JBBuscarParaAgregarDetalle.addActionListener(new java.awt.event.ActionListener() {
@@ -572,26 +571,26 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 JBBuscarParaAgregarDetalleActionPerformed(evt);
             }
         });
-        panel_IngreosFacturaCompra.add(JBBuscarParaAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 960, -1, -1));
+        panel_IngreosFacturaCompra.add(JBBuscarParaAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 770, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel9.setText("Código:");
-        panel_IngreosFacturaCompra.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 960, -1, -1));
-        panel_IngreosFacturaCompra.add(txtCantidadDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 960, 140, -1));
+        panel_IngreosFacturaCompra.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 770, -1, -1));
+        panel_IngreosFacturaCompra.add(txtCantidadDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 770, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel10.setText("Precio de compra:");
-        panel_IngreosFacturaCompra.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 1000, 140, -1));
-        panel_IngreosFacturaCompra.add(txtPrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 1000, 140, -1));
+        panel_IngreosFacturaCompra.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 810, 140, -1));
+        panel_IngreosFacturaCompra.add(txtPrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 810, 140, -1));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel11.setText("Cantidad:");
-        panel_IngreosFacturaCompra.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 960, -1, -1));
+        panel_IngreosFacturaCompra.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 770, -1, -1));
 
         scroll_IngresoFacturaCompra.setViewportView(panel_IngreosFacturaCompra);
 
         add(scroll_IngresoFacturaCompra);
-        scroll_IngresoFacturaCompra.setBounds(0, 0, 1360, 640);
+        scroll_IngresoFacturaCompra.setBounds(0, 0, 1360, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAceptar_IngresarDetalleFacturaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarDetalleFacturaCompraActionPerformed
