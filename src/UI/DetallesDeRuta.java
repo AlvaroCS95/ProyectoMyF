@@ -22,7 +22,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Ruta.setText(Nombre);
         this.Id = id;
-        //ListarClientesPorBusqueda(Id);
+        ListarClientesPorBusqueda(Id);
     }
 
     @SuppressWarnings("unchecked")

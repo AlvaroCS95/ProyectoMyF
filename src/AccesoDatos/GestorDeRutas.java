@@ -49,7 +49,7 @@ public class GestorDeRutas extends Coneccion{
             return resultadoConsulta;
         }
     }
-     public ResultSet IngresarClienteARuta(int idRuta, String cedula) throws 
+     public ResultSet IngresarClienteARuta(int idRuta, String cedula,int idD) throws 
             ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -58,7 +58,7 @@ public class GestorDeRutas extends Coneccion{
         consulta = conexion.createStatement();
         try {
             resultadoConsulta = consulta.executeQuery("call AgregarEnlaceRutaCliente"
-                    + "("+idRuta+",'"+cedula+"'); ");
+                    + "("+idRuta+",'"+cedula+"','"+idD+"'); ");
             return resultadoConsulta;
         } catch (SQLException ex) {
             return resultadoConsulta;
