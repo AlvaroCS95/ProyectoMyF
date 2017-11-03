@@ -62,6 +62,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
 
         txtFacturaBuscar_BuscarFacturasVentas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtFacturaBuscar_BuscarFacturasVentas.setForeground(new java.awt.Color(0, 102, 102));
+        txtFacturaBuscar_BuscarFacturasVentas.setToolTipText("Número de factura que desea buscar y luego clic buscar");
         txtFacturaBuscar_BuscarFacturasVentas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFacturaBuscar_BuscarFacturasVentasKeyTyped(evt);
@@ -70,7 +71,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
 
         btBuscar_BuscarFacturasDeVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Search_Icon_16.png"))); // NOI18N
         btBuscar_BuscarFacturasDeVentas.setText("Buscar");
-        btBuscar_BuscarFacturasDeVentas.setToolTipText("Oprimir para guardar usuario");
+        btBuscar_BuscarFacturasDeVentas.setToolTipText("Oprimir para buscar factura de venta con el número ingresado");
         btBuscar_BuscarFacturasDeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscar_BuscarFacturasDeVentasActionPerformed(evt);
@@ -85,6 +86,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
 
         btListarFacturas_BuscarFacturasDeVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listar.png"))); // NOI18N
         btListarFacturas_BuscarFacturasDeVentas.setText("Listar Facturas");
+        btListarFacturas_BuscarFacturasDeVentas.setToolTipText("Se muestran todas las facturas que no tengan devoluciones");
         btListarFacturas_BuscarFacturasDeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btListarFacturas_BuscarFacturasDeVentasActionPerformed(evt);
@@ -99,6 +101,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
                 "Numero Factura", "Fecha Venta", "Monto Vendido", "Nombre Usuario", "Nombre Local"
             }
         ));
+        TablaFacturaVentas_Devoluciones.setToolTipText("Facturas de venta que no tienen devoluciones");
         TablaFacturaVentas_Devoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 TablaFacturaVentas_DevolucionesMousePressed(evt);
@@ -108,6 +111,7 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
 
         btAceptar_BuscarFacturasDeVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AcceptIcon.png"))); // NOI18N
         btAceptar_BuscarFacturasDeVentas.setText("Aceptar");
+        btAceptar_BuscarFacturasDeVentas.setToolTipText("seleccione alguna factura y luegoo precione este botón para agregarle devoluciones");
         btAceptar_BuscarFacturasDeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_BuscarFacturasDeVentasActionPerformed(evt);
