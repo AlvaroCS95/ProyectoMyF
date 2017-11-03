@@ -343,8 +343,8 @@
             <Component class="UI.VisualizaryEditarCargas" name="visualizaryEditarCargas1">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="tab3">
-                    <Property name="tabTitle" type="java.lang.String" value="tab3"/>
+                  <JTabbedPaneConstraints tabName="Visualizaci&#xf3;n de cargas">
+                    <Property name="tabTitle" type="java.lang.String" value="Visualizaci&#xf3;n de cargas"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>

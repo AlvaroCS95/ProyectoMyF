@@ -213,7 +213,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         jScrollPane1.setViewportView(ingresarCarga1);
 
         JTCamiones.addTab("Ingresar Cargas", jScrollPane1);
-        JTCamiones.addTab("tab3", visualizaryEditarCargas1);
+        JTCamiones.addTab("Visualización de cargas", visualizaryEditarCargas1);
 
         JTInicio.addTab("Camiones", JTCamiones);
 
