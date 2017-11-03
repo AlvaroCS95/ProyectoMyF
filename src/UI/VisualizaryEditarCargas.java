@@ -124,7 +124,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar_VisualizarCargas = new javax.swing.JTextField();
-        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<>();
+        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<String>();
         jButton2 = new javax.swing.JButton();
         btActualizar_VisualizarCargas = new javax.swing.JButton();
 
@@ -175,7 +175,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaCargas_VisualizarCargas);
 
-        jLabel1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Visualizar cargas");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
@@ -245,8 +245,8 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                             .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

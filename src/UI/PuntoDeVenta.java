@@ -230,13 +230,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 if (Integer.parseInt(txtCantidadDeProducto_PuntoDeVenta.getText()) > 0) {
                     BuscarProductoParaVender();
                     CalcularTotalAPagar();
+                    txtCodigoDelProducto_PuntoDeVenta.setText("");
+                    txtCantidadDeProducto_PuntoDeVenta.setText("");
                 } else {
                     JOptionPane.showMessageDialog(null, "La cantidad de articulos debe ser mayor a 0 para\n"
                             + "poder agregar el producto a la lista de venta.", "¡Verifique los datos!",
                             JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debe ingresar un codigo y una cantidad de articulos deseados para\n"
+                JOptionPane.showMessageDialog(null, "Debe ingresar un código y una cantidad de árticulos deseados para\n"
                         + "poder agregar el producto a la lista de venta.", "¡Verifique los datos!",
                         JOptionPane.ERROR_MESSAGE);
 
@@ -433,7 +435,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public void CrearFacturaDeVentaContado() {
-        // totalVendido;
         int idCliente, idTipoPago;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
@@ -557,10 +558,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        Fecha = new javax.swing.JLabel();
-        EtiquetaHora = new javax.swing.JLabel();
-        Hora = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtDescuento_PuntoDeVenta = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -626,34 +623,14 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cash_register_Icon_128.png"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 20, -1, 100));
 
-        jLabel85.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jLabel85.setForeground(new java.awt.Color(51, 51, 0));
-        jLabel85.setText("Fecha");
-        add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 51, 24));
-
-        Fecha.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        Fecha.setForeground(new java.awt.Color(51, 51, 0));
-        Fecha.setText("FechaActual");
-        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 100, 24));
-
-        EtiquetaHora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        EtiquetaHora.setForeground(new java.awt.Color(51, 51, 0));
-        EtiquetaHora.setText("Hora :");
-        add(EtiquetaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 51, -1));
-
-        Hora.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        Hora.setForeground(new java.awt.Color(51, 51, 0));
-        Hora.setText("HoraActual");
-        add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 78, -1));
-
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel4.setText("Descuento:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 500, 90, 30));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 480, 90, 30));
 
         txtDescuento_PuntoDeVenta.setEditable(false);
         txtDescuento_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDescuento_PuntoDeVenta.setText("0");
-        add(txtDescuento_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 500, 180, 30));
+        add(txtDescuento_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 480, 180, 30));
 
         TablaFacturacion_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         TablaFacturacion_PuntoDeVenta.setModel(new javax.swing.table.DefaultTableModel(
@@ -719,20 +696,20 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jLabel92.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel92.setText("Total a pagar ‎₡");
-        add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 350, 123, 30));
+        add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 330, 123, 30));
 
         txtTotalAPagar_PuntoDeVenta.setEditable(false);
         txtTotalAPagar_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtTotalAPagar_PuntoDeVenta.setText("0");
-        add(txtTotalAPagar_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 350, 180, 31));
+        add(txtTotalAPagar_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 330, 180, 31));
 
         jLabel98.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel98.setText("Monto de pago:");
-        add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 130, 30));
+        add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 130, 30));
 
         txtMontoDePago_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMontoDePago_PuntoDeVenta.setComponentPopupMenu(jppMontoPagoPuntoDeVenta);
-        add(txtMontoDePago_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 400, 180, 30));
+        add(txtMontoDePago_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 380, 180, 30));
 
         jLabelImprime.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabelImprime.setText("Imprimir factura:");
@@ -753,7 +730,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 FacturarVenta_PuntoDeVEntaActionPerformed(evt);
             }
         });
-        add(FacturarVenta_PuntoDeVEnta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 540, 90, 80));
+        add(FacturarVenta_PuntoDeVEnta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 520, 90, 80));
 
         jButton2.setText("Limpiar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -792,12 +769,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jLNReferencia.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLNReferencia.setText("N° de referencia:");
-        add(jLNReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 460, -1, -1));
+        add(jLNReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 440, -1, -1));
 
         txtNDeReferencia.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNDeReferencia.setText("0");
         txtNDeReferencia.setPreferredSize(new java.awt.Dimension(6, 30));
-        add(txtNDeReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 450, 180, -1));
+        add(txtNDeReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 430, 180, -1));
 
         jLCliente_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLCliente_PuntoDeVenta.setText("Cliente:");
@@ -862,10 +839,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JLabel EtiquetaHora;
     private javax.swing.JButton FacturarVenta_PuntoDeVEnta;
-    public static javax.swing.JLabel Fecha;
-    public static javax.swing.JLabel Hora;
     public static javax.swing.JTable TablaFacturacion_PuntoDeVenta;
     public static javax.swing.JComboBox<String> cbxImprime_PuntoDeVenta;
     public static javax.swing.JComboBox cmbxFormaDePago_PuntoDeVenta;
@@ -881,7 +855,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;

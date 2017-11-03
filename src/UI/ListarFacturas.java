@@ -13,7 +13,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ListarFacturasDeCompra extends javax.swing.JPanel {
+public class ListarFacturas extends javax.swing.JPanel {
 
     static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     static Object[] filas;
@@ -23,19 +23,33 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     int tipoBusqueda, fila;
     boolean sentinela;
 
-    public ListarFacturasDeCompra() {
+    public ListarFacturas() {
 
         initComponents();
 
     }
 
     public boolean CamposVacios() {
-        if ((!cbx_SeleccionBusqueda.getSelectedItem().toString().equals("Seleccione..."))
-                && (!txt_IngresoFormaBusqueda.getText().isEmpty()
-                || jdc_FechaDesde.getDate() != null
-                || jdc_FechaHasta.getDate() != null)) {
-            return true;
+        if (cbx_SeleccionBusqueda.isVisible()) {
+            if ((!cbx_SeleccionBusqueda.getSelectedItem().toString().equals("Seleccione..."))
+                    && (!txt_IngresoFormaBusqueda.getText().isEmpty()
+                    || jdc_FechaDesde.getDate() != null
+                    || jdc_FechaHasta.getDate() != null)) {
+                return true;
 
+            } else {
+                return false;
+            }
+        } else if (jComboBox1.isVisible()) {
+            if ((!jComboBox1.getSelectedItem().toString().equals("Seleccione..."))
+                    && (!txt_IngresoFormaBusqueda.getText().isEmpty()
+                    || jdc_FechaDesde.getDate() != null
+                    || jdc_FechaHasta.getDate() != null)) {
+                return true;
+
+            } else {
+                return false;
+            }
         }
         return false;
     }
@@ -94,9 +108,9 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
                         modelo.addRow(filas);
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jt_ListarFacturasDeCompra.setModel(modelo);
+                jt_ListarFacturasDeCompraVenta.setModel(modelo);
                 break;
 
             case "Compra":
@@ -119,9 +133,9 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
                         modelo.addRow(filas);
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jt_ListarFacturasDeCompra.setModel(modelo);
+                jt_ListarFacturasDeCompraVenta.setModel(modelo);
                 break;
         }
     }
@@ -297,10 +311,16 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
                 break;
             case 2:// numero de factura
                 if (!txt_IngresoFormaBusqueda.getText().isEmpty()) {
-                    if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
-                        resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
-                    } else {
-                        resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    try {
+                        int codigo = Integer.parseInt(txt_IngresoFormaBusqueda.getText());
+                        if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                            resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        } else {
+                            resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "El número de factura a buscar debe ser númerico.",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar el N° factura de compra para poder"
@@ -361,15 +381,15 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     }
 
     public int ObtenerFilaSeleccionada() {
-        return jt_ListarFacturasDeCompra.getSelectedRow();
+        return jt_ListarFacturasDeCompraVenta.getSelectedRow();
     }
 
     public int ObtenerColumnaSeleccionada() {
-        return jt_ListarFacturasDeCompra.getSelectedColumn();
+        return jt_ListarFacturasDeCompraVenta.getSelectedColumn();
     }
 
     public void BuscarParaEditar() {
-        String idFactura = jt_ListarFacturasDeCompra.getValueAt(jt_ListarFacturasDeCompra.getSelectedRow(), 0).toString();
+        String idFactura = jt_ListarFacturasDeCompraVenta.getValueAt(jt_ListarFacturasDeCompraVenta.getSelectedRow(), 0).toString();
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
         coordinador.BuscarParaEditar(idFactura);
 
@@ -389,12 +409,15 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     }
 
     public void VisualizarDetallesDeFactura() {
-        String nFactura = jt_ListarFacturasDeCompra.getValueAt(fila, 0).toString();
-        CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-        coordinador.ObtenerDetallesDeFactura(nFactura);
+        String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
+        if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+            CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
+            coordinador.ObtenerDetallesDeFactura(nFactura);
+        } else {
+            CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+            coordinador.ObtenerDetallesDeFactura(nFactura);
+        }
     }
-
-
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -402,7 +425,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         jmIEditar = new javax.swing.JMenuItem();
         jmIVerDetalles = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jt_ListarFacturasDeCompra = new javax.swing.JTable();
+        jt_ListarFacturasDeCompraVenta = new javax.swing.JTable();
         jLTitulo = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
         txt_IngresoFormaBusqueda = new javax.swing.JTextField();
@@ -426,7 +449,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         });
         jppEditarFactura.add(jmIEditar);
 
-        jmIVerDetalles.setText("Ver detalles de compra");
+        jmIVerDetalles.setText("Ver detalles");
         jmIVerDetalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmIVerDetallesActionPerformed(evt);
@@ -437,7 +460,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(990, 631));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jt_ListarFacturasDeCompra.setModel(new javax.swing.table.DefaultTableModel(
+        jt_ListarFacturasDeCompraVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -445,13 +468,13 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
             }
         ));
-        jt_ListarFacturasDeCompra.setComponentPopupMenu(jppEditarFactura);
-        jt_ListarFacturasDeCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+        jt_ListarFacturasDeCompraVenta.setComponentPopupMenu(jppEditarFactura);
+        jt_ListarFacturasDeCompraVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jt_ListarFacturasDeCompraMouseClicked(evt);
+                jt_ListarFacturasDeCompraVentaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jt_ListarFacturasDeCompra);
+        jScrollPane1.setViewportView(jt_ListarFacturasDeCompraVenta);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 1010, 400));
 
@@ -549,13 +572,13 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jmIVerDetallesActionPerformed
 
-    private void jt_ListarFacturasDeCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ListarFacturasDeCompraMouseClicked
+    private void jt_ListarFacturasDeCompraVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ListarFacturasDeCompraVentaMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            fila = jt_ListarFacturasDeCompra.getSelectedRow();
+            fila = jt_ListarFacturasDeCompraVenta.getSelectedRow();
         } else if (evt.getButton() == MouseEvent.BUTTON3) {
-            fila = jt_ListarFacturasDeCompra.getSelectedRow();
+            fila = jt_ListarFacturasDeCompraVenta.getSelectedRow();
         }
-    }//GEN-LAST:event_jt_ListarFacturasDeCompraMouseClicked
+    }//GEN-LAST:event_jt_ListarFacturasDeCompraVentaMouseClicked
 
     private void cbxMostrar_FacturasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMostrar_FacturasItemStateChanged
         if (cbxMostrar_Facturas.getSelectedIndex() == 0) {
@@ -592,7 +615,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     private javax.swing.JMenuItem jmIEditar;
     private javax.swing.JMenuItem jmIVerDetalles;
     private javax.swing.JPopupMenu jppEditarFactura;
-    public static javax.swing.JTable jt_ListarFacturasDeCompra;
+    public static javax.swing.JTable jt_ListarFacturasDeCompraVenta;
     private javax.swing.JTextField txt_IngresoFormaBusqueda;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@ package LogicaDeNegocios;
 
 import AccesoDatos.GestorFacturaVenta;
 import Modelos.FacturaDeVenta;
+import UI.DetallesFacturaCompraVenta;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -65,11 +66,6 @@ public class CoordinadorDeFacturaVenta {
         return (nuevaCantidad - cantidadAnterior);
     }
 
-     public int DevolverUltimoIdFacturaVenta() throws SQLException, ClassNotFoundException {
-        GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
-        return elGestorFacturaVenta.ObtenerUltimaIdFacturaVenta();
-    }
-    
     public void CrearFacturaVentaContado(float monto, int idCliente, int idTipoPago, String nuReferencia) {
         FacturaDeVenta nuevaFactura = new FacturaDeVenta();
         nuevaFactura.CrearFacturaDeVentaContado(monto, idCliente, idTipoPago, nuReferencia);
@@ -222,5 +218,27 @@ public class CoordinadorDeFacturaVenta {
         resultado = gestor.ListarFacturasUltimoMes();
 
         return resultado;
+    }
+    
+    public void ObtenerDetallesDeFactura(String idFactura) {
+        GestorFacturaVenta gestor = new GestorFacturaVenta();
+        resultado = gestor.ObtenerDetallesDeFactura(idFactura);
+        try {
+            if (resultado.next()) {
+                DetallesFacturaCompraVenta detalles = new DetallesFacturaCompraVenta(null, true, idFactura, false);
+                resultado.previous();
+                detalles.LlenarListaDetalles(resultado);
+                detalles.setVisible(true);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public int DevolverUltimoIdFacturaVenta() throws SQLException, ClassNotFoundException {
+        GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
+        return elGestorFacturaVenta.ObtenerUltimaIdFacturaVenta();
     }
 }
