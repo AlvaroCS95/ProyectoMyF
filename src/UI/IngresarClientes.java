@@ -23,7 +23,8 @@ public class IngresarClientes extends javax.swing.JDialog {
             SegundoApellido,
             Direccion,
             NombreLocal,
-            NivelDeCliente;
+            NivelDeCliente,
+           RazonSocial;
     public IngresarClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
        
@@ -75,6 +76,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         btLimpiar_IngresarCliente = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtNombreLocal_IngresarCliente = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtRazonSocial_IngresarCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -154,15 +157,28 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtNombreLocal_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreLocal_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel15.setText("Razón Social");
+
+        txtRazonSocial_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtRazonSocial_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(470, 470, 470)
-                .addComponent(btLimpiar_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(btAceptar_IngresarCliente)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(470, 470, 470)
+                        .addComponent(btLimpiar_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(btAceptar_IngresarCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel15)
+                        .addGap(65, 65, 65)
+                        .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(92, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -214,7 +230,11 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(426, Short.MAX_VALUE)
+                .addContainerGap(402, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btAceptar_IngresarCliente)
                     .addComponent(btLimpiar_IngresarCliente))
@@ -313,9 +333,9 @@ public void LimpiarCampos() {
                 SegundoApellido = txtSegundoApellido_IngresarCliente.getText();
                 Direccion = txtDireccion_IngresarCliente.getText();
                 NombreLocal = txtNombreLocal_IngresarCliente.getText();
-
+                RazonSocial=txtRazonSocial_IngresarCliente.getText();
                 CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
-                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido);
+                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,RazonSocial);
                 if (elCoordinadorDeClientes.AgregarCliente(elCliente) == true) {
                     JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
                     LimpiarCampos();
@@ -363,6 +383,7 @@ public void LimpiarCampos() {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -374,6 +395,7 @@ public void LimpiarCampos() {
     public javax.swing.JTextField txtNombreLocal_IngresarCliente;
     public static javax.swing.JTextField txtPrimerApellido_IngresarCliente;
     public static javax.swing.JTextField txtPrimerNombre_IngresarCliente;
+    public static javax.swing.JTextField txtRazonSocial_IngresarCliente;
     public static javax.swing.JTextField txtSegundoApellido_IngresarCliente;
     public static javax.swing.JTextField txtSegundoNombre_IngresarCliente;
     // End of variables declaration//GEN-END:variables

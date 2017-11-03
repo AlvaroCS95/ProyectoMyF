@@ -4,12 +4,8 @@ import java.awt.Dimension;
 import UI.CuentasPorPagar;
 import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
 import static UI.CuentasPorPagar.tbCuentasPorPagar;
-import static UI.GestorDeRutas.InicailaizarTablaRutas;
-import static UI.GestorDeRutas.InicializarFiltroCamiones;
-import static UI.GestorDeRutas.InicializarFiltroClientes;
-import static UI.GestorDeRutas.TableListarBuscarCamiones;
-import static UI.GestorDeRutas.TableListarBuscarClientes;
-import static UI.GestorDeRutas.VisualizarTodasLasRutas;
+import static UI.GestorDeRutas.VisualizarRutasActivas;
+
 import static UI.IngresarProductos.ListarClasificaciones;
 import static UI.IngresarProductos.ListarUMES;
 import static UI.IngresoFacturaCompra.ListarProveedores;
@@ -40,8 +36,7 @@ import javax.swing.Timer;
 public class Inicio extends javax.swing.JFrame implements Runnable{
 
     Dimension dim;
-    private UI.GestorDeRutas rutas = new UI.GestorDeRutas();
-    
+//    UI.GestorDeRutas gestor = new GestorDeRutas();
    String hora, minutos, segundos, ampm;
    Calendar calendario;
    public Timer tiempo;
@@ -58,6 +53,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
          jMenuBar1.add(Box.createHorizontalGlue()); 
          jMenuBar1.add(jMenu3);
          jMenuBar1.add(jMenu4);
+//         JTInicio.addTab("Gestor de rutas", gestor);
 
 
     }
@@ -296,13 +292,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         VisualizarCamion(TablaListarCamiones_ListarCamiones);        // TODO add your handling code here:
     }//GEN-LAST:event_listarCamiones1AncestorAdded
 
-    private void gestorDeRutas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_gestorDeRutas1AncestorAdded
-        InicailaizarTablaRutas();
-        InicializarFiltroClientes(TableListarBuscarClientes);
-        InicializarFiltroCamiones(TableListarBuscarCamiones);
-        VisualizarTodasLasRutas();        // TODO add your handling code here:
-    }//GEN-LAST:event_gestorDeRutas1AncestorAdded
-
     private void puntoDeVenta1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_puntoDeVenta1AncestorAdded
         ListarTiposDePago();
         ((JSpinner.DefaultEditor) jSDiasPlazo_PuntoDeVenta.getEditor()).getTextField().setEditable(false);
@@ -400,6 +389,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         return;
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void gestorDeRutas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_gestorDeRutas1AncestorAdded
+        try {
+            VisualizarRutasActivas()   ;     // TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_gestorDeRutas1AncestorAdded
 
     
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame){

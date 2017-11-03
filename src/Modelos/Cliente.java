@@ -9,21 +9,21 @@ package Modelos;
  *
  * @author Laura
  */
-public class Cliente extends Persona{
-    String NombreDeLocal ;
+public class Cliente extends Persona {
+
+    String NombreDeLocal;
     String NivelDeCliente;
     String Direccion;
+    String RazonSocial;
 
-   
-    
-
-    public Cliente(String nivelDeCliente, String direccion, String Cedula,String nombreDeLocal,
-            String PrimerNombre, String SegundoNombre, String PrimerApellido, String SegundoApellido) {
+    public Cliente(String nivelDeCliente, String direccion, String Cedula, String nombreDeLocal,
+            String PrimerNombre, String SegundoNombre, String PrimerApellido, String SegundoApellido, String Razon) {
         super(Cedula, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido);
-     
+
         this.NivelDeCliente = nivelDeCliente;
         this.Direccion = direccion;
-        this.NombreDeLocal=nombreDeLocal;
+        this.NombreDeLocal = nombreDeLocal;
+        this.RazonSocial = Razon;
     }
 
     public String getNombreDeLocal() {
@@ -32,6 +32,14 @@ public class Cliente extends Persona{
 
     public void setNombreDeLocal(String NombreDeLocal) {
         this.NombreDeLocal = NombreDeLocal;
+    }
+
+    public String getRazonSocial() {
+        return RazonSocial;
+    }
+
+    public void setRazonSocial(String RazonSocial) {
+        this.RazonSocial = RazonSocial;
     }
 
     public String getNivelDeCliente() {
@@ -50,5 +58,4 @@ public class Cliente extends Persona{
         this.Direccion = Direccion;
     }
 
-    
 }

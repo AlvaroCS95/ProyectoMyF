@@ -65,7 +65,7 @@ public class GestorDeRutas extends Coneccion{
         }
     }
     
-     public ResultSet ListarRutas() throws ClassNotFoundException, SQLException {
+     public ResultSet ListarRutasActivas() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;

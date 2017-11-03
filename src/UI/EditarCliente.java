@@ -12,8 +12,9 @@ import static UI.BuscarClientes.TablaFiltrarClientes_ListarClientes;
 import static UI.BuscarClientes.VisualizarTodosLosClientes;
 
 import static UI.BuscarClientes.txtCedulaABuscar_BuscarCliente;
-
 import static UI.ListarClientes.TablaListarClientes_ListarClientes;
+
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,11 +33,12 @@ public class EditarCliente extends javax.swing.JDialog {
             PrimerApellido,
             SegundoApellido,
             NombreLocal,
-            NivelDeCliente;
+            NivelDeCliente,
+            RazonSocial;
     public static int index = 0;
 
     public EditarCliente(java.awt.Frame parent, boolean modal, String Nivel, String cedula, String primerNombre, String segundoNombre, String primerApellido,
-            String segundoApellido, String Nombrelocal) {
+            String segundoApellido, String Nombrelocal,String Razon) {
         super(parent, modal);
         this.Cedula = cedula;
         this.PrimerNombreUsuario = primerNombre;
@@ -45,8 +47,9 @@ public class EditarCliente extends javax.swing.JDialog {
         this.SegundoApellido = segundoApellido;
         this.NombreLocal = Nombrelocal;
         this.NivelDeCliente = Nivel;
+        this.RazonSocial=Razon;
         initComponents();
-        JOptionPane.showMessageDialog(null, NivelDeCliente);
+        setLocationRelativeTo(null);
         CargarDatos();
 cerrar();
     }
@@ -91,6 +94,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         cbxNivel_EditarCliente = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         txtNombreLocal_EditarCliente = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtRazonSocial_EditarCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -166,6 +171,12 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtNombreLocal_EditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreLocal_EditarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel16.setText("Razón Social");
+
+        txtRazonSocial_EditarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtRazonSocial_EditarCliente.setForeground(new java.awt.Color(0, 102, 102));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,9 +225,13 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addGap(27, 27, 27)
                         .addComponent(txtSegundoNombre_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel16))
                         .addGap(34, 34, 34)
-                        .addComponent(txtNombreLocal_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRazonSocial_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreLocal_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -247,10 +262,15 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addGap(1, 1, 1)
                         .addComponent(jLabel14))
                     .addComponent(txtNombreLocal_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(txtPrimerApellido_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addComponent(txtPrimerApellido_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtRazonSocial_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
@@ -319,7 +339,7 @@ public int nivel() {
         txtSegundoNombre_EditarCliente.setText("");
         txtPrimerApellido_EditarCliente.setText("");
         txtSegundoApellido_EditarCliente.setText("");
-
+        
         txtNombreLocal_EditarCliente.setText("");
     }
     private void btAceptar_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarUsuarioActionPerformed
@@ -336,10 +356,11 @@ public int nivel() {
                 PrimerApellido = txtPrimerApellido_EditarCliente.getText();
                 SegundoApellido = txtSegundoApellido_EditarCliente.getText();
                 NombreLocal = txtNombreLocal_EditarCliente.getText();
+                RazonSocial= txtRazonSocial_EditarCliente.getText();
 
                 CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
 
-                Cliente elCliente = new Cliente(NivelDeCliente, null, Cedula, NombreLocal, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido);
+                Cliente elCliente = new Cliente(NivelDeCliente, null, Cedula, NombreLocal, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido,RazonSocial);
 
                 ResultSet Respuesta = elCoordinadorDeClientes.EditarCliente(elCliente);
                 if (Respuesta.next()) {
@@ -395,6 +416,7 @@ public int nivel() {
     public static javax.swing.JComboBox cbxNivel_EditarCliente;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -407,6 +429,7 @@ public int nivel() {
     public javax.swing.JTextField txtNombreLocal_EditarCliente;
     public static javax.swing.JTextField txtPrimerApellido_EditarCliente;
     public static javax.swing.JTextField txtPrimerNombre_EditarCliente;
+    public javax.swing.JTextField txtRazonSocial_EditarCliente;
     public static javax.swing.JTextField txtSegundoApellido_EditarCliente;
     public static javax.swing.JTextField txtSegundoNombre_EditarCliente;
     // End of variables declaration//GEN-END:variables

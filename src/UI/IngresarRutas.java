@@ -5,10 +5,12 @@
  */
 package UI;
 
+import AccesoDatos.GestorDeRutas;
 import LogicaDeNegocios.CoordinadorDeRutas;
 import Modelos.Ruta;
-import static UI.GestorDeRutas.VisualizarRutas;
-import static UI.GestorDeRutas.VisualizarTodasLasRutas;
+import static UI.GestorDeRutas.VisualizarRutasActivas;
+//import static UI.GestorDeRutas.VisualizarRutas;
+//import static UI.GestorDeRutas.VisualizarTodasLasRutas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,8 +41,8 @@ public class IngresarRutas extends javax.swing.JDialog {
             if (respuesta.getString(1).equals("2")) {
                 JOptionPane.showMessageDialog(null, "La ruta se inserto correctamente");
 
-                VisualizarRutas();
-                VisualizarTodasLasRutas();
+               
+               VisualizarRutasActivas();  
                 LimpiarCampos();               
             } else {
                 JOptionPane.showMessageDialog(null, "Error en la inserción");

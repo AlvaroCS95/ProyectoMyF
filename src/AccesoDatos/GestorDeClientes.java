@@ -20,7 +20,7 @@ public class GestorDeClientes extends Coneccion {
         EstablecerConexion();
         try {
 
-            llamadaAlMetodo = conexion.prepareCall("{call IngresarCliente (?,?,?,?,?,?,?,?)}");
+            llamadaAlMetodo = conexion.prepareCall("{call IngresarCliente (?,?,?,?,?,?,?,?,?)}");
             llamadaAlMetodo.setString(1, elCliente.getCedula());
             llamadaAlMetodo.setString(2, elCliente.getPrimerNombre());
             llamadaAlMetodo.setString(3, elCliente.getSegundoNombre());
@@ -29,6 +29,7 @@ public class GestorDeClientes extends Coneccion {
             llamadaAlMetodo.setString(6, elCliente.getNivelDeCliente());
             llamadaAlMetodo.setString(7, elCliente.getNombreDeLocal());
             llamadaAlMetodo.setString(8, elCliente.getDireccion());
+            llamadaAlMetodo.setString(9, elCliente.getRazonSocial());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;
@@ -46,7 +47,7 @@ public class GestorDeClientes extends Coneccion {
         ResultSet resultadoConsulta = null;
         try {
 
-            llamadaAlMetodo = conexion.prepareCall("{call ActualizarCliente (?,?,?,?,?,?,?)}");
+            llamadaAlMetodo = conexion.prepareCall("{call ActualizarCliente (?,?,?,?,?,?,?,?)}");
             llamadaAlMetodo.setString(1, elCliente.getCedula());
             llamadaAlMetodo.setString(2, elCliente.getPrimerNombre());
             llamadaAlMetodo.setString(3, elCliente.getSegundoNombre());
@@ -54,6 +55,7 @@ public class GestorDeClientes extends Coneccion {
             llamadaAlMetodo.setString(5, elCliente.getSegundoApellido());
             llamadaAlMetodo.setString(6, elCliente.getNivelDeCliente());
             llamadaAlMetodo.setString(7, elCliente.getNombreDeLocal());
+            llamadaAlMetodo.setString(8, elCliente.getRazonSocial());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
             
@@ -66,6 +68,7 @@ public class GestorDeClientes extends Coneccion {
         }
 
     }
+
 
 
     public ResultSet ListarTodosLosClientes() throws ClassNotFoundException, SQLException {

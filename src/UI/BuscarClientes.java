@@ -39,23 +39,25 @@ public class BuscarClientes extends javax.swing.JDialog {
         VisualizarTodosLosClientes(TablaFiltrarClientes_ListarClientes);
         cerrar();
     }
-public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarClientes.panelHabilitado=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarClientes.panelHabilitado = false;
+                    dispose();
+                }
             }
         });
-}
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,7 +155,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(112, 112, 112)
                         .addComponent(jLabel52)
                         .addGap(32, 32, 32)
                         .addComponent(jLabel49)
@@ -162,9 +164,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addGap(18, 18, 18)
                         .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(69, 69, 69)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +194,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             };
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
             ResultSet resultadoConsulta = elCoordinador.ListarTodosLosClientes();
-
+            modelo.addColumn("Codigo");
             modelo.addColumn("Cédula");
             modelo.addColumn("Primer nombre");
             modelo.addColumn("Segundo nombre");
@@ -203,6 +205,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
             modelo.addColumn("Direccion");
             modelo.addColumn("Nombre de local");
+            modelo.addColumn("Razon social");
             Listar.setModel(modelo);
             filas = new Object[modelo.getColumnCount()];
             if (resultadoConsulta == null) {
@@ -213,7 +216,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
                 for (int i = 0; i < modelo.getColumnCount(); i++) {
 
-                    if ((i + 1) == 7) {
+                    if ((i + 1) == 8) {
                         if (resultadoConsulta.getBoolean(i + 1) == true) {
                             filas[i] = "Activo";
 
@@ -243,13 +246,13 @@ addWindowListener(new java.awt.event.WindowAdapter() {
     public static void filtro() {
         int columnaABuscar = 0;
         if (cbxFiltro.getSelectedItem() == "Cedula") {
-            columnaABuscar = 0;
-        }
-        if (cbxFiltro.getSelectedItem() == "Nombre") {
             columnaABuscar = 1;
         }
+        if (cbxFiltro.getSelectedItem() == "Nombre") {
+            columnaABuscar = 2;
+        }
         if (cbxFiltro.getSelectedItem() == "Apellido") {
-            columnaABuscar = 4;
+            columnaABuscar = 5;
         }
         trsFiltro.setRowFilter(RowFilter.regexFilter(txtCedulaABuscar_BuscarCliente.getText(), columnaABuscar));
     }
@@ -283,37 +286,37 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         if (SeleccionDeFila == false) {
             JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
         } else {
-            String Estado=Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-            if(Estado.equals("Inactivo")){
-              JOptionPane.showMessageDialog(null, "El cliente seleccionado ha sido eliminado"+"\n"+
-                      "con anterioridad");
-            }else{
-            String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-            String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el cliente: " + NombreClienteSeleccionadoAEliminar
-                    + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar cliente");
-            if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+            String Estado = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+            if (Estado.equals("Inactivo")) {
+                JOptionPane.showMessageDialog(null, "El cliente seleccionado ha sido eliminado" + "\n"
+                        + "con anterioridad");
+            } else {
+                String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+                String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el cliente: " + NombreClienteSeleccionadoAEliminar
+                        + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar cliente");
+                if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
 
-                CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
-                try {
-                    elCoordinadorDeClientes.CambiarEstadoCliente(CedulaDelClienteSeleccionadoAEliminar);
-                    VisualizarClientes(TablaListarClientes_ListarClientes);
-                   if (ListarClientes.panelHabilitado == true) {
-                           
+                    CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
+                    try {
+                        elCoordinadorDeClientes.CambiarEstadoCliente(CedulaDelClienteSeleccionadoAEliminar);
+                        VisualizarClientes(TablaListarClientes_ListarClientes);
+                        if (ListarClientes.panelHabilitado == true) {
+
                             txtCedulaABuscar_BuscarCliente.setText("");
                             BuscarCliente();
                             VisualizarTodosLosClientes(Lista);
-                            
+
                         }
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                SeleccionDeFila = false;
             }
-            SeleccionDeFila = false;
-        }
         }
     }
 
@@ -321,52 +324,54 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         if (SeleccionDeFila == false) {
             JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
         } else {
-            
-            String Estado=Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-            if(Estado.equals("Activo")){
-              JOptionPane.showMessageDialog(null, "El cliente seleccionado ha sido Activado"+"\n"+
-                      "con anterioridad");
-            }else{
-            String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-            String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Activar el cliente: " + NombreClienteSeleccionadoAEliminar
-                    + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Activar cliente");
-            if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
 
-                CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
-                try {
-                    elCoordinadorDeClientes.CambiarEstadoCliente(CedulaDelClienteSeleccionadoAEliminar);
-                    VisualizarClientes(TablaListarClientes_ListarClientes);
-                     if (ListarClientes.panelHabilitado == true) {
-                           
+            String Estado = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+            if (Estado.equals("Activo")) {
+                JOptionPane.showMessageDialog(null, "El cliente seleccionado ha sido Activado" + "\n"
+                        + "con anterioridad");
+            } else {
+                String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+                String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Activar el cliente: " + NombreClienteSeleccionadoAEliminar
+                        + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Activar cliente");
+                if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+
+                    CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
+                    try {
+                        elCoordinadorDeClientes.CambiarEstadoCliente(CedulaDelClienteSeleccionadoAEliminar);
+                        VisualizarClientes(TablaListarClientes_ListarClientes);
+                        if (ListarClientes.panelHabilitado == true) {
+
                             txtCedulaABuscar_BuscarCliente.setText("");
                             BuscarCliente();
                             VisualizarTodosLosClientes(Lista);
-                            
+
                         }
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }}
+            }
             SeleccionDeFila = false;
         }
     }
 
     public void EditarCliente(JTable Lista) {
 
-        String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String Nivel=Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
-        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
-        elClienteAEditar = new EditarCliente(null, true, Nivel,CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
+        String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+        String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+        String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+        String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+        String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+        String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+        String RazonSocial = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
+        elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
-                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar);
+                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar, RazonSocial);
         elClienteAEditar.setVisible(true);
 
     }

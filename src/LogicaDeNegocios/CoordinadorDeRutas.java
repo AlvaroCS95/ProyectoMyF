@@ -11,9 +11,9 @@ public class CoordinadorDeRutas {
     public CoordinadorDeRutas() {
     }
 
-    public ResultSet ListarRutas() throws ClassNotFoundException, SQLException {
+    public ResultSet ListarRutasActivas() throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
-        return elGestorDeRutas.ListarRutas();
+        return elGestorDeRutas.ListarRutasActivas();
     }
   public ResultSet ListarTodasLasRutas() throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();

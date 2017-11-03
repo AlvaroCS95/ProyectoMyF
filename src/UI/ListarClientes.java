@@ -77,7 +77,7 @@ public class ListarClientes extends javax.swing.JPanel {
 
         jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator10.setAlignmentX(5.0F);
-        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 90, 205, -1));
+        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, 205, -1));
 
         btAgregar_ListarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarUC.png"))); // NOI18N
         btAgregar_ListarUsuarios.setToolTipText("Oprima para cancelar");
@@ -86,7 +86,7 @@ public class ListarClientes extends javax.swing.JPanel {
                 btAgregar_ListarUsuariosActionPerformed(evt);
             }
         });
-        add(btAgregar_ListarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, -1, -1));
+        add(btAgregar_ListarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 100, -1, -1));
 
         TablaListarClientes_ListarClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,12 +108,12 @@ public class ListarClientes extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(TablaListarClientes_ListarClientes);
 
-        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 1030, 360));
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 1300, 360));
 
         jLabel51.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(0, 102, 112));
         jLabel51.setText("Ingresar Cliente");
-        add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
+        add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 60, -1, -1));
 
         jLabel50.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel50.setText("Lista de Clientes Activos");
@@ -121,7 +121,7 @@ public class ListarClientes extends javax.swing.JPanel {
 
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator11.setAlignmentX(5.0F);
-        add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 205, -1));
+        add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, 205, -1));
 
         btAgregar_ListarUsuarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarUsuario.png"))); // NOI18N
         btAgregar_ListarUsuarios1.setToolTipText("Oprima para cancelar");
@@ -130,12 +130,12 @@ public class ListarClientes extends javax.swing.JPanel {
                 btAgregar_ListarUsuarios1ActionPerformed(evt);
             }
         });
-        add(btAgregar_ListarUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
+        add(btAgregar_ListarUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, -1, -1));
 
         jLabel53.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(0, 102, 112));
         jLabel53.setText("Buscar Cliente");
-        add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 173, -1));
+        add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 173, -1));
     }// </editor-fold>//GEN-END:initComponents
 private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
 
@@ -153,7 +153,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             };
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
             ResultSet resultadoConsulta = elCoordinador.ListarClientes();
-
+            modelo.addColumn("Codigo");
             modelo.addColumn("Cédula");
             modelo.addColumn("Primer nombre");
             modelo.addColumn("Segundo nombre");
@@ -163,6 +163,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
 
             modelo.addColumn("Direccion");
             modelo.addColumn("Nombre de local");
+            modelo.addColumn("Razon Social");
             Listar.setModel(modelo);
             filas = new Object[modelo.getColumnCount()];
             if (resultadoConsulta == null) {
@@ -192,8 +193,8 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
         } else {
 
-            String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-            String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String CedulaDelClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String NombreClienteSeleccionadoAEliminar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
             int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el cliente: " + NombreClienteSeleccionadoAEliminar
                     + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar cliente");
             if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
@@ -255,22 +256,23 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
     }//GEN-LAST:event_TablaListarClientes_ListarClientesMousePressed
     public void EditarCliente(JTable Lista) {
 
-        String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+        String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+        String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+        String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+        String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+        String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+        String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,7 ).toString();
 
-        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
         elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
-                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar);
+                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar,Razon);
         elClienteAEditar.setVisible(true);
 
     }
     private void btAgregar_ListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregar_ListarUsuariosActionPerformed
-        IngresarClientes ingresoCliente = new IngresarClientes(null, true);
+      IngresarClientes ingresoCliente = new IngresarClientes(null, true);
         ingresoCliente.setVisible(true);
     }//GEN-LAST:event_btAgregar_ListarUsuariosActionPerformed
 
