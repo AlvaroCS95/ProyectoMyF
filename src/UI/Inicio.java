@@ -84,6 +84,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         listarCamiones1 = new UI.ListarCamiones();
         jScrollPane1 = new javax.swing.JScrollPane();
         ingresarCarga1 = new UI.IngresarCarga();
+        visualizaryEditarCargas1 = new UI.VisualizaryEditarCargas();
         gestorDeRutas1 = new UI.GestorDeRutas();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -151,7 +152,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
-        JTInventario.addTab("Visualizar y Editar Devoluciones", visualizarYEditarDevoluciones1);
+        JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
 
         JTInicio.addTab("Inventario", JTInventario);
 
@@ -216,6 +217,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         jScrollPane1.setViewportView(ingresarCarga1);
 
         JTCamiones.addTab("Ingresar Cargas", jScrollPane1);
+        JTCamiones.addTab("tab3", visualizaryEditarCargas1);
 
         JTInicio.addTab("Camiones", JTCamiones);
 
@@ -433,5 +435,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
     private UI.PuntoDeVenta puntoDeVenta1;
     private UI.VisualizarProductos visualizarProductos1;
     private UI.VisualizarYEditarDevoluciones visualizarYEditarDevoluciones1;
+    private UI.VisualizaryEditarCargas visualizaryEditarCargas1;
     // End of variables declaration//GEN-END:variables
 }

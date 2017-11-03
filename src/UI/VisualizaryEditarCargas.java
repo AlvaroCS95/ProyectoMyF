@@ -13,8 +13,14 @@ import static UI.VisualizarProductos.modelo;
 import static UI.VisualizarProductos.txtBuscar_VisualizarProductos;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -118,9 +124,9 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar_VisualizarCargas = new javax.swing.JTextField();
-        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<>();
+        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<String>();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btActualizar_VisualizarCargas = new javax.swing.JButton();
 
         Editar_VisualizarCargas.setText("Editar");
         Editar_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
@@ -128,8 +134,12 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                 Editar_VisualizarCargasActionPerformed(evt);
             }
         });
+        menuEmergente_VisualizarCargas.add(Editar_VisualizarCargas);
 
         detalles_VisualizarCargas.setText("Detalles");
+        menuEmergente_VisualizarCargas.add(detalles_VisualizarCargas);
+
+        setPreferredSize(new java.awt.Dimension(1360, 700));
 
         tablaCargas_VisualizarCargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,10 +158,20 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
             }
         });
         tablaCargas_VisualizarCargas.setComponentPopupMenu(menuEmergente_VisualizarCargas);
+        tablaCargas_VisualizarCargas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCargas_VisualizarCargasMouseClicked(evt);
+            }
+        });
+        tablaCargas_VisualizarCargas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaCargas_VisualizarCargasKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaCargas_VisualizarCargas);
 
-        jLabel1.setFont(new java.awt.Font("Segoe Print", 1, 18)); // NOI18N
-        jLabel1.setText("Visualizar y editar cargas");
+        jLabel1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
+        jLabel1.setText("Visualizar cargas");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
 
@@ -168,50 +188,60 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VerContraseña.png"))); // NOI18N
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flechas-de-actualizacion.png"))); // NOI18N
+        btActualizar_VisualizarCargas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flechas-de-actualizacion.png"))); // NOI18N
+        btActualizar_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btActualizar_VisualizarCargasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(71, 71, 71)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 31, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btActualizar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(520, 520, 520))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btActualizar_VisualizarCargas)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,18 +250,62 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscar_VisualizarCargasKeyTyped
 
     private void Editar_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_VisualizarCargasActionPerformed
-        EditarCarga editarCarga=new EditarCarga();
-        editarCarga.setVisible(true);
+    String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
+    Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
+    int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+    JOptionPane.showMessageDialog(null, PlacaDeCamion+"   "+FechaCarga+"    "+IdCarga);
+        EditarCarga editarCarga;
+      try {
+          editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga);
+          editarCarga.setVisible(true);
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        
     }//GEN-LAST:event_Editar_VisualizarCargasActionPerformed
+
+    
+    public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+    private void btActualizar_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizar_VisualizarCargasActionPerformed
+        ListarCargas();
+        
+    }//GEN-LAST:event_btActualizar_VisualizarCargasActionPerformed
+int fila=0;
+    private void tablaCargas_VisualizarCargasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasKeyPressed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_tablaCargas_VisualizarCargasKeyPressed
+
+    private void tablaCargas_VisualizarCargasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasMouseClicked
+        // TODO add your handling code here: 
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            fila = tablaCargas_VisualizarCargas.getSelectedRow();
+        } else if (evt.getButton() == MouseEvent.BUTTON3) {
+            fila = tablaCargas_VisualizarCargas.getSelectedRow();
+        }
+    }//GEN-LAST:event_tablaCargas_VisualizarCargasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Editar_VisualizarCargas;
+    private javax.swing.JButton btActualizar_VisualizarCargas;
     private javax.swing.JComboBox<String> cmbxFiltrar_VisualizarCargas;
     private javax.swing.JMenuItem detalles_VisualizarCargas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

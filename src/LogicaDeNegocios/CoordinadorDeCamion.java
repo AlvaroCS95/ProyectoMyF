@@ -35,20 +35,26 @@ public class CoordinadorDeCamion {
 
     }
      public ResultSet ListarCamionesActivos() throws SQLException, ClassNotFoundException {
-        GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
-        return elGestorDeUsuarios.ListarCamionesActivos();
+        GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
+        return elGestorDeCamion.ListarCamionesActivos();
     }
+     
+      public ResultSet ListarTodasLasPlacas() throws SQLException, ClassNotFoundException {
+        GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
+        return elGestorDeCamion.ListartodasLasPlacas();
+    }
+      
       public ResultSet ListarCargas() throws SQLException, ClassNotFoundException {
-        GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
-        return elGestorDeUsuarios.ListarCargas();
+        GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
+        return elGestorDeCamion.ListarCargas();
     }
       public ResultSet ListarTodosLosCamiones() throws SQLException, ClassNotFoundException {
-        GestorDeCamiones elGestorDeUsuarios = new GestorDeCamiones();
-        return elGestorDeUsuarios.ListarTodosLosCamiones();
+        GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
+        return elGestorDeCamion.ListarTodosLosCamiones();
     }
      public ResultSet CambiarEstadoCamion(String Placa) throws SQLException, ClassNotFoundException {
-        GestorDeCamiones elGestorDeClientes = new GestorDeCamiones();
-        return elGestorDeClientes.CambiarEstadoCamion(Placa);
+        GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
+        return elGestorDeCamion.CambiarEstadoCamion(Placa);
     }
      
 }

@@ -98,6 +98,20 @@ public class GestorDeCamiones extends Coneccion {
         }
     }
 
+ public ResultSet ListartodasLasPlacas() throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call MostrartodasLasPlacas ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
+ 
     public ResultSet ListarTodosLosCamiones() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
