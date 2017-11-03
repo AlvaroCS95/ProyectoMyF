@@ -62,10 +62,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu_Reintegro = new javax.swing.JPopupMenu();
-        jMenuItemEditar_Reintegro = new javax.swing.JMenuItem();
-        jPopupMenu_Desecho = new javax.swing.JPopupMenu();
-        jMenuItemEditar_Desecho = new javax.swing.JMenuItem();
         jLabel44 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         btLimpiar_IngresarDevoluciones = new javax.swing.JButton();
@@ -95,23 +91,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         btQuitarReintegro_Devoluciones = new javax.swing.JButton();
         btAgegarReintegro_Devoluciones = new javax.swing.JButton();
         btQuitarDesechado_Devoluciones = new javax.swing.JButton();
-
-        jMenuItemEditar_Reintegro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EditIcon.png"))); // NOI18N
-        jMenuItemEditar_Reintegro.setText("Editar");
-        jMenuItemEditar_Reintegro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemEditar_ReintegroActionPerformed(evt);
-            }
-        });
-        jPopupMenu_Reintegro.add(jMenuItemEditar_Reintegro);
-
-        jMenuItemEditar_Desecho.setText("jMenuItem1");
-        jMenuItemEditar_Desecho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemEditar_DesechoActionPerformed(evt);
-            }
-        });
-        jPopupMenu_Desecho.add(jMenuItemEditar_Desecho);
 
         setPreferredSize(new java.awt.Dimension(1260, 690));
         setVerifyInputWhenFocusTarget(false);
@@ -156,6 +135,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Search_Icon_16.png"))); // NOI18N
         jButton1.setText("Seleccionar Factura");
+        jButton1.setToolTipText("aqui busca  selecciona la factura de venta que desea ingresarle la devolucion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -225,7 +205,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TablaReintegro_Devoluciones.setComponentPopupMenu(jPopupMenu_Reintegro);
         TablaReintegro_Devoluciones.getTableHeader().setReorderingAllowed(false);
         TablaReintegro_Devoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -261,7 +240,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 "Codigo Producto", "Nombre Producto", "Cantidad Desechada", "Detalle"
             }
         ));
-        TablaProductosDesechados_Devoluciones.setComponentPopupMenu(jPopupMenu_Desecho);
         TablaProductosDesechados_Devoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaProductosDesechados_DevolucionesMouseClicked(evt);
@@ -805,16 +783,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
           FilaSeleccionadaDesechado = TablaProductosDesechados_Devoluciones.getSelectedRow();}
     }//GEN-LAST:event_TablaProductosDesechados_DevolucionesMouseClicked
 
-    private void jMenuItemEditar_ReintegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEditar_ReintegroActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jMenuItemEditar_ReintegroActionPerformed
-
-    private void jMenuItemEditar_DesechoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEditar_DesechoActionPerformed
-        // TODO add your handling code here:
-  
-    }//GEN-LAST:event_jMenuItemEditar_DesechoActionPerformed
-
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
 
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
@@ -1133,10 +1101,6 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenuItem jMenuItemEditar_Desecho;
-    private javax.swing.JMenuItem jMenuItemEditar_Reintegro;
-    private javax.swing.JPopupMenu jPopupMenu_Desecho;
-    private javax.swing.JPopupMenu jPopupMenu_Reintegro;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

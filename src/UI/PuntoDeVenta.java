@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 public class PuntoDeVenta extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    boolean imprimirFactura;
     ArrayList<Object> lista = new ArrayList<>();
     static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     int fila, tipoDeVenta = 2;
@@ -345,17 +344,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         }
     }
 
-    public void DecideImprimirFactura() {
-        switch (cbxImprime_PuntoDeVenta.getSelectedItem().toString()) {
-            case "Si":
-                imprimirFactura = true;
-                break;
-            case "No":
-                imprimirFactura = false;
-                break;
-        }
-    }
-
     public void AgregarCodigoAListaDeDescuentos(int fila) {
         lista.add(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 0).toString());
     }
@@ -620,8 +608,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jppPuntoVenta = new javax.swing.JPopupMenu();
         jmIAgregarDescuento = new javax.swing.JMenuItem();
-        jmIQuitarDescuento = new javax.swing.JMenuItem();
-        jmIEliminarDeLaLista = new javax.swing.JMenuItem();
         jppMontoPagoPuntoDeVenta = new javax.swing.JPopupMenu();
         jmICompleto = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
@@ -640,8 +626,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         txtTotalAPagar_PuntoDeVenta = new javax.swing.JTextField();
         jLabel98 = new javax.swing.JLabel();
         txtMontoDePago_PuntoDeVenta = new javax.swing.JTextField();
-        jLabelImprime = new javax.swing.JLabel();
-        cbxImprime_PuntoDeVenta = new javax.swing.JComboBox<String>();
         FacturarVenta_PuntoDeVEnta = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -658,20 +642,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jmIAgregarDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anadir.png"))); // NOI18N
         jmIAgregarDescuento.setText("Agregar descuento");
+        jmIAgregarDescuento.setToolTipText("Agrega descuento al producto seleccionada.");
         jmIAgregarDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmIAgregarDescuentoActionPerformed(evt);
             }
         });
         jppPuntoVenta.add(jmIAgregarDescuento);
-
-        jmIQuitarDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/menos.png"))); // NOI18N
-        jmIQuitarDescuento.setText("Quitar descuento");
-        jppPuntoVenta.add(jmIQuitarDescuento);
-
-        jmIEliminarDeLaLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png"))); // NOI18N
-        jmIEliminarDeLaLista.setText("Quitar de la lista");
-        jppPuntoVenta.add(jmIEliminarDeLaLista);
 
         jmICompleto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/efectivo.png"))); // NOI18N
         jmICompleto.setText("Completo");
@@ -699,6 +676,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         txtDescuento_PuntoDeVenta.setEditable(false);
         txtDescuento_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDescuento_PuntoDeVenta.setText("0");
+        txtDescuento_PuntoDeVenta.setToolTipText("Acumula el descuento realizado en esta venta.");
         add(txtDescuento_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 480, 180, 30));
 
         TablaFacturacion_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -748,14 +726,18 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 115, 20));
 
         txtCodigoDelProducto_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtCodigoDelProducto_PuntoDeVenta.setToolTipText("Ingrese el código del producto que desea vender.");
         add(txtCodigoDelProducto_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 191, 31));
 
         txtCantidadDeProducto_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtCantidadDeProducto_PuntoDeVenta.setToolTipText("Cantidad de producto que desea vender.");
         add(txtCantidadDeProducto_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 120, 31));
 
         jButtonAgregarAlaLista.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jButtonAgregarAlaLista.setMnemonic('A');
         jButtonAgregarAlaLista.setText("Agregar a la lista");
+        jButtonAgregarAlaLista.setToolTipText("Agrega el producto a la lista de venta.");
+        jButtonAgregarAlaLista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonAgregarAlaLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarAlaListaAgregarProductoALaLista(evt);
@@ -770,6 +752,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         txtTotalAPagar_PuntoDeVenta.setEditable(false);
         txtTotalAPagar_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtTotalAPagar_PuntoDeVenta.setText("0");
+        txtTotalAPagar_PuntoDeVenta.setToolTipText("Acumula el total de la venta actual.");
         add(txtTotalAPagar_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 330, 180, 31));
 
         jLabel98.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -777,23 +760,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 130, 30));
 
         txtMontoDePago_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtMontoDePago_PuntoDeVenta.setToolTipText("Ingrese el monto con el cual va a cancelar esta venta.");
         txtMontoDePago_PuntoDeVenta.setComponentPopupMenu(jppMontoPagoPuntoDeVenta);
         add(txtMontoDePago_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 380, 180, 30));
 
-        jLabelImprime.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        jLabelImprime.setText("Imprimir factura:");
-        add(jLabelImprime, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 150, 30));
-
-        cbxImprime_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        cbxImprime_PuntoDeVenta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No", "Si" }));
-        cbxImprime_PuntoDeVenta.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxImprime_PuntoDeVentaSeleccionarImprimirFactura(evt);
-            }
-        });
-        add(cbxImprime_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 500, 70, -1));
-
         FacturarVenta_PuntoDeVEnta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fullshopping.png"))); // NOI18N
+        FacturarVenta_PuntoDeVEnta.setToolTipText("Factura la venta actual.");
+        FacturarVenta_PuntoDeVEnta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         FacturarVenta_PuntoDeVEnta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FacturarVenta_PuntoDeVEntaActionPerformed(evt);
@@ -801,13 +774,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         });
         add(FacturarVenta_PuntoDeVEnta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 520, 90, 80));
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jButton2.setText("Limpiar");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 380, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel3.setText("Tipo de venta:");
@@ -815,6 +790,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         cmbxTipoVenta_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         cmbxTipoVenta_PuntoDeVenta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Contado", "Credito" }));
+        cmbxTipoVenta_PuntoDeVenta.setToolTipText("Muestra opciones de venta.");
+        cmbxTipoVenta_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbxTipoVenta_PuntoDeVenta.setPreferredSize(new java.awt.Dimension(110, 23));
         cmbxTipoVenta_PuntoDeVenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -828,6 +805,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, -1));
 
         cmbxFormaDePago_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        cmbxFormaDePago_PuntoDeVenta.setToolTipText("Muestra las formas de pago admitidas.");
+        cmbxFormaDePago_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbxFormaDePago_PuntoDeVenta.setPreferredSize(new java.awt.Dimension(110, 23));
         cmbxFormaDePago_PuntoDeVenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -842,12 +821,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         txtNDeReferencia.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNDeReferencia.setText("0");
+        txtNDeReferencia.setToolTipText("Número de documento de algún trámite bancario.");
         txtNDeReferencia.setPreferredSize(new java.awt.Dimension(6, 30));
         add(txtNDeReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 430, 180, -1));
 
         jLCliente_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLCliente_PuntoDeVenta.setText("Cliente:");
         add(jLCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, -1));
+
+        txtCedulaCliente_PuntoDeVenta.setToolTipText("Cédula del cliente  al que le está vendiendo.");
         add(txtCedulaCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 150, 30));
 
         jLPlazoDias.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -856,10 +838,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jSDiasPlazo_PuntoDeVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jSDiasPlazo_PuntoDeVenta.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
+        jSDiasPlazo_PuntoDeVenta.setToolTipText("Cantidad de días plazo para pagar.");
         jSDiasPlazo_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(jSDiasPlazo_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 80, -1));
 
         jCAbonar_PuntoVenta.setText("Abonar a esta venta.");
+        jCAbonar_PuntoVenta.setToolTipText("Decide o no abonar en esta venta.");
+        jCAbonar_PuntoVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCAbonar_PuntoVenta.setEnabled(false);
         add(jCAbonar_PuntoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -868,10 +853,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         VerificarDatosParaAgregarAlaLista();
 
     }//GEN-LAST:event_jButtonAgregarAlaListaAgregarProductoALaLista
-
-    private void cbxImprime_PuntoDeVentaSeleccionarImprimirFactura(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxImprime_PuntoDeVentaSeleccionarImprimirFactura
-//        JOptionPane.showMessageDialog(null, "Hola");
-    }//GEN-LAST:event_cbxImprime_PuntoDeVentaSeleccionarImprimirFactura
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         LimpiarDatos();
@@ -911,7 +892,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FacturarVenta_PuntoDeVEnta;
     public static javax.swing.JTable TablaFacturacion_PuntoDeVenta;
-    public static javax.swing.JComboBox<String> cbxImprime_PuntoDeVenta;
     public static javax.swing.JComboBox cmbxFormaDePago_PuntoDeVenta;
     private javax.swing.JComboBox cmbxTipoVenta_PuntoDeVenta;
     private javax.swing.JButton jButton2;
@@ -929,14 +909,11 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel98;
-    public static javax.swing.JLabel jLabelImprime;
     public static javax.swing.JSpinner jSDiasPlazo_PuntoDeVenta;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem jmIAgregarDescuento;
     private javax.swing.JMenuItem jmICompleto;
-    private javax.swing.JMenuItem jmIEliminarDeLaLista;
-    private javax.swing.JMenuItem jmIQuitarDescuento;
     private javax.swing.JPopupMenu jppMontoPagoPuntoDeVenta;
     private javax.swing.JPopupMenu jppPuntoVenta;
     public static javax.swing.JTextField txtCantidadDeProducto_PuntoDeVenta;

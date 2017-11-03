@@ -378,7 +378,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         scroll_IngresoFacturaCompra.setBackground(new java.awt.Color(153, 255, 102));
         scroll_IngresoFacturaCompra.setBorder(null);
+        scroll_IngresoFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        panel_IngreosFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panel_IngreosFacturaCompra.setPreferredSize(new java.awt.Dimension(1343, 1370));
         panel_IngreosFacturaCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -391,6 +393,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         txtNumeroDeFactura_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNumeroDeFactura_IngresarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
+        txtNumeroDeFactura_IngresarFacturaCompra.setToolTipText("Ingrese n° de factura.");
         panel_IngreosFacturaCompra.add(txtNumeroDeFactura_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 156, -1));
 
         jLabel63.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -402,6 +405,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, 29));
 
         cbxProveedor_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        cbxProveedor_IngresarFacturaCompra.setToolTipText("Seleccione el proveedor.");
+        cbxProveedor_IngresarFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxProveedor_IngresarFacturaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbxProveedor_IngresarFacturaCompraMouseClicked(evt);
@@ -415,7 +420,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         txtMontoDeCompra_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMontoDeCompra_IngresarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
-        txtMontoDeCompra_IngresarFacturaCompra.setToolTipText("Campo para ingresar nombre del producto");
+        txtMontoDeCompra_IngresarFacturaCompra.setToolTipText("Ingrese monto total de la compra.");
         txtMontoDeCompra_IngresarFacturaCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtMontoDeCompra_IngresarFacturaCompraKeyPressed(evt);
@@ -440,16 +445,21 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         cbxTipoCompra_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         cbxTipoCompra_IngresarFacturaCompra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Contado", "Credito" }));
+        cbxTipoCompra_IngresarFacturaCompra.setToolTipText("Seleccione el tipo de compra.");
+        cbxTipoCompra_IngresarFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxTipoCompra_IngresarFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTipoCompra_IngresarFacturaCompraActionPerformed(evt);
             }
         });
         panel_IngreosFacturaCompra.add(cbxTipoCompra_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 156, -1));
+
+        jDCFecha_Compra.setToolTipText("Seleccione la fecha de la compra.");
         panel_IngreosFacturaCompra.add(jDCFecha_Compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 156, -1));
 
         btAceptar_IngresarDetalleFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
-        btAceptar_IngresarDetalleFacturaCompra.setToolTipText("Oprima para cancelar");
+        btAceptar_IngresarDetalleFacturaCompra.setToolTipText("Guarda los datos de la lista.");
+        btAceptar_IngresarDetalleFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btAceptar_IngresarDetalleFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_IngresarDetalleFacturaCompraActionPerformed(evt);
@@ -458,7 +468,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(btAceptar_IngresarDetalleFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 760, -1, -1));
 
         btLimpiar_IngresarFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
-        btLimpiar_IngresarFacturaCompra.setToolTipText("Oprima para cancelar");
+        btLimpiar_IngresarFacturaCompra.setToolTipText("Limpia los datos de la lista.");
+        btLimpiar_IngresarFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btLimpiar_IngresarFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimpiar_IngresarFacturaCompraActionPerformed(evt);
@@ -477,11 +488,13 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtN_Pedido.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtN_Pedido.setForeground(new java.awt.Color(0, 102, 102));
         txtN_Pedido.setText("0");
+        txtN_Pedido.setToolTipText("Ingrese n° de pedido.");
         panel_IngreosFacturaCompra.add(txtN_Pedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 160, -1));
 
         txtN_Entrega.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtN_Entrega.setForeground(new java.awt.Color(0, 102, 102));
         txtN_Entrega.setText("0");
+        txtN_Entrega.setToolTipText("Ingrese n° de entrega.");
         panel_IngreosFacturaCompra.add(txtN_Entrega, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, 170, 30));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -491,6 +504,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtN_Referencia.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtN_Referencia.setForeground(new java.awt.Color(0, 102, 102));
         txtN_Referencia.setText("0");
+        txtN_Referencia.setToolTipText("Ingrese n° de referencia.");
         panel_IngreosFacturaCompra.add(txtN_Referencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 160, -1));
 
         jLabel4.setText("*");
@@ -500,6 +514,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, -1, -1));
 
         cbxTipoPago_FacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        cbxTipoPago_FacturaCompra.setToolTipText("Seleccione la forma de pago.");
+        cbxTipoPago_FacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxTipoPago_FacturaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbxTipoPago_FacturaCompraMouseClicked(evt);
@@ -517,10 +533,12 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
         txtMontoCancelado_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMontoCancelado_IngresarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
+        txtMontoCancelado_IngresarFacturaCompra.setToolTipText("Ingree el monto que canceló.");
         panel_IngreosFacturaCompra.add(txtMontoCancelado_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 160, -1));
 
         txtPlazoDias_IngresarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPlazoDias_IngresarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
+        txtPlazoDias_IngresarFacturaCompra.setToolTipText("Digite la cantidad de días para pagar.");
         panel_IngreosFacturaCompra.add(txtPlazoDias_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, 170, 30));
 
         JTIngresoDetalleFacturaCompra.setModel(new javax.swing.table.DefaultTableModel(
@@ -539,6 +557,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        JTIngresoDetalleFacturaCompra.setToolTipText("Muestra los datos que se van a agregar.");
         jScrollPane2.setViewportView(JTIngresoDetalleFacturaCompra);
         if (JTIngresoDetalleFacturaCompra.getColumnModel().getColumnCount() > 0) {
             JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(0).setResizable(false);
@@ -555,6 +574,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 690, 500, -1));
 
         boton_ListoDatosFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
+        boton_ListoDatosFacturaCompra.setToolTipText("Crea la factura de compra.");
+        boton_ListoDatosFacturaCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         boton_ListoDatosFacturaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton_ListoDatosFacturaCompraActionPerformed(evt);
@@ -562,10 +583,13 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         });
         panel_IngreosFacturaCompra.add(boton_ListoDatosFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, -1, -1));
 
+        txtCodigoDetalleFactura.setToolTipText("Ingrese código.");
         txtCodigoDetalleFactura.setPreferredSize(new java.awt.Dimension(6, 23));
-        panel_IngreosFacturaCompra.add(txtCodigoDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 160, -1));
+        panel_IngreosFacturaCompra.add(txtCodigoDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 770, 160, 30));
 
         JBBuscarParaAgregarDetalle.setText("Agregar detalle");
+        JBBuscarParaAgregarDetalle.setToolTipText("Agrega el detalle a la lista.");
+        JBBuscarParaAgregarDetalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JBBuscarParaAgregarDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBBuscarParaAgregarDetalleActionPerformed(evt);
@@ -576,12 +600,16 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel9.setText("Código:");
         panel_IngreosFacturaCompra.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 770, -1, -1));
-        panel_IngreosFacturaCompra.add(txtCantidadDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 770, 140, -1));
+
+        txtCantidadDetalleFactura.setToolTipText("Ingrese cantidad deseada.");
+        panel_IngreosFacturaCompra.add(txtCantidadDetalleFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 770, 140, 30));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel10.setText("Precio de compra:");
         panel_IngreosFacturaCompra.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 810, 140, -1));
-        panel_IngreosFacturaCompra.add(txtPrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 810, 140, -1));
+
+        txtPrecioDeCompra.setToolTipText("Ingrese precio de compra.");
+        panel_IngreosFacturaCompra.add(txtPrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 810, 140, 30));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel11.setText("Cantidad:");

@@ -281,6 +281,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
             }
         ));
+        TablaBuscarProveedores_BuscarProveedores.setToolTipText("Muestra los proveedores.");
         TablaBuscarProveedores_BuscarProveedores.setComponentPopupMenu(menuFiltar);
         TablaBuscarProveedores_BuscarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -290,7 +291,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         jScrollPane5.setViewportView(TablaBuscarProveedores_BuscarProveedores);
 
         jLabel49.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel49.setText("Cédula:");
+        jLabel49.setText("Ingrese pista:");
 
         txtCedulaABuscar_BuscarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedulaABuscar_BuscarProveedor.setForeground(new java.awt.Color(0, 102, 102));
@@ -302,6 +303,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
         cbxFiltro.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cedula", "Nombre", "Direccion" }));
+        cbxFiltro.setToolTipText("Opciones de búsqueda.");
         cbxFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFiltroActionPerformed(evt);
@@ -328,7 +330,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addGap(18, 18, 18)
                         .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

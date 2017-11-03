@@ -154,6 +154,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
 
             }
         ));
+        TablaListarProveedores_ListarProveedores.setToolTipText("Lista de proveedores registrados.");
         TablaListarProveedores_ListarProveedores.setComponentPopupMenu(MenuProveedor);
         TablaListarProveedores_ListarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -174,7 +175,8 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         jSeparator10.setAlignmentX(5.0F);
 
         btBuscar_ListarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarUsuario.png"))); // NOI18N
-        btBuscar_ListarProveedor.setToolTipText("Oprima para cancelar");
+        btBuscar_ListarProveedor.setToolTipText("Busca los proveedores.");
+        btBuscar_ListarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btBuscar_ListarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscar_ListarProveedorActionPerformed(evt);
@@ -189,6 +191,8 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         jSeparator11.setAlignmentX(5.0F);
 
         btnActualizar_ListarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarUC.png"))); // NOI18N
+        btnActualizar_ListarProveedor.setToolTipText("Agrega un nuevo proveedor.");
+        btnActualizar_ListarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizar_ListarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizar_ListarProveedorActionPerformed(evt);
@@ -229,7 +233,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(80, 80, 80)
                                         .addComponent(btnActualizar_ListarProveedor)))))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

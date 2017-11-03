@@ -235,6 +235,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 700));
 
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -242,6 +244,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CerrarSesionIcon.png"))); // NOI18N
         jMenuItem1.setText("Salir");
+        jMenuItem1.setToolTipText("Sale del sistema.");
+        jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -251,6 +255,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ExitIcon.png"))); // NOI18N
         jMenuItem2.setText("Cerrar Sesion");
+        jMenuItem2.setToolTipText("Cierra secion.");
+        jMenuItem2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);

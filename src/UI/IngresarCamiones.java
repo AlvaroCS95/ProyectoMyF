@@ -91,15 +91,19 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
         txtNumeroDePlaca_IngresarCamion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNumeroDePlaca_IngresarCamion.setForeground(new java.awt.Color(0, 102, 102));
+        txtNumeroDePlaca_IngresarCamion.setToolTipText("Ingrese n° de placa.");
 
         txtMarca_IngresarCamion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMarca_IngresarCamion.setForeground(new java.awt.Color(0, 102, 102));
+        txtMarca_IngresarCamion.setToolTipText("Ingrese marca.");
 
         txtEstilo_IngresarCamion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtEstilo_IngresarCamion.setForeground(new java.awt.Color(0, 102, 102));
+        txtEstilo_IngresarCamion.setToolTipText("Ingrese estilo.");
 
         txtColor_IngresarCamion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtColor_IngresarCamion.setForeground(new java.awt.Color(0, 102, 102));
+        txtColor_IngresarCamion.setToolTipText("Ingrese color.");
 
         jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel28.setText("Color");
@@ -133,12 +137,17 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         });
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel23.setText("Modelo");
+        jLabel23.setText("Módelo");
 
         jLabel25.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel25.setText("Capacidad");
 
+        date_IngresarCamion.setToolTipText("Seleccione fecha.");
+
+        YCModelo_IngresarCamion.setToolTipText("Especifiquee año de fabricación.");
+
         SpinnerCantidad_IngresarCamion.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        SpinnerCantidad_IngresarCamion.setToolTipText("Indique capacidad en toneladas.");
 
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator4.setAlignmentX(5.0F);
@@ -184,20 +193,21 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                                 .addGap(66, 66, 66)
                                 .addComponent(btLimpiar_IngresarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel30)
-                                .addGap(40, 40, 40)
-                                .addComponent(date_IngresarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel25))
-                                .addGap(88, 88, 88)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(YCModelo_IngresarCamion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(SpinnerCantidad_IngresarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(147, 147, 147)
-                                .addComponent(jLabel32)))
+                                .addComponent(jLabel32))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel30)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(date_IngresarCamion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel23)
+                                        .addComponent(jLabel25))
+                                    .addGap(88, 88, 88)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(YCModelo_IngresarCamion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(SpinnerCantidad_IngresarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(74, 74, 74))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)

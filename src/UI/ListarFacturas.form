@@ -8,17 +8,13 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jmIEditar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Editar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIEditarActionPerformed"/>
-          </Events>
-        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jmIVerDetalles">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/RutaInformacion.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ver detalles"/>
+            <Property name="toolTipText" type="java.lang.String" value="Muestra los detalles de la factura seleccionada."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIVerDetallesActionPerformed"/>
@@ -66,11 +62,15 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Lista de facturas de Compra/Venta."/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="jppEditarFactura"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor de Mano"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -115,6 +115,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_IngresoFormaBusqueda">
       <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingreso de los criterios de busqueda."/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Constraints>
@@ -126,6 +127,10 @@
     <Component class="javax.swing.JButton" name="jb_Buscar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Busca bajo alg&#xfa;n criterio seleccionado."/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_BuscarActionPerformed"/>
@@ -146,6 +151,10 @@
             <StringItem index="3" value="C&#xf3;digo de usuario"/>
             <StringItem index="4" value="Fecha de compra"/>
           </StringArray>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Opciones de busqueda."/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
         </Property>
       </Properties>
       <Events>
@@ -215,6 +224,10 @@
     <Component class="javax.swing.JButton" name="jbListarFacturas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Lista las facturas de Compra/venta."/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbListarFacturasActionPerformed"/>
@@ -238,6 +251,9 @@
             <StringItem index="0" value="Compra"/>
             <StringItem index="1" value="Venta"/>
           </StringArray>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
         </Property>
       </Properties>
       <Events>

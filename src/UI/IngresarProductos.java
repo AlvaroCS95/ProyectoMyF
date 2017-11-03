@@ -165,14 +165,14 @@ public class IngresarProductos extends javax.swing.JPanel {
         jLabel40 = new javax.swing.JLabel();
         txtCodigo_IngresarInventario = new javax.swing.JTextField();
         txtNombre_IngresarInventario = new javax.swing.JTextField();
-        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<>();
+        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<String>();
         btIngClasificacion_IngresarProductos = new javax.swing.JButton();
         btLimpiar_IngresarInventario = new javax.swing.JButton();
         btAceptar_IngresarInventario = new javax.swing.JButton();
         btCancelar_IngresarInventario = new javax.swing.JButton();
         btActualizar_IngresarProductos = new javax.swing.JButton();
         txtPrecio_IngresarInventario = new javax.swing.JTextField();
-        cmbxUME_IngresarProductos = new javax.swing.JComboBox<>();
+        cmbxUME_IngresarProductos = new javax.swing.JComboBox<String>();
         jLabel39 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         btIngUME_IngresarProductos = new javax.swing.JButton();
@@ -200,10 +200,12 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         txtCodigo_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCodigo_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
+        txtCodigo_IngresarInventario.setToolTipText("Codigo del nuevo producto");
         add(txtCodigo_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 163, -1));
 
         txtNombre_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombre_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
+        txtNombre_IngresarInventario.setToolTipText("Nombre del nuevo producto ");
         add(txtNombre_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 163, -1));
 
         cmbxClasificacion_IngresarProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione..."}));
