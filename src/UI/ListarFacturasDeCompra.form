@@ -16,14 +16,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIEditarActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmIEliminar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIEliminarActionPerformed"/>
-          </Events>
-        </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="jmIVerDetalles">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver detalles de compra"/>
@@ -72,72 +64,10 @@
         <Component class="javax.swing.JTable" name="jt_ListarFacturasDeCompra">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="10" rowCount="0">
-                <Column editable="false" title="N&#xb0; Factura" type="java.lang.Object"/>
-                <Column editable="false" title="Usuario encargado" type="java.lang.Object"/>
-                <Column editable="false" title="Fecha de compra" type="java.lang.Object"/>
-                <Column editable="false" title="Tipo de compra" type="java.lang.Object"/>
-                <Column editable="false" title="Nombre del proveedor" type="java.lang.Object"/>
-                <Column editable="false" title="Monto total" type="java.lang.Object"/>
-                <Column editable="false" title="N&#xb0; pedido" type="java.lang.Object"/>
-                <Column editable="false" title="N&#xb0; entrega" type="java.lang.Object"/>
-                <Column editable="false" title="Tipo de pago" type="java.lang.Object"/>
-                <Column editable="false" title="N&#xb0; de referencia" type="java.lang.Object"/>
-              </Table>
+              <Table columnCount="0" rowCount="0"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
+              <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="jppEditarFactura"/>
@@ -160,7 +90,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Lista de facturas de compra"/>
+        <Property name="text" type="java.lang.String" value="Se est&#xe1; mostrando las facturas de "/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -211,10 +141,10 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
             <StringItem index="0" value="Seleccione..."/>
-            <StringItem index="1" value="Nombre de proveedor"/>
-            <StringItem index="2" value="Codigo de usuario"/>
-            <StringItem index="3" value="Fecha de compra"/>
-            <StringItem index="4" value="N&#xb0; de factura"/>
+            <StringItem index="1" value="N&#xb0; de factura"/>
+            <StringItem index="2" value="Nombre de proveedor"/>
+            <StringItem index="3" value="C&#xf3;digo de usuario"/>
+            <StringItem index="4" value="Fecha de compra"/>
           </StringArray>
         </Property>
       </Properties>
@@ -295,6 +225,66 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="730" y="120" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbxMostrar_Facturas">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="18" style="3"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Compra"/>
+            <StringItem index="1" value="Venta"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxMostrar_FacturasItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="410" y="30" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlTitulo2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="24" style="1"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="510" y="30" width="230" height="30"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Seleccione..."/>
+            <StringItem index="1" value="N&#xb0; de factura"/>
+            <StringItem index="2" value="Nombre de local"/>
+            <StringItem index="3" value="C&#xf3;digo de usuario"/>
+            <StringItem index="4" value="Fecha de venta"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="230" y="110" width="150" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

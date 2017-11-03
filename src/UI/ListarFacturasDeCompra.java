@@ -1,6 +1,7 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaCompra;
+import LogicaDeNegocios.CoordinadorDeFacturaVenta;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +18,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     static Object[] filas;
     static DefaultTableModel modelo;
+    static ComboBoxModel modeloComboBox;
     ResultSet resultadoConsulta;
     int tipoBusqueda, fila;
     boolean sentinela;
@@ -23,7 +26,6 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     public ListarFacturasDeCompra() {
 
         initComponents();
-//        ListarFacturasDelUltimoMes();
 
     }
 
@@ -38,152 +40,294 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         return false;
     }
 
-    public static void EstablecerModelo(ResultSet lista) {
-
+    public static void EstablecerModelo() {
         modelo = new DefaultTableModel();
-        modelo.addColumn("N° Factura");
-        modelo.addColumn("Usuario encargado");
-        modelo.addColumn("Fecha de compra");
-        modelo.addColumn("Tipo de compra");
-        modelo.addColumn("Nombre del proveedor");
-        modelo.addColumn("Monto total");
-        modelo.addColumn("N° pedido");
-        modelo.addColumn("N° entrega");
-        modelo.addColumn("Tipo de pago");
-        modelo.addColumn("N° de referencia");
-        filas = new Object[modelo.getColumnCount()];
+        switch (cbxMostrar_Facturas.getSelectedItem().toString()) {
 
-        try {
-            while (lista.next()) {
-                for (int i = 0; i < modelo.getColumnCount(); i++) {
-                    if (i == 3) {
-                        if (lista.getBoolean(i + 1) == true) {
-                            filas[i] = "Contado";
-                        } else {
-                            filas[i] = "Credito";
-                        }
-                    } else {
-                        filas[i] = lista.getObject(i + 1);
-                    }
-                }
-                modelo.addRow(filas);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+            case "Compra":
+
+                modelo.addColumn("N° Factura");
+                modelo.addColumn("Usuario encargado");
+                modelo.addColumn("Fecha de compra");
+                modelo.addColumn("Tipo de compra");
+                modelo.addColumn("Nombre del proveedor");
+                modelo.addColumn("Monto comprado");
+                modelo.addColumn("N° pedido");
+                modelo.addColumn("N° entrega");
+                modelo.addColumn("Tipo de pago");
+                modelo.addColumn("N° de referencia");
+                break;
+
+            case "Venta":
+                modelo.addColumn("N° Factura");
+                modelo.addColumn("Usuario encargado");
+                modelo.addColumn("Local del cliente");
+                modelo.addColumn("Fecha de venta");
+                modelo.addColumn("Monto de venta");
+                modelo.addColumn("Tipo de pago");
+                modelo.addColumn("Tipo de venta");
+                break;
         }
-        jt_ListarFacturasDeCompra.setModel(modelo);
 
     }
 
-    public void ListarFacturas() {
-        jLTitulo.setText("Se está mostrando todas las facturas de compra.");
-        jbListarFacturas.setText("Listar facturas ultimo mes");
+    public static void LlenarDatosTabla(ResultSet listaDeFacturas) {
+        switch (cbxMostrar_Facturas.getSelectedItem().toString()) {
 
-        CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-        EstablecerModelo(coordinador.ListarFacturasCompra());
+            case "Venta":
+                EstablecerModelo();
+
+                filas = new Object[modelo.getColumnCount()];
+                try {
+                    while (listaDeFacturas.next()) {
+                        for (int i = 0; i < modelo.getColumnCount(); i++) {
+                            if (i == 6) {
+                                if (listaDeFacturas.getBoolean(i + 1) == true) {
+                                    filas[i] = "Contado";
+                                } else {
+                                    filas[i] = "Crédito";
+                                }
+                            } else {
+                                filas[i] = listaDeFacturas.getObject(i + 1);
+                            }
+                        }
+                        modelo.addRow(filas);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jt_ListarFacturasDeCompra.setModel(modelo);
+                break;
+
+            case "Compra":
+                EstablecerModelo();
+
+                filas = new Object[modelo.getColumnCount()];
+                try {
+                    while (listaDeFacturas.next()) {
+                        for (int i = 0; i < modelo.getColumnCount(); i++) {
+                            if (i == 3) {
+                                if (listaDeFacturas.getBoolean(i + 1) == true) {
+                                    filas[i] = "Contado";
+                                } else {
+                                    filas[i] = "Crédito";
+                                }
+                            } else {
+                                filas[i] = listaDeFacturas.getObject(i + 1);
+                            }
+                        }
+                        modelo.addRow(filas);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jt_ListarFacturasDeCompra.setModel(modelo);
+                break;
+        }
+    }
+
+    public void ListarFacturas() {
+        jLTitulo.setText("Se muestran todas las facturas de ");
+        jlTitulo2.setText(".");
+        jbListarFacturas.setText("Listar facturas último mes");
+        if (cbxMostrar_Facturas.getSelectedIndex() == 0) {
+            CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+            LlenarDatosTabla(coordinador.ListarFacturasCompra());
+        } else {
+            CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
+            LlenarDatosTabla(coordinador.ListarFacturasDeVenta());
+        }
 
     }
 
     public static void ListarFacturasDelUltimoMes() {
-        jLTitulo.setText("Se está mostrando las facturas de compra del ultimo mes.");
+        jLTitulo.setText("Se están mostrando las facturas de ");
+        jlTitulo2.setText(" del último mes.");
         jbListarFacturas.setText("Listar todas las facturas");
 
-        CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-        EstablecerModelo(coordinador.ListarFacturasCompraDelUltimoMes());
+        if (cbxMostrar_Facturas.getSelectedIndex() == 0) {
+            CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+            LlenarDatosTabla(coordinador.ListarFacturasCompraDelUltimoMes());
+        } else {
+            CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
+            LlenarDatosTabla(coordinador.ListarFacturasVentaDelUltimoMes());
+        }
 
     }
 
     public void SeleccionFormaDeBusqueda() {
-        switch (cbx_SeleccionBusqueda.getSelectedItem().toString()) {
-            case "Nombre de proveedor":
-                jdc_FechaDesde.setDate(null);
-                jdc_FechaHasta.setDate(null);
-                txt_IngresoFormaBusqueda.setText("");
-                jl_Desde.setEnabled(false);
-                jl_Hasta.setEnabled(false);
-                jdc_FechaDesde.setEnabled(false);
-                jdc_FechaHasta.setEnabled(false);
-                txt_IngresoFormaBusqueda.setEnabled(true);
-                tipoBusqueda = 3;
-                break;
-            case "N° de factura":
-                jdc_FechaDesde.setDate(null);
-                jdc_FechaHasta.setDate(null);
-                txt_IngresoFormaBusqueda.setText("");
-                jl_Desde.setEnabled(false);
-                jl_Hasta.setEnabled(false);
-                jdc_FechaDesde.setEnabled(false);
-                jdc_FechaHasta.setEnabled(false);
-                txt_IngresoFormaBusqueda.setEnabled(true);
-                tipoBusqueda = 2;
-                break;
-            case "Fecha de compra":
-                txt_IngresoFormaBusqueda.setText("");
-                txt_IngresoFormaBusqueda.setEnabled(false);
-                jl_Desde.setEnabled(true);
-                jl_Hasta.setEnabled(true);
-                jdc_FechaDesde.setEnabled(true);
-                jdc_FechaHasta.setEnabled(true);
-                tipoBusqueda = 4;
-                break;
-            case "Codigo de usuario":
-                jdc_FechaDesde.setDate(null);
-                jdc_FechaHasta.setDate(null);
-                txt_IngresoFormaBusqueda.setText("");
-                jl_Desde.setEnabled(false);
-                jl_Hasta.setEnabled(false);
-                jdc_FechaDesde.setEnabled(false);
-                jdc_FechaHasta.setEnabled(false);
-                txt_IngresoFormaBusqueda.setEnabled(true);
-                tipoBusqueda = 1;
-                break;
-            case "Seleccione...":
-                jl_Desde.setEnabled(false);
-                jl_Hasta.setEnabled(false);
-                jdc_FechaDesde.setEnabled(false);
-                jdc_FechaHasta.setEnabled(false);
-                txt_IngresoFormaBusqueda.setEnabled(false);
-                txt_IngresoFormaBusqueda.setText("");
-                jdc_FechaDesde.setDate(null);
-                jdc_FechaHasta.setDate(null);
-                break;
+
+        if (cbx_SeleccionBusqueda.isVisible()) {
+            switch (cbx_SeleccionBusqueda.getSelectedItem().toString()) {
+                case "Nombre de proveedor":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 3;
+                    break;
+                case "N° de factura":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 2;
+                    break;
+                case "Fecha de compra":
+                    txt_IngresoFormaBusqueda.setText("");
+                    txt_IngresoFormaBusqueda.setEnabled(false);
+                    jl_Desde.setEnabled(true);
+                    jl_Hasta.setEnabled(true);
+                    jdc_FechaDesde.setEnabled(true);
+                    jdc_FechaHasta.setEnabled(true);
+                    tipoBusqueda = 4;
+                    break;
+                case "Código de usuario":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 1;
+                    break;
+                case "Seleccione...":
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    break;
+            }
+        } else if (jComboBox1.isVisible()) {
+            switch (jComboBox1.getSelectedItem().toString()) {
+                case "Nombre de local":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 3;
+                    break;
+                case "N° de factura":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 2;
+                    break;
+                case "Fecha de venta":
+                    txt_IngresoFormaBusqueda.setText("");
+                    txt_IngresoFormaBusqueda.setEnabled(false);
+                    jl_Desde.setEnabled(true);
+                    jl_Hasta.setEnabled(true);
+                    jdc_FechaDesde.setEnabled(true);
+                    jdc_FechaHasta.setEnabled(true);
+                    tipoBusqueda = 4;
+                    break;
+                case "Código de usuario":
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(true);
+                    tipoBusqueda = 1;
+                    break;
+                case "Seleccione...":
+                    jl_Desde.setEnabled(false);
+                    jl_Hasta.setEnabled(false);
+                    jdc_FechaDesde.setEnabled(false);
+                    jdc_FechaHasta.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setEnabled(false);
+                    txt_IngresoFormaBusqueda.setText("");
+                    jdc_FechaDesde.setDate(null);
+                    jdc_FechaHasta.setDate(null);
+                    break;
+            }
         }
     }
 
     public ResultSet ValidarBusquedas() {
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+        CoordinadorDeFacturaVenta coordinadorVenta = new CoordinadorDeFacturaVenta();
 
         switch (tipoBusqueda) {
-            case 1:
+            case 1: // código de usuario
                 if (!txt_IngresoFormaBusqueda.getText().isEmpty()) {
-                    resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    try {
+                        int codigo = Integer.parseInt(txt_IngresoFormaBusqueda.getText());
+
+                        if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                            resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        } else {
+                            resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                        }
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "El código de usuario a buscar debe ser numerico.",
+                                "¡Error!", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar el codigo de usuario para poder"
                             + "realizar la busqueda!", "¡Error, faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                 }
 
                 break;
-            case 2:
+            case 2:// numero de factura
                 if (!txt_IngresoFormaBusqueda.getText().isEmpty()) {
-                    resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                        resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    } else {
+                        resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar el N° factura de compra para poder"
                             + "realizar la busqueda!", "¡Error, faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                 }
 
                 break;
-            case 3:
+            case 3:// nombre proveedor o Nombre de local
                 if (!txt_IngresoFormaBusqueda.getText().isEmpty()) {
-                    resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                        resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    } else {
+                        resultadoConsulta = coordinador.Buscar(tipoBusqueda, txt_IngresoFormaBusqueda.getText(), null);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar el nombre del proveedor para poder"
                             + "realizar la busqueda!", "¡Error, faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                 }
 
                 break;
-            case 4:
+            case 4:// fechas
                 if ((jdc_FechaDesde.getDate() != null) && (jdc_FechaHasta.getDate() != null)) {
-                    resultadoConsulta = coordinador.Buscar(tipoBusqueda, ObtenerFechaDesde(), ObtenerFechaHasta());
+                    if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+                        resultadoConsulta = coordinadorVenta.Buscar(tipoBusqueda, ObtenerFechaDesde(), ObtenerFechaHasta());
+                    } else {
+                        resultadoConsulta = coordinador.Buscar(tipoBusqueda, ObtenerFechaDesde(), ObtenerFechaHasta());
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "¡Debe ingresar un rango de fechas valido para poder"
                             + "realizar la busqueda!", "¡Error, faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
@@ -195,8 +339,8 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
     public void Buscar() {
         if (CamposVacios()) {
+            LlenarDatosTabla(ValidarBusquedas());
 
-            EstablecerModelo(ValidarBusquedas());
         } else {
             JOptionPane.showMessageDialog(null, "¡Debe seleccionar algún criterio de busqueda!",
                     "Error de selección", JOptionPane.ERROR_MESSAGE);
@@ -232,6 +376,8 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     }
 
     public void TiposDeLista() {
+        cbx_SeleccionBusqueda.setSelectedIndex(0);
+        txt_IngresoFormaBusqueda.setText("");
 
         if (sentinela) {
             ListarFacturasDelUltimoMes();
@@ -254,7 +400,6 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
         jppEditarFactura = new javax.swing.JPopupMenu();
         jmIEditar = new javax.swing.JMenuItem();
-        jmIEliminar = new javax.swing.JMenuItem();
         jmIVerDetalles = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_ListarFacturasDeCompra = new javax.swing.JTable();
@@ -269,6 +414,9 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         jl_Desde = new javax.swing.JLabel();
         jl_Hasta = new javax.swing.JLabel();
         jbListarFacturas = new javax.swing.JButton();
+        cbxMostrar_Facturas = new javax.swing.JComboBox();
+        jlTitulo2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         jmIEditar.setText("Editar");
         jmIEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -277,14 +425,6 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
             }
         });
         jppEditarFactura.add(jmIEditar);
-
-        jmIEliminar.setText("Eliminar");
-        jmIEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmIEliminarActionPerformed(evt);
-            }
-        });
-        jppEditarFactura.add(jmIEliminar);
 
         jmIVerDetalles.setText("Ver detalles de compra");
         jmIVerDetalles.addActionListener(new java.awt.event.ActionListener() {
@@ -302,17 +442,9 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
 
             },
             new String [] {
-                "N° Factura", "Usuario encargado", "Fecha de compra", "Tipo de compra", "Nombre del proveedor", "Monto total", "N° pedido", "N° entrega", "Tipo de pago", "N° de referencia"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jt_ListarFacturasDeCompra.setComponentPopupMenu(jppEditarFactura);
         jt_ListarFacturasDeCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -320,23 +452,11 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jt_ListarFacturasDeCompra);
-        if (jt_ListarFacturasDeCompra.getColumnModel().getColumnCount() > 0) {
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(0).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(1).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(2).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(3).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(4).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(5).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(6).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(7).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(8).setResizable(false);
-            jt_ListarFacturasDeCompra.getColumnModel().getColumn(9).setResizable(false);
-        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 1010, 400));
 
         jLTitulo.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLTitulo.setText("Lista de facturas de compra");
+        jLTitulo.setText("Se está mostrando las facturas de ");
         add(jLTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/invoice_22150 (1).png"))); // NOI18N
@@ -353,7 +473,7 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         });
         add(jb_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, -1, 50));
 
-        cbx_SeleccionBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Nombre de proveedor", "Codigo de usuario", "Fecha de compra", "N° de factura" }));
+        cbx_SeleccionBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "N° de factura", "Nombre de proveedor", "Código de usuario", "Fecha de compra" }));
         cbx_SeleccionBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_SeleccionBusquedaActionPerformed(evt);
@@ -386,6 +506,26 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
             }
         });
         add(jbListarFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, -1, -1));
+
+        cbxMostrar_Facturas.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        cbxMostrar_Facturas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra", "Venta" }));
+        cbxMostrar_Facturas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxMostrar_FacturasItemStateChanged(evt);
+            }
+        });
+        add(cbxMostrar_Facturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+
+        jlTitulo2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        add(jlTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 230, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "N° de factura", "Nombre de local", "Código de usuario", "Fecha de venta" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
@@ -404,10 +544,6 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         BuscarParaEditar();
     }//GEN-LAST:event_jmIEditarActionPerformed
 
-    private void jmIEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIEliminarActionPerformed
-
-    }//GEN-LAST:event_jmIEliminarActionPerformed
-
     private void jmIVerDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIVerDetallesActionPerformed
         VisualizarDetallesDeFactura();
 
@@ -421,9 +557,27 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jt_ListarFacturasDeCompraMouseClicked
 
+    private void cbxMostrar_FacturasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxMostrar_FacturasItemStateChanged
+        if (cbxMostrar_Facturas.getSelectedIndex() == 0) {
+            cbx_SeleccionBusqueda.setVisible(true);
+            jComboBox1.setVisible(false);
+            cbx_SeleccionBusqueda.setSelectedIndex(0);
+        } else {
+            cbx_SeleccionBusqueda.setVisible(false);
+            jComboBox1.setVisible(true);
+            jComboBox1.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_cbxMostrar_FacturasItemStateChanged
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        SeleccionFormaDeBusqueda();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JComboBox cbxMostrar_Facturas;
     private javax.swing.JComboBox cbx_SeleccionBusqueda;
+    private javax.swing.JComboBox jComboBox1;
     public static javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel68;
@@ -432,10 +586,10 @@ public class ListarFacturasDeCompra extends javax.swing.JPanel {
     private javax.swing.JButton jb_Buscar;
     private com.toedter.calendar.JDateChooser jdc_FechaDesde;
     private com.toedter.calendar.JDateChooser jdc_FechaHasta;
+    public static javax.swing.JLabel jlTitulo2;
     private javax.swing.JLabel jl_Desde;
     private javax.swing.JLabel jl_Hasta;
     private javax.swing.JMenuItem jmIEditar;
-    private javax.swing.JMenuItem jmIEliminar;
     private javax.swing.JMenuItem jmIVerDetalles;
     private javax.swing.JPopupMenu jppEditarFactura;
     public static javax.swing.JTable jt_ListarFacturasDeCompra;

@@ -12,9 +12,11 @@ public class DetallesFacturaCompra extends javax.swing.JDialog {
     Object[] filas;
     int fila;
 
-    public DetallesFacturaCompra(java.awt.Frame parent, boolean modal) {
+    public DetallesFacturaCompra(java.awt.Frame parent, boolean modal, String nFactura) {
         super(parent, modal);
         initComponents();
+        jlTituloDetalles.setText("Detalles de factura de compra # " + nFactura);
+        setLocationRelativeTo(null); 
     }
 
     public void LlenarListaDetalles(ResultSet listaDetalles) {
@@ -44,8 +46,7 @@ public class DetallesFacturaCompra extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
 
-        jlTituloDetalles.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        jlTituloDetalles.setText("Detalles de factura de compra #");
+        jlTituloDetalles.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
         jtDetallesFacturaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,36 +73,46 @@ public class DetallesFacturaCompra extends javax.swing.JDialog {
         }
 
         jbCerrar.setText("Cerrar");
+        jbCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlTituloDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbCerrar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlTituloDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbCerrar)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTituloDetalles)
+                .addComponent(jlTituloDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jbCerrar)
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbCerrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

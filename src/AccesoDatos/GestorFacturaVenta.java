@@ -83,7 +83,7 @@ public class GestorFacturaVenta extends Coneccion {
             Logger.getLogger(GestorFacturaVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void CrearFacturaVentaCredito(FacturaDeVenta nuevaFactura) {
         try {
             EstablecerConexion();
@@ -145,19 +145,24 @@ public class GestorFacturaVenta extends Coneccion {
             return resultadoConsulta;
         }
     }
- public ResultSet ListarFacturasDeVenta() throws ClassNotFoundException, SQLException {
-        EstablecerConexion();
-        Statement consulta;
-        ResultSet resultadoConsulta = null;
 
-        consulta = conexion.createStatement();
+    public ResultSet ListarFacturasDeVenta() {
         try {
-            resultadoConsulta = consulta.executeQuery("call MostrarFacturasDeVenta(); ");
-            return resultadoConsulta;
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL ListarFacturasDeVenta");
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (SQLException ex) {
-            return resultadoConsulta;
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+
         }
+
+        return resultadoConsulta;
     }
+
     public ResultSet BuscarFacturaDeVentaQueTieneDevolucionPorNFactura(String NumeroFactura) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -205,7 +210,7 @@ public class GestorFacturaVenta extends Coneccion {
         }
         return resultadoConsulta;
     }
-    
+
     public ResultSet ObtenerIDClientePorNumeroDeCedula(String numeroDeCedula) {
         try {
             EstablecerConexion();
@@ -218,6 +223,85 @@ public class GestorFacturaVenta extends Coneccion {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+        return resultadoConsulta;
+    }
+
+    public ResultSet BuscarFacturaPorFecha(String FechaDesde, String FechaHasta) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL BuscarFacturaVentaPorFecha ('" + FechaDesde
+                    + "','" + FechaHasta + "');");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
+
+    public ResultSet BuscarFacturaNombreLocal(String nombreLocal) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL BuscarFacturaVentaNombreLocal ('"
+                    + nombreLocal + "');");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
+
+    public ResultSet BuscarFacturaVentaCodigoUsuario(String codigoUsuario) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL BuscarFacturaVentaIdUsuario ('"
+                    + codigoUsuario + "');");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+
+    }
+
+    public ResultSet BuscarFacturaVentaNFactura(String nFactura) {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL BuscarFacturaVentaIdFacturaVenta ('"
+                    + nFactura + "');");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+
+    }
+
+    public ResultSet ListarFacturasUltimoMes() {
+        try {
+            EstablecerConexion();
+            consulta = conexion.createStatement();
+            resultadoConsulta = consulta.executeQuery("CALL ListarFacturasDeVentaDelMes");
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
         return resultadoConsulta;
     }
 

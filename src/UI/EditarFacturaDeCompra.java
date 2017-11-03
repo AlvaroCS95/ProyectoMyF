@@ -191,14 +191,6 @@ public class EditarFacturaDeCompra extends javax.swing.JDialog {
         txtMontoDeCompra_EditarFacturaCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMontoDeCompra_EditarFacturaCompra.setForeground(new java.awt.Color(0, 102, 102));
         txtMontoDeCompra_EditarFacturaCompra.setToolTipText("Campo para ingresar nombre del producto");
-        txtMontoDeCompra_EditarFacturaCompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMontoDeCompra_EditarFacturaCompraKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtMontoDeCompra_EditarFacturaCompraKeyTyped(evt);
-            }
-        });
         getContentPane().add(txtMontoDeCompra_EditarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 285, 170, -1));
 
         jLabel62.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -303,15 +295,6 @@ public class EditarFacturaDeCompra extends javax.swing.JDialog {
     private void cbxProveedor_EditarFacturaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxProveedor_EditarFacturaCompraMouseClicked
         ListarProveedores();
     }//GEN-LAST:event_cbxProveedor_EditarFacturaCompraMouseClicked
-
-    private void txtMontoDeCompra_EditarFacturaCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoDeCompra_EditarFacturaCompraKeyPressed
-
-    }//GEN-LAST:event_txtMontoDeCompra_EditarFacturaCompraKeyPressed
-
-    private void txtMontoDeCompra_EditarFacturaCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoDeCompra_EditarFacturaCompraKeyTyped
-
-
-    }//GEN-LAST:event_txtMontoDeCompra_EditarFacturaCompraKeyTyped
 
     private void cbxTipoCompra_EditarFacturaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCompra_EditarFacturaCompraActionPerformed
         EstablecerTipoCompra();

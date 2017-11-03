@@ -74,7 +74,7 @@ public class CoordinadorDeFacturaVenta {
 
     public void CrearFacturaVentaCredito(float monto, int idCliente, int idTipoPago, String nuReferencia, int plazoDias,
             float montoCancelado) {
-        
+
         FacturaDeVenta nuevaFactura = new FacturaDeVenta();
         nuevaFactura.CrearFacturaVentaCredito(monto, idCliente, idTipoPago, nuReferencia, plazoDias, montoCancelado);
         GestorFacturaVenta gestor = new GestorFacturaVenta();
@@ -164,10 +164,12 @@ public class CoordinadorDeFacturaVenta {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.ListarFacturasDeVentaQueNoTienenDevoluciones();
     }
- public ResultSet ListarFacturasDeVenta() throws SQLException, ClassNotFoundException {
+
+    public ResultSet ListarFacturasDeVenta(){
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.ListarFacturasDeVenta();
     }
+
     public ResultSet BuscarFacturaDeVentaQueNoTieneDevolucionPorNumeroDeFactura(String NumeroDeFactura) throws SQLException, ClassNotFoundException {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.BuscarFacturaDeVentaQueNoTieneDevolucionPorNFactura(NumeroDeFactura);
@@ -186,5 +188,34 @@ public class CoordinadorDeFacturaVenta {
     public ResultSet BuscarTodosLosProductosDeUnaFacturaDeVenta(String NumeroDeFactura) throws SQLException, ClassNotFoundException {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.BuscarTodosLosProductosDeUnaFacturaDeVenta(NumeroDeFactura);
+    }
+    
+    public ResultSet Buscar(int tipoBusqueda, String criterioUno, String criterioDos) {
+        GestorFacturaVenta gestorDeBusqueda = new GestorFacturaVenta();
+
+        switch (tipoBusqueda) {
+            case 1:
+                resultado = gestorDeBusqueda.BuscarFacturaVentaCodigoUsuario(criterioUno);// busqueda por cod Usuario
+                break;
+            case 2:
+                resultado = gestorDeBusqueda.BuscarFacturaVentaNFactura(criterioUno); // busqueda por N de factura
+                break;
+            case 3:
+                resultado = gestorDeBusqueda.BuscarFacturaNombreLocal(criterioUno); // busqueda por Nombre del local
+                break;
+            case 4:
+                resultado = gestorDeBusqueda.BuscarFacturaPorFecha(criterioUno, criterioDos); // busqueda por fecha
+                break;
+
+        }
+        return resultado;
+    }
+    
+    public ResultSet ListarFacturasVentaDelUltimoMes() {
+
+        GestorFacturaVenta gestor = new GestorFacturaVenta();
+        resultado = gestor.ListarFacturasUltimoMes();
+
+        return resultado;
     }
 }
