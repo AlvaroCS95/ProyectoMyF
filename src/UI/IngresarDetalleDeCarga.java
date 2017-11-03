@@ -158,11 +158,13 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidad_IngresarDetalleCargaKeyTyped
 
     private void btAceptar_IngresarDetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarDetalleCargaActionPerformed
-       float cantidad=Integer.parseInt(txtCantidad_IngresarDetalleCarga.getText());
+      
+      if(!txtCantidad_IngresarDetalleCarga.getText().isEmpty()){
+          float cantidad=Integer.parseInt(txtCantidad_IngresarDetalleCarga.getText());
         if(cantidad>0&&cantidad<=existencias){
         setVisible(false);
         IngresarCarga.cargarProducto(cantidad,existencias,codigo,nombre);
-        }
+        }}
     }//GEN-LAST:event_btAceptar_IngresarDetalleCargaActionPerformed
 
     private void btCancelar_IngresarDetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarDetalleCargaActionPerformed
