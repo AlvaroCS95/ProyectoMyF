@@ -15,6 +15,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
    static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
     int fila, tipoDeVenta = 2;
     DecimalFormat formato = new DecimalFormat("#.00");
+    public static String CuerpoDelTextoAImprimir="";
 
     public PuntoDeVenta() {
         initComponents();
@@ -444,6 +445,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         nuReferencia = txtNDeReferencia.getText();
 
         facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
+        CuerpoDelTextoAImprimir="Número de Factura: "+DevolverUltimoIdFacturaVenta()+"\n"
+                + "Cédula del cliente: "+txtCedulaCliente_PuntoDeVenta.getText()
+                + "Forma de pago: "+cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString()+"\n";
     }
 
     public void CrearFacturaVentaCreditoConAbono() {
@@ -452,7 +456,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String nuReferencia;
 
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-
         totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -460,6 +463,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         montoAbonado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
         plazoDias = Integer.parseInt(jSDiasPlazo_PuntoDeVenta.getValue().toString());
         facturaVenta.CrearFacturaVentaCredito(totalVendido, idCliente, idTipoPago, nuReferencia, plazoDias, montoAbonado);
+        CuerpoDelTextoAImprimir="Número de Factura: "+DevolverUltimoIdFacturaVenta();
     }
 
     public void CrearFacturaVentaCreditoSinAbono() {
@@ -527,6 +531,18 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
         coordinador.ResumenVentaCredito(txtTotalAPagar_PuntoDeVenta.getText(),
                 "No abona nada.", jSDiasPlazo_PuntoDeVenta.getValue().toString());
+    }
+    
+     private int DevolverUltimoIdFacturaVenta() {
+        int IdFacturaDeVenta = 0;
+        CoordinadorDeFacturaVenta LaFacturaVenta = new CoordinadorDeFacturaVenta();
+        try {
+            IdFacturaDeVenta = LaFacturaVenta.DevolverUltimoIdFacturaVenta();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error buscando la factura de venta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return IdFacturaDeVenta;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

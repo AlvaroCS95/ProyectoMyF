@@ -304,5 +304,23 @@ public class GestorFacturaVenta extends Coneccion {
 
         return resultadoConsulta;
     }
+    
+    public int ObtenerUltimaIdFacturaVenta() throws ClassNotFoundException, SQLException {
+        int IdUsuarioActivo = 0;
+        try {
+            EstablecerConexion();
+
+            Statement statement = conexion.createStatement();
+            ResultSet resulset;
+
+            String busca = "call DevolverUltimoIdFactura()";
+            resulset = statement.executeQuery(busca);
+            while (resulset.next()) {
+                IdUsuarioActivo = resulset.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return IdUsuarioActivo;
+    }
 
 }

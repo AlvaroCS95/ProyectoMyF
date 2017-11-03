@@ -65,6 +65,11 @@ public class CoordinadorDeFacturaVenta {
         return (nuevaCantidad - cantidadAnterior);
     }
 
+     public int DevolverUltimoIdFacturaVenta() throws SQLException, ClassNotFoundException {
+        GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
+        return elGestorFacturaVenta.ObtenerUltimaIdFacturaVenta();
+    }
+    
     public void CrearFacturaVentaContado(float monto, int idCliente, int idTipoPago, String nuReferencia) {
         FacturaDeVenta nuevaFactura = new FacturaDeVenta();
         nuevaFactura.CrearFacturaDeVentaContado(monto, idCliente, idTipoPago, nuReferencia);
