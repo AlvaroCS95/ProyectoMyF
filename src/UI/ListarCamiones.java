@@ -73,7 +73,8 @@ public class ListarCamiones extends javax.swing.JPanel {
         add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 205, -1));
 
         btBuscar_ListarCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa.png"))); // NOI18N
-        btBuscar_ListarCamion.setToolTipText("Oprima para cancelar");
+        btBuscar_ListarCamion.setToolTipText("Oprima para buscar.");
+        btBuscar_ListarCamion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btBuscar_ListarCamion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscar_ListarCamionActionPerformed(evt);
@@ -91,6 +92,8 @@ public class ListarCamiones extends javax.swing.JPanel {
         add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, 206, 11));
 
         btnActualizar_ListarCamion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mas.png"))); // NOI18N
+        btnActualizar_ListarCamion.setToolTipText("Oprima para agregar.");
+        btnActualizar_ListarCamion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizar_ListarCamion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizar_ListarCamionActionPerformed(evt);
@@ -109,6 +112,7 @@ public class ListarCamiones extends javax.swing.JPanel {
 
             }
         ));
+        TablaListarCamiones_ListarCamiones.setToolTipText("Muestra los camiones registrados.");
         TablaListarCamiones_ListarCamiones.setComponentPopupMenu(menuCamiones);
         TablaListarCamiones_ListarCamiones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

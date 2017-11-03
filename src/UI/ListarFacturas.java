@@ -422,7 +422,6 @@ public class ListarFacturas extends javax.swing.JPanel {
     private void initComponents() {
 
         jppEditarFactura = new javax.swing.JPopupMenu();
-        jmIEditar = new javax.swing.JMenuItem();
         jmIVerDetalles = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_ListarFacturasDeCompraVenta = new javax.swing.JTable();
@@ -441,15 +440,9 @@ public class ListarFacturas extends javax.swing.JPanel {
         jlTitulo2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
-        jmIEditar.setText("Editar");
-        jmIEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmIEditarActionPerformed(evt);
-            }
-        });
-        jppEditarFactura.add(jmIEditar);
-
+        jmIVerDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/RutaInformacion.png"))); // NOI18N
         jmIVerDetalles.setText("Ver detalles");
+        jmIVerDetalles.setToolTipText("Muestra los detalles de la factura seleccionada.");
         jmIVerDetalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmIVerDetallesActionPerformed(evt);
@@ -573,10 +566,6 @@ public class ListarFacturas extends javax.swing.JPanel {
         TiposDeLista();
     }//GEN-LAST:event_jbListarFacturasActionPerformed
 
-    private void jmIEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIEditarActionPerformed
-        BuscarParaEditar();
-    }//GEN-LAST:event_jmIEditarActionPerformed
-
     private void jmIVerDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIVerDetallesActionPerformed
         VisualizarDetallesDeFactura();
 
@@ -622,7 +611,6 @@ public class ListarFacturas extends javax.swing.JPanel {
     public static javax.swing.JLabel jlTitulo2;
     private javax.swing.JLabel jl_Desde;
     private javax.swing.JLabel jl_Hasta;
-    private javax.swing.JMenuItem jmIEditar;
     private javax.swing.JMenuItem jmIVerDetalles;
     private javax.swing.JPopupMenu jppEditarFactura;
     public static javax.swing.JTable jt_ListarFacturasDeCompraVenta;

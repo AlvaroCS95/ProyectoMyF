@@ -48,6 +48,7 @@ public class IngresarProveedor extends javax.swing.JDialog {
 
         btLimpiar_IngresarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_IngresarProveedor.setToolTipText("Oprima para limpiar campos");
+        btLimpiar_IngresarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btLimpiar_IngresarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimpiar_IngresarProveedorActionPerformed(evt);
@@ -59,11 +60,13 @@ public class IngresarProveedor extends javax.swing.JDialog {
 
         txtDireccion_IngresarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDireccion_IngresarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtDireccion_IngresarProveedor.setToolTipText("Ingrese dirección.");
 
         jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
 
         txtTelefono_IngresarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtTelefono_IngresarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtTelefono_IngresarProveedor.setToolTipText("Ingrese teléfono.");
 
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator7.setAlignmentX(5.0F);
@@ -79,21 +82,25 @@ public class IngresarProveedor extends javax.swing.JDialog {
 
         txtNombre_IngresarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombre_IngresarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtNombre_IngresarProveedor.setToolTipText("Ingrese nombre de proveedor.");
 
         jLabel54.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel54.setText("Corréo");
 
         txtCorreo_IngresarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCorreo_IngresarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtCorreo_IngresarProveedor.setToolTipText("Ingrese correo.");
 
         jLabel59.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel59.setText("Cedúla juridica");
 
         txtCedulaJuridica_IngresarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedulaJuridica_IngresarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtCedulaJuridica_IngresarProveedor.setToolTipText("Ingrese n° cédula.");
 
         btAceptar_IngresarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_IngresarProveedor.setToolTipText("Oprimir para guardar proveedor");
+        btAceptar_IngresarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btAceptar_IngresarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_IngresarProveedorActionPerformed(evt);

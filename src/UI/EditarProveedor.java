@@ -59,6 +59,7 @@ public class EditarProveedor extends javax.swing.JDialog {
 
         txtCorreo_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCorreo_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtCorreo_EditarProveedor.setToolTipText("Muestra correo.");
 
         jLabel59.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel59.setText("Cedúla juridica");
@@ -66,10 +67,12 @@ public class EditarProveedor extends javax.swing.JDialog {
         txtCedulaJuridica_EditarProveedor.setEditable(false);
         txtCedulaJuridica_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedulaJuridica_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtCedulaJuridica_EditarProveedor.setToolTipText("Muestra cédula del proveedor.");
         txtCedulaJuridica_EditarProveedor.setEnabled(false);
 
         btAceptar_EditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_EditarProveedor.setToolTipText("Oprimir para guardar proveedor");
+        btAceptar_EditarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btAceptar_EditarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_EditarProveedorActionPerformed(evt);
@@ -78,18 +81,21 @@ public class EditarProveedor extends javax.swing.JDialog {
 
         btLimpiar_EditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_EditarProveedor.setToolTipText("Oprima para limpiar campos");
+        btLimpiar_EditarProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel57.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel57.setText("Editar de proveedor");
 
         txtDireccion_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDireccion_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtDireccion_EditarProveedor.setToolTipText("Muestra dirección.");
 
         jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator7.setAlignmentX(5.0F);
 
         txtTelefono_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtTelefono_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtTelefono_EditarProveedor.setToolTipText("Muestra teléfono.");
 
         jLabel55.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel55.setText("Nombre");
@@ -99,6 +105,7 @@ public class EditarProveedor extends javax.swing.JDialog {
 
         txtNombre_EditarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombre_EditarProveedor.setForeground(new java.awt.Color(0, 102, 102));
+        txtNombre_EditarProveedor.setToolTipText("Muestra nombre proveedor.");
 
         jLabel58.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel58.setText("Dirección");
@@ -139,8 +146,7 @@ public class EditarProveedor extends javax.swing.JDialog {
                         .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btLimpiar_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btAceptar_EditarProveedor))
-                        .addGap(1, 1, 1))
+                            .addComponent(btAceptar_EditarProveedor)))
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
@@ -157,13 +163,11 @@ public class EditarProveedor extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel55))
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel54))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel54)
                             .addComponent(txtCorreo_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel59)
                             .addComponent(txtCedulaJuridica_EditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
