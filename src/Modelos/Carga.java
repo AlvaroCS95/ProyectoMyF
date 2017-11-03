@@ -1,10 +1,13 @@
 package Modelos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Carga {
     String IdCamion;
+    int IdCarga;
+    String FechaCarga;
 
     ArrayList <DetalleCarga> laListaDeCarga;
 
@@ -15,7 +18,7 @@ public class Carga {
          laListaDeCarga=new ArrayList();
     }
 
-    
+    public Carga(){}
 
     public String getIdCamion() {
         return IdCamion;
@@ -32,4 +35,22 @@ public class Carga {
     public void setLaListaDeCarga(ArrayList<DetalleCarga> laListaDeCarga) {
         this.laListaDeCarga = laListaDeCarga;
     }
+
+    public int getIdCarga() {
+        return IdCarga;
+    }
+
+    public String getFechaCarga() {
+        return FechaCarga;
+    }
+
+    public void setIdCarga(int IdCarga) {
+        this.IdCarga = IdCarga;
+    }
+
+    public void setFechaCarga(String FechaCarga) {
+        this.FechaCarga = FechaCarga;
+    }
+    
+    
 }

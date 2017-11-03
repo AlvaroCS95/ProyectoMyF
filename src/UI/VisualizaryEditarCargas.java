@@ -74,7 +74,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         trsFiltro = new TableRowSorter(tablaCargas_VisualizarCargas.getModel());
         tablaCargas_VisualizarCargas.setRowSorter(trsFiltro);
     }
-   public void ListarCargas(){
+   public static void ListarCargas(){
           try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
@@ -253,7 +253,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
     String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
     Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
     int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
-    JOptionPane.showMessageDialog(null, PlacaDeCamion+"   "+FechaCarga+"    "+IdCarga);
+
         EditarCarga editarCarga;
       try {
           editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga);
@@ -310,7 +310,7 @@ int fila=0;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu menuEmergente_VisualizarCargas;
-    private javax.swing.JTable tablaCargas_VisualizarCargas;
+    public static javax.swing.JTable tablaCargas_VisualizarCargas;
     private javax.swing.JTextField txtBuscar_VisualizarCargas;
     // End of variables declaration//GEN-END:variables
 }

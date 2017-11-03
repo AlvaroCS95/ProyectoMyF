@@ -6,9 +6,13 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeCamion;
+import Modelos.Carga;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -92,6 +96,11 @@ public class EditarCarga extends javax.swing.JFrame {
         jComboPlacas_EditarCarga.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione..." }));
 
         btAceptar_EditarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
+        btAceptar_EditarCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAceptar_EditarCargaActionPerformed(evt);
+            }
+        });
 
         btSalir_EditarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
         btSalir_EditarCarga.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +180,37 @@ public class EditarCarga extends javax.swing.JFrame {
        dispose();
     }//GEN-LAST:event_btSalir_EditarCargaActionPerformed
 
+    private void btAceptar_EditarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarCargaActionPerformed
+        // TODO add your handling code here:
+        Carga laCarga= new Carga();
+        laCarga.setIdCamion(jComboPlacas_EditarCarga.getSelectedItem().toString());
+        laCarga.setFechaCarga(ObtenerFecha());
+        laCarga.setIdCarga(Integer.parseInt(txtIdCarga_EditarCarga.getText()));
+        CoordinadorDeCamion elCoordinadorDeCamion= new CoordinadorDeCamion();
+        try {
+            boolean Exito=elCoordinadorDeCamion.EditarCarga(laCarga);
+            if(Exito==false){
+             getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Se produjo un error a la hora de actualizar la carga");
+            }else {
+            JOptionPane.showMessageDialog(null, "Se edito con exito la carga");
+            VisualizaryEditarCargas.ListarCargas();
+            dispose();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarCarga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarCarga.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+    }//GEN-LAST:event_btAceptar_EditarCargaActionPerformed
+
+     public String ObtenerFecha() {
+
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+        return String.valueOf(formatoDeFecha.format(DateFechaCarga_EditarCarga.getDate()));
+    }
     /**
      * @param args the command line arguments
      */

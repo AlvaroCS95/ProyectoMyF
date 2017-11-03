@@ -151,6 +151,9 @@
               <Image iconType="3" name="/Imagenes/Check_Icon_32.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAceptar_EditarCargaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btSalir_EditarCarga">
           <Properties>

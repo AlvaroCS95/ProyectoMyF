@@ -5,6 +5,7 @@ import Modelos.Carga;
 import Modelos.DetalleCarga;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,6 +50,22 @@ public class GestorDeCamiones extends Coneccion {
             llamadaAlMetodo.setString(5, elCamion.getFechaDeCompra());
             llamadaAlMetodo.setFloat(6, elCamion.getCapacidad());
             llamadaAlMetodo.setString(7, elCamion.getModelo());
+            llamadaAlMetodo.execute();
+            llamadaAlMetodo.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+
+        try {
+            llamadaAlMetodo = conexion.prepareCall("Call ActualizarCarga(?,?,?);");
+            llamadaAlMetodo.setInt(1, laCarga.getIdCarga());
+            llamadaAlMetodo.setString(2, laCarga.getIdCamion());
+            llamadaAlMetodo.setString(3, laCarga.getFechaCarga());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;
