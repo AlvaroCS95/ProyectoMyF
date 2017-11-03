@@ -53,9 +53,9 @@ public class CoordinadorDeRutas {
 
     
 
-    public ResultSet AgregarClienteARuta(int idRuta, String cedula) throws ClassNotFoundException, SQLException {
+    public ResultSet AgregarClienteARuta(int idRuta, String cedula,int idD) throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
-        return elGestorDeRutas.IngresarClienteARuta(idRuta, cedula);
+        return elGestorDeRutas.IngresarClienteARuta(idRuta, cedula,idD);
     }
     
      public ResultSet AgregarCamionARuta(int idRuta, String idCamion) throws ClassNotFoundException, SQLException {

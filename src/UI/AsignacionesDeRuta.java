@@ -75,9 +75,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
         } else {
             String Cliente[] = new String[3];
-            Cliente[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
-            Cliente[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-            Cliente[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+            Cliente[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
+            Cliente[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            Cliente[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
 
             modeloVerClientes.addRow(Cliente);
             TablaAsignarCliente.setModel(modeloVerClientes);
@@ -90,16 +90,18 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         try {
             for (int i = 0; i < modeloVerClientes.getColumnCount(); i++) {
                 String cedula = modeloVerClientes.getValueAt(i, 1).toString();
+                JOptionPane.showMessageDialog(null, cedula);
                 ResultSet Respuesta;
-                Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula);
-                if (Respuesta.next()) {
-                    if (Respuesta.getString(1).equals("2")) {
-                        JOptionPane.showMessageDialog(null, "Los clientes han sido asignados");
-                        InicializarFiltroClientes(TablaAsignarCliente);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Existe un fallo en la asignación");
-                    }
-                }
+//              //  Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula);
+//                if (Respuesta.next()) {
+//                     JOptionPane.showMessageDialog(null, "Entro");
+//                    if (Respuesta.getString(1).equals("2")) {
+//                        JOptionPane.showMessageDialog(null, "Los clientes han sido asignados");
+//                        InicializarFiltroClientes(TablaAsignarCliente);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Existe un fallo en la asignación");
+//                    }
+//                }
             }
         } catch (Exception e) {
             return;
@@ -168,6 +170,14 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         btnLimpiar_GestorRutas1 = new javax.swing.JButton();
         btnAceptar_GestorRutas = new javax.swing.JButton();
         cbxOpcionesFiltrar = new javax.swing.JComboBox();
+        Martes = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        Lunes = new javax.swing.JCheckBox();
+        Miercoles = new javax.swing.JCheckBox();
+        Juevez = new javax.swing.JCheckBox();
+        Viernes = new javax.swing.JCheckBox();
+        Sabado = new javax.swing.JCheckBox();
+        Domingo = new javax.swing.JCheckBox();
 
         AgregarCamion.setText("Asignar");
         AgregarCamion.addActionListener(new java.awt.event.ActionListener() {
@@ -289,6 +299,35 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             }
         });
 
+        Martes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Martes.setText("M");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel4.setText("Los dias");
+
+        Lunes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Lunes.setText("L");
+        Lunes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LunesActionPerformed(evt);
+            }
+        });
+
+        Miercoles.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Miercoles.setText("K");
+
+        Juevez.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Juevez.setText("J");
+
+        Viernes.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Viernes.setText("V");
+
+        Sabado.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Sabado.setText("S");
+
+        Domingo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Domingo.setText("D");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,18 +349,35 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(81, 81, 81))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 669, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4)
+                                    .addGap(28, 28, 28)
+                                    .addComponent(Lunes)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Martes)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Miercoles)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Juevez)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Viernes)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Sabado)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Domingo)
+                                    .addGap(37, 37, 37))
+                                .addComponent(jLabel1))
+                            .addGap(81, 81, 81)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(RutaDeAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,12 +391,22 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                 .addGap(18, 18, 18)
                 .addComponent(RutaDeAsignacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Martes)
+                        .addComponent(jLabel4)
+                        .addComponent(Lunes)
+                        .addComponent(Miercoles)
+                        .addComponent(Juevez)
+                        .addComponent(Viernes)
+                        .addComponent(Sabado)
+                        .addComponent(Domingo)))
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(Asignados))
@@ -417,6 +483,10 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         modeloVerCamiones.removeRow(TablaAsignarCamion.getSelectedRow());
     }//GEN-LAST:event_RemoverCamionesActionPerformed
 
+    private void LunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LunesActionPerformed
+        
+    }//GEN-LAST:event_LunesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -424,18 +494,26 @@ addWindowListener(new java.awt.event.WindowAdapter() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AgregarCamion;
     public static javax.swing.JLabel Asignados;
+    private javax.swing.JCheckBox Domingo;
+    private javax.swing.JCheckBox Juevez;
+    private javax.swing.JCheckBox Lunes;
+    private javax.swing.JCheckBox Martes;
+    private javax.swing.JCheckBox Miercoles;
     private javax.swing.JMenuItem RemoverCamiones;
     private javax.swing.JMenuItem RemoverCliente;
     public static javax.swing.JLabel RutaDeAsignacion;
+    private javax.swing.JCheckBox Sabado;
     public static javax.swing.JTable TablaAsignaciones;
     public static javax.swing.JTable TablaAsignarCamion;
     public static javax.swing.JTable TablaAsignarCliente;
+    private javax.swing.JCheckBox Viernes;
     public static javax.swing.JButton btnAceptar_GestorRutas;
     public static javax.swing.JButton btnLimpiar_GestorRutas1;
     public static javax.swing.JComboBox cbxOpcionesFiltrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
