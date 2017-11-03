@@ -14,26 +14,11 @@
               <Image iconType="3" name="/Imagenes/anadir.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar descuento"/>
+            <Property name="toolTipText" type="java.lang.String" value="Agrega descuento al producto seleccionada."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIAgregarDescuentoActionPerformed"/>
           </Events>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmIQuitarDescuento">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/menos.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Quitar descuento"/>
-          </Properties>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="jmIEliminarDeLaLista">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/carro.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Quitar de la lista"/>
-          </Properties>
         </MenuItem>
       </SubComponents>
     </Container>

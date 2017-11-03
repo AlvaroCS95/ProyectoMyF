@@ -608,8 +608,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jppPuntoVenta = new javax.swing.JPopupMenu();
         jmIAgregarDescuento = new javax.swing.JMenuItem();
-        jmIQuitarDescuento = new javax.swing.JMenuItem();
-        jmIEliminarDeLaLista = new javax.swing.JMenuItem();
         jppMontoPagoPuntoDeVenta = new javax.swing.JPopupMenu();
         jmICompleto = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
@@ -644,20 +642,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jmIAgregarDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anadir.png"))); // NOI18N
         jmIAgregarDescuento.setText("Agregar descuento");
+        jmIAgregarDescuento.setToolTipText("Agrega descuento al producto seleccionada.");
         jmIAgregarDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmIAgregarDescuentoActionPerformed(evt);
             }
         });
         jppPuntoVenta.add(jmIAgregarDescuento);
-
-        jmIQuitarDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/menos.png"))); // NOI18N
-        jmIQuitarDescuento.setText("Quitar descuento");
-        jppPuntoVenta.add(jmIQuitarDescuento);
-
-        jmIEliminarDeLaLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png"))); // NOI18N
-        jmIEliminarDeLaLista.setText("Quitar de la lista");
-        jppPuntoVenta.add(jmIEliminarDeLaLista);
 
         jmICompleto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/efectivo.png"))); // NOI18N
         jmICompleto.setText("Completo");
@@ -923,8 +914,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem jmIAgregarDescuento;
     private javax.swing.JMenuItem jmICompleto;
-    private javax.swing.JMenuItem jmIEliminarDeLaLista;
-    private javax.swing.JMenuItem jmIQuitarDescuento;
     private javax.swing.JPopupMenu jppMontoPagoPuntoDeVenta;
     private javax.swing.JPopupMenu jppPuntoVenta;
     public static javax.swing.JTextField txtCantidadDeProducto_PuntoDeVenta;

@@ -145,6 +145,7 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="4"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Lista de proveedores registrados."/>
             <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="MenuProveedor"/>
             </Property>
@@ -196,7 +197,10 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/BuscarUsuario.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Oprima para cancelar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Busca los proveedores."/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscar_ListarProveedorActionPerformed"/>
@@ -228,6 +232,10 @@
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/AgregarUC.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Agrega un nuevo proveedor."/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Mano"/>
         </Property>
       </Properties>
       <Events>
