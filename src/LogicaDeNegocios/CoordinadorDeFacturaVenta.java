@@ -241,4 +241,8 @@ public class CoordinadorDeFacturaVenta {
         GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
         return elGestorFacturaVenta.ObtenerUltimaIdFacturaVenta();
     }
+    public String ObtenerFechaDePagoConDiasDePLazo(int PlazoDias) throws SQLException, ClassNotFoundException {
+        GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
+        return elGestorFacturaVenta.ObtenerFechaDePagoConDiasDePLazo(PlazoDias);
+    }
 }
