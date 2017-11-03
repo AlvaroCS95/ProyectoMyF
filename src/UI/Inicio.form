@@ -133,7 +133,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="UI.ListarFacturasDeCompra" name="listarFacturasDeCompra1">
+            <Component class="UI.ListarFacturas" name="listarFacturasDeCompra1">
               <Events>
                 <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="listarFacturasDeCompra1AncestorAdded"/>
               </Events>

@@ -4,23 +4,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class DetallesFacturaCompra extends javax.swing.JDialog {
+public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
 
-    DefaultTableModel modelo;
+    static DefaultTableModel modelo;
     Object[] filas;
     int fila;
+    static boolean tipoDeFactura; // (true -> Compra) -- (false -> Venta)
 
-    public DetallesFacturaCompra(java.awt.Frame parent, boolean modal, String nFactura) {
+    public DetallesFacturaCompraVenta(java.awt.Frame parent, boolean modal, String nFactura, boolean tipoFactura) {
         super(parent, modal);
         initComponents();
         jlTituloDetalles.setText("Detalles de factura de compra # " + nFactura);
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        this.tipoDeFactura = tipoFactura;
+    }
+
+    public static void EstablecerModelo() {
+        modelo = new DefaultTableModel();
+        if (tipoDeFactura) {
+            modelo.addColumn("Código");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Precio");
+            modelo.addColumn("Cantidad");
+        } else {
+            modelo.addColumn("Código");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Monto de descuento");
+            modelo.addColumn("Precio de venta");
+        }
+
     }
 
     public void LlenarListaDetalles(ResultSet listaDetalles) {
-        modelo = (DefaultTableModel) jtDetallesFacturaCompra.getModel();
+        EstablecerModelo();
         filas = new Object[modelo.getColumnCount()];
         try {
             while (listaDetalles.next()) {
@@ -30,7 +50,7 @@ public class DetallesFacturaCompra extends javax.swing.JDialog {
                 modelo.addRow(filas);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ListarFacturasDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
         }
         jtDetallesFacturaCompra.setModel(modelo);
     }

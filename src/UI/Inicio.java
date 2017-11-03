@@ -14,7 +14,7 @@ import static UI.ListarCamiones.TablaListarCamiones_ListarCamiones;
 import static UI.ListarCamiones.VisualizarCamion;
 import static UI.ListarClientes.TablaListarClientes_ListarClientes;
 import static UI.ListarClientes.VisualizarClientes;
-import static UI.ListarFacturasDeCompra.ListarFacturasDelUltimoMes;
+import static UI.ListarFacturas.ListarFacturasDelUltimoMes;
 import static UI.ListarProveedor.VisualizarProveedores;
 import static UI.ListarUsuarios.VisualizarUsuarios;
 import static UI.PuntoDeVenta.ListarTiposDePago;
@@ -64,7 +64,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
         JTInicio = new javax.swing.JTabbedPane();
         JTFacturacion = new javax.swing.JTabbedPane();
         puntoDeVenta1 = new UI.PuntoDeVenta();
-        listarFacturasDeCompra1 = new UI.ListarFacturasDeCompra();
+        listarFacturasDeCompra1 = new UI.ListarFacturas();
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
         visualizarProductos1 = new UI.VisualizarProductos();
@@ -426,7 +426,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable{
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;
-    private UI.ListarFacturasDeCompra listarFacturasDeCompra1;
+    private UI.ListarFacturas listarFacturasDeCompra1;
     private UI.ListarProveedor listarProveedor1;
     private UI.ListarUsuarios listarUsuarios1;
     private UI.PuntoDeVenta puntoDeVenta1;
