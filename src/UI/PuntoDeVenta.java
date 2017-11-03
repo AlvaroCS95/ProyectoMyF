@@ -17,7 +17,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     ArrayList<Object> lista = new ArrayList<>();
     static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     int fila, tipoDeVenta = 2;
-    DecimalFormat formato = new DecimalFormat("#.00");
+    //DecimalFormat formato = new DecimalFormat("#.00");
     public static String CuerpoDelTextoAImprimir = "";
     public float TotalVendido=0;
     public float TotalConAbono=0;
@@ -232,7 +232,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        txtTotalAPagar_PuntoDeVenta.setText("" + formato.format(total));
+        txtTotalAPagar_PuntoDeVenta.setText("" +total);
     }
 
     public void VerificarDatosParaAgregarAlaLista() {
@@ -365,7 +365,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             totalDescuento += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
         }
-        txtDescuento_PuntoDeVenta.setText("" + formato.format(totalDescuento));
+        txtDescuento_PuntoDeVenta.setText("" +totalDescuento);
     }
 
     public void AplicarDescuento() {
@@ -522,7 +522,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String codigo;
         float cantidadVendida, descuentoAplicado, precioVendido;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-
+        CuerpoDelTextoAImprimir+="cProd       Cant       P.Ven       Desc.";
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             codigo = TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString();
             cantidadVendida = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 3).toString());
@@ -530,7 +530,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             precioVendido = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
 
             facturaVenta.AgregarDetalleFacturaVentaContado(codigo, cantidadVendida, descuentoAplicado, precioVendido);
+            CuerpoDelTextoAImprimir+="\n"+codigo+"            "+cantidadVendida+"       "+precioVendido+"       "+descuentoAplicado+"\n";
         }
+        float MontoCancelado=Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
+        float Vuelto=TotalVendido-MontoCancelado;
+        CuerpoDelTextoAImprimir+="\t\tAbono: "+MontoAbonado+"\n"
+        + "\t\tTotal Con Abono: "+TotalConAbono+"\n"
+                + "\t\tTotal Vedido: "+TotalVendido+"\n"
+                + "Paga con: "+MontoCancelado+"\n"
+                + "Su vuelto: "+Vuelto;
     }
 
     public void LimpiarDatos() {
