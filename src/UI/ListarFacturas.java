@@ -468,7 +468,9 @@ public class ListarFacturas extends javax.swing.JPanel {
 
             }
         ));
+        jt_ListarFacturasDeCompraVenta.setToolTipText("Lista de facturas de Compra/Venta.");
         jt_ListarFacturasDeCompraVenta.setComponentPopupMenu(jppEditarFactura);
+        jt_ListarFacturasDeCompraVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jt_ListarFacturasDeCompraVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jt_ListarFacturasDeCompraVentaMouseClicked(evt);
@@ -485,10 +487,13 @@ public class ListarFacturas extends javax.swing.JPanel {
         jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/invoice_22150 (1).png"))); // NOI18N
         add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, -1, -1));
 
+        txt_IngresoFormaBusqueda.setToolTipText("Ingreso de los criterios de busqueda.");
         txt_IngresoFormaBusqueda.setEnabled(false);
         add(txt_IngresoFormaBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 150, 30));
 
         jb_Buscar.setText("Buscar");
+        jb_Buscar.setToolTipText("Busca bajo algún criterio seleccionado.");
+        jb_Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_BuscarActionPerformed(evt);
@@ -497,6 +502,8 @@ public class ListarFacturas extends javax.swing.JPanel {
         add(jb_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, -1, 50));
 
         cbx_SeleccionBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "N° de factura", "Nombre de proveedor", "Código de usuario", "Fecha de compra" }));
+        cbx_SeleccionBusqueda.setToolTipText("Opciones de busqueda.");
+        cbx_SeleccionBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbx_SeleccionBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_SeleccionBusquedaActionPerformed(evt);
@@ -523,6 +530,8 @@ public class ListarFacturas extends javax.swing.JPanel {
         add(jl_Hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
 
         jbListarFacturas.setText("Listar");
+        jbListarFacturas.setToolTipText("Lista las facturas de Compra/venta.");
+        jbListarFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbListarFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbListarFacturasActionPerformed(evt);
@@ -532,6 +541,7 @@ public class ListarFacturas extends javax.swing.JPanel {
 
         cbxMostrar_Facturas.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         cbxMostrar_Facturas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra", "Venta" }));
+        cbxMostrar_Facturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbxMostrar_Facturas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxMostrar_FacturasItemStateChanged(evt);

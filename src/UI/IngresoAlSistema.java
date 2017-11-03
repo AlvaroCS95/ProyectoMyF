@@ -96,6 +96,8 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         btIngresar_IngresoAlSistema.setBackground(new java.awt.Color(0, 153, 153));
         btIngresar_IngresoAlSistema.setFont(new java.awt.Font("Papyrus", 1, 18)); // NOI18N
         btIngresar_IngresoAlSistema.setText("Ingresar");
+        btIngresar_IngresoAlSistema.setToolTipText("Ingresar al sistema (Enter)");
+        btIngresar_IngresoAlSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btIngresar_IngresoAlSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btIngresar_IngresoAlSistemaActionPerformed(evt);
@@ -109,6 +111,8 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         lbContraseña_IngresoAlSistema.setText("Contraseña:");
 
         MostrarContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VerContraseña.png"))); // NOI18N
+        MostrarContraseña.setToolTipText("Precione para mostrar/ocultar la contraseña.");
+        MostrarContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         MostrarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MostrarContraseñaMouseClicked(evt);
