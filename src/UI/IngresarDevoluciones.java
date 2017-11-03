@@ -135,6 +135,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Search_Icon_16.png"))); // NOI18N
         jButton1.setText("Seleccionar Factura");
+        jButton1.setToolTipText("aqui busca  selecciona la factura de venta que desea ingresarle la devolucion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

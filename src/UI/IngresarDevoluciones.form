@@ -285,6 +285,7 @@
           <Image iconType="3" name="/Imagenes/Search_Icon_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Seleccionar Factura"/>
+        <Property name="toolTipText" type="java.lang.String" value="aqui busca  selecciona la factura de venta que desea ingresarle la devolucion"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
