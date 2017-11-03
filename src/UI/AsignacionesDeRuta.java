@@ -105,7 +105,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                         if (Respuesta.next()) {
                             
                             if (Respuesta.getString(1).equals("2")) {
-                                     contador++;
+                                    
                             } else {
                                 JOptionPane.showMessageDialog(null, "Error en la insercion");
                             }
@@ -115,6 +115,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                     }
 
                 }
+           
             } else {
                 JOptionPane.showMessageDialog(null, "Ingrese datos para almacenar");
             }
@@ -448,30 +449,33 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
 
             AgregarClientes(1);
 
-        } else if (Martes.isSelected()) {
+        }if (Martes.isSelected()) {
 
             AgregarClientes(2);
-        } else if (Miercoles.isSelected()) {
+        }if (Miercoles.isSelected()) {
 
             AgregarClientes(3);
-        } else if (Juevez.isSelected()) {
+        } if (Juevez.isSelected()) {
 
             AgregarClientes(4);
-        } else if (Viernes.isSelected()) {
+        } if (Viernes.isSelected()) {
 
             AgregarClientes(5);
-        } else if (Sabado.isSelected()) {
+        } if (Sabado.isSelected()) {
 
             AgregarClientes(6);
-        } else if (Domingo.isSelected()) {
+        }  if (Domingo.isSelected()) {
 
             AgregarClientes(7);
-        } else {
+        } else if(!Lunes.isSelected()&&!Martes.isSelected()&&!Miercoles.isSelected()
+                &&!Juevez.isSelected()&&!Viernes.isSelected()&&!Sabado.isSelected()&&
+                !Domingo.isSelected()) {
             JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
         }
     }
     private void btnAceptar_GestorRutasingresarRutas(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar_GestorRutasingresarRutas
         try {
+            contador=0;
             AgregarCliente();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AsignacionesDeRuta.class.getName()).log(Level.SEVERE, null, ex);

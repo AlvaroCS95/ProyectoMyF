@@ -7,6 +7,10 @@ import static UI.GestorDeRutas.modeloVerCamiones;
 import static UI.GestorDeRutas.modeloVerClientes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +19,8 @@ public class DetallesDeRuta extends javax.swing.JDialog {
     static Object[] filas;
     static ResultSet resultadoConsulta = null;
     static int Id = 0;
+    int FilaSeleccionadaParaEliminar;
+    boolean SeleccionDeFila = false;
 
     public DetallesDeRuta(java.awt.Frame parent, boolean modal, int id, String Nombre) {
         super(parent, modal);
@@ -41,6 +47,11 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         Eliminar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DeleteIcon.png"))); // NOI18N
         Eliminar.setText("Eliminar de la ruta ");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         Menu.add(Eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -74,6 +85,11 @@ public class DetallesDeRuta extends javax.swing.JDialog {
             }
         ));
         TablaDetalles.setComponentPopupMenu(Menu);
+        TablaDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TablaDetallesMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDetalles);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,6 +138,46 @@ public class DetallesDeRuta extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_DetallesRutaActionPerformed
+    public void elimiarClienteDeRuta() throws SQLException, ClassNotFoundException {
+
+        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
+
+        String cedula = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+         String dia =  TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+        int dialogResult = JOptionPane.showConfirmDialog(null, "<html><h4>¿ Desea elimar el cliente? </h4></html>", "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
+
+        if (dialogResult == JOptionPane.YES_OPTION) {
+
+            CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+            ResultSet respuesta;
+            respuesta = elCoordinador.EliminarClienteDeRuta(cedula, dia);
+            if (respuesta.next()) {
+                if (respuesta.getString(1).equals("2")) {
+                   
+                    ListarClientesPorBusqueda(Id);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la eliminación");
+                }
+            }
+
+        }
+    }
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        try {
+            elimiarClienteDeRuta();
+        } catch (SQLException ex) {
+            Logger.getLogger(DetallesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DetallesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void TablaDetallesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDetallesMousePressed
+        FilaSeleccionadaParaEliminar = TablaDetalles.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaDetallesMousePressed
     public void activarRutas(int id) throws ClassNotFoundException, SQLException {
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
         ResultSet respuesta;

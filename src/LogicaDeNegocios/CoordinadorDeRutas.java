@@ -15,6 +15,11 @@ public class CoordinadorDeRutas {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
         return elGestorDeRutas.ListarRutasActivas();
     }
+    public ResultSet EliminarClienteDeRuta(String cedula,String dia) throws ClassNotFoundException, SQLException {
+        GestorDeRutas elGestorDeRutas = new GestorDeRutas();
+        return elGestorDeRutas.EliminarClienteDeRuta(cedula, dia);
+    }
+    
   public ResultSet ListarTodasLasRutas() throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
         return elGestorDeRutas.ListarTodasLasRutas();
