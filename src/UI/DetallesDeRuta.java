@@ -178,21 +178,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         FilaSeleccionadaParaEliminar = TablaDetalles.getSelectedRow();
         SeleccionDeFila = true;        // TODO add your handling code here:
     }//GEN-LAST:event_TablaDetallesMousePressed
-    public void activarRutas(int id) throws ClassNotFoundException, SQLException {
-        CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
-        ResultSet respuesta;
-        respuesta = elCoordinador.CambiarEstadoRutaPorId(id);
-        if (respuesta.next()) {
-            if (respuesta.getString(1).equals("2")) {
-                JOptionPane.showMessageDialog(null, "Activacion exitosa");
-
-                VisualizarRutasActivas();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Error en la activacion");
-            }
-        }
-    }
+   
 
     public static void ListarClientesPorBusqueda(int id) {
         try {

@@ -56,15 +56,14 @@ public class CoordinadorDeRutas {
         return elGestorDeRuta.CambiarEstadoRutaPorId(id);
     }
 
-    
 
     public ResultSet AgregarClienteARuta(int idRuta, String cedula,int idD) throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
         return elGestorDeRutas.IngresarClienteARuta(idRuta, cedula,idD);
     }
     
-     public ResultSet AgregarCamionARuta(int idRuta, String idCamion) throws ClassNotFoundException, SQLException {
+     public ResultSet AgregarCamionARuta(String idCamion,int idRuta,int idDia ) throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
-        return elGestorDeRutas.IngresarCamionARuta(idRuta, idCamion);
+        return elGestorDeRutas.IngresarCamionARutas(idCamion,idRuta, idDia);
     }
 }

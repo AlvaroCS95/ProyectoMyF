@@ -392,7 +392,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     private void gestorDeRutas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_gestorDeRutas1AncestorAdded
         try {
-            VisualizarRutasActivas();     // TODO add your handling code here:
+            VisualizarRutasActivas();     
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
