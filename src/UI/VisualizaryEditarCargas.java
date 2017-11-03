@@ -124,7 +124,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar_VisualizarCargas = new javax.swing.JTextField();
-        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<String>();
+        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         btActualizar_VisualizarCargas = new javax.swing.JButton();
 
@@ -137,6 +137,11 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         menuEmergente_VisualizarCargas.add(Editar_VisualizarCargas);
 
         detalles_VisualizarCargas.setText("Detalles");
+        detalles_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detalles_VisualizarCargasActionPerformed(evt);
+            }
+        });
         menuEmergente_VisualizarCargas.add(detalles_VisualizarCargas);
 
         setPreferredSize(new java.awt.Dimension(1360, 700));
@@ -297,6 +302,18 @@ int fila=0;
             fila = tablaCargas_VisualizarCargas.getSelectedRow();
         }
     }//GEN-LAST:event_tablaCargas_VisualizarCargasMouseClicked
+
+    private void detalles_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detalles_VisualizarCargasActionPerformed
+      String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
+    Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
+    int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+   
+        VisualizarDetallesDeCarga visualizarDetalle;
+   
+         visualizarDetalle = new  VisualizarDetallesDeCarga(IdCarga);
+          visualizarDetalle.setVisible(true);
+   
+    }//GEN-LAST:event_detalles_VisualizarCargasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

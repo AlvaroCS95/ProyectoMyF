@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class CoordinadorDeFacturaCompra {
 
@@ -223,7 +222,7 @@ public class CoordinadorDeFacturaCompra {
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
         try {
             if (resultado.next()) {
-                DetallesFacturaCompra detalles = new DetallesFacturaCompra(null, true);
+                DetallesFacturaCompra detalles = new DetallesFacturaCompra(null, true, idFactura);
                 resultado.previous();
                 detalles.LlenarListaDetalles(resultado);
                 detalles.setVisible(true);

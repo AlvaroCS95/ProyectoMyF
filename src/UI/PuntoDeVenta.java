@@ -1,12 +1,10 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.table.DefaultTableModel;
 
 public class PuntoDeVenta extends javax.swing.JPanel {
@@ -151,7 +149,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public boolean AplicarAbono() {
         try {
-            int plazoDias = Integer.parseInt(jSDiasPlazo_PuntoDeVenta.getValue().toString());
             if (jCAbonar_PuntoVenta.isSelected()) {
                 if (ExigirAbono()) {
                     return true;
