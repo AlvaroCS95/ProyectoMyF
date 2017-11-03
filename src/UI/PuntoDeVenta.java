@@ -1,6 +1,7 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     DefaultTableModel modelo;
     boolean imprimirFactura;
     ArrayList<Object> lista = new ArrayList<>();
-   static  ArrayList<Object> listaParaMostrar = new ArrayList<>();
+    static ArrayList<Object> listaParaMostrar = new ArrayList<>();
     int fila, tipoDeVenta = 2;
     DecimalFormat formato = new DecimalFormat("#.00");
-    public static String CuerpoDelTextoAImprimir="";
+    public static String CuerpoDelTextoAImprimir = "";
 
     public PuntoDeVenta() {
         initComponents();
@@ -69,7 +70,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "¡Verfique los datos del cliente!, ya que el numero de cédula\n"
-                        + "proporcionado no coincide con los clientes registrados o no se digitó ningún numero de cédula.",
+                        + "proporcionado no coincide con los clientes registrados \n"
+                        + "o no se digitó ningún numero de cédula.",
                         "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
@@ -131,21 +133,25 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String formaPago = cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString();
         if (formaPago.equals("Efectivo")) {
             if (!txtMontoDePago_PuntoDeVenta.getText().isEmpty()) {
+                return true;// exito
+            } else {
                 JOptionPane.showMessageDialog(null, "¡Debe ingresar el monto que desea abonar!",
                         "Error", JOptionPane.ERROR_MESSAGE);
-                return true;
+                return false;// error
             }
         } else if (formaPago.equals("Seleccione...")) {
             JOptionPane.showMessageDialog(null, "¡Debe selecionar una forma de pago!",
                     "¡Advertencia!", JOptionPane.WARNING_MESSAGE);
+            return false;// error
         } else {
             if (!txtNDeReferencia.getText().isEmpty()) {
+                return true;
+            } else {
                 JOptionPane.showMessageDialog(null, "¡Debe ingresar el N° de referencia con el cual realizó el abono!",
                         "Error", JOptionPane.ERROR_MESSAGE);
-                return true;
+                return false;//error
             }
         }
-        return false;
     }
 
     public boolean AplicarAbono() {
@@ -153,9 +159,10 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             if (jCAbonar_PuntoVenta.isSelected()) {
                 if (ExigirAbono()) {
                     return true;
+                }else{
+                    return false;
                 }
             }
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error");
         }
@@ -438,17 +445,17 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        String totalParaCambiar=txtTotalAPagar_PuntoDeVenta.getText();
-        totalParaCambiar=totalParaCambiar.replace(",", ".");       
+        String totalParaCambiar = txtTotalAPagar_PuntoDeVenta.getText();
+        totalParaCambiar = totalParaCambiar.replace(",", ".");
         float totalVendido = Float.parseFloat(totalParaCambiar);
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
 
         facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
-        CuerpoDelTextoAImprimir="Número de Factura: "+DevolverUltimoIdFacturaVenta()+"\n"
-                + "Cédula del cliente: "+txtCedulaCliente_PuntoDeVenta.getText()
-                + "Forma de pago: "+cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString()+"\n";
+        CuerpoDelTextoAImprimir = "Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
+                + "Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText()
+                + "Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n";
     }
 
     public void CrearFacturaVentaCreditoConAbono() {
@@ -464,7 +471,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         montoAbonado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
         plazoDias = Integer.parseInt(jSDiasPlazo_PuntoDeVenta.getValue().toString());
         facturaVenta.CrearFacturaVentaCredito(totalVendido, idCliente, idTipoPago, nuReferencia, plazoDias, montoAbonado);
-        CuerpoDelTextoAImprimir="Número de Factura: "+DevolverUltimoIdFacturaVenta();
+        CuerpoDelTextoAImprimir = "Número de Factura: " + DevolverUltimoIdFacturaVenta();
     }
 
     public void CrearFacturaVentaCreditoSinAbono() {
@@ -533,8 +540,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         coordinador.ResumenVentaCredito(txtTotalAPagar_PuntoDeVenta.getText(),
                 "No abona nada.", jSDiasPlazo_PuntoDeVenta.getValue().toString());
     }
-    
-     private int DevolverUltimoIdFacturaVenta() {
+
+    private int DevolverUltimoIdFacturaVenta() {
         int IdFacturaDeVenta = 0;
         CoordinadorDeFacturaVenta LaFacturaVenta = new CoordinadorDeFacturaVenta();
         try {
