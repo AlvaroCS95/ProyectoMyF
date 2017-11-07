@@ -153,7 +153,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             };
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
             ResultSet resultadoConsulta = elCoordinador.ListarClientes();
-            modelo.addColumn("Codigo");
+            modelo.addColumn("Código");
             modelo.addColumn("Cédula");
             modelo.addColumn("Primer nombre");
             modelo.addColumn("Segundo nombre");
@@ -161,9 +161,9 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             modelo.addColumn("Segundo apellido");
             modelo.addColumn("Nivel");
 
-            modelo.addColumn("Direccion");
+            modelo.addColumn("Dirección");
             modelo.addColumn("Nombre de local");
-            modelo.addColumn("Razon Social");
+            modelo.addColumn("Razón Social");
             Listar.setModel(modelo);
             filas = new Object[modelo.getColumnCount()];
             if (resultadoConsulta == null) {
