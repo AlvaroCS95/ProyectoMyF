@@ -28,6 +28,9 @@ public class CoordinadorDeClientes {
 
         return elGestorDeClientes.EditarCliente(elCliente);
 
+    }public ResultSet ListarClientesParaSeleccionPV() throws SQLException, ClassNotFoundException {
+        GestorDeClientes elGestorDeClientes = new GestorDeClientes();
+        return elGestorDeClientes.ListarClientesParaSeleccionPV();
     }
 
     public ResultSet ListarClientes() throws SQLException, ClassNotFoundException {
