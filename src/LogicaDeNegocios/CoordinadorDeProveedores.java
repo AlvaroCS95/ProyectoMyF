@@ -15,13 +15,13 @@ public class CoordinadorDeProveedores {
     public CoordinadorDeProveedores() {
     }
 
-    public boolean InsertarProveedor(Proveedor elProveedor) throws ClassNotFoundException {
+    public ResultSet InsertarProveedor(Proveedor elProveedor) throws ClassNotFoundException, SQLException {
         GestorDeProveedores elGestorDeProveedores = new GestorDeProveedores();
         return elGestorDeProveedores.InsertarProveedor(elProveedor);
     }
  
     
-    public boolean EditarProveedor(Proveedor elProveedor) throws ClassNotFoundException {
+    public ResultSet EditarProveedor(Proveedor elProveedor) throws ClassNotFoundException, SQLException {
         GestorDeProveedores elGestorDeProveedores = new GestorDeProveedores();
         return elGestorDeProveedores.EditarProveedor(elProveedor);
     }

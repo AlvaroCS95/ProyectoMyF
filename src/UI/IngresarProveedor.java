@@ -7,15 +7,17 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeProveedores;
 import Modelos.Proveedor;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class IngresarProveedor extends javax.swing.JDialog {
 
     String Nombre, Correo, Direccion, Telefono, Cedula;
+
     public IngresarProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -23,7 +25,6 @@ public class IngresarProveedor extends javax.swing.JDialog {
         cerrar();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -204,24 +205,26 @@ public void Limpiar() {
         txtTelefono_IngresarProveedor.setText("");
 
     }
-public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
-public boolean VerificaCamposVacios() {
+    }
+
+    public boolean VerificaCamposVacios() {
         if (txtCedulaJuridica_IngresarProveedor.getText().equals("")
                 || txtCorreo_IngresarProveedor.getText().equals("")
                 || txtDireccion_IngresarProveedor.getText().equals("")
@@ -233,7 +236,8 @@ public boolean VerificaCamposVacios() {
         }
 
     }
-public void IngresarProveedor() throws ClassNotFoundException {
+
+    public void IngresarProveedor() throws ClassNotFoundException, SQLException {
         if (VerificaCamposVacios() == true) {
             JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
 
@@ -245,12 +249,16 @@ public void IngresarProveedor() throws ClassNotFoundException {
             Telefono = txtTelefono_IngresarProveedor.getText();
             CoordinadorDeProveedores elCoordinadorDeProveedores = new CoordinadorDeProveedores();
             Proveedor elProveedor = new Proveedor(Cedula, Nombre, Direccion, Correo, Telefono);
-            if (elCoordinadorDeProveedores.InsertarProveedor(elProveedor) == true) {
-                JOptionPane.showMessageDialog(null, "Proveedor insertado con exito");
-                Limpiar();
-                ListarProveedor.VisualizarProveedores();
-            } else {
-                JOptionPane.showMessageDialog(null, "Fallo en la inserción ");
+            ResultSet respuesta = null;
+            respuesta = elCoordinadorDeProveedores.InsertarProveedor(elProveedor);
+            if (respuesta.next()) {
+                if (respuesta.getString(1).equals("1")) {
+                    JOptionPane.showMessageDialog(null, "Proveedor insertado con exito");
+                    Limpiar();
+                    ListarProveedor.VisualizarProveedores();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fallo en la inserción ");
+                }
             }
 
         }
@@ -265,13 +273,14 @@ public void IngresarProveedor() throws ClassNotFoundException {
             IngresarProveedor();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IngresarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(IngresarProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btAceptar_IngresarProveedorActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_IngresarProveedor;
