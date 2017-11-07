@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class GestorFacturaVenta extends Coneccion {
 
@@ -92,6 +93,7 @@ public class GestorFacturaVenta extends Coneccion {
             llamadaAlMetodo.setInt(2, nuevaFactura.getIdCliente());
             llamadaAlMetodo.setInt(3, nuevaFactura.getIdTipoDePago());
             llamadaAlMetodo.setString(4, nuevaFactura.getNuReferencia());
+            JOptionPane.showMessageDialog(null,"GESTOR!  "+ nuevaFactura.getNuReferencia());
             llamadaAlMetodo.setInt(5, nuevaFactura.getDiasPlazo());
             llamadaAlMetodo.setFloat(6, nuevaFactura.getMontCancelado());
             llamadaAlMetodo.execute();
@@ -211,11 +213,11 @@ public class GestorFacturaVenta extends Coneccion {
         return resultadoConsulta;
     }
 
-    public ResultSet ObtenerIDClientePorNumeroDeCedula(String numeroDeCedula) {
+    public ResultSet ObtenerIDClientePorCodigo(String codigo) {
         try {
             EstablecerConexion();
             consulta = conexion.createStatement();
-            resultadoConsulta = consulta.executeQuery("CALL ObtnerIdClientePorNumeroDeCedula ('" + numeroDeCedula + "');");
+            resultadoConsulta = consulta.executeQuery("CALL ObtenerIdClientePorCodigo ('" + codigo + "');");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
 
