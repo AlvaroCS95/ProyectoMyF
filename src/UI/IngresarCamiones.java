@@ -8,6 +8,7 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeCamion;
 import Modelos.Camion;
 import static UI.ListarCamiones.TablaListarCamiones_ListarCamiones;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -279,6 +280,8 @@ public void LimpiarCampos(){
       txtEstilo_IngresarCamion.setText("");
       txtMarca_IngresarCamion.setText("");
       txtNumeroDePlaca_IngresarCamion.setText("");
+      SpinnerCantidad_IngresarCamion.setValue(0);
+      
      }
 public String ObtenerFechaDesde() {
 
@@ -294,19 +297,23 @@ public void IngresarCamion() throws ClassNotFoundException, SQLException {
             Estilo = txtEstilo_IngresarCamion.getText();
             Color = txtColor_IngresarCamion.getText();
             Modelo= ""+YCModelo_IngresarCamion.getYear();
+            ResultSet Resultado=null;
             Capacidad= Float.parseFloat(SpinnerCantidad_IngresarCamion.getValue().toString());
-           
-     
-
             CoordinadorDeCamion elCoordinadorDeCamion = new CoordinadorDeCamion();
             Camion elCamion = new Camion(NumeroDePlaca, Marca, Modelo, Estilo, Color, ObtenerFechaDesde(), Capacidad);
-            if (elCoordinadorDeCamion.InsertarCamion(elCamion) == true) {
+            Resultado=elCoordinadorDeCamion.InsertarCamion(elCamion);
+            JOptionPane.showMessageDialog(null, Resultado);
+          if(Resultado.next()){
+            
+            if (Resultado.getString(1).equals("1")) {
                 JOptionPane.showMessageDialog(null, "El camion ha sido insertado exitosamente");
                 LimpiarCampos();
                  ListarCamiones.VisualizarCamion(TablaListarCamiones_ListarCamiones); 
             } else {
-                JOptionPane.showMessageDialog(null, "Error en la insercion");
+                JOptionPane.showMessageDialog(null, "Error en la insercion comuniquese con el administador");
             }
+            }
+            
 
         }
 

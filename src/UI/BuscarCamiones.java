@@ -212,9 +212,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             columnaABuscar = 1;
         }
         if (cbxFiltro.getSelectedItem() == "Modelo") {
-            columnaABuscar = 4;
+            columnaABuscar = 7;
         }
-        trsFiltro.setRowFilter(RowFilter.regexFilter(txtPlaca_BuscarCamion.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtPlaca_BuscarCamion.getText(), columnaABuscar));
     }
 
     public void EliminarCamion() throws SQLException, ClassNotFoundException {

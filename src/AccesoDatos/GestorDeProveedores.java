@@ -16,43 +16,47 @@ public class GestorDeProveedores extends Coneccion {
     public GestorDeProveedores() {
     }
 
-    public boolean InsertarProveedor(Proveedor elProveedor) throws ClassNotFoundException {
+    public ResultSet InsertarProveedor(Proveedor elProveedor) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
-        CallableStatement llamadaAlMetodo;
+        Statement consulta;
+        ResultSet Respuesta=null;
+        consulta= conexion.createStatement();
+        
+   
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("{call IngresarProveedor(?,?,?,?,?)}");
-            llamadaAlMetodo.setString(1, elProveedor.getCedulaJuridica());
-            llamadaAlMetodo.setString(2, elProveedor.getNombre());
-            llamadaAlMetodo.setString(3, elProveedor.getDireccion());
-            llamadaAlMetodo.setString(4, elProveedor.getTelefono());
-            llamadaAlMetodo.setString(5, elProveedor.getCorreo());
-            llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            Respuesta= consulta.executeQuery("call IngresarProveedor('"+elProveedor.getCedulaJuridica()
+                    +"','"+elProveedor.getNombre()+"','"+elProveedor.getDireccion()
+                    +"','"+elProveedor.getTelefono()+"','"+elProveedor.getCorreo()+"')");
+            
+            return Respuesta;
 
         } catch (Exception e) {
-            return false;
+            return Respuesta;
         }
 
     }
-
-    public boolean EditarProveedor(Proveedor elProveedor) throws ClassNotFoundException {
+  public ResultSet EditarProveedor(Proveedor elProveedor) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
-        CallableStatement llamadaAlMetodo;
+        Statement consulta;
+        ResultSet Respuesta=null;
+        consulta= conexion.createStatement();
+        
+   
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("call ActualizarProveedor(?,?)");
-            llamadaAlMetodo.setString(1, elProveedor.getCedulaJuridica());
-            llamadaAlMetodo.setString(2, elProveedor.getNombre());
-            llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            Respuesta= consulta.executeQuery("call ActualizarProveedor('"+elProveedor.getCedulaJuridica()
+                    +"','"+elProveedor.getNombre()+"','"+elProveedor.getDireccion()
+                    +"','"+elProveedor.getTelefono()+"','"+elProveedor.getCorreo()+"')");
+            
+            return Respuesta;
 
         } catch (Exception e) {
-            return false;
+            return Respuesta;
         }
+
     }
+    
  public ResultSet CambiarEstadoProveedores(String Cedula) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;

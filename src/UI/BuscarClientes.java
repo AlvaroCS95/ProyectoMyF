@@ -30,6 +30,7 @@ public class BuscarClientes extends javax.swing.JDialog {
     public static TableRowSorter trsFiltro;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
+    static    int columnaABuscar = 1;
     EditarCliente elClienteAEditar = null;
 
     public BuscarClientes(java.awt.Frame parent, boolean modal) {
@@ -244,7 +245,7 @@ public class BuscarClientes extends javax.swing.JDialog {
         BuscarCliente();
     }//GEN-LAST:event_txtCedulaABuscar_BuscarClienteKeyTyped
     public static void filtro() {
-        int columnaABuscar = 0;
+    
         if (cbxFiltro.getSelectedItem() == "Cedula") {
             columnaABuscar = 1;
         }
@@ -252,9 +253,9 @@ public class BuscarClientes extends javax.swing.JDialog {
             columnaABuscar = 2;
         }
         if (cbxFiltro.getSelectedItem() == "Apellido") {
-            columnaABuscar = 5;
+            columnaABuscar = 4;
         }
-        trsFiltro.setRowFilter(RowFilter.regexFilter(txtCedulaABuscar_BuscarCliente.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtCedulaABuscar_BuscarCliente.getText(), columnaABuscar));
     }
     private void cbxFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFiltroActionPerformed
 
@@ -367,11 +368,12 @@ public class BuscarClientes extends javax.swing.JDialog {
         String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
         String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
         String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
-        String RazonSocial = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
+        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 9).toString();
+        String RazonSocial = Lista.getValueAt(FilaSeleccionadaParaEliminar, 10).toString();
+        String Direccion = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
         elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
-                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar, RazonSocial);
+                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar, RazonSocial,Direccion);
         elClienteAEditar.setVisible(true);
 
     }
