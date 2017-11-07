@@ -84,6 +84,19 @@ public class GestorDeClientes extends Coneccion {
             return resultadoConsulta;
         }
     }
+    public ResultSet ListarClientesParaSeleccionPV() throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call MostrarClientesParaSeleccionPV(); ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
   public ResultSet ListarClientes() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
