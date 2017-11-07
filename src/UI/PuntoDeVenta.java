@@ -446,6 +446,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
+        facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
 
        CuerpoDelTextoAImprimir="Factura Contado\n"
                 + "Número de Factura: "+DevolverUltimoIdFacturaVenta()+"\n"
