@@ -317,6 +317,7 @@ public int nivel() {
         txtSegundoApellido_EditarCliente.setText(SegundoApellido);
         txtNombreLocal_EditarCliente.setText(NombreLocal);
         cbxNivel_EditarCliente.setSelectedIndex(nivel());
+        txtRazonSocial_EditarCliente.setText(RazonSocial);
 
     }
 
@@ -339,7 +340,7 @@ public int nivel() {
         txtSegundoNombre_EditarCliente.setText("");
         txtPrimerApellido_EditarCliente.setText("");
         txtSegundoApellido_EditarCliente.setText("");
-        
+        txtRazonSocial_EditarCliente.setText("");
         txtNombreLocal_EditarCliente.setText("");
     }
     private void btAceptar_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarUsuarioActionPerformed

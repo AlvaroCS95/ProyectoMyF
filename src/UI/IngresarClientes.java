@@ -303,6 +303,7 @@ public void LimpiarCampos() {
         txtSegundoApellido_IngresarCliente.setText("");
         txtDireccion_IngresarCliente.setText("");
         txtNombreLocal_IngresarCliente.setText("");
+        txtRazonSocial_IngresarCliente.setText("");
     }
 
  public boolean VerificarCamposVacios() {

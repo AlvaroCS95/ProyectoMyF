@@ -262,7 +262,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
         String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
         String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,7 ).toString();
+        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,9 ).toString();
 
         String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
         elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,

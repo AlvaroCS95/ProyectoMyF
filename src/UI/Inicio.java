@@ -62,6 +62,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
         visualizarProductos1 = new UI.VisualizarProductos();
+        ingresarProductos1 = new UI.IngresarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
         JTClientes = new javax.swing.JTabbedPane();
@@ -152,6 +153,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             }
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
+        JTInventario.addTab("Ingreso de productos", ingresarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
 
@@ -422,6 +424,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.GestorDeRutas gestorDeRutas1;
     private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
+    private UI.IngresarProductos ingresarProductos1;
     private UI.IngresoFacturaCompra ingresoFacturaCompra1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

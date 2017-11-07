@@ -8,6 +8,7 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeUsuarios;
 import Modelos.Usuario;
 import static UI.ListarUsuarios.VisualizarUsuarios;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -24,14 +25,16 @@ public class IngresarUsuarios extends javax.swing.JDialog {
             NombreUsuario,
             ClaveUsuario;
     Object[] filas;
+
     public IngresarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         cerrar();
+       
+        
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,6 +72,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         txtSegundoNombre_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoNombre_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtSegundoNombre_IngresarUsuario.setToolTipText("Campo para ingresar segundo nombre del usuario");
 
         jLabel21.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel21.setText("Primer apellido");
@@ -78,20 +82,25 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         txtPrimerApellido_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerApellido_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtPrimerApellido_IngresarUsuario.setToolTipText("Campo para ingresar primer apellido del usuario");
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
+        jLabel17.setToolTipText("Ventana ingreso de usuarios");
 
         jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel20.setText("Segundo apellido");
 
         txtNombreUsuario_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreUsuario_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtNombreUsuario_IngresarUsuario.setToolTipText("Campo para ingresar nombre de usuario");
 
         txtSegundoApellido_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoApellido_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtSegundoApellido_IngresarUsuario.setToolTipText("Campo para ingresar segundo apellido del usuario");
 
         jpwsContraseña_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jpwsContraseña_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        jpwsContraseña_IngresarUsuario.setToolTipText("Campo para ingresar contraseña de usuario");
 
         jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel22.setText("Cedúla");
@@ -101,6 +110,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         txtCedula_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedula_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtCedula_IngresarUsuario.setToolTipText("Campo para ingresar cedula de identidad del usuario");
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel14.setText("Nombre de usuario");
@@ -115,6 +125,7 @@ public class IngresarUsuarios extends javax.swing.JDialog {
 
         txtPrimerNombre_IngresarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerNombre_IngresarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtPrimerNombre_IngresarUsuario.setToolTipText("Campo para ingresar primer nombre del usuario");
 
         btLimpiar_IngresarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_IngresarUsuario.setToolTipText("Oprima para limpiar campos");
@@ -133,8 +144,9 @@ public class IngresarUsuarios extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addGap(309, 309, 309)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(255, 255, 255)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,24 +259,26 @@ public class IngresarUsuarios extends javax.swing.JDialog {
         txtNombreUsuario_IngresarUsuario.setText("");
         jpwsContraseña_IngresarUsuario.setText("");
     }
-  public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
-   public boolean VerificarCamposVacios() {
+    }
+
+    public boolean VerificarCamposVacios() {
 
         if (txtPrimerNombre_IngresarUsuario.getText().equals("")
                 || txtPrimerNombre_IngresarUsuario.getText().equals("")
@@ -277,57 +291,57 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         }
         return true;
     }
-   public void IngresarUsuario(){
-     if (VerificarCamposVacios() == false) {
+
+    public void IngresarUsuario() {
+        if (VerificarCamposVacios() == false) {
 
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
             return;
         } else {
             try {
-                 ResultSet Respuesta; 
+                ResultSet Respuesta;
                 Cedula = txtCedula_IngresarUsuario.getText();
                 PrimerNombreUsuario = txtPrimerNombre_IngresarUsuario.getText();
                 SegundoNombreUsuario = txtSegundoNombre_IngresarUsuario.getText();
                 PrimerApellido = txtPrimerApellido_IngresarUsuario.getText();
                 SegundoApellido = txtSegundoApellido_IngresarUsuario.getText();
                 NombreUsuario = txtNombreUsuario_IngresarUsuario.getText();
-                
+
                 char[] contraseña = IngresarUsuarios.jpwsContraseña_IngresarUsuario.getPassword();
                 ClaveUsuario = new String(contraseña);
                 CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
                 Usuario elUsuario = new Usuario(NombreUsuario, ClaveUsuario, Cedula, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido);
-                Respuesta=elCoordinadorDeUsuarios.AgregarUsuario(elUsuario);
-                if(Respuesta.next()){
-                    if(Respuesta.getString(1).equals("1")){
-                        JOptionPane.showMessageDialog(null,"Se ingreso el usuario exitosamente");
+                Respuesta = elCoordinadorDeUsuarios.AgregarUsuario(elUsuario);
+                if (Respuesta.next()) {
+                    if (Respuesta.getString(1).equals("1")) {
+                        JOptionPane.showMessageDialog(null, "Se ingreso el usuario exitosamente");
                         LimpiarCampos();
                         dispose();
                         ListarUsuarios.VisualizarUsuarios();
-                        
-                    }else {
-                        JOptionPane.showMessageDialog(null,"Error en la insercion:\nPosibles causas:\n1) No tiene permisos para ejecutar esta acción.\n"
-                                + "2) El usuario ha sido registrado con anterioridad. \nComuniquese con el administrador.","Error en la insercion",JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error en la insercion:\nPosibles causas:\n1) No tiene permisos para ejecutar esta acción.\n"
+                                + "2) El usuario ha sido registrado con anterioridad. \nComuniquese con el administrador.", "Error en la insercion", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-               
+
             } catch (Exception e) {
             }
         }
-}
+    }
     private void btAceptar_IngresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarUsuarioActionPerformed
-        
+
         IngresarUsuario();
     }//GEN-LAST:event_btAceptar_IngresarUsuarioActionPerformed
 
     private void btLimpiar_IngresarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarUsuarioActionPerformed
         LimpiarCampos();
     }//GEN-LAST:event_btLimpiar_IngresarUsuarioActionPerformed
-
+   
     /**
      * @param args the command line arguments
      */
 
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_IngresarUsuario;
     public static javax.swing.JButton btLimpiar_IngresarUsuario;

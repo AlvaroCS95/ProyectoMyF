@@ -199,7 +199,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         if (cbxFiltro.getSelectedItem() == "Apellido") {
             columnaABuscar = 3;
         }
-        trsFiltro.setRowFilter(RowFilter.regexFilter(txtCedulaABuscar_BuscarUsuario.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtCedulaABuscar_BuscarUsuario.getText(), columnaABuscar));
     }
 
     public static void BuscarUsuario() {
@@ -271,6 +271,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
         txtCedulaABuscar_BuscarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedulaABuscar_BuscarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtCedulaABuscar_BuscarUsuario.setToolTipText("Campo para buscar usuario");
         txtCedulaABuscar_BuscarUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaABuscar_BuscarUsuarioKeyTyped(evt);
@@ -279,6 +280,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
         cbxFiltro.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cedula", "Nombre", "Apellido" }));
+        cbxFiltro.setToolTipText("Despliegue para seleccionar opciones de busqueda");
         cbxFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFiltroActionPerformed(evt);
@@ -296,6 +298,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
             }
         ));
+        TablaFiltrarUsuarios_BuscarUsuarios.setToolTipText("");
         TablaFiltrarUsuarios_BuscarUsuarios.setComponentPopupMenu(menuBuscar);
         TablaFiltrarUsuarios_BuscarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -314,9 +317,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel52)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel49)
-                        .addGap(33, 33, 33)
+                        .addGap(25, 25, 25)
                         .addComponent(txtCedulaABuscar_BuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -332,8 +335,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                     .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel52))
                 .addGap(34, 34, 34)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();

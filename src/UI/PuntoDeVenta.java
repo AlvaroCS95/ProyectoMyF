@@ -521,13 +521,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             facturaVenta.AgregarDetalleFacturaVentaContado(codigo, cantidadVendida, descuentoAplicado, precioVendido);
             CuerpoDelTextoAImprimir+="\n"+codigo+"            "+cantidadVendida+"       "+precioVendido+"       "+descuentoAplicado+"\n";
         }
-        float MontoCancelado=Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
-        float Vuelto=TotalVendido-MontoCancelado;
+//        float MontoCancelado=Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
+//        float Vuelto=TotalVendido-MontoCancelado;
         CuerpoDelTextoAImprimir+="\t\tAbono: "+MontoAbonado+"\n"
         + "\t\tTotal Con Abono: "+TotalConAbono+"\n"
                 + "\t\tTotal Vedido: "+TotalVendido+"\n"
-                + "Paga con: "+MontoCancelado+"\n"
-                + "Su vuelto: "+Vuelto;
+                + "Paga con: "+"\n"
+                + "Su vuelto: ";
     }
 
     public void LimpiarDatos() {
