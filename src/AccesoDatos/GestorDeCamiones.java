@@ -17,43 +17,35 @@ public class GestorDeCamiones extends Coneccion {
     public GestorDeCamiones() {
     }
 
-    public boolean InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
+    public ResultSet InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
-
+        Statement consulta;
+        ResultSet resultadoConsulta=null;
+        consulta= conexion.createStatement();
         try {
-            llamadaAlMetodo = conexion.prepareCall("{Call IngresarCamion(?,?,?,?,?,?,?)}");
-            llamadaAlMetodo.setString(1, elCamion.getNumeroDePlaca());
-            llamadaAlMetodo.setString(2, elCamion.getMarca());
-            llamadaAlMetodo.setString(3, elCamion.getEstilo());
-            llamadaAlMetodo.setString(4, elCamion.getColor());
-            llamadaAlMetodo.setString(5, elCamion.getFechaDeCompra());
-            llamadaAlMetodo.setFloat(6, elCamion.getCapacidad());
-            llamadaAlMetodo.setString(7, elCamion.getModelo());
-            llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            resultadoConsulta= consulta.executeQuery("call IngresarCamion('"+elCamion.getNumeroDePlaca()+
+                    "','"+elCamion.getMarca()+"','"+elCamion.getEstilo()+"','"+elCamion.getColor()+
+                    "','"+elCamion.getFechaDeCompra()+"',"+elCamion.getCapacidad()+",'"+elCamion.getModelo()+"')");
+            return resultadoConsulta;
         } catch (Exception e) {
-            return false;
+             return resultadoConsulta;
         }
+
+       
     }
 
-    public boolean EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
-        EstablecerConexion();
-
+    public ResultSet EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
+          EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta=null;
+        consulta= conexion.createStatement();
         try {
-            llamadaAlMetodo = conexion.prepareCall("{Call ActualizarCamion(?,?,?,?,?,?,?)}");
-            llamadaAlMetodo.setString(1, elCamion.getNumeroDePlaca());
-            llamadaAlMetodo.setString(2, elCamion.getMarca());
-            llamadaAlMetodo.setString(3, elCamion.getEstilo());
-            llamadaAlMetodo.setString(4, elCamion.getColor());
-            llamadaAlMetodo.setString(5, elCamion.getFechaDeCompra());
-            llamadaAlMetodo.setFloat(6, elCamion.getCapacidad());
-            llamadaAlMetodo.setString(7, elCamion.getModelo());
-            llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            resultadoConsulta= consulta.executeQuery("call ActualizarCamion('"+elCamion.getNumeroDePlaca()+
+                    "','"+elCamion.getMarca()+"','"+elCamion.getEstilo()+"','"+elCamion.getColor()+
+                    "','"+elCamion.getFechaDeCompra()+"',"+elCamion.getCapacidad()+",'"+elCamion.getModelo()+"')");
+            return resultadoConsulta;
         } catch (Exception e) {
-            return false;
+             return resultadoConsulta;
         }
     }
     
