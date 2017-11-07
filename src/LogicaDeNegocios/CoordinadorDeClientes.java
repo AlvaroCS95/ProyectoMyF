@@ -12,13 +12,13 @@ public class CoordinadorDeClientes {
     public CoordinadorDeClientes() {
     }
 
-    public boolean AgregarCliente(Cliente elCliente) throws ClassNotFoundException, SQLException {
-        boolean Respuesta;
+    public ResultSet AgregarCliente(Cliente elCliente) throws ClassNotFoundException, SQLException {
+       
         GestorDeClientes elGestorDeClientes = new GestorDeClientes();
 
-        Respuesta = elGestorDeClientes.InsertarCliente(elCliente);
+      return  elGestorDeClientes.InsertarCliente(elCliente);
 
-        return Respuesta;
+        
 
     }
 

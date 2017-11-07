@@ -94,7 +94,6 @@ public class EditarCamion extends javax.swing.JDialog {
         btLimpiar_EditarCamion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(732, 412));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -103,6 +102,7 @@ public class EditarCamion extends javax.swing.JDialog {
 
         txtNumeroDePlaca_EditarCamion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNumeroDePlaca_EditarCamion.setForeground(new java.awt.Color(0, 102, 102));
+        txtNumeroDePlaca_EditarCamion.setEnabled(false);
         getContentPane().add(txtNumeroDePlaca_EditarCamion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 140, -1));
 
         jLabel25.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N

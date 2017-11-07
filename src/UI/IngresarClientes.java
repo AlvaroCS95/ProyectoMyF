@@ -8,6 +8,7 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeClientes;
 import Modelos.Cliente;
 import static UI.ListarClientes.TablaListarClientes_ListarClientes;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -337,7 +338,10 @@ public void LimpiarCampos() {
                 RazonSocial=txtRazonSocial_IngresarCliente.getText();
                 CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
                 Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,RazonSocial);
-                if (elCoordinadorDeClientes.AgregarCliente(elCliente) == true) {
+               ResultSet respuesta=null;
+               respuesta= elCoordinadorDeClientes.AgregarCliente(elCliente);
+                if(respuesta.next()){
+                 if (respuesta.getString(1).equals("1")) {
                     JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
                     LimpiarCampos();
                     ListarClientes.VisualizarClientes(TablaListarClientes_ListarClientes); 
@@ -345,6 +349,8 @@ public void LimpiarCampos() {
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la inserción");
                 }
+                }
+               
             } catch (Exception e) {
             }
         }
