@@ -121,11 +121,9 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCargas_VisualizarCargas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar_VisualizarCargas = new javax.swing.JTextField();
-        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<String>();
-        jButton2 = new javax.swing.JButton();
+        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<>();
         btActualizar_VisualizarCargas = new javax.swing.JButton();
 
         Editar_VisualizarCargas.setText("Editar");
@@ -178,8 +176,6 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Visualizar cargas");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
-
         jLabel2.setText("Buscar carga:");
 
         txtBuscar_VisualizarCargas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -190,8 +186,6 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
 
         cmbxFiltrar_VisualizarCargas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...","Por Id", "Por Camión", "Por Fecha"}));
         cmbxFiltrar_VisualizarCargas.setSelectedItem("Seleccione...");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/VerContraseña.png"))); // NOI18N
 
         btActualizar_VisualizarCargas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flechas-de-actualizacion.png"))); // NOI18N
         btActualizar_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
@@ -213,11 +207,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                         .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(294, 294, 294)
                         .addComponent(btActualizar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1298, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -232,10 +222,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btActualizar_VisualizarCargas)))
+                        .addComponent(btActualizar_VisualizarCargas))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
@@ -246,7 +233,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                             .addComponent(cmbxFiltrar_VisualizarCargas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -309,7 +296,7 @@ int fila=0;
     int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
    
         VisualizarDetallesDeCarga visualizarDetalle;
-   
+         
          visualizarDetalle = new  VisualizarDetallesDeCarga(IdCarga);
           visualizarDetalle.setVisible(true);
    
@@ -321,8 +308,6 @@ int fila=0;
     private javax.swing.JButton btActualizar_VisualizarCargas;
     private javax.swing.JComboBox<String> cmbxFiltrar_VisualizarCargas;
     private javax.swing.JMenuItem detalles_VisualizarCargas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

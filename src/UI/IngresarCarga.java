@@ -6,6 +6,7 @@ import LogicaDeNegocios.CoordinadorDeInventario;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
+import static UI.VisualizaryEditarCargas.ListarCargas;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
@@ -356,6 +357,7 @@ public void VisualizarCamion(JTable Listar) {
                 if(elCoordinador.InsertarCarga(laCarga)){
                     JOptionPane.showMessageDialog(null, "¡Carga ingresada exitosamente!");
                     Limpiar();
+                    VisualizaryEditarCargas.ListarCargas();
                 }
             }
         } catch (SQLException ex) {
