@@ -449,7 +449,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
     private void btReintegro_IngresarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReintegro_IngresarDevolucionesActionPerformed
         int UsuarioActivo = 0;
-        Devolucion LaDevolucionAIngresar = new Devolucion();
+        Devolucion LaDevolucionAIngresar;
         CoordinadorDeDevoluciones ElCoordinadorDeDevoluciones = new CoordinadorDeDevoluciones();
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("Seguro que desea ingesar esta devolución", "IngresarTablas");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
@@ -459,15 +459,15 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
                     return;
                 } else {
-                    LaDevolucionAIngresar.setCedulaUsuario(UsuarioActivo);
-                    LaDevolucionAIngresar.setNumeroFactura(txtNFactura_IngresarDevoluciones.getText());
-                    LaDevolucionAIngresar.setValorTotal(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente());
-                    LaDevolucionAIngresar.setReintegroAlCliente(ReintegradoAlCliente);
-                   
+                
+                    int factura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
+                   LaDevolucionAIngresar= new Devolucion(UsuarioActivo, 5, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
+                    
                     try {
+                        
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                            JOptionPane.showMessageDialog(null, "Se ingreso exitosamente");
-                             try {
+                            
+                            try {
                             boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
                             if (SeIngresoLosDetalles == true) {
                             JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
@@ -478,16 +478,17 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                             } else {
                             JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
                             }
-                             } catch (Exception e) {
-                             JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
-                             }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Error en la inserción");
-                        }//fin else se inserto
+                            } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
+                            }
+                            //fin else se inserto
+                        }
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                          JOptionPane.showMessageDialog(null, "class notfound");
                     } catch (SQLException ex) {
-                        Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                       // Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                          JOptionPane.showMessageDialog(null, "sqlexception");
                     }
                     
                 }//fin else si las tablas estan vacias.

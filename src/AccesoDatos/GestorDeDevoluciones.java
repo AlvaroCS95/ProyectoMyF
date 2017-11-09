@@ -27,22 +27,36 @@ public class GestorDeDevoluciones extends Coneccion {
     }
 
     public boolean IngresarDevolucion(Devolucion LaDevolucion) throws SQLException, ClassNotFoundException {
-
+        boolean exito = true;
         EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+        consulta = conexion.createStatement();
         try {
 
-            llamadaAlMetodo = conexion.prepareCall("{call IngresarDevolucion (?,?,?,?)}");
-            llamadaAlMetodo.setString(1, LaDevolucion.getNumeroFactura());
-            llamadaAlMetodo.setInt(2, LaDevolucion.getCedulaUsuario());
-            llamadaAlMetodo.setFloat(3, LaDevolucion.getValorTotal());
-            llamadaAlMetodo.setFloat(4, LaDevolucion.getReintegroAlCliente());
-            llamadaAlMetodo.execute();
-            ResultSet Resultado = llamadaAlMetodo.getResultSet();
-            llamadaAlMetodo.close();
-            return true;
+            try {
+            resultadoConsulta = consulta.executeQuery("call IngresarDevolucion"
+                    + "(" + LaDevolucion.getNumeroFactura()+ "," + LaDevolucion.getCedulaUsuario()
+                    + "," + LaDevolucion.getValorTotal()+ "," + LaDevolucion.getReintegroAlCliente()+ ");");
+          exito=true;
+    
         } catch (Exception e) {
-
-            return false;
+           return exito=false;        
+        }
+            while(resultadoConsulta.next()){
+            if(resultadoConsulta.getObject(1).equals("2"))
+            {exito=true;
+            
+            }else{
+            
+            exito=false;
+            }
+            }
+            //llamadaAlMetodo.close();
+            return exito;
+        } catch (Exception e) {
+            exito=false;
+            return exito;
         }
     }
 
