@@ -153,7 +153,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             };
             CoordinadorDeClientes elCoordinador = new CoordinadorDeClientes();
             ResultSet resultadoConsulta = elCoordinador.ListarClientes();
-            modelo.addColumn("Codigo");
+            modelo.addColumn("Código");
             modelo.addColumn("Cédula");
             modelo.addColumn("Primer nombre");
             modelo.addColumn("Segundo nombre");
@@ -161,9 +161,9 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             modelo.addColumn("Segundo apellido");
             modelo.addColumn("Nivel");
 
-            modelo.addColumn("Direccion");
+            modelo.addColumn("Dirección");
             modelo.addColumn("Nombre de local");
-            modelo.addColumn("Razon Social");
+            modelo.addColumn("Razón Social");
             Listar.setModel(modelo);
             filas = new Object[modelo.getColumnCount()];
             if (resultadoConsulta == null) {
@@ -262,12 +262,13 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
         String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
         String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,7 ).toString();
+          String Direccion = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,9 ).toString();
 
         String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
         elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
-                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar,Razon);
+                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar,Razon,Direccion);
         elClienteAEditar.setVisible(true);
 
     }

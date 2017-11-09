@@ -140,7 +140,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         if (cbxFiltro.getSelectedItem() == "Direccion") {
             columnaABuscar = 4;
         }
-        trsFiltro.setRowFilter(RowFilter.regexFilter(txtCedulaABuscar_BuscarProveedor.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtCedulaABuscar_BuscarProveedor.getText(), columnaABuscar));
     }
 
     public void EliminarProveedor(JTable Lista) {

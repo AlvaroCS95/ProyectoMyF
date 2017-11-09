@@ -24,7 +24,7 @@ public class CoordinadorDeFacturaVenta {
         resultado = gestor.BuscarProductoParaVender(codigo, nuevaCantidadAcumulada);
         try {
             while (resultado.next()) {
-                if (resultado.getObject(1).equals("2")) {
+                if (resultado.getObject(1).equals("-2")) {
                     return fila = null;
 
                 } else {
@@ -112,9 +112,9 @@ public class CoordinadorDeFacturaVenta {
         return listaParaRetornar;
     }
 
-    public int ObtenerIdClientePorNumeroCedula(String cedulaABuscar) {
+    public int ObtenerIdClientePorNumeroCedula(String codigoABuscar) {
         GestorFacturaVenta gestor = new GestorFacturaVenta();
-        resultado = gestor.ObtenerIDClientePorNumeroDeCedula(cedulaABuscar);
+        resultado = gestor.ObtenerIDClientePorCodigo(codigoABuscar);
         try {
             if (resultado.next()) {
                 return resultado.getInt(1);

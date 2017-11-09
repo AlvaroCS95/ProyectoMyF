@@ -21,6 +21,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
     static int Id = 0;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
+    static boolean estado = false;
 
     public DetallesDeRuta(java.awt.Frame parent, boolean modal, int id, String Nombre) {
         super(parent, modal);
@@ -132,9 +133,11 @@ public class DetallesDeRuta extends javax.swing.JDialog {
 
         if (DetallesRuta.getSelectedItem().equals("Clientes")) {
             ListarClientesPorBusqueda(Id);
+            estado = false;
 
         } else if (DetallesRuta.getSelectedItem().equals("Camiones")) {
             ListarCamionesPorBusqueda(Id);
+            estado = true;
 
         }
     }//GEN-LAST:event_DetallesRutaActionPerformed
@@ -143,7 +146,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
 
         String cedula = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-         String dia =  TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+        String dia = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
         int dialogResult = JOptionPane.showConfirmDialog(null, "<html><h4>¿ Desea elimar el cliente? </h4></html>", "Confirmar eliminación",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
 
@@ -151,11 +154,37 @@ public class DetallesDeRuta extends javax.swing.JDialog {
 
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
             ResultSet respuesta;
-            respuesta = elCoordinador.EliminarClienteDeRuta(cedula, dia);
+            respuesta = elCoordinador.EliminarClienteDeRuta(cedula,dia,Id);
             if (respuesta.next()) {
                 if (respuesta.getString(1).equals("2")) {
-                   
+
                     ListarClientesPorBusqueda(Id);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en la eliminación");
+                }
+            }
+
+        }
+    }
+     public void elimiarCamionDeRuta() throws SQLException, ClassNotFoundException {
+
+        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
+
+        String placa = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+        String dia = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+        int dialogResult = JOptionPane.showConfirmDialog(null, "<html><h4>¿ Desea elimar el camion? </h4></html>", "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
+
+        if (dialogResult == JOptionPane.YES_OPTION) {
+
+            CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+            ResultSet respuesta;
+            respuesta = elCoordinador.EliminarCamionDeRuta(placa, dia,Id);
+            if (respuesta.next()) {
+                if (respuesta.getString(1).equals("2")) {
+
+                    ListarCamionesPorBusqueda(Id);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la eliminación");
@@ -166,7 +195,12 @@ public class DetallesDeRuta extends javax.swing.JDialog {
     }
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         try {
-            elimiarClienteDeRuta();
+            if (estado == false) {
+                 elimiarClienteDeRuta();
+            } else {
+                elimiarCamionDeRuta();
+            }
+           
         } catch (SQLException ex) {
             Logger.getLogger(DetallesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -178,7 +212,6 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         FilaSeleccionadaParaEliminar = TablaDetalles.getSelectedRow();
         SeleccionDeFila = true;        // TODO add your handling code here:
     }//GEN-LAST:event_TablaDetallesMousePressed
-   
 
     public static void ListarClientesPorBusqueda(int id) {
         try {
@@ -235,6 +268,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
             modeloVerCamiones.addColumn("Marca");
             modeloVerCamiones.addColumn("Estilo");
             modeloVerCamiones.addColumn("Modelo");
+            modeloVerCamiones.addColumn("Dia de visita");
             filas = new Object[modeloVerCamiones.getColumnCount()];
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
 

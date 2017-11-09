@@ -10,6 +10,8 @@ import Modelos.Proveedor;
 import static UI.BuscarProveedores.BuscarProveedor;
 import static UI.BuscarProveedores.txtCedulaABuscar_BuscarProveedor;
 import UI.ListarProveedor;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -200,23 +202,25 @@ public class EditarProveedor extends javax.swing.JDialog {
         txtTelefono_EditarProveedor.setText("");
 
     }
-public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
+    }
+
     public void cargarDatos() {
         txtCedulaJuridica_EditarProveedor.setText(Cedula);
         txtNombre_EditarProveedor.setText(Nombre);
@@ -237,7 +241,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
     }
 
-    public void editarProveedor() throws ClassNotFoundException {
+    public void editarProveedor() throws ClassNotFoundException, SQLException {
         if (VerificaCamposVacios() == true) {
             JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
 
@@ -249,27 +253,33 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             Proveedor elProveedor = new Proveedor(Cedula, Nombre, Direccion, Correo, Telefono);
 
             CoordinadorDeProveedores elCoordinadorDeProveedores = new CoordinadorDeProveedores();
-            if (elCoordinadorDeProveedores.EditarProveedor(elProveedor) == true) {
-                JOptionPane.showMessageDialog(null, "Proveedor editado con exito");
-                Limpiar();
-                dispose();
-              ListarProveedor.VisualizarProveedores();
-              if (ListarProveedor.panelHabilitado == true) {
-                            txtCedulaABuscar_BuscarProveedor.setText("");
-                           BuscarProveedor();
-                            BuscarProveedores.VisualizarTodosLosProveedores();
-                           
-                        }
-            } else {
+            ResultSet respuestas = null;
+            respuestas = elCoordinadorDeProveedores.EditarProveedor(elProveedor);
+            if (respuestas.next()) {
+                if (respuestas.getString(1).equals("1")) {
+                    JOptionPane.showMessageDialog(null, "Proveedor editado con exito");
+                    Limpiar();
+                    dispose();
+                    ListarProveedor.VisualizarProveedores();
+                    if (ListarProveedor.panelHabilitado == true) {
+                        
+                        BuscarProveedores.VisualizarTodosLosProveedores();
 
-                JOptionPane.showMessageDialog(null, "Fallo en la edicion del proveedor ");
+                    }
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Fallo en la edicion del proveedor ");
+                }
             }
+
         }
     }
     private void btAceptar_EditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarProveedorActionPerformed
         try {
             editarProveedor();        // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(EditarProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btAceptar_EditarProveedorActionPerformed

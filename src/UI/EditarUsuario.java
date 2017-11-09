@@ -131,12 +131,14 @@ public void LimpiarCampos() {
         jLabel15.setText("Editar usuario");
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Edit_Male_User_Icon_128.png"))); // NOI18N
+        jLabel17.setToolTipText("Ventana editar usuarios");
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator3.setAlignmentX(5.0F);
 
         txtPrimerNombre_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerNombre_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtPrimerNombre_EditarUsuario.setToolTipText("Campo para ingresar primer nombre del usuario");
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel18.setText("Primer nombre");
@@ -146,18 +148,21 @@ public void LimpiarCampos() {
 
         txtSegundoNombre_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoNombre_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtSegundoNombre_EditarUsuario.setToolTipText("Campo para ingresar segundo nombre del usuario");
 
         jLabel21.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel21.setText("Primer apellido");
 
         txtPrimerApellido_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerApellido_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtPrimerApellido_EditarUsuario.setToolTipText("Campo para ingresar primer apellido del usuario");
 
         jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel20.setText("Segundo apellido");
 
         txtSegundoApellido_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoApellido_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtSegundoApellido_EditarUsuario.setToolTipText("Campo para ingresar segundo apellido del usuario");
 
         jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel22.setText("Cedúla");
@@ -165,10 +170,11 @@ public void LimpiarCampos() {
         txtCedula_EditarUsuario.setEditable(false);
         txtCedula_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedula_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtCedula_EditarUsuario.setToolTipText("Cedula del usuario a editar");
         txtCedula_EditarUsuario.setEnabled(false);
 
         btAceptar_EditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
-        btAceptar_EditarUsuario.setToolTipText("Oprimir para guardar usuario");
+        btAceptar_EditarUsuario.setToolTipText("Oprimir para guardar cambios del usuario");
         btAceptar_EditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_EditarUsuarioActionPerformed(evt);
@@ -191,10 +197,12 @@ public void LimpiarCampos() {
 
         jpwsContraseña_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jpwsContraseña_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        jpwsContraseña_EditarUsuario.setToolTipText("Campo para ingresar contraseña actual del usuario");
         jpwsContraseña_EditarUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         txtNombreUsuario_EditarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreUsuario_EditarUsuario.setForeground(new java.awt.Color(0, 102, 102));
+        txtNombreUsuario_EditarUsuario.setToolTipText("Campo para ingresar nombre de usuario");
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel23.setText("Nombre de usuarios");
@@ -203,6 +211,7 @@ public void LimpiarCampos() {
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Cambiar contraseña");
+        jButton1.setToolTipText("Presione si desea cambiar su contraseña");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -263,8 +272,8 @@ public void LimpiarCampos() {
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addGap(38, 38, 38)
-                                .addComponent(jpwsContraseña_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(31, 31, 31)
+                                .addComponent(jpwsContraseña_EditarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(

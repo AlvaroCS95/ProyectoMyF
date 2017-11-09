@@ -28,6 +28,7 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
     public VisualizarDetallesDeCarga(int IdCarga) {
         initComponents();
         IDCarga=IdCarga;
+          ListarDetalleDeCarga();
     }
  public void filtroPalabraClave(String busqueda) {
         int columnaABuscar = 0;

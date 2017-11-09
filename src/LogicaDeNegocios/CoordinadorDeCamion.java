@@ -12,7 +12,7 @@ public class CoordinadorDeCamion {
     public CoordinadorDeCamion() {
     }
 
-    public boolean InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
+    public ResultSet InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
         return elGestorDeCamion.InsertarCamion(elCamion);
 
@@ -29,7 +29,7 @@ public class CoordinadorDeCamion {
         }
       return insertóCarga;
     }
-     public boolean EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
+     public ResultSet EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
         return elGestorDeCamion.EditarCamion(elCamion);
 

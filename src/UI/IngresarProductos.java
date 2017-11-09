@@ -24,9 +24,11 @@ public class IngresarProductos extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            else{
+            cmbxClasificacion_IngresarProductos.removeAllItems();
             while (resultadoConsulta.next()) {
                 cmbxClasificacion_IngresarProductos.addItem(resultadoConsulta.getString(2));
-            }
+            }}
         } catch (SQLException ex) {
 
         } catch (ClassNotFoundException ex) {
@@ -102,12 +104,13 @@ public class IngresarProductos extends javax.swing.JPanel {
             ResultSet resultadoConsulta = elCoordinador.ListarUMES();
             if (resultadoConsulta == null) {
                 JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
-                return;
+                
             }
-
+            else{
+               cmbxUME_IngresarProductos.removeAllItems();
             while (resultadoConsulta.next()) {
                 cmbxUME_IngresarProductos.addItem(resultadoConsulta.getString(2));
-            }
+            }}
         } catch (SQLException ex) {
 
         } catch (ClassNotFoundException ex) {
@@ -117,8 +120,7 @@ public class IngresarProductos extends javax.swing.JPanel {
     }
 
     public void Actualizar() {
-        cmbxClasificacion_IngresarProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione..."}));
-        cmbxUME_IngresarProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Seleccione..."}));
+    
         ListarUMES();
         ListarClasificaciones();
     }

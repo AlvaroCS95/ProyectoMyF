@@ -2,6 +2,7 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeInventario;
 import Modelos.Producto;
+import static UI.IngresarProductos.cmbxClasificacion_IngresarProductos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,12 +37,12 @@ public class EditarProducto extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         txtNombre_EditarProductos = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
-        cmbxClasificacion_EditarProductos = new javax.swing.JComboBox<String>();
+        cmbxClasificacion_EditarProductos = new javax.swing.JComboBox<>();
         btIngClasificacion_EditarProductos = new javax.swing.JButton();
         jLabel39 = new javax.swing.JLabel();
         txtPrecio_EditarProductos = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        cmbxUME_EditarProductos = new javax.swing.JComboBox<String>();
+        cmbxUME_EditarProductos = new javax.swing.JComboBox<>();
         btIngUME_IngresarProductos = new javax.swing.JButton();
         lbExistencias_EditarProductos = new javax.swing.JLabel();
         txtExistencias_EditarProductos = new javax.swing.JTextField();
@@ -424,6 +425,7 @@ public class EditarProducto extends javax.swing.JFrame {
                 Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, existencias, precio, IdUME);
                 if (elCoordinadorDeInventario.EditarProducto(elProducto) == true) {
                     JOptionPane.showMessageDialog(null, "Producto editado exitosamente");
+                    VisualizarProductos.VisualizarTodosProductos();
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la actualización");
                 }
@@ -471,7 +473,7 @@ public class EditarProducto extends javax.swing.JFrame {
         return true;
     }
 
-    public void ListarClasificaciones() {
+    public static void ListarClasificaciones() {
         try {
             CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
             ResultSet resultadoConsulta = elCoordinador.ListarClasificaciones();
@@ -479,9 +481,11 @@ public class EditarProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            else{
+            cmbxClasificacion_EditarProductos.removeAllItems();
             while (resultadoConsulta.next()) {
                 cmbxClasificacion_EditarProductos.addItem(resultadoConsulta.getString(2));
-            }
+            }}
         } catch (SQLException ex) {
 
         } catch (ClassNotFoundException ex) {
@@ -490,7 +494,7 @@ public class EditarProducto extends javax.swing.JFrame {
 
     }
 
-    public void ListarUMES() {
+    public static void ListarUMES() {
         try {
             CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
             ResultSet resultadoConsulta = elCoordinador.ListarUMES();
@@ -498,6 +502,8 @@ public class EditarProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+              cmbxUME_EditarProductos.removeAllItems();
+              
             while (resultadoConsulta.next()) {
                 cmbxUME_EditarProductos.addItem(resultadoConsulta.getString(2));
             }
@@ -520,8 +526,8 @@ public class EditarProducto extends javax.swing.JFrame {
     private javax.swing.JButton btIngClasificacion_EditarProductos;
     private javax.swing.JButton btIngUME_IngresarProductos;
     public static javax.swing.JButton btLimpiar_IngresarInventario;
-    private javax.swing.JComboBox<String> cmbxClasificacion_EditarProductos;
-    private javax.swing.JComboBox<String> cmbxUME_EditarProductos;
+    private static javax.swing.JComboBox<String> cmbxClasificacion_EditarProductos;
+    private static javax.swing.JComboBox<String> cmbxUME_EditarProductos;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;

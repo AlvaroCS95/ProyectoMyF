@@ -65,7 +65,7 @@ public class GestorDeRutas extends Coneccion{
             return resultadoConsulta;
         }
     }
-     public ResultSet EliminarClienteDeRuta(String cedula,String idD) throws 
+     public ResultSet EliminarClienteDeRuta(String cedula,String idD,int IdR) throws 
             ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -74,7 +74,22 @@ public class GestorDeRutas extends Coneccion{
         consulta = conexion.createStatement();
         try {
             resultadoConsulta = consulta.executeQuery("call EliminarClienteDeRuta"
-                    + "('"+cedula+"','"+idD+"'); ");
+                    + "('"+cedula+"','"+idD+"',"+IdR+"); ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
+      public ResultSet EliminarCamionDeRuta(String cedula,String idD,int Idr) throws 
+            ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call EliminarCamionDeRuta"
+                    + "('"+cedula+"','"+idD+"',"+Idr+"); ");
             return resultadoConsulta;
         } catch (SQLException ex) {
             return resultadoConsulta;
