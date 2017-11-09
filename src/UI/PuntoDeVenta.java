@@ -479,16 +479,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 + "Cédula del cliente: "+txtCedulaCliente_PuntoDeVenta.getText()+"\n"
                 + "Cliente: "+DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText())+"\n"
                 + "Forma de pago: "+cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString()+"\n"
-                + "Número de referencia: "+nuReferencia+"\n"
+                + "Número de referencia: "+nuReferencia+"\n";
         facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
 
-        CuerpoDelTextoAImprimir = "Factura Contado\n"
-                + "Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
-                + "Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText() + "\n"
-                + "Cliente: " + DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText()) + "\n"
-                + "Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
-                + "Número de referencia: " + nuReferencia + "\n"
-                + "----------------------------------------------\n\n";
     }
 
     public void CrearFacturaVentaCreditoConAbono() {

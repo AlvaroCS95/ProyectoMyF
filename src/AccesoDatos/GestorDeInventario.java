@@ -15,14 +15,14 @@ public class GestorDeInventario extends Coneccion {
     CallableStatement llamadaAlMetodo;
     Connection conect;
     
-    public float ObtenerPrecioDeUnProducto(String CodigoProducto) throws ClassNotFoundException, SQLException {
+    public float ObtenerPrecioDeUnProducto(String CodigoProducto, int NumeroFactura) throws ClassNotFoundException, SQLException {
            float PrecioProducto=0;
               try {
                     EstablecerConexion();
                    Statement statement= conexion.createStatement();
                    ResultSet resulset;
 
-               String busca="call DevolverPrecioDeUnProductoPorCodigo('"+CodigoProducto+"')";
+               String busca="call DevolverPrecioDeUnProductoPorCodigo('"+CodigoProducto+"',"+NumeroFactura+")";
                 resulset=statement.executeQuery(busca);
             while(resulset.next())
                 {

@@ -461,13 +461,13 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 } else {
                 
                     int factura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
-                   LaDevolucionAIngresar= new Devolucion(UsuarioActivo, 5, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
+                   LaDevolucionAIngresar= new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
                     
                     try {
                         
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
                             
-                            try {
+                           // try {
                             boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
                             if (SeIngresoLosDetalles == true) {
                             JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
@@ -478,9 +478,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                             } else {
                             JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
                             }
-                            } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Error en la inserción de los detalle");
-                            }
+                           
                             //fin else se inserto
                         }
                     } catch (ClassNotFoundException ex) {
@@ -923,11 +921,11 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         return IdDevolucionBuscada;
     }
 
-    private float DevolverPrecioDeUnProducto(String CodigoProducto) {
+    private float DevolverPrecioDeUnProducto(String CodigoProducto, int NumeroFactura) {
         float ElPrecioDelProductoBuscado = 0;
         CoordinadorDeInventario ElProductoBuscado = new CoordinadorDeInventario();
         try {
-            ElPrecioDelProductoBuscado = ElProductoBuscado.DevolverPrecio(CodigoProducto);
+            ElPrecioDelProductoBuscado = ElProductoBuscado.DevolverPrecio(CodigoProducto,NumeroFactura);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error buscando el precio", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1000,10 +998,12 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         float PrecioVenta = 0;
         float Cantidad = 0;
         String CodigoProducto = "";
+        int NumeroFactura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
+        
         for (int Contador = 0; Contador < TablaARecogerPrecios.getRowCount(); Contador++) {
             CodigoProducto = TablaARecogerPrecios.getValueAt(Contador, 0).toString();
             Cantidad = Float.parseFloat(TablaARecogerPrecios.getValueAt(Contador, 2).toString());
-            PrecioVenta = DevolverPrecioDeUnProducto(CodigoProducto);
+            PrecioVenta = DevolverPrecioDeUnProducto(CodigoProducto,NumeroFactura);
             PrecioRecogido += Cantidad * PrecioVenta;
         }
         return PrecioRecogido;
@@ -1047,6 +1047,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 Exito = ElCoordinadorDeProductosDesechados.IngresarProductosDesechados(ElProductoDesechado);
             } catch (Exception e) {
                 Exito = false;
+                JOptionPane.showMessageDialog(null, "no se porque no se ingresa desechos jaja");
             }
         }
         return Exito;
