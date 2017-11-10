@@ -618,7 +618,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String NombreLocal = "";
         CoordinadorDeClientes elCliente = new CoordinadorDeClientes();
         try {
-            NombreLocal = elCliente.ObtenerNombreLocalPorCedulaCliente(CedulaCliente);
+            NombreLocal = elCliente.ObtenerNombreLocalPorCodigoCliente(CedulaCliente);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error buscando el nombre del local", "Error", JOptionPane.ERROR_MESSAGE);
