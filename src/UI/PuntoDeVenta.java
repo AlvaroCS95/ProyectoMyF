@@ -23,8 +23,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public PuntoDeVenta() {
         initComponents();
-        RestrictedTextField restriccionCedula = new RestrictedTextField(txtCedulaCliente_PuntoDeVenta);
-        RestrictedTextField restriccionNRefe = new RestrictedTextField(txtCedulaCliente_PuntoDeVenta);
+        RestrictedTextField restriccionCedula = new RestrictedTextField(txtCodigoCliente_PuntoDeVenta);
+        RestrictedTextField restriccionNRefe = new RestrictedTextField(txtCodigoCliente_PuntoDeVenta);
         restriccionCedula.setOnlyNums(true);
         restriccionCedula.setLimit(10);
         restriccionNRefe.setLimit(10);
@@ -109,9 +109,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public boolean VerificarCliente() {
-        if (!txtCedulaCliente_PuntoDeVenta.getText().isEmpty()) {
+        if (!txtCodigoCliente_PuntoDeVenta.getText().isEmpty()) {
             CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
-            int resultado = coordinador.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
+            int resultado = coordinador.ObtenerIdClientePorNumeroCedula(txtCodigoCliente_PuntoDeVenta.getText());
             if (resultado != -1) {
                 return true;
             }
@@ -470,15 +470,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         totalParaCambiar = totalParaCambiar.replace(",", ".");
         float totalVendido = Float.parseFloat(totalParaCambiar);
         TotalVendido = totalVendido;
-        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
+        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigoCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
         facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
 
         CuerpoDelTextoAImprimir = "Factura Contado\n"
                 + "Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
-                + "Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText() + "\n"
-                + "Cliente: " + DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText()) + "\n"
+                + "Cédula del cliente: " + txtCodigoCliente_PuntoDeVenta.getText() + "\n"
+                + "Cliente: " + DevolverNombreLocalPorCedula(txtCodigoCliente_PuntoDeVenta.getText()) + "\n"
                 + "Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
                 + "Número de referencia: " + nuReferencia + "\n"
                 + "----------------------------------------------\n\n";
@@ -492,7 +492,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
         totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
         TotalVendido = totalVendido;
-        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
+        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigoCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
         montoAbonado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
@@ -502,8 +502,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         facturaVenta.CrearFacturaVentaCredito(totalVendido, idCliente, idTipoPago, nuReferencia, plazoDias, montoAbonado);
         CuerpoDelTextoAImprimir = "Factura Credito Con Abono\n"
                 + "Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
-                + "Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText() + "\n"
-                + "Cliente: " + DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText()) + "\n"
+                + "Cédula del cliente: " + txtCodigoCliente_PuntoDeVenta.getText() + "\n"
+                + "Cliente: " + DevolverNombreLocalPorCedula(txtCodigoCliente_PuntoDeVenta.getText()) + "\n"
                 + "Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
                 + "Número de referencia: " + nuReferencia + "\n"
                 + "Plazo de días: " + plazoDias + "\n"
@@ -518,7 +518,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
         totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
         TotalVendido = totalVendido;
-        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
+        idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigoCliente_PuntoDeVenta.getText());
         idTipoPago = 1;
         nuReferencia = txtNDeReferencia.getText();
         montoAbonado = 0;
@@ -526,8 +526,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         facturaVenta.CrearFacturaVentaCredito(totalVendido, idCliente, idTipoPago, nuReferencia, plazoDias, montoAbonado);
         CuerpoDelTextoAImprimir = "  Factura Credito Sin Abono\n"
                 + "  Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
-                + "  Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText() + "\n"
-                + "  Cliente: " + DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText()) + "\n"
+                + "  Cédula del cliente: " + txtCodigoCliente_PuntoDeVenta.getText() + "\n"
+                + "  Cliente: " + DevolverNombreLocalPorCedula(txtCodigoCliente_PuntoDeVenta.getText()) + "\n"
                 + "  Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
                 + "  Número de referencia: " + nuReferencia + "\n"
                 + "  Plazo de días: " + plazoDias + "\n"
@@ -571,7 +571,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         cmbxFormaDePago_PuntoDeVenta.setSelectedIndex(0);
         cmbxTipoVenta_PuntoDeVenta.setSelectedIndex(0);
         txtCantidadDeProducto_PuntoDeVenta.setText("");
-        txtCedulaCliente_PuntoDeVenta.setText("");
+        txtCodigoCliente_PuntoDeVenta.setText("");
         txtCodigoDelProducto_PuntoDeVenta.setText("");
         txtDescuento_PuntoDeVenta.setText("0");
         txtMontoDePago_PuntoDeVenta.setText("");
@@ -671,7 +671,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         jLNReferencia = new javax.swing.JLabel();
         txtNDeReferencia = new javax.swing.JTextField();
         jLCliente_PuntoDeVenta = new javax.swing.JLabel();
-        txtCedulaCliente_PuntoDeVenta = new javax.swing.JTextField();
+        txtCodigoCliente_PuntoDeVenta = new javax.swing.JTextField();
         jLPlazoDias = new javax.swing.JLabel();
         jSDiasPlazo_PuntoDeVenta = new javax.swing.JSpinner();
         jCAbonar_PuntoVenta = new javax.swing.JCheckBox();
@@ -755,7 +755,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 970, 179));
 
         jLabel89.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        jLabel89.setText("Codigo de producto:");
+        jLabel89.setText("Código de producto:");
         add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 166, -1));
 
         jLabel93.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -817,14 +817,14 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(FacturarVenta_PuntoDeVEnta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 520, 90, 80));
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jButton2.setText("Limpiar");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 380, 90, 30));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 370, 40, 40));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel3.setText("Tipo de venta:");
@@ -868,11 +868,11 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(txtNDeReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 430, 180, -1));
 
         jLCliente_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        jLCliente_PuntoDeVenta.setText("Cliente:");
-        add(jLCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, -1, -1));
+        jLCliente_PuntoDeVenta.setText("Cod. Cliente:");
+        add(jLCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, -1, -1));
 
-        txtCedulaCliente_PuntoDeVenta.setToolTipText("Cédula del cliente  al que le está vendiendo.");
-        add(txtCedulaCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 150, 30));
+        txtCodigoCliente_PuntoDeVenta.setToolTipText("Cédula del cliente  al que le está vendiendo.");
+        add(txtCodigoCliente_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 150, 30));
 
         jLPlazoDias.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLPlazoDias.setText("Plazo de días para pagar:");
@@ -981,7 +981,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JPopupMenu jppMontoPagoPuntoDeVenta;
     private javax.swing.JPopupMenu jppPuntoVenta;
     public static javax.swing.JTextField txtCantidadDeProducto_PuntoDeVenta;
-    public static javax.swing.JTextField txtCedulaCliente_PuntoDeVenta;
+    public static javax.swing.JTextField txtCodigoCliente_PuntoDeVenta;
     public static javax.swing.JTextField txtCodigoDelProducto_PuntoDeVenta;
     public static javax.swing.JTextField txtDescuento_PuntoDeVenta;
     public static javax.swing.JTextField txtMontoDePago_PuntoDeVenta;
