@@ -4,7 +4,8 @@ import LogicaDeNegocios.CoordinadorDeClientes;
 
 import static UI.BuscarClientes.columnaABuscar;
 
-import static UI.PuntoDeVenta.txtCodigoCliente_PuntoDeVenta;
+import static UI.PuntoDeVenta.txtCodigoCli_PuntoDeVenta;
+import static UI.PuntoDeVenta.txtCantidadDeProducto_PuntoDeVenta;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -66,6 +67,7 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jtListarClientesPV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtListarClientesPV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtListarClientesPVMouseClicked(evt);
@@ -81,7 +83,7 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
         });
 
         cbxFiltroCliente.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        cbxFiltroCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo", "Cedula", "Nombre del propietario", "Nombre del local", "Razon social" }));
+        cbxFiltroCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Código", "Cédula", "Nombre del propietario", "Nombre del local", "Razón social" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,22 +91,20 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 664, Short.MAX_VALUE)
-                        .addComponent(jbAceptar)
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtBuscar_PuntoDeVenta)
+                .addComponent(txtBuscar_PuntoDeVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(cbxFiltroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbAceptar)
+                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,16 +116,18 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
                     .addComponent(cbxFiltroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jbAceptar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        txtCodigoCliente_PuntoDeVenta.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
+        String s = jtListarClientesPV.getValueAt(fila, 0).toString();
+        txtCodigoCli_PuntoDeVenta.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
+        txtCantidadDeProducto_PuntoDeVenta.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
         dispose();
     }//GEN-LAST:event_jbAceptarActionPerformed
 
@@ -142,16 +144,16 @@ BuscarCliente();        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar_PuntoDeVentaKeyTyped
     public static void filtro() {
     
-        if (cbxFiltroCliente.getSelectedItem() == "Codigo") {
+        if (cbxFiltroCliente.getSelectedItem() == "Código") {
             columnaABuscar = 0;
         }
-        if (cbxFiltroCliente.getSelectedItem() == "Cedula") {
+        if (cbxFiltroCliente.getSelectedItem() == "Cédula") {
             columnaABuscar = 1;
         }
         if (cbxFiltroCliente.getSelectedItem() == "Nombre del propietario") {
             columnaABuscar = 2;
         }
-        if (cbxFiltroCliente.getSelectedItem() == "Razon social") {
+        if (cbxFiltroCliente.getSelectedItem() == "Razón social") {
             columnaABuscar = 6;
         }
         if (cbxFiltroCliente.getSelectedItem() == "Nombre del local") {
