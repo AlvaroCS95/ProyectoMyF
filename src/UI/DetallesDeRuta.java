@@ -149,14 +149,15 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         String dia = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
         int dialogResult = JOptionPane.showConfirmDialog(null, "<html><h4>¿ Desea elimar el cliente? </h4></html>", "Confirmar eliminación",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
-
+       
         if (dialogResult == JOptionPane.YES_OPTION) {
-
+                JOptionPane.showMessageDialog(null, cedula+"\n"+dia+"\n"+Id);
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
             ResultSet respuesta;
             respuesta = elCoordinador.EliminarClienteDeRuta(cedula,dia,Id);
+            JOptionPane.showMessageDialog(null,respuesta);
             if (respuesta.next()) {
-                if (respuesta.getString(1).equals("2")) {
+                if (respuesta.getString(1).equals("1")) {
 
                     ListarClientesPorBusqueda(Id);
 
@@ -182,7 +183,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
             ResultSet respuesta;
             respuesta = elCoordinador.EliminarCamionDeRuta(placa, dia,Id);
             if (respuesta.next()) {
-                if (respuesta.getString(1).equals("2")) {
+                if (respuesta.getString(1).equals("1")) {
 
                     ListarCamionesPorBusqueda(Id);
 
@@ -291,7 +292,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
             }
             TablaDetalles.setModel(modeloVerCamiones);
         } catch (SQLException | ClassNotFoundException ex) {
-
+             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
     /**

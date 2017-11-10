@@ -139,7 +139,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                     try {
                         if (Respuesta.next()) {
 
-                            if (Respuesta.getString(1).equals("2")) {
+                            if (Respuesta.getString(1).equals("1")) {
 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Existe un fallo en la asignación");
