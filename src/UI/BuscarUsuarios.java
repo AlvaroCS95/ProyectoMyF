@@ -38,23 +38,25 @@ public class BuscarUsuarios extends javax.swing.JDialog {
         VisualizarTodosLosUsuarios();
         cerrar();
     }
-public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
+    }
+
     @SuppressWarnings("unchecked")
 
     public static void VisualizarTodosLosUsuarios() {
@@ -106,88 +108,92 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         }
 
     }
-     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
 
-        int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, 
+    private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
+
+        int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame,
                 JOptionPane.YES_NO_OPTION);
         return OpcionDelUsuario;
     }
-         public void EliminarUsuario() throws SQLException, ClassNotFoundException {
+
+    public void EliminarUsuario() throws SQLException, ClassNotFoundException {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un Usuario de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un usuario de la lista.");
         } else {
-            String Estado=TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+            String Estado = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
             String CedulaDelUsuarioSeleccionadoAEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
             String NombreUsuarioSeleccionadoAEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-              if(Estado.equals("Inactivo")){
-                        JOptionPane.showMessageDialog(null,"Este usuario ha sido eliminado con anterioridad");
-                    }else{
-              
-            
-            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el usuario: " + NombreUsuarioSeleccionadoAEliminar
-                    + " \ncon la cedula número: " + CedulaDelUsuarioSeleccionadoAEliminar + "?", "Eliminar Usuario");
-            if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+            if (Estado.equals("Inactivo")) {
+                JOptionPane.showMessageDialog(null, "Este usuario ha sido eliminado con anterioridad");
+            } else {
 
-                CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
-                try {
-                  
-                    elCoordinadorDeUsuarios.CambiarEstadoUsuario(CedulaDelUsuarioSeleccionadoAEliminar);
-                     VisualizarUsuarios();
-                     if (ListarUsuarios.panel == true) {
-                           
+                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el usuario: " + NombreUsuarioSeleccionadoAEliminar
+                        + " \ncon la cedula número: " + CedulaDelUsuarioSeleccionadoAEliminar + "?", "Eliminar Usuario");
+                if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+
+                    CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
+                    try {
+
+                        elCoordinadorDeUsuarios.CambiarEstadoUsuario(CedulaDelUsuarioSeleccionadoAEliminar);
+                        VisualizarUsuarios();
+                        if (ListarUsuarios.panel == true) {
+
                             txtCedulaABuscar_BuscarUsuario.setText("");
                             BuscarUsuario();
                             VisualizarTodosLosUsuarios();
-                            
+
                         }
-                   
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                SeleccionDeFila = false;
             }
-            SeleccionDeFila = false;}
         }
     }
-  public void ActivarUsuario() throws SQLException, ClassNotFoundException {
+
+    public void ActivarUsuario() throws SQLException, ClassNotFoundException {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un Usuario de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un usuario de la lista.");
         } else {
-            String Estado=TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+            String Estado = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
             String CedulaDelUsuarioSeleccionadoAEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
             String NombreUsuarioSeleccionadoAEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-              if(Estado.equals("Activo")){
-                        JOptionPane.showMessageDialog(null,"Este usuario ha sido activado con anterioridad");
-                    }else{
-              
-            
-            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea activar el usuario: " + NombreUsuarioSeleccionadoAEliminar
-                    + " \ncon la cedula número: " + CedulaDelUsuarioSeleccionadoAEliminar + "?", "Activar Usuario");
-            if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+            if (Estado.equals("Activo")) {
+                JOptionPane.showMessageDialog(null, "Este usuario ha sido activado con anterioridad");
+            } else {
 
-                CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
-                try {
-                  
-                    elCoordinadorDeUsuarios.CambiarEstadoUsuario(CedulaDelUsuarioSeleccionadoAEliminar);
-                   
-                     VisualizarUsuarios();
-                     if (ListarUsuarios.panel == true) {
-                           
+                int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea activar el usuario: " + NombreUsuarioSeleccionadoAEliminar
+                        + " \ncon la cedula número: " + CedulaDelUsuarioSeleccionadoAEliminar + "?", "Activar Usuario");
+                if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
+
+                    CoordinadorDeUsuarios elCoordinadorDeUsuarios = new CoordinadorDeUsuarios();
+                    try {
+
+                        elCoordinadorDeUsuarios.CambiarEstadoUsuario(CedulaDelUsuarioSeleccionadoAEliminar);
+
+                        VisualizarUsuarios();
+                        if (ListarUsuarios.panel == true) {
+
                             txtCedulaABuscar_BuscarUsuario.setText("");
                             BuscarUsuario();
-                             VisualizarTodosLosUsuarios();
-                            
+                            VisualizarTodosLosUsuarios();
+
                         }
-                } catch (SQLException ex) {
-                    Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                SeleccionDeFila = false;
             }
-            SeleccionDeFila = false;}
         }
     }
+
     public static void filtro() {
         int columnaABuscar = 0;
         if (cbxFiltro.getSelectedItem() == "Cedula") {
@@ -199,7 +205,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         if (cbxFiltro.getSelectedItem() == "Apellido") {
             columnaABuscar = 3;
         }
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtCedulaABuscar_BuscarUsuario.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtCedulaABuscar_BuscarUsuario.getText(), columnaABuscar));
     }
 
     public static void BuscarUsuario() {
@@ -301,8 +307,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         TablaFiltrarUsuarios_BuscarUsuarios.setToolTipText("");
         TablaFiltrarUsuarios_BuscarUsuarios.setComponentPopupMenu(menuBuscar);
         TablaFiltrarUsuarios_BuscarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaFiltrarUsuarios_BuscarUsuariosMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaFiltrarUsuarios_BuscarUsuariosMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaFiltrarUsuarios_BuscarUsuarios);
@@ -351,11 +357,6 @@ addWindowListener(new java.awt.event.WindowAdapter() {
 
     }//GEN-LAST:event_cbxFiltroActionPerformed
 
-    private void TablaFiltrarUsuarios_BuscarUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFiltrarUsuarios_BuscarUsuariosMousePressed
-        FilaSeleccionadaParaEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaFiltrarUsuarios_BuscarUsuariosMousePressed
-
     private void ActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActivarActionPerformed
         try {
             ActivarUsuario();        // TODO add your handling code here:
@@ -375,22 +376,30 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             Logger.getLogger(BuscarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_EliminarActionPerformed
-   public void EditarUsuario() {
+    public void EditarUsuario() {
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un usuario de la lista.");
+        } else {
 
-        String CedulaDelUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String PrimerNombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String SegundoNombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String PrimerApellidoUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String SegundoApellidoUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String NombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+            String CedulaDelUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            String PrimerNombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String SegundoNombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+            String PrimerApellidoUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            String SegundoApellidoUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+            String NombreUsuarioSeleccionadoAEditar = TablaFiltrarUsuarios_BuscarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
 
-        elUsuarioAEditar = new EditarUsuario(null,true,CedulaDelUsuarioSeleccionadoAEditar, PrimerNombreUsuarioSeleccionadoAEditar, SegundoNombreUsuarioSeleccionadoAEditar, PrimerApellidoUsuarioSeleccionadoAEditar, SegundoApellidoUsuarioSeleccionadoAEditar, NombreUsuarioSeleccionadoAEditar);
-        elUsuarioAEditar.setVisible(true);
-
+            elUsuarioAEditar = new EditarUsuario(null, true, CedulaDelUsuarioSeleccionadoAEditar, PrimerNombreUsuarioSeleccionadoAEditar, SegundoNombreUsuarioSeleccionadoAEditar, PrimerApellidoUsuarioSeleccionadoAEditar, SegundoApellidoUsuarioSeleccionadoAEditar, NombreUsuarioSeleccionadoAEditar);
+            elUsuarioAEditar.setVisible(true);
+        }
     }
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-     EditarUsuario();
+        EditarUsuario();
     }//GEN-LAST:event_EditarActionPerformed
+
+    private void TablaFiltrarUsuarios_BuscarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFiltrarUsuarios_BuscarUsuariosMouseClicked
+        FilaSeleccionadaParaEliminar = TablaFiltrarUsuarios_BuscarUsuarios.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaFiltrarUsuarios_BuscarUsuariosMouseClicked
 
     /**
      * @param args the command line arguments

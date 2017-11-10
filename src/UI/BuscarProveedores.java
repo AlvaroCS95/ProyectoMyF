@@ -285,8 +285,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         TablaBuscarProveedores_BuscarProveedores.setToolTipText("Muestra los proveedores.");
         TablaBuscarProveedores_BuscarProveedores.setComponentPopupMenu(menuFiltar);
         TablaBuscarProveedores_BuscarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaBuscarProveedores_BuscarProveedoresMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBuscarProveedores_BuscarProveedoresMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaBuscarProveedores_BuscarProveedores);
@@ -350,11 +350,6 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TablaBuscarProveedores_BuscarProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBuscarProveedores_BuscarProveedoresMousePressed
-        FilaSeleccionadaParaEliminar = TablaBuscarProveedores_BuscarProveedores.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaBuscarProveedores_BuscarProveedoresMousePressed
-
     private void txtCedulaABuscar_BuscarProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaABuscar_BuscarProveedorKeyTyped
         BuscarProveedor();
 
@@ -381,6 +376,11 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             Logger.getLogger(BuscarProveedores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ActivarActionPerformed
+
+    private void TablaBuscarProveedores_BuscarProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBuscarProveedores_BuscarProveedoresMouseClicked
+FilaSeleccionadaParaEliminar = TablaBuscarProveedores_BuscarProveedores.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaBuscarProveedores_BuscarProveedoresMouseClicked
 
     /**
      * @param args the command line arguments

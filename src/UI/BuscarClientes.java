@@ -139,8 +139,8 @@ public class BuscarClientes extends javax.swing.JDialog {
         TablaFiltrarClientes_ListarClientes.setColumnSelectionAllowed(true);
         TablaFiltrarClientes_ListarClientes.setComponentPopupMenu(menuFiltro);
         TablaFiltrarClientes_ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaFiltrarClientes_ListarClientesMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaFiltrarClientes_ListarClientesMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaFiltrarClientes_ListarClientes);
@@ -261,11 +261,6 @@ public class BuscarClientes extends javax.swing.JDialog {
 
     }//GEN-LAST:event_cbxFiltroActionPerformed
 
-    private void TablaFiltrarClientes_ListarClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFiltrarClientes_ListarClientesMousePressed
-        FilaSeleccionadaParaEliminar = TablaFiltrarClientes_ListarClientes.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaFiltrarClientes_ListarClientesMousePressed
-
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
         EditarCliente(TablaFiltrarClientes_ListarClientes);
     }//GEN-LAST:event_EditarActionPerformed
@@ -277,6 +272,11 @@ public class BuscarClientes extends javax.swing.JDialog {
     private void ActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActivarActionPerformed
         ActivarCliente(TablaFiltrarClientes_ListarClientes);
     }//GEN-LAST:event_ActivarActionPerformed
+
+    private void TablaFiltrarClientes_ListarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFiltrarClientes_ListarClientesMouseClicked
+        FilaSeleccionadaParaEliminar = TablaFiltrarClientes_ListarClientes.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaFiltrarClientes_ListarClientesMouseClicked
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
 
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
@@ -361,7 +361,9 @@ public class BuscarClientes extends javax.swing.JDialog {
     }
 
     public void EditarCliente(JTable Lista) {
-
+if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
+        } else {
         String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
         String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
         String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
@@ -375,7 +377,7 @@ public class BuscarClientes extends javax.swing.JDialog {
                 SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
                 SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar, RazonSocial,Direccion);
         elClienteAEditar.setVisible(true);
-
+}
     }
 
     public  void BuscarCliente() {

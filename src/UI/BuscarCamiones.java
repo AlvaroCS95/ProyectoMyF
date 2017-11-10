@@ -102,8 +102,8 @@ public class BuscarCamiones extends javax.swing.JDialog {
         ));
         TablaBuscarCamiones.setComponentPopupMenu(menuFiltrar);
         TablaBuscarCamiones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaBuscarCamionesMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBuscarCamionesMouseClicked(evt);
             }
         });
         jScrollPane6.setViewportView(TablaBuscarCamiones);
@@ -188,12 +188,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         }
             }
         });
-}
-    private void TablaBuscarCamionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBuscarCamionesMousePressed
-        FilaSeleccionadaParaEliminar = TablaBuscarCamiones.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaBuscarCamionesMousePressed
-
+}    
     private void txtPlaca_BuscarCamionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlaca_BuscarCamionKeyTyped
         BuscarCamion();
     }//GEN-LAST:event_txtPlaca_BuscarCamionKeyTyped
@@ -384,6 +379,11 @@ addWindowListener(new java.awt.event.WindowAdapter() {
             Logger.getLogger(BuscarCamiones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ActivarActionPerformed
+
+    private void TablaBuscarCamionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBuscarCamionesMouseClicked
+   FilaSeleccionadaParaEliminar = TablaBuscarCamiones.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaBuscarCamionesMouseClicked
 
     /**
      * @param args the command line arguments

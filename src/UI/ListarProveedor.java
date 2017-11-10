@@ -1,4 +1,3 @@
-
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeProveedores;
@@ -12,17 +11,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ListarProveedor extends javax.swing.JPanel {
- static Object[] filas;
+
+    static Object[] filas;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
     EditarProveedor elProveedorAEditar = null;
-  public static boolean panelHabilitado=false;
+    public static boolean panelHabilitado = false;
+
     public ListarProveedor() {
         initComponents();
 //       
     }
 
-     public  static void VisualizarProveedores() {
+    public static void VisualizarProveedores() {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
 
@@ -38,7 +39,7 @@ public class ListarProveedor extends javax.swing.JPanel {
             modelo.addColumn("Correo electronico");
             modelo.addColumn("Direccion");
             modelo.addColumn("Telefono");
-           
+
             filas = new Object[modelo.getColumnCount()];
             TablaListarProveedores_ListarProveedores.setModel(modelo);
             if (resultadoConsulta == null) {
@@ -61,15 +62,16 @@ public class ListarProveedor extends javax.swing.JPanel {
         }
 
     }
-private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
+
+    private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
 
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
         return OpcionDelUsuario;
     }
 
- public void EliminarProveedor() {
+    public void EliminarProveedor() {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un proveedor de la lista.");
         } else {
             String CedulaDelClienteSeleccionadoAEliminar = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
             String NombreClienteSeleccionadoAEliminar = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
@@ -91,20 +93,22 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             SeleccionDeFila = false;
         }
     }
- public void editarProveedor(){
- if (SeleccionDeFila == false) {
+
+    public void editarProveedor() {
+        if (SeleccionDeFila == false) {
             JOptionPane.showMessageDialog(null, "Primero selecione un proveedor de la lista.");
-        }else{
-        String Cedula= TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String Nombre = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String Direccion = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String Telefono = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String correo = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-       
-        elProveedorAEditar = new EditarProveedor(null,true, Cedula, Nombre, Direccion,correo, Telefono );
-        elProveedorAEditar.setVisible(true);
- }
-}
+        } else {
+            String Cedula = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            String Nombre = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String Direccion = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            String Telefono = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+            String correo = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+
+            elProveedorAEditar = new EditarProveedor(null, true, Cedula, Nombre, Direccion, correo, Telefono);
+            elProveedorAEditar.setVisible(true);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,8 +161,8 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         TablaListarProveedores_ListarProveedores.setToolTipText("Lista de proveedores registrados.");
         TablaListarProveedores_ListarProveedores.setComponentPopupMenu(MenuProveedor);
         TablaListarProveedores_ListarProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaListarProveedores_ListarProveedoresMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaListarProveedores_ListarProveedoresMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaListarProveedores_ListarProveedores);
@@ -265,30 +269,30 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TablaListarProveedores_ListarProveedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarProveedores_ListarProveedoresMousePressed
-        FilaSeleccionadaParaEliminar = TablaListarProveedores_ListarProveedores.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaListarProveedores_ListarProveedoresMousePressed
-
     private void btBuscar_ListarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscar_ListarProveedorActionPerformed
-        panelHabilitado=true;
-        BuscarProveedores elProveedor= new BuscarProveedores(null, true);
+        panelHabilitado = true;
+        BuscarProveedores elProveedor = new BuscarProveedores(null, true);
         elProveedor.setVisible(true);
-    
+
     }//GEN-LAST:event_btBuscar_ListarProveedorActionPerformed
 
     private void btnActualizar_ListarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar_ListarProveedorActionPerformed
-  IngresarProveedor elProveedor= new IngresarProveedor(null, true);
-  elProveedor.setVisible(true);
+        IngresarProveedor elProveedor = new IngresarProveedor(null, true);
+        elProveedor.setVisible(true);
     }//GEN-LAST:event_btnActualizar_ListarProveedorActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-       EliminarProveedor();
+        EliminarProveedor();
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-       editarProveedor();
+        editarProveedor();
     }//GEN-LAST:event_EditarActionPerformed
+
+    private void TablaListarProveedores_ListarProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarProveedores_ListarProveedoresMouseClicked
+        FilaSeleccionadaParaEliminar = TablaListarProveedores_ListarProveedores.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaListarProveedores_ListarProveedoresMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

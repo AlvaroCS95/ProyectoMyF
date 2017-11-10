@@ -1,4 +1,3 @@
-
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeRutas;
@@ -34,7 +33,8 @@ public class BuscarRutas extends javax.swing.JDialog {
     static DefaultTableModel modeloVerClientes, modeloVerCamiones;
     public static TableRowSorter trsFiltro;
     static ResultSet resultadoConsulta;
-    static  int columnaABuscar = 0;
+    static int columnaABuscar = 0;
+
     public BuscarRutas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -181,8 +181,8 @@ public class BuscarRutas extends javax.swing.JDialog {
         ));
         TableBuscarRutas_GestorDeRutas.setComponentPopupMenu(Menu);
         TableBuscarRutas_GestorDeRutas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TableBuscarRutas_GestorDeRutasMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableBuscarRutas_GestorDeRutasMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(TableBuscarRutas_GestorDeRutas);
@@ -228,64 +228,70 @@ public class BuscarRutas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxOpcionesBuscarRuta_GestorDeRutastipoDeBusqueda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOpcionesBuscarRuta_GestorDeRutastipoDeBusqueda
-filtro();
+        filtro();
     }//GEN-LAST:event_cbxOpcionesBuscarRuta_GestorDeRutastipoDeBusqueda
 
-    private void TableBuscarRutas_GestorDeRutasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableBuscarRutas_GestorDeRutasMousePressed
-        FilaSeleccionadaParaEliminar = TableBuscarRutas_GestorDeRutas.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TableBuscarRutas_GestorDeRutasMousePressed
-
     private void txtBuscarRuta_GestorDeRutaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRuta_GestorDeRutaKeyTyped
-BuscarRuta();
+        BuscarRuta();
 
     }//GEN-LAST:event_txtBuscarRuta_GestorDeRutaKeyTyped
- public void editar(){
-     int id=(int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,0);
-      String Nombre=TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,1).toString();
-      String Detalle=TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,2).toString();
-        EditarRutas editar= new EditarRutas(null, true, id, Nombre, Detalle);
-        editar.setVisible(true);
-     }
+    public void editar() {
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un ruta de la lista.");
+        } else {
+            int id = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
+            String Nombre = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String Detalle = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+            EditarRutas editar = new EditarRutas(null, true, id, Nombre, Detalle);
+            editar.setVisible(true);
+        }
+    }
+
     public void eliminarRutas(int id) throws ClassNotFoundException, SQLException {
-        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un ruta de la lista.");
+        } else {
+            Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
 
-        String estado = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        if(estado.equals("Inactivo")){
-         JOptionPane.showMessageDialog(null, "Error,esta ruta se encuentra inactivada");
-         return;
-        }else{
-         int dialogResult = JOptionPane.showConfirmDialog(null,"<html><h4>¿ Desea elimar la ruta ?</h4></html>", "Confirmar eliminación",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
-     
-         if (dialogResult == JOptionPane.YES_OPTION) {
+            String estado = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            if (estado.equals("Inactivo")) {
+                JOptionPane.showMessageDialog(null, "Error,esta ruta se encuentra inactivada");
+                return;
+            } else {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "<html><h4>¿ Desea elimar la ruta ?</h4></html>", "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icono);
 
-            CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
-            ResultSet respuesta;
-            respuesta = elCoordinador.CambiarEstadoRutaPorId(id);
-            if (respuesta.next()) {
-                if (respuesta.getString(1).equals("2")) {
-                    JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                if (dialogResult == JOptionPane.YES_OPTION) {
 
-                      VisualizarTodasLasRutas();
-                      VisualizarRutasActivas(); 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error en la eliminación");
+                    CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+                    ResultSet respuesta;
+                    respuesta = elCoordinador.CambiarEstadoRutaPorId(id);
+                    if (respuesta.next()) {
+                        if (respuesta.getString(1).equals("2")) {
+                            JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+
+                            VisualizarTodasLasRutas();
+                            VisualizarRutasActivas();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error en la eliminación");
+                        }
+                    }
                 }
             }
         }
-        }
-       
-       
     }
     private void AsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsignacionActionPerformed
-        int id = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
-        String Nombre = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        AsignacionesDeRuta laAsignacion = new AsignacionesDeRuta(null, true, id, Nombre);
-        laAsignacion.setVisible(true);        // TODO add your handling code here:
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un ruta de la lista.");
+        } else {
+            int id = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
+            String Nombre = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            AsignacionesDeRuta laAsignacion = new AsignacionesDeRuta(null, true, id, Nombre);
+            laAsignacion.setVisible(true);
+        }     // TODO add your handling code here:
     }//GEN-LAST:event_AsignacionActionPerformed
-     public static void filtro() {
-       
+    public static void filtro() {
+
         if (cbxOpcionesBuscarRuta_GestorDeRutas.getSelectedItem() == "N°Ruta") {
             opcionBusqueda = true;
             columnaABuscar = 0;
@@ -295,51 +301,61 @@ BuscarRuta();
             columnaABuscar = 1;
         }
 
-        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtBuscarRuta_GestorDeRuta.getText(), columnaABuscar));
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtBuscarRuta_GestorDeRuta.getText(), columnaABuscar));
     }
-       public static void BuscarRuta() {
 
-         txtBuscarRuta_GestorDeRuta.addKeyListener(new KeyAdapter() {
+    public static void BuscarRuta() {
+
+        txtBuscarRuta_GestorDeRuta.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 String cadena = (txtBuscarRuta_GestorDeRuta.getText());
                 txtBuscarRuta_GestorDeRuta.setText(cadena);
 
-                filtro();         
+                filtro();
             }
         });
         trsFiltro = new TableRowSorter(TableBuscarRutas_GestorDeRutas.getModel());
         TableBuscarRutas_GestorDeRutas.setRowSorter(trsFiltro);
     }
     private void MostarDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostarDetallesActionPerformed
-        int id = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
-        String Nombre = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        DetallesDeRuta losDetalles = new DetallesDeRuta(null, true, id, Nombre);
-        losDetalles.setVisible(true);        // TODO add your handling code here:
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un ruta de la lista.");
+        } else {
+            int id = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
+            String Nombre = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            DetallesDeRuta losDetalles = new DetallesDeRuta(null, true, id, Nombre);
+            losDetalles.setVisible(true);
+        }     // TODO add your handling code here:
     }//GEN-LAST:event_MostarDetallesActionPerformed
- public void activarRutas(int id) throws ClassNotFoundException, SQLException {
-         String estado = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        if(estado.equals("Activo")){
-         JOptionPane.showMessageDialog(null, "Error,esta ruta se encuentra activa");
-         return;
-        }else{
-        CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
-        ResultSet respuesta;
-        respuesta = elCoordinador.CambiarEstadoRutaPorId(id);
-        if (respuesta.next()) {
-            if (respuesta.getString(1).equals("2")) {
-                JOptionPane.showMessageDialog(null, "Activacion exitosa");
-
-                VisualizarTodasLasRutas();
-                   VisualizarRutasActivas(); 
-
+    public void activarRutas(int id) throws ClassNotFoundException, SQLException {
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un ruta de la lista.");
+        } else {
+            String estado = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            if (estado.equals("Activo")) {
+                JOptionPane.showMessageDialog(null, "Error,esta ruta se encuentra activa");
+                return;
             } else {
-                JOptionPane.showMessageDialog(null, "Error en la activacion");
+                CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+                ResultSet respuesta;
+                respuesta = elCoordinador.CambiarEstadoRutaPorId(id);
+                if (respuesta.next()) {
+                    if (respuesta.getString(1).equals("2")) {
+                        JOptionPane.showMessageDialog(null, "Activacion exitosa");
+
+                        VisualizarTodasLasRutas();
+                        VisualizarRutasActivas();
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error en la activacion");
+                    }
+                }
             }
-        }}
+        }
     }
     private void InactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InactivarActionPerformed
         try {
-             int RutaEliminar = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
+            int RutaEliminar = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
             eliminarRutas(RutaEliminar);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(BuscarRutas.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,8 +365,8 @@ BuscarRuta();
     }//GEN-LAST:event_InactivarActionPerformed
 
     private void ActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActivarActionPerformed
-         int RutaEliminar = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
-           
+        int RutaEliminar = (int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 0);
+
         try {
             activarRutas(RutaEliminar);      // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
@@ -361,8 +377,13 @@ BuscarRuta();
     }//GEN-LAST:event_ActivarActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-editar();        // TODO add your handling code here:
+        editar();        // TODO add your handling code here:
     }//GEN-LAST:event_EditarActionPerformed
+
+    private void TableBuscarRutas_GestorDeRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableBuscarRutas_GestorDeRutasMouseClicked
+        FilaSeleccionadaParaEliminar = TableBuscarRutas_GestorDeRutas.getSelectedRow();
+        SeleccionDeFila = true;
+    }//GEN-LAST:event_TableBuscarRutas_GestorDeRutasMouseClicked
 
     /**
      * @param args the command line arguments

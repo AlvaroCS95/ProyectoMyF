@@ -1,4 +1,3 @@
-
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeClientes;
@@ -102,8 +101,8 @@ public class ListarClientes extends javax.swing.JPanel {
         TablaListarClientes_ListarClientes.setColumnSelectionAllowed(true);
         TablaListarClientes_ListarClientes.setComponentPopupMenu(menuClientes);
         TablaListarClientes_ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaListarClientes_ListarClientesMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaListarClientes_ListarClientesMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaListarClientes_ListarClientes);
@@ -250,30 +249,29 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
             SeleccionDeFila = false;
         }
     }
-    private void TablaListarClientes_ListarClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarClientes_ListarClientesMousePressed
-        FilaSeleccionadaParaEliminar = TablaListarClientes_ListarClientes.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaListarClientes_ListarClientesMousePressed
+
     public void EditarCliente(JTable Lista) {
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
+        } else {
+            String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+            String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+            String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+            String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
+            String Direccion = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+            String Razon = Lista.getValueAt(FilaSeleccionadaParaEliminar, 9).toString();
 
-        String CedulaDelClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String PrimerNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String SegundoNombreClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String PrimerApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String SegundoApellidoClienteSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
-        String Nivel = Lista.getValueAt(FilaSeleccionadaParaEliminar, 6).toString();
-          String Direccion = Lista.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
-        String Razon=Lista.getValueAt(FilaSeleccionadaParaEliminar,9 ).toString();
-
-        String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
-        elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
-                SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
-                SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar,Razon,Direccion);
-        elClienteAEditar.setVisible(true);
-
+            String NombreLocalSeleccionadoAEditar = Lista.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
+            elClienteAEditar = new EditarCliente(null, true, Nivel, CedulaDelClienteSeleccionadoAEditar, PrimerNombreClienteSeleccionadoAEditar,
+                    SegundoNombreClienteSeleccionadoAEditar, PrimerApellidoClienteSeleccionadoAEditar,
+                    SegundoApellidoClienteSeleccionadoAEditar, NombreLocalSeleccionadoAEditar, Razon, Direccion);
+            elClienteAEditar.setVisible(true);
+        }
     }
     private void btAgregar_ListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregar_ListarUsuariosActionPerformed
-      IngresarClientes ingresoCliente = new IngresarClientes(null, true);
+        IngresarClientes ingresoCliente = new IngresarClientes(null, true);
         ingresoCliente.setVisible(true);
     }//GEN-LAST:event_btAgregar_ListarUsuariosActionPerformed
 
@@ -291,6 +289,11 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         EliminarCliente(TablaListarClientes_ListarClientes);
     }//GEN-LAST:event_EliminarActionPerformed
+
+    private void TablaListarClientes_ListarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarClientes_ListarClientesMouseClicked
+        FilaSeleccionadaParaEliminar = TablaListarClientes_ListarClientes.getSelectedRow();
+        SeleccionDeFila = true;       
+    }//GEN-LAST:event_TablaListarClientes_ListarClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

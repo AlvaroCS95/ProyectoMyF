@@ -16,7 +16,7 @@ public class ListarCamiones extends javax.swing.JPanel {
     static Object[] filas;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
-   static boolean panelHabilitado=false;
+    static boolean panelHabilitado = false;
     EditarProveedor elProveedorAEditar = null;
 
     public ListarCamiones() {
@@ -115,8 +115,8 @@ public class ListarCamiones extends javax.swing.JPanel {
         TablaListarCamiones_ListarCamiones.setToolTipText("Muestra los camiones registrados.");
         TablaListarCamiones_ListarCamiones.setComponentPopupMenu(menuCamiones);
         TablaListarCamiones_ListarCamiones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaListarCamiones_ListarCamionesMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaListarCamiones_ListarCamionesMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaListarCamiones_ListarCamiones);
@@ -156,42 +156,42 @@ public class ListarCamiones extends javax.swing.JPanel {
         }
     }
     private void btBuscar_ListarCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscar_ListarCamionActionPerformed
-       panelHabilitado=true;
-        BuscarCamiones elCamion = new BuscarCamiones(null,true);
+        panelHabilitado = true;
+        BuscarCamiones elCamion = new BuscarCamiones(null, true);
         elCamion.setVisible(true);
     }//GEN-LAST:event_btBuscar_ListarCamionActionPerformed
     public void EditarCamion() {
-if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un proveedor de la lista.");
-        }else{
-        String NumeroDePlaca=TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String Marca=TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String Modelo=TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
-        String Estilo=TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String Color=TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        Date FechaDeCompra=(Date) TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 4);
-        float Capacidad=Float.parseFloat(TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 6).toString());
-         EditarCamion editarCamion= new EditarCamion(null, true, NumeroDePlaca, Marca, Modelo, Estilo, Color, FechaDeCompra, Capacidad);
-        editarCamion.setVisible(true);
-}
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un camión de la lista.");
+        } else {
+            String NumeroDePlaca = TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            String Marca = TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String Modelo = TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+            String Estilo = TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+            String Color = TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            Date FechaDeCompra = (Date) TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 4);
+            float Capacidad = Float.parseFloat(TablaListarCamiones_ListarCamiones.getValueAt(FilaSeleccionadaParaEliminar, 6).toString());
+            EditarCamion editarCamion = new EditarCamion(null, true, NumeroDePlaca, Marca, Modelo, Estilo, Color, FechaDeCompra, Capacidad);
+            editarCamion.setVisible(true);
+        }
     }
     private void btnActualizar_ListarCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar_ListarCamionActionPerformed
-  IngresarCamiones elCamion= new IngresarCamiones(null,true);
-  elCamion.setVisible(true);
+        IngresarCamiones elCamion = new IngresarCamiones(null, true);
+        elCamion.setVisible(true);
     }//GEN-LAST:event_btnActualizar_ListarCamionActionPerformed
 
-    private void TablaListarCamiones_ListarCamionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarCamiones_ListarCamionesMousePressed
-        FilaSeleccionadaParaEliminar = TablaListarCamiones_ListarCamiones.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaListarCamiones_ListarCamionesMousePressed
-
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-       EditarCamion();
+        EditarCamion();
     }//GEN-LAST:event_EditarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-       EliminarCamion();
+        EliminarCamion();
     }//GEN-LAST:event_EliminarActionPerformed
+
+    private void TablaListarCamiones_ListarCamionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarCamiones_ListarCamionesMouseClicked
+        FilaSeleccionadaParaEliminar = TablaListarCamiones_ListarCamiones.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaListarCamiones_ListarCamionesMouseClicked
     public static void VisualizarCamion(JTable Listar) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
@@ -219,10 +219,9 @@ if (SeleccionDeFila == false) {
             }
             while (resultadoConsulta.next()) {
                 for (int i = 0; i < modelo.getColumnCount(); i++) {
-                    
-                        
-                        filas[i] = resultadoConsulta.getObject(i + 1);
-                    
+
+                    filas[i] = resultadoConsulta.getObject(i + 1);
+
                 }
                 modelo.addRow(filas);
                 Listar.setModel(modelo);

@@ -251,8 +251,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         ));
         TablaAsignaciones.setComponentPopupMenu(menuCamion);
         TablaAsignaciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaAsignacionesMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAsignacionesMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaAsignaciones);
@@ -270,8 +270,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         ));
         TablaAsignarCliente.setComponentPopupMenu(menuClientes);
         TablaAsignarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaAsignarClienteMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAsignarClienteMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(TablaAsignarCliente);
@@ -289,8 +289,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         ));
         TablaAsignarCamion.setComponentPopupMenu(menuCamiones);
         TablaAsignarCamion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaAsignarCamionMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAsignarCamionMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(TablaAsignarCamion);
@@ -516,26 +516,6 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
             Logger.getLogger(AsignacionesDeRuta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAceptar_GestorRutasingresarRutas
-
-    private void TablaAsignacionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionesMousePressed
-        FilaSeleccionadaParaEliminar = TablaAsignaciones.getSelectedRow();
-        SeleccionDeFila = true;
-
-    }//GEN-LAST:event_TablaAsignacionesMousePressed
-
-    private void TablaAsignarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignarClienteMousePressed
-        FilaSeleccionadaParaEliminar = TablaAsignarCliente.getSelectedRow();
-        SeleccionDeFila = true;
-
-
-    }//GEN-LAST:event_TablaAsignarClienteMousePressed
-
-    private void TablaAsignarCamionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignarCamionMousePressed
-        FilaSeleccionadaParaEliminar = TablaAsignarCamion.getSelectedRow();
-        SeleccionDeFila = true;
-
-
-    }//GEN-LAST:event_TablaAsignarCamionMousePressed
     public void OpcionFiltro() {
         if (opcionFiltro == false) {
             AgregarTablaCliente();
@@ -563,6 +543,21 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     private void LunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LunesActionPerformed
 
     }//GEN-LAST:event_LunesActionPerformed
+
+    private void TablaAsignacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionesMouseClicked
+        FilaSeleccionadaParaEliminar = TablaAsignaciones.getSelectedRow();
+        SeleccionDeFila = true;
+    }//GEN-LAST:event_TablaAsignacionesMouseClicked
+
+    private void TablaAsignarCamionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignarCamionMouseClicked
+        FilaSeleccionadaParaEliminar = TablaAsignarCamion.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaAsignarCamionMouseClicked
+
+    private void TablaAsignarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignarClienteMouseClicked
+        FilaSeleccionadaParaEliminar = TablaAsignarCliente.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaAsignarClienteMouseClicked
 
     /**
      * @param args the command line arguments

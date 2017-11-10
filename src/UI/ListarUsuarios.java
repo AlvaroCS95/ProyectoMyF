@@ -1,8 +1,6 @@
-
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeUsuarios;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,16 +12,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class ListarUsuarios extends javax.swing.JPanel {
 
-   static Object[] filas;
+    static Object[] filas;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
     EditarUsuario elUsuarioAEditar = null;
-    public static boolean panel=false;
-   
+    public static boolean panel = false;
 
     public ListarUsuarios() {
         initComponents();
-      
 
     }
 
@@ -100,8 +96,8 @@ public class ListarUsuarios extends javax.swing.JPanel {
         ));
         TablaListarUsuarios_ListarUsuarios.setComponentPopupMenu(menuUsuarios);
         TablaListarUsuarios_ListarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaListarUsuarios_ListarUsuariosMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaListarUsuarios_ListarUsuariosMouseClicked(evt);
             }
         });
         jScrollPane5.setViewportView(TablaListarUsuarios_ListarUsuarios);
@@ -235,7 +231,7 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
 
     public void EliminarUsuario() {
         if (SeleccionDeFila == false) {
-            JOptionPane.showMessageDialog(null, "Primero selecione un Usuario de la lista.");
+            JOptionPane.showMessageDialog(null, "Primero selecione un usuario de la lista.");
         } else {
             String CedulaDelUsuarioSeleccionadoAEliminar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
             String NombreUsuarioSeleccionadoAEliminar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
@@ -253,48 +249,50 @@ private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String 
                     Logger.getLogger(ListarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-             SeleccionDeFila=false;
+            SeleccionDeFila = false;
         }
     }
-    
-    
+
+
     private void btBuscar_ListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscar_ListarUsuariosActionPerformed
-         panel=true;  
-        BuscarUsuarios elUsuarioBuscar=new BuscarUsuarios(null, true);
-          elUsuarioBuscar.setVisible(true);
-          
+        panel = true;
+        BuscarUsuarios elUsuarioBuscar = new BuscarUsuarios(null, true);
+        elUsuarioBuscar.setVisible(true);
+
     }//GEN-LAST:event_btBuscar_ListarUsuariosActionPerformed
-
-    private void TablaListarUsuarios_ListarUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarUsuarios_ListarUsuariosMousePressed
-        FilaSeleccionadaParaEliminar = TablaListarUsuarios_ListarUsuarios.getSelectedRow();
-        SeleccionDeFila = true;
-    }//GEN-LAST:event_TablaListarUsuarios_ListarUsuariosMousePressed
     public void EditarUsuario() {
+        if (SeleccionDeFila == false) {
+            JOptionPane.showMessageDialog(null, "Primero selecione un usuario de la lista.");
+        } else {
+            String CedulaDelUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            String PrimerNombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+            String SegundoNombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
+            String PrimerApellidoUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
+            String SegundoApellidoUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
+            String NombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
 
-        String CedulaDelUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        String PrimerNombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-        String SegundoNombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-        String PrimerApellidoUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
-        String SegundoApellidoUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 4).toString();
-        String NombreUsuarioSeleccionadoAEditar = TablaListarUsuarios_ListarUsuarios.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
-
-        elUsuarioAEditar = new EditarUsuario(null,true,CedulaDelUsuarioSeleccionadoAEditar, PrimerNombreUsuarioSeleccionadoAEditar, SegundoNombreUsuarioSeleccionadoAEditar, PrimerApellidoUsuarioSeleccionadoAEditar, SegundoApellidoUsuarioSeleccionadoAEditar, NombreUsuarioSeleccionadoAEditar);
-        elUsuarioAEditar.setVisible(true);
-
+            elUsuarioAEditar = new EditarUsuario(null, true, CedulaDelUsuarioSeleccionadoAEditar, PrimerNombreUsuarioSeleccionadoAEditar, SegundoNombreUsuarioSeleccionadoAEditar, PrimerApellidoUsuarioSeleccionadoAEditar, SegundoApellidoUsuarioSeleccionadoAEditar, NombreUsuarioSeleccionadoAEditar);
+            elUsuarioAEditar.setVisible(true);
+        }
     }
     private void btnActualizarUsuario_ListarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarUsuario_ListarUsuarioActionPerformed
 
-        IngresarUsuarios elUsuarioIngresar= new IngresarUsuarios(null, true);
+        IngresarUsuarios elUsuarioIngresar = new IngresarUsuarios(null, true);
         elUsuarioIngresar.setVisible(true);
     }//GEN-LAST:event_btnActualizarUsuario_ListarUsuarioActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
-EditarUsuario();        // TODO add your handling code here:
+        EditarUsuario();        // TODO add your handling code here:
     }//GEN-LAST:event_EditarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         EliminarUsuario();
     }//GEN-LAST:event_EliminarActionPerformed
+
+    private void TablaListarUsuarios_ListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarUsuarios_ListarUsuariosMouseClicked
+        FilaSeleccionadaParaEliminar = TablaListarUsuarios_ListarUsuarios.getSelectedRow();
+        SeleccionDeFila = true;        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaListarUsuarios_ListarUsuariosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
