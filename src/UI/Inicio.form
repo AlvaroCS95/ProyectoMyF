@@ -54,11 +54,13 @@
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="text" type="java.lang.String" value="jMenu3"/>
+            <Property name="toolTipText" type="java.lang.String" value="Fecha del sistema"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
             <Property name="text" type="java.lang.String" value="jMenu4"/>
+            <Property name="toolTipText" type="java.lang.String" value="Hora del sistema"/>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
@@ -104,7 +106,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="-20" y="0" width="1370" height="700"/>
+          <AbsoluteConstraints x="0" y="0" width="1370" height="700"/>
         </Constraint>
       </Constraints>
 
@@ -230,7 +232,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="UI.IngresarProductos" name="ingresarProductos1">
+            <Component class="UI.IngresarProductos" name="ingresarProductos2">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Ingresar Productos">
