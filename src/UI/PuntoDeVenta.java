@@ -9,7 +9,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Atxy2k.CustomTextField.RestrictedTextField;
 import java.awt.event.KeyEvent;
 
 public class PuntoDeVenta extends javax.swing.JPanel {

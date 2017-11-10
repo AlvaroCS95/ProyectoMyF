@@ -50,7 +50,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel52" min="-2" pref="93" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cbxMostar_Cuentas" min="-2" pref="277" max="-2" attributes="0"/>
+                      <Component id="cbxMostar_Cuentas" min="-2" pref="374" max="-2" attributes="0"/>
                   </Group>
                   <Component id="Tutulo_Cuentas" alignment="0" min="-2" pref="722" max="-2" attributes="0"/>
               </Group>

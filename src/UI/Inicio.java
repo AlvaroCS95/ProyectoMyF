@@ -2,6 +2,7 @@ package UI;
 
 import java.awt.Dimension;
 import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
+import static UI.CuentasPorPagar.cbxMostar_Cuentas;
 import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
 import static UI.IngresarProductos.ListarClasificaciones;
@@ -61,9 +62,9 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         listarFacturasDeCompra1 = new UI.ListarFacturas();
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
+        ingresarProductos2 = new UI.IngresarProductos();
         visualizarProductos1 = new UI.VisualizarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
-        ingresarProductos2 = new UI.IngresarProductos();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
         JTClientes = new javax.swing.JTabbedPane();
         listarClientes1 = new UI.ListarClientes();
@@ -144,6 +145,17 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         JTInventario.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
+        ingresarProductos2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                ingresarProductos2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        JTInventario.addTab("Ingresar Productos", ingresarProductos2);
+
         visualizarProductos1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -155,7 +167,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
-        JTInventario.addTab("Ingresar Productos", ingresarProductos2);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
 
         JTInicio.addTab("Inventario", JTInventario);
@@ -293,6 +304,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private void cuentasPorPagar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cuentasPorPagar1AncestorAdded
         try {
             VisualizarCuentasPorPagar(tbCuentasPorPagar);
+            cbxMostar_Cuentas.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -405,7 +417,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     private void gestorDeRutas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_gestorDeRutas1AncestorAdded
         try {
-            VisualizarRutasActivas();     
+            VisualizarRutasActivas();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -414,6 +426,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
         VisualizarTodosProductos();      // TODO add your handling code here:
     }//GEN-LAST:event_visualizarProductos1AncestorAdded
+
+    private void ingresarProductos2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarProductos2AncestorAdded
+        ListarClasificaciones();
+        ListarUMES();
+    }//GEN-LAST:event_ingresarProductos2AncestorAdded
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
