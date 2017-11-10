@@ -559,9 +559,10 @@ public class PuntoDeVenta extends javax.swing.JPanel {
        
         CuerpoDelTextoAImprimir += "\t\tAbono: " + MontoAbonado + "\n"
                 + "\t\tTotal Con Abono: " + TotalConAbono + "\n"
-                + "\t\tTotal Vedido: " + TotalVendido + "\n"
+                + "\t\tTotal Vendido: " + TotalVendido + "\n"
                 + "Paga con: " + MontoCancelado + "\n"
-                + "Su vuelto: " + Vuelto;
+                + "Su vuelto: " + Vuelto+ "\n"
+                + "\n\n\nMuchas gracias por preferirnos";
     }
 
     public void LimpiarDatos() {
