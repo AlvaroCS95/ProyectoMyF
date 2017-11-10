@@ -495,7 +495,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
-        JOptionPane.showMessageDialog(null, nuReferencia);
         montoAbonado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
         TotalConAbono = TotalVendido - montoAbonado;
         MontoAbonado = montoAbonado;
@@ -550,13 +549,19 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             facturaVenta.AgregarDetalleFacturaVentaContado(codigo, cantidadVendida, descuentoAplicado, precioVendido);
             CuerpoDelTextoAImprimir += "\n" + codigo + "            " + cantidadVendida + "       " + precioVendido + "       " + descuentoAplicado + "\n";
         }
-//        float MontoCancelado=Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
-//        float Vuelto=TotalVendido-MontoCancelado;
+        float MontoCancelado = 0;
+        float Vuelto = 0;
+        if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")) {
+            MontoCancelado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
+             Vuelto = TotalVendido - MontoCancelado;
+        }
+
+       
         CuerpoDelTextoAImprimir += "\t\tAbono: " + MontoAbonado + "\n"
                 + "\t\tTotal Con Abono: " + TotalConAbono + "\n"
                 + "\t\tTotal Vedido: " + TotalVendido + "\n"
-                + "Paga con: " + "\n"
-                + "Su vuelto: ";
+                + "Paga con: " + MontoCancelado + "\n"
+                + "Su vuelto: " + Vuelto;
     }
 
     public void LimpiarDatos() {
