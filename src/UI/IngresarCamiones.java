@@ -302,7 +302,7 @@ public void IngresarCamion() throws ClassNotFoundException, SQLException {
             CoordinadorDeCamion elCoordinadorDeCamion = new CoordinadorDeCamion();
             Camion elCamion = new Camion(NumeroDePlaca, Marca, Modelo, Estilo, Color, ObtenerFechaDesde(), Capacidad);
             Resultado=elCoordinadorDeCamion.InsertarCamion(elCamion);
-            JOptionPane.showMessageDialog(null, Resultado);
+            
           if(Resultado.next()){
             
             if (Resultado.getString(1).equals("1")) {

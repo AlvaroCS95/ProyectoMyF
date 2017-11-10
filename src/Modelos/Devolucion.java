@@ -7,11 +7,11 @@ import java.util.Date;
 public class Devolucion {
 
   int CedulaUsuario;
-  String NumeroFactura;
+  int NumeroFactura;
   float ValorTotal;
   float ReintegroAlCliente;
 
-    public Devolucion( int CedulaUsuario, String NumeroFactura, float ValorTotal, float ReintegroAlCliente) {
+    public Devolucion( int CedulaUsuario, int NumeroFactura, float ValorTotal, float ReintegroAlCliente) {
         
         this.CedulaUsuario = CedulaUsuario;
         this.NumeroFactura = NumeroFactura;
@@ -27,7 +27,7 @@ public class Devolucion {
         return CedulaUsuario;
     }
 
-    public String getNumeroFactura() {
+    public int getNumeroFactura() {
         return NumeroFactura;
     }
 
@@ -45,7 +45,7 @@ public class Devolucion {
         this.CedulaUsuario = CedulaUsuario;
     }
 
-    public void setNumeroFactura(String NumeroFactura) {
+    public void setNumeroFactura(int NumeroFactura) {
         this.NumeroFactura = NumeroFactura;
     }
 

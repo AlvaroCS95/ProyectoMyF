@@ -64,6 +64,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         visualizarProductos1 = new UI.VisualizarProductos();
         ingresarProductos1 = new UI.IngresarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
+        ingresarProductos1 = new UI.IngresarProductos();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
         JTClientes = new javax.swing.JTabbedPane();
         listarClientes1 = new UI.ListarClientes();
@@ -155,6 +156,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
         JTInventario.addTab("Ingreso de productos", ingresarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
+        JTInventario.addTab("Ingresar Productos", ingresarProductos1);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
 
         JTInicio.addTab("Inventario", JTInventario);
@@ -235,7 +237,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         JTInicio.addTab("Rutas", gestorDeRutas1);
 
-        getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 700));
+        getContentPane().add(JTInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 1370, 700));
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 

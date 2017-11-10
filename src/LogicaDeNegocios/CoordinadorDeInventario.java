@@ -10,9 +10,9 @@ import java.sql.SQLException;
 
 public class CoordinadorDeInventario {
     
-    public float DevolverPrecio(String CodigoProducto) throws SQLException, ClassNotFoundException {
+    public float DevolverPrecio(String CodigoProducto, int NumeroFactura) throws SQLException, ClassNotFoundException {
         GestorDeInventario elGestorDeInventario = new GestorDeInventario();
-        return elGestorDeInventario.ObtenerPrecioDeUnProducto(CodigoProducto);
+        return elGestorDeInventario.ObtenerPrecioDeUnProducto(CodigoProducto,NumeroFactura);
     }
 
     public boolean AgregarProducto(Producto elProducto) throws ClassNotFoundException, SQLException {

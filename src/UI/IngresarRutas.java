@@ -31,6 +31,7 @@ public class IngresarRutas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        cerrar();
     }
  public void IngresarRuta() throws ClassNotFoundException, SQLException {
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
@@ -42,13 +43,30 @@ public class IngresarRutas extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "La ruta se inserto correctamente");
 
                
-               VisualizarRutasActivas();  
+                VisualizarRutasActivas();  
                 LimpiarCampos();               
             } else {
                 JOptionPane.showMessageDialog(null, "Error en la inserción");
             }
         }
 
+    }
+  public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")

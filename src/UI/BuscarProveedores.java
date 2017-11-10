@@ -32,6 +32,7 @@ public class BuscarProveedores extends javax.swing.JDialog {
     public static TableRowSorter trsFiltro;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
+     static int columnaABuscar = 0;
     EditarProveedor elProveedorAEditar = null;
 
     public BuscarProveedores(java.awt.Frame parent, boolean modal) {
@@ -130,7 +131,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
     }
 
     public static void filtro() {
-        int columnaABuscar = 0;
+      
         if (cbxFiltro.getSelectedItem() == "Cedula") {
             columnaABuscar = 0;
         }
