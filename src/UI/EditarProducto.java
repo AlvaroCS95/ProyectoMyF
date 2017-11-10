@@ -160,6 +160,7 @@ public class EditarProducto extends javax.swing.JFrame {
 
         txtExistencias_EditarProductos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtExistencias_EditarProductos.setForeground(new java.awt.Color(0, 102, 102));
+        txtExistencias_EditarProductos.setEnabled(false);
         txtExistencias_EditarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtExistencias_EditarProductosActionPerformed(evt);
