@@ -460,13 +460,13 @@ public class EditarProducto extends javax.swing.JFrame {
         txtNombre_EditarProductos.setText("");
         txtPrecio_EditarProductos.setText("");
         txtExistencias_EditarProductos.setText("");
-        cmbxClasificacion_EditarProductos.setSelectedItem("");
-        cmbxUME_EditarProductos.setSelectedItem("");
+        cmbxClasificacion_EditarProductos.setSelectedItem("Seleccione...");
+        cmbxUME_EditarProductos.setSelectedItem("Seleccione...");
     }//GEN-LAST:event_btLimpiar_IngresarInventarioActionPerformed
     public boolean VerificarCamposVacios_Producto() {
 
-        if (cmbxUME_EditarProductos.getSelectedItem().equals("") || txtCodigo_EditarProductos.getText().equals("") || txtExistencias_EditarProductos.getText().equals("")
-                || txtNombre_EditarProductos.getText().equals("") || cmbxClasificacion_EditarProductos.getSelectedItem().equals("")
+        if (cmbxUME_EditarProductos.getSelectedItem().equals("Seleccione...") || txtCodigo_EditarProductos.getText().equals("") || txtExistencias_EditarProductos.getText().equals("")
+                || txtNombre_EditarProductos.getText().equals("") || cmbxClasificacion_EditarProductos.getSelectedItem().equals("Seleccione...")
                 || txtPrecio_EditarProductos.getText().equals("")) {
 
             return false;
@@ -484,6 +484,8 @@ public class EditarProducto extends javax.swing.JFrame {
             }
             else{
             cmbxClasificacion_EditarProductos.removeAllItems();
+             cmbxClasificacion_EditarProductos.addItem("Seleccione...");
+            cmbxClasificacion_EditarProductos.setSelectedItem("Seleccione...");
             while (resultadoConsulta.next()) {
                 cmbxClasificacion_EditarProductos.addItem(resultadoConsulta.getString(2));
             }}
@@ -504,7 +506,8 @@ public class EditarProducto extends javax.swing.JFrame {
                 return;
             }
               cmbxUME_EditarProductos.removeAllItems();
-              
+              cmbxUME_EditarProductos.addItem("Seleccione...");
+             cmbxUME_EditarProductos.setSelectedItem("Seleccione...");
             while (resultadoConsulta.next()) {
                 cmbxUME_EditarProductos.addItem(resultadoConsulta.getString(2));
             }
