@@ -1,7 +1,7 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeClientes;
-import static UI.PuntoDeVenta.txtCedulaCliente_PuntoDeVenta;
+import static UI.PuntoDeVenta.txtCodigoCliente_PuntoDeVenta;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -112,7 +112,7 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        txtCedulaCliente_PuntoDeVenta.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
+        txtCodigoCliente_PuntoDeVenta.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
         dispose();
     }//GEN-LAST:event_jbAceptarActionPerformed
 

@@ -46,7 +46,7 @@ public class CoordinadorDeClientes {
         return elGestorDeClientes.CambiarEstadoCliente(CedulaCliente);
     }
 
-    public String ObtenerNombreLocalPorCedulaCliente(String CedulaCliente) throws SQLException, ClassNotFoundException {
+    public String ObtenerNombreLocalPorCodigoCliente(String CedulaCliente) throws SQLException, ClassNotFoundException {
         GestorDeClientes elGestorDeClientes = new GestorDeClientes();
         return elGestorDeClientes.ObtenerNombreLocalPorId(CedulaCliente);
     }

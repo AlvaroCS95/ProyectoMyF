@@ -7,6 +7,7 @@ package UI;
 
 import Modelos.Producto;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,6 +64,7 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
         lbExistencias_IngresarDetalleCarga.setText("XXXXXXXXXXXXX");
 
         btAceptar_IngresarDetalleCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
+        btAceptar_IngresarDetalleCarga.setToolTipText("Para ingresar un detalle de carga");
         btAceptar_IngresarDetalleCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_IngresarDetalleCargaActionPerformed(evt);
@@ -76,6 +78,7 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
         });
 
         btCancelar_IngresarDetalleCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
+        btCancelar_IngresarDetalleCarga.setToolTipText("Para salir de la ventana");
         btCancelar_IngresarDetalleCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelar_IngresarDetalleCargaActionPerformed(evt);
@@ -164,7 +167,11 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
         if(cantidad>0&&cantidad<=existencias){
         setVisible(false);
         IngresarCarga.cargarProducto(cantidad,existencias,codigo,nombre);
-        }}
+        }}else{
+      JOptionPane.showMessageDialog(null, "Recuerde que para agregar un producto a la carga del camión debe "
+                                       + "\n  ingresar la cantidad del producto a cargar", "ERROR", JOptionPane.ERROR_MESSAGE);
+      }
+      
     }//GEN-LAST:event_btAceptar_IngresarDetalleCargaActionPerformed
 
     private void btCancelar_IngresarDetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarDetalleCargaActionPerformed

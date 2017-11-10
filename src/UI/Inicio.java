@@ -62,7 +62,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
         visualizarProductos1 = new UI.VisualizarProductos();
-        ingresarProductos1 = new UI.IngresarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
         ingresarProductos2 = new UI.IngresarProductos();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
@@ -80,6 +79,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         gestorDeRutas1 = new UI.GestorDeRutas();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -154,7 +154,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             }
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
-        JTInventario.addTab("Ingreso de productos", ingresarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
         JTInventario.addTab("Ingresar Productos", ingresarProductos2);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
@@ -241,7 +240,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenu1.setText("File");
+        jMenu1.setText("Inicio");
+
+        jMenuItem3.setText("Manual de usuario");
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -314,10 +317,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         ((JSpinner.DefaultEditor) jSDiasPlazo_PuntoDeVenta.getEditor()).getTextField().setEditable(false);
         jSDiasPlazo_PuntoDeVenta.setEnabled(false);        // TODO add your handling code here:
     }//GEN-LAST:event_puntoDeVenta1AncestorAdded
-
-    private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
-        VisualizarTodosProductos();      // TODO add your handling code here:
-    }//GEN-LAST:event_visualizarProductos1AncestorAdded
 
     private void ingresarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarProductos1AncestorAdded
         ListarUMES();
@@ -410,6 +409,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_gestorDeRutas1AncestorAdded
 
+    private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
+        VisualizarTodosProductos();      // TODO add your handling code here:
+    }//GEN-LAST:event_visualizarProductos1AncestorAdded
+
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
         return OpcionDelUsuario;
@@ -428,7 +431,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.GestorDeRutas gestorDeRutas1;
     private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
-    private UI.IngresarProductos ingresarProductos1;
     private UI.IngresarProductos ingresarProductos2;
     private UI.IngresoFacturaCompra ingresoFacturaCompra1;
     private javax.swing.JMenu jMenu1;
@@ -438,6 +440,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;

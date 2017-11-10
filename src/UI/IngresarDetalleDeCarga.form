@@ -141,6 +141,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imagenes/Check_Icon_32.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Para ingresar un detalle de carga"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAceptar_IngresarDetalleCargaActionPerformed"/>
@@ -156,6 +157,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imagenes/Delete_Icon_32.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Para salir de la ventana"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCancelar_IngresarDetalleCargaActionPerformed"/>

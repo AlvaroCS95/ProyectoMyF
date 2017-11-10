@@ -118,7 +118,7 @@ public class GestorDeClientes extends Coneccion {
         }
     }
 
-    public String ObtenerNombreLocalPorId(String CedulaDelCliente) throws ClassNotFoundException, SQLException {
+    public String ObtenerNombreLocalPorId(String CodigoDelCliente) throws ClassNotFoundException, SQLException {
         String NombreLocal = "";
         try {
             EstablecerConexion();
@@ -126,7 +126,7 @@ public class GestorDeClientes extends Coneccion {
             Statement statement = conexion.createStatement();
             ResultSet resulset;
 
-            String busca = "call DevolverNombreClientePorCedula('" + CedulaDelCliente + "')";
+            String busca = "call DevolverNombreClientePorCodigo('" + CodigoDelCliente + "')";
             resulset = statement.executeQuery(busca);
             while (resulset.next()) {
                 NombreLocal = resulset.getString(1);
