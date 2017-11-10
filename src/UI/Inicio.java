@@ -79,6 +79,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         gestorDeRutas1 = new UI.GestorDeRutas();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -239,7 +240,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenu1.setText("File");
+        jMenu1.setText("Inicio");
+
+        jMenuItem3.setText("Manual de usuario");
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -435,6 +440,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;
