@@ -30,7 +30,7 @@ public class GestorFacturaDeCompra extends Coneccion {
             llamadaAlMetodo.setString(6, nuevaFactura.getnPedido());
             llamadaAlMetodo.setString(7, nuevaFactura.getnEntrega());
             llamadaAlMetodo.setInt(8, nuevaFactura.getIdTipoPago());
-            llamadaAlMetodo.setInt(9, nuevaFactura.getnDeReferencia());
+            llamadaAlMetodo.setString(9, nuevaFactura.getnDeReferencia());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
 
@@ -56,7 +56,7 @@ public class GestorFacturaDeCompra extends Coneccion {
             llamadaAlMetodo.setString(6, nuevaFactura.getnPedido());
             llamadaAlMetodo.setString(7, nuevaFactura.getnEntrega());
             llamadaAlMetodo.setInt(8, nuevaFactura.getIdTipoPago());
-            llamadaAlMetodo.setInt(9, nuevaFactura.getnDeReferencia());
+            llamadaAlMetodo.setString(9, nuevaFactura.getnDeReferencia());
             llamadaAlMetodo.setFloat(10, nuevaFactura.getMontoCancelado());
             llamadaAlMetodo.setInt(11, nuevaFactura.getPlazoDeDias());
             llamadaAlMetodo.execute();
@@ -250,7 +250,7 @@ public class GestorFacturaDeCompra extends Coneccion {
             llamadaAlMetodo.setString(6, facturaAEditar.getnPedido());
             llamadaAlMetodo.setString(7, facturaAEditar.getnEntrega());
             llamadaAlMetodo.setInt(8, facturaAEditar.getIdTipoPago());
-            llamadaAlMetodo.setInt(9, facturaAEditar.getnDeReferencia());
+            llamadaAlMetodo.setString(9, facturaAEditar.getnDeReferencia());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
 

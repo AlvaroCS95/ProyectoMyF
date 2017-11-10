@@ -473,15 +473,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCedulaCliente_PuntoDeVenta.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         nuReferencia = txtNDeReferencia.getText();
-       facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
-       CuerpoDelTextoAImprimir="Factura Contado\n"
-                + "Número de Factura: "+DevolverUltimoIdFacturaVenta()+"\n"
-                + "Cédula del cliente: "+txtCedulaCliente_PuntoDeVenta.getText()+"\n"
-                + "Cliente: "+DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText())+"\n"
-                + "Forma de pago: "+cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString()+"\n"
-                + "Número de referencia: "+nuReferencia+"\n";
         facturaVenta.CrearFacturaVentaContado(totalVendido, idCliente, idTipoPago, nuReferencia);
 
+        CuerpoDelTextoAImprimir = "Factura Contado\n"
+                + "Número de Factura: " + DevolverUltimoIdFacturaVenta() + "\n"
+                + "Cédula del cliente: " + txtCedulaCliente_PuntoDeVenta.getText() + "\n"
+                + "Cliente: " + DevolverNombreLocalPorCedula(txtCedulaCliente_PuntoDeVenta.getText()) + "\n"
+                + "Forma de pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
+                + "Número de referencia: " + nuReferencia + "\n"
+                + "----------------------------------------------\n\n";
     }
 
     public void CrearFacturaVentaCreditoConAbono() {
@@ -885,6 +885,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jCAbonar_PuntoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Search_Icon_16.png"))); // NOI18N
+        jButton1.setToolTipText("Busque un cliente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
