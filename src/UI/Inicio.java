@@ -62,7 +62,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         cuentasPorPagar1 = new UI.CuentasPorPagar();
         JTInventario = new javax.swing.JTabbedPane();
         visualizarProductos1 = new UI.VisualizarProductos();
-        ingresarProductos1 = new UI.IngresarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
         ingresarProductos2 = new UI.IngresarProductos();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
@@ -154,7 +153,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             }
         });
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
-        JTInventario.addTab("Ingreso de productos", ingresarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
         JTInventario.addTab("Ingresar Productos", ingresarProductos2);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
@@ -315,10 +313,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jSDiasPlazo_PuntoDeVenta.setEnabled(false);        // TODO add your handling code here:
     }//GEN-LAST:event_puntoDeVenta1AncestorAdded
 
-    private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
-        VisualizarTodosProductos();      // TODO add your handling code here:
-    }//GEN-LAST:event_visualizarProductos1AncestorAdded
-
     private void ingresarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarProductos1AncestorAdded
         ListarUMES();
         ListarClasificaciones();        // TODO add your handling code here:
@@ -410,6 +404,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_gestorDeRutas1AncestorAdded
 
+    private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
+        VisualizarTodosProductos();      // TODO add your handling code here:
+    }//GEN-LAST:event_visualizarProductos1AncestorAdded
+
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
         return OpcionDelUsuario;
@@ -428,7 +426,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.GestorDeRutas gestorDeRutas1;
     private UI.IngresarCarga ingresarCarga1;
     private UI.IngresarDevoluciones ingresarDevoluciones1;
-    private UI.IngresarProductos ingresarProductos1;
     private UI.IngresarProductos ingresarProductos2;
     private UI.IngresoFacturaCompra ingresoFacturaCompra1;
     private javax.swing.JMenu jMenu1;
