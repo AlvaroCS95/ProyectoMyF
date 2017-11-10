@@ -378,13 +378,13 @@ public class BuscarClientes extends javax.swing.JDialog {
 
     }
 
-    public static void BuscarCliente() {
+    public  void BuscarCliente() {
 
         txtCedulaABuscar_BuscarCliente.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 String cadena = (txtCedulaABuscar_BuscarCliente.getText());
                 txtCedulaABuscar_BuscarCliente.setText(cadena);
-                // repaint();
+                 repaint();
                 filtro();
 
             }

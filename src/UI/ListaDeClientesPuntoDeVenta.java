@@ -3,8 +3,9 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeClientes;
 
 import static UI.BuscarClientes.columnaABuscar;
+import static UI.PuntoDeVenta.txtCodigo;
 
-import static UI.PuntoDeVenta.ccc;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -124,8 +125,10 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        ccc.setText(jtListarClientesPV.getValueAt(fila, 0).toString());
-        dispose();
+
+      txtCodigo.setText(jtListarClientesPV.getValueAt(fila,0).toString());
+      dispose();
+     
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jtListarClientesPVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListarClientesPVMouseClicked

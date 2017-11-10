@@ -67,7 +67,6 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtPrimerApellido_IngresarCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtSegundoApellido_IngresarCliente = new javax.swing.JTextField();
-        txtCedula_IngresarCliente = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtDireccion_IngresarCliente = new javax.swing.JTextField();
@@ -79,6 +78,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtNombreLocal_IngresarCliente = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtRazonSocial_IngresarCliente = new javax.swing.JTextField();
+        txtCedula_IngresarCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,11 +114,8 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtSegundoApellido_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoApellido_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
-        txtCedula_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        txtCedula_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel9.setText("Cedúla");
+        jLabel9.setText("Cédula");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setText("Dirección");
@@ -179,7 +176,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addGap(25, 25, 25)
                         .addComponent(jLabel15)
                         .addGap(65, 65, 65)
-                        .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCedula_IngresarCliente)
+                            .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
                 .addContainerGap(92, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -212,9 +211,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                             .addComponent(txtSegundoApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel9)
-                            .addGap(97, 97, 97)
-                            .addComponent(txtCedula_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
+                            .addGap(340, 340, 340)
                             .addComponent(jLabel10)
                             .addGap(113, 113, 113)
                             .addComponent(txtDireccion_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,7 +228,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(402, Short.MAX_VALUE)
+                .addContainerGap(303, Short.MAX_VALUE)
+                .addComponent(txtCedula_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -270,17 +269,15 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                         .addComponent(txtSegundoNombre_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(txtSegundoApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
+                            .addGap(21, 21, 21)
                             .addComponent(jLabel9))
-                        .addComponent(txtCedula_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
+                            .addGap(32, 32, 32)
                             .addComponent(jLabel10))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(11, 11, 11)
+                            .addGap(29, 29, 29)
                             .addComponent(txtDireccion_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(24, 24, 24)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +394,7 @@ public void LimpiarCampos() {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator2;
-    public static javax.swing.JTextField txtCedula_IngresarCliente;
+    private javax.swing.JTextField txtCedula_IngresarCliente;
     public static javax.swing.JTextField txtDireccion_IngresarCliente;
     public javax.swing.JTextField txtNombreLocal_IngresarCliente;
     public static javax.swing.JTextField txtPrimerApellido_IngresarCliente;

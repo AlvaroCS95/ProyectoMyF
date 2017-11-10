@@ -78,11 +78,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         visualizaryEditarCargas1 = new UI.VisualizaryEditarCargas();
         gestorDeRutas1 = new UI.GestorDeRutas();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -240,13 +240,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jMenu1.setText("Inicio");
-
-        jMenuItem3.setText("Manual de usuario");
-        jMenu1.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu1);
-
         jMenu2.setText("Salir");
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CerrarSesionIcon.png"))); // NOI18N
@@ -272,6 +265,15 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu5.setText("Ayuda");
+
+        jMenuItem4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seo.png"))); // NOI18N
+        jMenuItem4.setText("Manual de usuario");
+        jMenu5.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu3.setText("jMenu3");
         jMenu3.setToolTipText("Fecha del sistema");
@@ -433,14 +435,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.IngresarDevoluciones ingresarDevoluciones1;
     private UI.IngresarProductos ingresarProductos2;
     private UI.IngresoFacturaCompra ingresoFacturaCompra1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;

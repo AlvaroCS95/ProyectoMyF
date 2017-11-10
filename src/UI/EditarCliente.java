@@ -7,7 +7,7 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeClientes;
 import Modelos.Cliente;
-import static UI.BuscarClientes.BuscarCliente;
+
 import static UI.BuscarClientes.TablaFiltrarClientes_ListarClientes;
 import static UI.BuscarClientes.VisualizarTodosLosClientes;
 
@@ -388,7 +388,8 @@ public int nivel() {
 
                 CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
 
-                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombreUsuario, SegundoNombreUsuario, PrimerApellido, SegundoApellido, RazonSocial);
+                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombreUsuario, 
+                        SegundoNombreUsuario, PrimerApellido, SegundoApellido, RazonSocial);
 
                 ResultSet Respuesta = elCoordinadorDeClientes.EditarCliente(elCliente);
                
