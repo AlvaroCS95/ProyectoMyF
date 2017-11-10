@@ -564,10 +564,10 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Primero seleccione el producto al que quiera agregar a desechos");
         } else {
             CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
-            if (BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaProductosDesechados_Devoluciones, CodigoDelProducto) == true) {
+            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaProductosDesechados_Devoluciones, CodigoDelProducto) == true)   || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto)==0)) {
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Ya tiene este producto agregado para desecharlo.\n"
-                        + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.");
+                        + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.\nO ya no tiene producto para ingresar");
             } else {
                 if (detalleProductoDesechado.isVisible() == true) {
                     getToolkit().beep();
@@ -637,10 +637,10 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
         } else {
             CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
-            if (BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaReintegro_Devoluciones, CodigoDelProducto) == true) {
+            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaReintegro_Devoluciones, CodigoDelProducto) == true)   || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto)==0)) {
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Ya tiene este producto agregado para reintegrar.\n"
-                        + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.");
+                        + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.\nO no tiene mas producto para ingresar");
             } else {
                 if (DetalleProductoReintegrados.isVisible() == true) {
                     getToolkit().beep();

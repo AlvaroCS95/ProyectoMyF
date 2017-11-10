@@ -4,7 +4,6 @@ import LogicaDeNegocios.CoordinadorDeInventario;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
 import javax.swing.*;
 
@@ -26,6 +25,8 @@ public class IngresarProductos extends javax.swing.JPanel {
             }
             else{
             cmbxClasificacion_IngresarProductos.removeAllItems();
+            cmbxClasificacion_IngresarProductos.addItem("Seleccione...");
+            cmbxClasificacion_IngresarProductos.setSelectedItem("Seleccione...");
             while (resultadoConsulta.next()) {
                 cmbxClasificacion_IngresarProductos.addItem(resultadoConsulta.getString(2));
             }}
@@ -39,8 +40,8 @@ public class IngresarProductos extends javax.swing.JPanel {
 
     public boolean VerificarCamposVacios_Producto() {
 
-        if (cmbxUME_IngresarProductos.getSelectedItem().equals("") || txtCodigo_IngresarInventario.getText().equals("")
-                || txtNombre_IngresarInventario.getText().equals("") || cmbxClasificacion_IngresarProductos.getSelectedItem().equals("")
+        if (cmbxUME_IngresarProductos.getSelectedItem().equals("Seleccione...") || txtCodigo_IngresarInventario.getText().equals("")
+                || txtNombre_IngresarInventario.getText().equals("") || cmbxClasificacion_IngresarProductos.getSelectedItem().equals("Seleccione...")
                 || txtPrecio_IngresarInventario.getText().equals("")) {
 
             return false;
@@ -108,6 +109,8 @@ public class IngresarProductos extends javax.swing.JPanel {
             }
             else{
                cmbxUME_IngresarProductos.removeAllItems();
+               cmbxUME_IngresarProductos.addItem("Seleccione...");
+            cmbxUME_IngresarProductos.setSelectedItem("Seleccione...");
             while (resultadoConsulta.next()) {
                 cmbxUME_IngresarProductos.addItem(resultadoConsulta.getString(2));
             }}

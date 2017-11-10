@@ -6,6 +6,8 @@ import LogicaDeNegocios.CoordinadorDeInventario;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
+import static UI.VisualizarProductos.Tabla1_ActualizacionProductos;
+import static UI.VisualizarProductos.VisualizarTodosProductos;
 import static UI.VisualizaryEditarCargas.ListarCargas;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -49,7 +51,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         TablaListarCamiones_ListarCamiones = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<String>();
+        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<>();
         txtBuscar_VisualizarProductos = new javax.swing.JTextField();
         btnAgregar_IngresarCarga = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -58,6 +60,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         TablaProductosCargados_IngresarCarga = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         btEditar_IngresarCarga = new javax.swing.JButton();
+        EliminarProducto_IngresarCarga = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(916, 622));
         setMinimumSize(new java.awt.Dimension(916, 622));
@@ -69,14 +72,16 @@ public class IngresarCarga extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 11, -1, -1));
 
         btLimpiar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flechas-de-actualizacion.png"))); // NOI18N
+        btLimpiar_IngresarCarga.setToolTipText("Para llenar las tablas con los datos ");
         btLimpiar_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimpiar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1067, 37, 48, -1));
+        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 40, 48, -1));
 
         btAceptar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
+        btAceptar_IngresarCarga.setToolTipText("Para ingresar una carga");
         btAceptar_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAceptar_IngresarCargaActionPerformed(evt);
@@ -85,6 +90,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         add(btAceptar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1121, 37, 51, -1));
 
         btCancelar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
+        btCancelar_IngresarCarga.setToolTipText("Para salir de la ventana");
         btCancelar_IngresarCarga.setMinimumSize(new java.awt.Dimension(916, 622));
         btCancelar_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +144,7 @@ public class IngresarCarga extends javax.swing.JPanel {
 
         btnAgregar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AddIcon.png"))); // NOI18N
         btnAgregar_IngresarCarga.setText("Agregar");
+        btnAgregar_IngresarCarga.setToolTipText("Para agregar un producto a la carga");
         btnAgregar_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregar_IngresarCargaActionPerformed(evt);
@@ -182,12 +189,22 @@ public class IngresarCarga extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, -1, -1));
 
         btEditar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
+        btEditar_IngresarCarga.setToolTipText("Para editar producto ingresado a la carga");
         btEditar_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1041, 497, -1, -1));
+        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 50, 40));
+
+        EliminarProducto_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
+        EliminarProducto_IngresarCarga.setToolTipText("Para llenar las tablas con los datos ");
+        EliminarProducto_IngresarCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarProducto_IngresarCargaActionPerformed(evt);
+            }
+        });
+        add(EliminarProducto_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 48, -1));
     }// </editor-fold>//GEN-END:initComponents
 public void VisualizarCamion(JTable Listar) {
         try {
@@ -360,6 +377,10 @@ public void VisualizarCamion(JTable Listar) {
                     VisualizaryEditarCargas.ListarCargas();
                 }
             }
+            else{
+            JOptionPane.showMessageDialog(null, "Recuerde seleccionar un camión "
+                                           + "\ny ingresar productos a la carga", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (SQLException ex) {
 
         } catch (ClassNotFoundException ex) {
@@ -376,7 +397,7 @@ public void VisualizarCamion(JTable Listar) {
     }//GEN-LAST:event_txtBuscar_VisualizarProductosKeyTyped
     public static boolean estáEnLaTabla(String codigo){
       boolean estáEnLaTabla=false;
-      ArrayList<String> codigos=new ArrayList();
+     
       int filas=TablaProductosCargados_IngresarCarga.getRowCount();
       for(int i=0;i<filas;i++){
       String elCodigo=TablaProductosCargados_IngresarCarga.getValueAt(i,0).toString();
@@ -406,7 +427,8 @@ public void VisualizarCamion(JTable Listar) {
                     existencias=existencias-cantidad;
                     TablaProductosCargados_IngresarCarga.setValueAt(""+existencias, fila, 2);
                      TablaProductosCargados_IngresarCarga.setValueAt(""+cantidad, fila, 3);
-                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,TablaProductos1_IngresarCargas.getSelectedRow(), 3);
+                     int fila=DevolverPosicion(codigo);
+                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
                   
                   }
     }
@@ -420,7 +442,18 @@ public void VisualizarCamion(JTable Listar) {
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregar_IngresarCargaActionPerformed
- public void Cancelar() {
+ public static int DevolverPosicion(String codigo){
+     int fila=0;
+     int filas=TablaProductos1_IngresarCargas.getRowCount();
+      for(int i=0;i<filas;i++){
+      String elCodigo=TablaProductos1_IngresarCargas.getValueAt(i,0).toString();
+      if(elCodigo.equals(codigo)){
+      fila=i;
+      }
+      }
+      return fila;
+ }
+    public void Cancelar() {
         int Decision = JOptionPane.showConfirmDialog(
                 null,
                 "Desea salir de esta ventana",
@@ -447,9 +480,31 @@ public void VisualizarCamion(JTable Listar) {
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btEditar_IngresarCargaActionPerformed
+public void Eliminar() {
+        boolean eliminado = false;
+        if (TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0) {
+            
+                while (TablaProductosCargados_IngresarCarga.getSelectedRowCount() != 0) {
+                    DefaultTableModel dtm = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
+                   float cantidad=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
+                    float existencias=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 2).toString());
+                     String codigo=(String) TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 0);
+                    existencias=existencias+cantidad;
+                     dtm.removeRow(TablaProductosCargados_IngresarCarga.getSelectedRow());
+                     int fila=DevolverPosicion(codigo);
+                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
+  
+            }
+        }
+    }
+
+    private void EliminarProducto_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProducto_IngresarCargaActionPerformed
+        Eliminar();
+    }//GEN-LAST:event_EliminarProducto_IngresarCargaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EliminarProducto_IngresarCarga;
     public static javax.swing.JTable TablaListarCamiones_ListarCamiones;
     private static javax.swing.JTable TablaProductos1_IngresarCargas;
     private static javax.swing.JTable TablaProductosCargados_IngresarCarga;

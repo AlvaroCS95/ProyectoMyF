@@ -526,9 +526,9 @@ public class VisualizarProductos extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla2_ActualizacionProductos = new javax.swing.JTable();
-        cmbxFiltrar1_VisualizarProductos = new javax.swing.JComboBox<String>();
+        cmbxFiltrar1_VisualizarProductos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cmbxFiltrar2_VisualizarProductos = new javax.swing.JComboBox<String>();
+        cmbxFiltrar2_VisualizarProductos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         btEliminartb1_VisualizarProductos = new javax.swing.JButton();
         btEditartb1_VisualizarProductos = new javax.swing.JButton();
@@ -537,7 +537,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
         txtBuscarExistencias_VisualizarProductos = new javax.swing.JTextField();
         txtBuscar_VisualizarProductos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cmbxFiltrar2_VisualizarProductos1 = new javax.swing.JComboBox<String>();
+        cmbxFiltrar2_VisualizarProductos1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabla1_ActualizacionProductos = new javax.swing.JTable();
         btEliminartb2_VisualizarProductos = new javax.swing.JButton();
@@ -588,14 +588,16 @@ public class VisualizarProductos extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 230, -1));
 
         btEliminartb1_VisualizarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
+        btEliminartb1_VisualizarProductos.setToolTipText("Para Eliminar un producto");
         btEliminartb1_VisualizarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEliminartb1_VisualizarProductosActionPerformed(evt);
             }
         });
-        add(btEliminartb1_VisualizarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 100, 50, 45));
+        add(btEliminartb1_VisualizarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 100, 50, 50));
 
         btEditartb1_VisualizarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
+        btEditartb1_VisualizarProductos.setToolTipText("Para editar un producto");
         btEditartb1_VisualizarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditartb1_VisualizarProductosActionPerformed(evt);
@@ -606,6 +608,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
         panelOculto_VisualizarProductos.setVisible(false);
 
         btBuscar_VisualizarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa-para-buscar.png"))); // NOI18N
+        btBuscar_VisualizarProductos.setToolTipText("Para buscar productos con existencias igual o menores a....");
         btBuscar_VisualizarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBuscar_VisualizarProductosActionPerformed(evt);
@@ -670,6 +673,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 810, 191));
 
         btEliminartb2_VisualizarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
+        btEliminartb2_VisualizarProductos.setToolTipText("Para Eliminar un producto");
         btEliminartb2_VisualizarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEliminartb2_VisualizarProductosActionPerformed(evt);
@@ -678,6 +682,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
         add(btEliminartb2_VisualizarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 390, 50, 45));
 
         btEditartb2_VisualizarProductos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
+        btEditartb2_VisualizarProductos1.setToolTipText("Para editar un producto");
         btEditartb2_VisualizarProductos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEditartb2_VisualizarProductos1ActionPerformed(evt);
@@ -686,6 +691,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
         add(btEditartb2_VisualizarProductos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 390, 50, 45));
 
         btActualizar_VisualizarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flechas-de-actualizacion.png"))); // NOI18N
+        btActualizar_VisualizarProductos.setToolTipText("Para actualizar tabla");
         btActualizar_VisualizarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btActualizar_VisualizarProductosActionPerformed(evt);

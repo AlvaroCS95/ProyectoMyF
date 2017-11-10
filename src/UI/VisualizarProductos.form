@@ -158,13 +158,14 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/cubo-de-basura.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Para Eliminar un producto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminartb1_VisualizarProductosActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1000" y="100" width="50" height="45"/>
+          <AbsoluteConstraints x="1000" y="100" width="50" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -173,6 +174,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/editar.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Para editar un producto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditartb1_VisualizarProductosActionPerformed"/>
@@ -226,6 +228,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imagenes/lupa-para-buscar.png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Para buscar productos con existencias igual o menores a...."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBuscar_VisualizarProductosActionPerformed"/>
@@ -357,6 +360,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/cubo-de-basura.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Para Eliminar un producto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminartb2_VisualizarProductosActionPerformed"/>
@@ -372,6 +376,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/editar.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Para editar un producto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditartb2_VisualizarProductos1ActionPerformed"/>
@@ -387,6 +392,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/flechas-de-actualizacion.png"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Para actualizar tabla"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btActualizar_VisualizarProductosActionPerformed"/>
