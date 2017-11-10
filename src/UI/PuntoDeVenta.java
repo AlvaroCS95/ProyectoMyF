@@ -23,7 +23,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public PuntoDeVenta() {
         initComponents();
-      
+
     }
 
     public void FacturarNuevaVenta() {
@@ -84,7 +84,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                         "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "¡Primero debe ingresar algun articulo a la lista de venta!",
+            JOptionPane.showMessageDialog(null, "¡Primero debe ingresar algun artículo a la lista de venta!",
                     "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -549,6 +549,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")) {
             MontoCancelado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
             Vuelto = TotalVendido - MontoCancelado;
+            if (Vuelto < 0) {
+                Vuelto = Vuelto * -1;                
+            }
         }
 
         CuerpoDelTextoAImprimir += "\t\tAbono: " + MontoAbonado + "\n"
@@ -574,6 +577,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             txtNDeReferencia.setText("0");
             txtTotalAPagar_PuntoDeVenta.setText("");
             jCAbonar_PuntoVenta.setSelected(false);
+        } else {
             JOptionPane.showMessageDialog(null, "¡Primero ingrese algún artículo a la lista!",
                     "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
