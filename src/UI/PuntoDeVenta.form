@@ -526,7 +526,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCedulaCliente_PuntoDeVenta">
+    <Component class="javax.swing.JTextField" name="txtCodigoCliente_PuntoDeVenta">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="C&#xe9;dula del cliente  al que le est&#xe1; vendiendo."/>
       </Properties>
