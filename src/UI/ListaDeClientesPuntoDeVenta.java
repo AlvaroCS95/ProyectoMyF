@@ -1,19 +1,26 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeClientes;
+
+import static UI.BuscarClientes.columnaABuscar;
+
 import static UI.PuntoDeVenta.txtCodigoCliente_PuntoDeVenta;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
     
     static Object[] filas;
     DefaultTableModel modelo;
     int fila;
-    
+    public static TableRowSorter trsFiltro;
     public ListaDeClientesPuntoDeVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,8 +35,8 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
         jbAceptar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListarClientesPV = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBuscar_PuntoDeVenta = new javax.swing.JTextField();
+        cbxFiltroCliente = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,9 +73,15 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jtListarClientesPV);
 
-        jTextField1.setToolTipText("Código del cliente");
+        txtBuscar_PuntoDeVenta.setToolTipText("Código del cliente");
+        txtBuscar_PuntoDeVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscar_PuntoDeVentaKeyTyped(evt);
+            }
+        });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Search_Icon_16.png"))); // NOI18N
+        cbxFiltroCliente.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        cbxFiltroCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo", "Cedula", "Nombre del propietario", "Nombre del local", "Razon social" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,7 +91,7 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 631, Short.MAX_VALUE)
+                        .addGap(0, 664, Short.MAX_VALUE)
                         .addComponent(jbAceptar)
                         .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -87,25 +100,25 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
-                .addGap(73, 73, 73)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtBuscar_PuntoDeVenta)
+                .addGap(18, 18, 18)
+                .addComponent(cbxFiltroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtBuscar_PuntoDeVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxFiltroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(jbAceptar)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,7 +136,43 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
             fila = jtListarClientesPV.getSelectedRow();
         }
     }//GEN-LAST:event_jtListarClientesPVMouseClicked
+
+    private void txtBuscar_PuntoDeVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_PuntoDeVentaKeyTyped
+BuscarCliente();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar_PuntoDeVentaKeyTyped
+    public static void filtro() {
     
+        if (cbxFiltroCliente.getSelectedItem() == "Codigo") {
+            columnaABuscar = 0;
+        }
+        if (cbxFiltroCliente.getSelectedItem() == "Cedula") {
+            columnaABuscar = 1;
+        }
+        if (cbxFiltroCliente.getSelectedItem() == "Nombre del propietario") {
+            columnaABuscar = 2;
+        }
+        if (cbxFiltroCliente.getSelectedItem() == "Razon social") {
+            columnaABuscar = 6;
+        }
+        if (cbxFiltroCliente.getSelectedItem() == "Nombre del local") {
+            columnaABuscar = 5;
+        }
+        trsFiltro.setRowFilter(RowFilter.regexFilter("(?i)"+txtBuscar_PuntoDeVenta.getText(), columnaABuscar));
+    }
+    public  void BuscarCliente() {
+
+        txtBuscar_PuntoDeVenta.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtBuscar_PuntoDeVenta.getText());
+                txtBuscar_PuntoDeVenta.setText(cadena);
+                repaint();
+                filtro();
+
+            }
+        });
+        trsFiltro = new TableRowSorter(jtListarClientesPV.getModel());
+        jtListarClientesPV.setRowSorter(trsFiltro);
+    }
     public void VisualizarClientes() {
         try {
             modelo = (DefaultTableModel) jtListarClientesPV.getModel();
@@ -155,11 +204,11 @@ public class ListaDeClientesPuntoDeVenta extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JComboBox cbxFiltroCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbAceptar;
     public static javax.swing.JTable jtListarClientesPV;
+    public static javax.swing.JTextField txtBuscar_PuntoDeVenta;
     // End of variables declaration//GEN-END:variables
 }

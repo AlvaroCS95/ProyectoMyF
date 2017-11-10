@@ -127,7 +127,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        JTFacturacion.addTab("Lista de facturas de compra", listarFacturasDeCompra1);
+        JTFacturacion.addTab("Lista de facturas ", listarFacturasDeCompra1);
 
         cuentasPorPagar1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {

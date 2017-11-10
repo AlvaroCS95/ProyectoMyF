@@ -173,8 +173,8 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Lista de facturas de compra">
-                    <Property name="tabTitle" type="java.lang.String" value="Lista de facturas de compra"/>
+                  <JTabbedPaneConstraints tabName="Lista de facturas ">
+                    <Property name="tabTitle" type="java.lang.String" value="Lista de facturas "/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
