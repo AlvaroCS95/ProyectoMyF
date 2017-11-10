@@ -16,7 +16,7 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 
 public class IngresoFacturaCompra extends javax.swing.JPanel {
 
-    String tx_idFacturaCompra, tx_nPedido, tx_nEntrega, tx_fechaDeCompra,tx_nDeReferencia;
+    String tx_idFacturaCompra, tx_nPedido, tx_nEntrega, tx_fechaDeCompra, tx_nDeReferencia;
     int tx_idProveedor, tx_idTipoPago, plazoDias;
     boolean tx_tipoDeCompra;
     float tx_montoTotal, montoCanclado;
@@ -28,7 +28,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     public IngresoFacturaCompra() {
         initComponents();
         RestrictedTextField restriccion = new RestrictedTextField(txtN_Referencia);
-        restriccion.setLimit(10);      
+        restriccion.setLimit(10);
     }
 
     public void IngresarFacturaCompra() {
@@ -60,7 +60,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
                 JOptionPane.showMessageDialog(null, "¡Factura N° "
                         + tx_idFacturaCompra + " ha sido agregada exitosamente!");
-                EstablecerDatosDeFactura("# "+txtNumeroDeFactura_IngresarFacturaCompra.getText());
+                EstablecerDatosDeFactura("# " + txtNumeroDeFactura_IngresarFacturaCompra.getText());
                 LimpiarCampos();
 
             } else {
@@ -240,18 +240,24 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 float precio = Float.parseFloat(txtPrecioDeCompra.getText());
                 CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
                 resultadoConsulta = coordinador.BuscarParaAgregarDetalle(codigo);
+                if (resultadoConsulta != null) {
+                    modelo = (DefaultTableModel) JTIngresoDetalleFacturaCompra.getModel();
 
-                modelo = (DefaultTableModel) JTIngresoDetalleFacturaCompra.getModel();
+                    filas = new Object[5];
+                    for (int i = 0; i < 3; i++) {
+                        filas[i] = resultadoConsulta.getObject(i + 1);
 
-                filas = new Object[5];
-                for (int i = 0; i < 3; i++) {
-                    filas[i] = resultadoConsulta.getObject(i + 1);
-
+                    }
+                    filas[3] = precio;
+                    filas[4] = cantidad;
+                    modelo.addRow(filas);
+                    JTIngresoDetalleFacturaCompra.setModel(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡El producto con código " + codigo + ", no existe!"
+                            + "\nPor favor, dirijase al apartado 'Inventario'."
+                            + "\nLuego proceda a ingresarlo.", "¡Error de ingreso!", JOptionPane.ERROR_MESSAGE);
                 }
-                filas[3] = precio;
-                filas[4] = cantidad;
-                modelo.addRow(filas);
-                JTIngresoDetalleFacturaCompra.setModel(modelo);
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "¡Error, verifique que los datos sean correctos!");
             } catch (SQLException ex) {
@@ -282,9 +288,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
     public boolean VerificarTablaVacía() {
         int cantidadDeArticulos = JTIngresoDetalleFacturaCompra.getRowCount();
-        if (cantidadDeArticulos < 1) {           
-             JOptionPane.showMessageDialog(null, "Primero debe ingresar datos a la tabla para\n"
-                    + "luego agregarlos.","¡Error!",JOptionPane.ERROR_MESSAGE);
+        if (cantidadDeArticulos < 1) {
+            JOptionPane.showMessageDialog(null, "Primero debe ingresar datos a la tabla para\n"
+                    + "luego agregarlos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

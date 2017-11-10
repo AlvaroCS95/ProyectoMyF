@@ -116,3 +116,3880 @@ INNER JOIN producto AS P ON P.IdProducto = D.IdProducto AND D.IdFacturaCompra = 
 END
 
 *************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+**********************************************AQUI EMPIEZA EL************************************************************
+************************************************SCRIPT DE LA*************************************************************
+****************************************************BD*******************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+*************************************************************************************************************************
+
+
+
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema bdmyf
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema bdmyf
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bdmyf` DEFAULT CHARACTER SET utf8 ;
+USE `bdmyf` ;
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`proveedor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`proveedor` (
+  `IdProveedor` INT(11) NOT NULL AUTO_INCREMENT,
+  `NCedula` VARCHAR(20) NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  `NombreProveedor` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`IdProveedor`),
+  INDEX `ProveedorCorreo_idx` (`NCedula` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`tipopago`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`tipopago` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoDePago` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8
+COMMENT = '	';
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`persona`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`persona` (
+  `NCedula` VARCHAR(45) NOT NULL,
+  `PrimerNombre` VARCHAR(20) NOT NULL,
+  `SegundoNombre` VARCHAR(20) NULL DEFAULT NULL,
+  `PrimerApellido` VARCHAR(20) NOT NULL,
+  `SegundoApellido` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`NCedula`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`usuario` (
+  `IdUsuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `NCedula` VARCHAR(20) NOT NULL,
+  `NombreUsuario` VARCHAR(20) NOT NULL,
+  `Contraseña` VARCHAR(20) NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  PRIMARY KEY (`IdUsuario`),
+  INDEX `PersonaUsuario_idx` (`NCedula` ASC),
+  CONSTRAINT `PersonaUsuario`
+    FOREIGN KEY (`NCedula`)
+    REFERENCES `bdmyf`.`persona` (`NCedula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`facturacompra`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`facturacompra` (
+  `IdFacturaCompra` VARCHAR(20) NOT NULL,
+  `IdUsuario` INT(11) NOT NULL,
+  `FechaCompra` DATETIME NOT NULL,
+  `FechaIngreso` DATETIME NOT NULL,
+  `TipoCompra` BIT(1) NOT NULL,
+  `IdProveedor` INT(11) NOT NULL,
+  `MontoTotal` FLOAT NOT NULL,
+  `NPedido` VARCHAR(15) NOT NULL,
+  `NEntrega` VARCHAR(15) NOT NULL,
+  `IdTipoPago` INT(11) NOT NULL,
+  `NDeReferencia` VARCHAR(40) NULL DEFAULT NULL,
+  PRIMARY KEY (`IdFacturaCompra`),
+  INDEX `ProveedorFacturaCompra_idx` (`IdProveedor` ASC),
+  INDEX `TipoPagoFacturaCompra_idx` (`IdTipoPago` ASC),
+  INDEX `UsuarioFacturaCompra_idx` (`IdUsuario` ASC),
+  CONSTRAINT `ProveedorFacturaCompra`
+    FOREIGN KEY (`IdProveedor`)
+    REFERENCES `bdmyf`.`proveedor` (`IdProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `TipoPagoFacturaCompra`
+    FOREIGN KEY (`IdTipoPago`)
+    REFERENCES `bdmyf`.`tipopago` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `UsuarioFacturaCompra`
+    FOREIGN KEY (`IdUsuario`)
+    REFERENCES `bdmyf`.`usuario` (`IdUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`cliente` (
+  `IdCliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `NCedula` VARCHAR(20) NOT NULL,
+  `Nivel` VARCHAR(20) NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  `NombreLocal` VARCHAR(20) NOT NULL,
+  `RazónSocial` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`IdCliente`),
+  INDEX `PersonaCliente_idx` (`NCedula` ASC),
+  CONSTRAINT `PersonaCliente`
+    FOREIGN KEY (`NCedula`)
+    REFERENCES `bdmyf`.`persona` (`NCedula`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 14
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`facturaventa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`facturaventa` (
+  `IdFacturaVenta` INT(11) NOT NULL AUTO_INCREMENT,
+  `FechaVenta` DATETIME NOT NULL,
+  `MontoVenta` FLOAT NOT NULL,
+  `TipoVenta` BIT(1) NOT NULL,
+  `IdUsuario` INT(11) NOT NULL,
+  `IdCliente` INT(11) NOT NULL,
+  `IdTipoPago` INT(11) NOT NULL,
+  `NDeReferencia` VARCHAR(40) NULL DEFAULT NULL,
+  PRIMARY KEY (`IdFacturaVenta`),
+  INDEX `TipoPagoFacturaVenta_idx` (`IdTipoPago` ASC),
+  INDEX `UsuarioFacturaVenta_idx` (`IdUsuario` ASC),
+  INDEX `ClienteFacturaVenta_idx` (`IdCliente` ASC),
+  CONSTRAINT `ClienteFacturaVenta`
+    FOREIGN KEY (`IdCliente`)
+    REFERENCES `bdmyf`.`cliente` (`IdCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `TipoPagoFacturaVenta`
+    FOREIGN KEY (`IdTipoPago`)
+    REFERENCES `bdmyf`.`tipopago` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `UsuarioFacturaVenta`
+    FOREIGN KEY (`IdUsuario`)
+    REFERENCES `bdmyf`.`usuario` (`IdUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 33
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`cuentaspendientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`cuentaspendientes` (
+  `IdCuentasPendientes` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoCuenta` BIT(1) NOT NULL,
+  `IdFacturaCompra` VARCHAR(20) NULL DEFAULT NULL,
+  `FechaCreacion` DATETIME NOT NULL,
+  `MontoCancelado` FLOAT NOT NULL,
+  `MontoAdeudado` FLOAT NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  `FechaVencimiento` DATETIME NOT NULL,
+  `IdFacturaVenta` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`IdCuentasPendientes`),
+  INDEX `CuentasPendientesFacturaVenta_idx` (`IdFacturaCompra` ASC),
+  INDEX `CuentasPendientesFacturaVenta_idx1` (`IdFacturaVenta` ASC),
+  CONSTRAINT `CuentasPendientesFacturaCompra`
+    FOREIGN KEY (`IdFacturaCompra`)
+    REFERENCES `bdmyf`.`facturacompra` (`IdFacturaCompra`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `CuentasPendientesFacturaVenta`
+    FOREIGN KEY (`IdFacturaVenta`)
+    REFERENCES `bdmyf`.`facturaventa` (`IdFacturaVenta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 20
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`abono`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`abono` (
+  `IdAbono` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdCuentasPendientes` INT(11) NOT NULL,
+  `MontodeAbono` FLOAT NOT NULL,
+  `FechaDeAbono` DATETIME NOT NULL,
+  `TipoDePago` INT(11) NOT NULL,
+  PRIMARY KEY (`IdAbono`),
+  INDEX `CuentaPendienteAbono_idx` (`IdCuentasPendientes` ASC),
+  CONSTRAINT `CuentaPendienteAbono`
+    FOREIGN KEY (`IdCuentasPendientes`)
+    REFERENCES `bdmyf`.`cuentaspendientes` (`IdCuentasPendientes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`bitacora`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`bitacora` (
+  `Idbitacora` INT(11) NOT NULL AUTO_INCREMENT,
+  `TablaModificada` VARCHAR(15) NOT NULL,
+  `AccionRealizada` VARCHAR(10) NOT NULL,
+  `UsuarioEncargado` VARCHAR(10) NOT NULL,
+  `Fecha` DATETIME NOT NULL,
+  `Hots` VARCHAR(20) NOT NULL,
+  `IdRegistroAfectado` VARCHAR(20) NOT NULL,
+  `DescripcionAdicional` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`Idbitacora`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`camion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`camion` (
+  `IdCamion` VARCHAR(10) NOT NULL,
+  `Marca` VARCHAR(10) NOT NULL,
+  `Estilo` VARCHAR(10) NOT NULL,
+  `Color` VARCHAR(10) NOT NULL,
+  `FechaCompra` DATETIME NOT NULL,
+  `IdUsuario` INT(11) NOT NULL,
+  `Capacidad` FLOAT NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  `Modelo` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`IdCamion`),
+  INDEX `UsuarioCamion_idx` (`IdUsuario` ASC),
+  CONSTRAINT `UsuarioCamion`
+    FOREIGN KEY (`IdUsuario`)
+    REFERENCES `bdmyf`.`usuario` (`IdUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`carga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`carga` (
+  `IdCarga` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdCamion` VARCHAR(10) NOT NULL,
+  `FechaCarga` DATETIME NOT NULL,
+  PRIMARY KEY (`IdCarga`),
+  INDEX `CamionCarga_idx` (`IdCamion` ASC),
+  CONSTRAINT `CamionCarga`
+    FOREIGN KEY (`IdCamion`)
+    REFERENCES `bdmyf`.`camion` (`IdCamion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`clasificacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`clasificacion` (
+  `IdClasificacion` INT(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`IdClasificacion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`correo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`correo` (
+  `IdCorreo` INT(11) NOT NULL AUTO_INCREMENT,
+  `NCedula` VARCHAR(20) NOT NULL,
+  `Correo` VARCHAR(30) NOT NULL,
+  `IdProveedor` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`IdCorreo`),
+  INDEX `PersonaCorreo_idx` (`NCedula` ASC),
+  INDEX `CorreoProveedor_idx` (`IdProveedor` ASC),
+  CONSTRAINT `CorreoProveedor`
+    FOREIGN KEY (`IdProveedor`)
+    REFERENCES `bdmyf`.`proveedor` (`IdProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`detallecarga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`detallecarga` (
+  `IdDetalleCarga` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdProducto` INT(11) NOT NULL,
+  `Cantidad` FLOAT NOT NULL,
+  `IdCarga` INT(11) NOT NULL,
+  PRIMARY KEY (`IdDetalleCarga`),
+  INDEX `CargaDetalleCarga_idx` (`IdCarga` ASC),
+  CONSTRAINT `CargaDetalleCarga`
+    FOREIGN KEY (`IdCarga`)
+    REFERENCES `bdmyf`.`carga` (`IdCarga`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`detallefacturacompra`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`detallefacturacompra` (
+  `IdDetalleFacturaCompra` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdFacturaCompra` VARCHAR(20) NOT NULL,
+  `IdProducto` VARCHAR(20) NOT NULL,
+  `Cantidad` FLOAT NOT NULL,
+  `PrecioCompra` FLOAT NOT NULL,
+  PRIMARY KEY (`IdDetalleFacturaCompra`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 14
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`umes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`umes` (
+  `IdUme` INT(11) NOT NULL AUTO_INCREMENT,
+  `UME` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`IdUme`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`producto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`producto` (
+  `IdProducto` VARCHAR(15) NOT NULL,
+  `Nombre` VARCHAR(25) NOT NULL,
+  `IdClasificacion` INT(11) NOT NULL,
+  `Existencias` FLOAT NOT NULL,
+  `PrecioVenta` FLOAT NOT NULL,
+  `IdUME` INT(11) NOT NULL,
+  PRIMARY KEY (`IdProducto`),
+  INDEX `ClasificacionProducto_idx` (`IdClasificacion` ASC),
+  INDEX `UmeProducto_idx` (`IdUME` ASC),
+  CONSTRAINT `ClasificacionProducto`
+    FOREIGN KEY (`IdClasificacion`)
+    REFERENCES `bdmyf`.`clasificacion` (`IdClasificacion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `UmeProducto`
+    FOREIGN KEY (`IdUME`)
+    REFERENCES `bdmyf`.`umes` (`IdUme`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`detallefacturaventa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`detallefacturaventa` (
+  `IdDetalleFacturaVenta` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdFacturaVenta` INT(11) NOT NULL,
+  `IdProducto` VARCHAR(20) NOT NULL,
+  `Cantidad` FLOAT NOT NULL,
+  `MontoDescuento` FLOAT NOT NULL,
+  `PrecioVenta` FLOAT NOT NULL,
+  PRIMARY KEY (`IdDetalleFacturaVenta`),
+  INDEX `FacturaCompraDetalleFactura_idx` (`IdFacturaVenta` ASC),
+  INDEX `ProductoDetalleFactura_idx` (`IdProducto` ASC),
+  CONSTRAINT `ProductoDetalleFactura`
+    FOREIGN KEY (`IdProducto`)
+    REFERENCES `bdmyf`.`producto` (`IdProducto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 47
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`devoluciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`devoluciones` (
+  `IdDevoluciones` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdFacturaVenta` INT(11) NOT NULL,
+  `IdUsuario` INT(11) NOT NULL,
+  `FechaDevolucion` DATETIME NOT NULL,
+  `ValorTotal` FLOAT NOT NULL,
+  `ReintegroAlCliente` FLOAT NOT NULL,
+  PRIMARY KEY (`IdDevoluciones`),
+  INDEX `FacturaVentaDevoluciones_idx` (`IdFacturaVenta` ASC),
+  INDEX `UsuarioDevoluciones_idx` (`IdUsuario` ASC),
+  CONSTRAINT `UsuarioDevoluciones`
+    FOREIGN KEY (`IdUsuario`)
+    REFERENCES `bdmyf`.`usuario` (`IdUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`dias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`dias` (
+  `iddias` INT(11) NOT NULL AUTO_INCREMENT,
+  `Dia` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`iddias`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 8
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`direcciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`direcciones` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Direccion` VARCHAR(100) NOT NULL,
+  `IdCliente` INT(11) NULL DEFAULT NULL,
+  `IdProveedor` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `Direcciones_idx` (`IdCliente` ASC),
+  INDEX `DireccionProveedor_idx` (`IdProveedor` ASC),
+  CONSTRAINT `DireccionCliente`
+    FOREIGN KEY (`IdCliente`)
+    REFERENCES `bdmyf`.`cliente` (`IdCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `DireccionProveedor`
+    FOREIGN KEY (`IdProveedor`)
+    REFERENCES `bdmyf`.`proveedor` (`IdProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 18
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`rutas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`rutas` (
+  `IdRutas` INT(11) NOT NULL AUTO_INCREMENT,
+  `NombreRuta` VARCHAR(20) NOT NULL,
+  `Descripcion` VARCHAR(50) NOT NULL,
+  `Estado` BIT(1) NOT NULL,
+  PRIMARY KEY (`IdRutas`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`enlacecamionruta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`enlacecamionruta` (
+  `IdCamion` VARCHAR(10) NOT NULL,
+  `IdRutas` INT(11) NOT NULL,
+  `IdDia` INT(11) NOT NULL,
+  PRIMARY KEY (`IdDia`, `IdRutas`, `IdCamion`),
+  INDEX `RutasEnlaceCamionRuta_idx` (`IdRutas` ASC),
+  INDEX `CamionEnlaceCamionRuta_idx` (`IdCamion` ASC),
+  CONSTRAINT `CamionEnlaceCamionRuta`
+    FOREIGN KEY (`IdCamion`)
+    REFERENCES `bdmyf`.`camion` (`IdCamion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `RutaEnlaceDias`
+    FOREIGN KEY (`IdDia`)
+    REFERENCES `bdmyf`.`dias` (`iddias`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `RutasEnlaceCamionRuta`
+    FOREIGN KEY (`IdRutas`)
+    REFERENCES `bdmyf`.`rutas` (`IdRutas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`enlacerutacliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`enlacerutacliente` (
+  `IdRutas` INT(11) NOT NULL,
+  `IdCliente` INT(11) NOT NULL,
+  `IdDia` INT(11) NOT NULL,
+  PRIMARY KEY (`IdDia`, `IdCliente`, `IdRutas`),
+  INDEX `RutasEnlaceRutas_idx` (`IdRutas` ASC),
+  INDEX `ClienteEnlaceRutaCliente_idx` (`IdCliente` ASC),
+  CONSTRAINT `ClienteEnlaceRutaCliente`
+    FOREIGN KEY (`IdCliente`)
+    REFERENCES `bdmyf`.`cliente` (`IdCliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `RutasDias`
+    FOREIGN KEY (`IdDia`)
+    REFERENCES `bdmyf`.`dias` (`iddias`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `RutasEnlaceRutaCliente`
+    FOREIGN KEY (`IdRutas`)
+    REFERENCES `bdmyf`.`rutas` (`IdRutas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`productoreintegrado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`productoreintegrado` (
+  `IdProductoReintegrado` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdProducto` VARCHAR(20) NOT NULL,
+  `IdDevolucion` INT(11) NOT NULL,
+  `Cantidad` FLOAT NOT NULL,
+  PRIMARY KEY (`IdProductoReintegrado`),
+  INDEX `DevolucionReintegro_idx` (`IdDevolucion` ASC),
+  INDEX `ProductoProductoReintegrado_idx` (`IdProducto` ASC),
+  CONSTRAINT `DevolucionReintegro`
+    FOREIGN KEY (`IdDevolucion`)
+    REFERENCES `bdmyf`.`devoluciones` (`IdDevoluciones`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ProductoProductoReintegrado`
+    FOREIGN KEY (`IdProducto`)
+    REFERENCES `bdmyf`.`producto` (`IdProducto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`productosdesechados`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`productosdesechados` (
+  `IdProductosDesechados` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdDevolucion` INT(11) NOT NULL,
+  `IdProducto` VARCHAR(20) NOT NULL,
+  `Cantidad` FLOAT NOT NULL,
+  `Detalle` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`IdProductosDesechados`),
+  INDEX `DevolucionProductosDesechados_idx` (`IdDevolucion` ASC),
+  INDEX `ProductoProductosDesechados_idx` (`IdProducto` ASC),
+  CONSTRAINT `DevolucionProductosDesechados`
+    FOREIGN KEY (`IdDevolucion`)
+    REFERENCES `bdmyf`.`devoluciones` (`IdDevoluciones`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ProductoProductosDesechados`
+    FOREIGN KEY (`IdProducto`)
+    REFERENCES `bdmyf`.`producto` (`IdProducto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bdmyf`.`telefono`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdmyf`.`telefono` (
+  `IdTelefono` INT(11) NOT NULL AUTO_INCREMENT,
+  `NCedula` VARCHAR(20) NOT NULL,
+  `NTelefono` VARCHAR(20) NOT NULL,
+  `IdProveedor` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`IdTelefono`),
+  INDEX `PersonaTelefono_idx` (`NCedula` ASC),
+  INDEX `ProveedorTelefono_idx` (`IdProveedor` ASC),
+  CONSTRAINT `ProveedorTelefono`
+    FOREIGN KEY (`IdProveedor`)
+    REFERENCES `bdmyf`.`proveedor` (`IdProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+USE `bdmyf` ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarCamion`(in Id varchar(10),in MarcaE varchar(10),
+in EstiloE varchar(10),in ColorE varchar(10),in FechaC varchar(10)
+,in CapacidadE float(10),in ModeloE varchar(20))
+BEGIN
+DECLARE EXIT handler for sqlexception
+  BEGIN
+    
+     select '2' as error;
+  ROLLBACK;
+END;
+START TRANSACTION;
+
+update  camion set Marca=MarcaE,Estilo=EstiloE,
+Color=ColorE,Color=ColorE,FechaCompra=FechaC,Capacidad=CapacidadE,
+Modelo=ModeloE where IdCamion=Id;
+
+select '1' as exito;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarCarga
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarCarga`(in idCarga int(11), 
+in idCamion varchar(10), in fechaCarga date)
+BEGIN
+
+UPDATE carga SET IdCamion=idCamion , FechaCarga=fechaCarga WHERE IdCarga=idCarga;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarCliente`(in cedula varchar(20),
+ in primerNombre varchar(20),in segundoNombre varchar(20), in primerApellido varchar(20),
+ in segundoApellido varchar(20),in nivelentrante varchar(20), in nombrelocalentrante varchar(20),in 
+ direc varchar(45),in Razon varchar(45))
+BEGIN
+declare id int(11);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+   
+     select '2' as error;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+ 
+Set id:= (Select IdCliente from cliente where NCedula = cedula);
+update direcciones set Direccion=direc where IdCliente=id;
+update  persona set PrimerNombre=primerNombre,SegundoNombre=segundoNombre,
+PrimerApellido=primerApellido,SegundoApellido=segundoApellido where NCedula=cedula;
+
+update  cliente set Nivel=nivelentrante,NombreLocal=nombrelocalentrante,RazónSocial=Razon where  NCedula=cedula;
+select '1' as exito;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarClienteId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarClienteId`(in idCliente int(11), 
+in nuCedula varchar(20), in nivelCliente varchar(5), in nuevoEstado bit(1), 
+in nuevoNombreLocal varchar(20))
+BEGIN
+
+
+update cliente set NCedula=nuCedula, Nivel=nivelCliente, Estado=nuevoEstado, 
+NombreLocal = nuevoNombreLocal where IdCliente=idCliente;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarCuentaPendiente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarCuentaPendiente`(in idCuentaPendiente int(11), 
+in tipodeCuenta bit(1), in idDeFactura varchar(20), in nuevoMontoCancelado float, in nuevoMontoAdeudado float ,
+in fechaDeVencimiento date)
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+UPDATE cuentaspendientes SET TipoCuenta = tipodeCuenta, IdFactura = idDeFactura,
+FechaCreacion = fechaCreacion, MontoCancelado = nuevoMontoCancelado,  MontoAdeudado = nuevoMontoAdeudado, 
+FechaVencimiento = fechaDeVencimiento WHERE IdCuentasPendientes = idCuentaPendiente ;
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarDatosdelAbono
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarDatosdelAbono`(in idDeAbono int(11), in idCuentaPendiente int(11),
+in montoDelAbono float, in fechaDelAbono datetime, in tipoPago varchar(45), in tipoDeLaCuenta bit)
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+UPDATE abono SET  IdCuentasPendientes = idCuentaPendiente, MontodeAbono = montoDelAbono, FechaDeAbono = fechaDelAbono,
+TipoDePago = tipoPago , TipoDeCuenta = tipoDeLaCuenta WHERE IdAbono=idDeAbono;
+
+SELECT '2' AS EXITO;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarProveedor`(in cedula varchar(20), 
+in Nombre varchar(20),in direc varchar(20),in tel varchar (20),in email varchar(20))
+BEGIN
+declare id int(11);
+ 
+ declare exit handler for sqlexception
+ begin
+ select '2'as error;
+ Rollback;
+ end;
+START TRANSACTION;
+SET id:= (Select IdProveedor from proveedor where NCedula=cedula);
+update direcciones set Direccion=direc where IdProveedor=id;
+update correo set Correo=email where IdProveedor=id;
+update telefono set NTelefono=tel where IdProveedor=id;
+update proveedor set NombreProveedor=Nombre where IdProveedor=id;
+select '1' as exito;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarUnProducto
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarUnProducto`(IN codigo VARCHAR(15), IN NuevoNombre VARCHAR(25),
+IN ClasificacionId INT(11), IN NuevasExistencias INT(11), IN precio FLOAT, IN UMEId INT(11))
+BEGIN
+UPDATE `producto` SET Nombre=NuevoNombre, IdClasificacion=ClasificacionId, Existencias=NuevasExistencias, 
+PrecioVenta=precio, IdUME=UMEId WHERE IdProducto=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ActualizarUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarUsuario`(in cedula varchar(20),
+ in primerNombre varchar(20),in segundoNombre varchar(20), in primerApellido varchar(20),
+ in segundoApellido varchar(20),in nombreUsuario varchar(20), in nuevacontraseña varchar(20))
+BEGIN
+Declare ContraseñaVerificacion varchar(20);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     select 'No se puede relizar la actualización,comuniquese con el administrador' as mensaje;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+
+set ContraseñaVerificacion:=(Select Contraseña from usuario where NCedula=cedula );
+
+IF(ContraseñaVerificacion=nuevacontraseña)
+then 
+
+update  persona set PrimerNombre=primerNombre,SegundoNombre=segundoNombre,
+PrimerApellido=primerApellido,SegundoApellido=segundoApellido where NCedula=cedula;
+
+update  usuario set NombreUsuario=nombreUsuario where  NCedula=cedula;
+select '1' as exito;
+else
+
+select '0' as error;
+
+end if;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarClasificacion`(in _nombre varchar(20))
+BEGIN
+
+INSERT INTO clasificacion(Nombre) VALUES (_nombre);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarDetalleDeFacturaVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarDetalleDeFacturaVenta`(in ProductoId varchar(20),
+in NuevaCantidad float, in descuento float, in precioVendido float)
+BEGIN
+DECLARE id int;
+DECLARE CantStock float;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+SET id = (Select IdFacturaVenta from facturaventa order by IdFacturaVenta desc limit 1);
+SET CantStock = (SELECT Existencias from producto where IdProducto = ProductoId);
+
+INSERT INTO detallefacturaventa (IdFacturaVenta, IdProducto, Cantidad, MontoDescuento, PrecioVenta)
+VALUES (id, ProductoId, NuevaCantidad, descuento, precioVendido);
+
+UPDATE producto SET Existencias = (Existencias - NuevaCantidad)  WHERE IdProducto = ProductoId;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarDetalleFacturaCompra
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarDetalleFacturaCompra`(in productoId varchar(20),
+in cantidadComprada float, in precioDeCompra float)
+BEGIN
+
+DECLARE idFac varchar(20);
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+SET idFac = (Select IdFacturaCompra from facturacompra order by FechaIngreso desc limit 1);
+INSERT INTO detallefacturacompra (IdFacturaCompra, IdProducto, Cantidad, PrecioCompra)
+VALUES (idFac, productoId, cantidadComprada, precioDeCompra);
+
+UPDATE producto SET Existencias = (Existencias + cantidadComprada) WHERE IdProducto = productoId;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarEnlaceCamionRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarEnlaceCamionRuta`(in Placa varchar(10),in IdR int(11),in DiaAsignado int(11))
+BEGIN
+declare exit handler for sqlexception
+begin
+select '2' error;
+Rollback;
+end;
+
+insert into enlacecamionruta(IdCamion,IdRutas,IdDia)values(Placa,IdR,DiaAsignado);
+select '1' Exito;
+commit;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarEnlaceRutaCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarEnlaceRutaCliente`(in IdR int(11),in Ced varchar(20),in DiaAsignado int(11))
+BEGIN
+declare idC int(11);
+declare exit handler for sqlexception
+begin
+select '2' error;
+Rollback;
+end;
+set idC:= (select IdCliente from cliente where NCedula=Ced);
+
+insert into enlacerutacliente(IdRutas,IdCliente,IdDia)values(IdR,idC,DiaAsignado);
+select '1' exito;
+commit;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarUME`( in _nombre varchar(20))
+BEGIN
+
+INSERT INTO umes(UME) VALUES (_nombre);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarUnNuevoProductoDesechado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarUnNuevoProductoDesechado`(in IdDevolucion int(11) ,in IdProducto varchar(20) ,in Cantidad int(11) ,
+in Detalle varchar(50))
+BEGIN
+insert into productosdesechados (IdDevolucion,IdProducto,Cantidad ,Detalle) values
+ (IdDevolucion,IdProducto,Cantidad ,Detalle);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarUnNuevoProductoReintegrado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarUnNuevoProductoReintegrado`(in IdProducto varchar(20) ,in IdDevolucion int(11) ,
+in Cantidad int(11))
+BEGIN
+insert into productoreintegrado (IdProducto,IdDevolucion,Cantidad ) values
+ (IdProducto,IdDevolucion,Cantidad );
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure AgregarUnProductoNuevo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarUnProductoNuevo`(in ProductoId varchar(15), in NombreP varchar(25),
+in ClasificacionId int(11), in ExistenciasDelProducto int(11), in PrecioDeVenta float, in UMEId int(11))
+BEGIN
+INSERT INTO producto (IdProducto, Nombre, IdClasificacion, Existencias, PrecioVenta, IdUME)
+VALUES (ProductoId, NombreP , ClasificacionId, ExistenciasDelProducto, PrecioDeVenta, UMEId);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarAbonoPorIdCuentasPendientes
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarAbonoPorIdCuentasPendientes`(in idCuentaPendiente int(11))
+BEGIN
+
+SELECT * FROM abono WHERE IdCuentasPendientes = idCuentaPendiente;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarCamionId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarCamionId`(in id varchar(10))
+BEGIN
+
+select IdCamion, Marca, Estilo, Color, FechaCompra, Capacidad 
+from Camion where IdCamion = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarCargaPorCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarCargaPorCamion`(in  camionId varchar(10))
+BEGIN
+
+SELECT * FROM carga WHERE IdCamion = camionId;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarClientePorCedulaPropietario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarClientePorCedulaPropietario`(in nuCedula varchar(20))
+BEGIN
+
+SELECT p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, c.Nivel, c.NombreLocal FROM persona p INNER JOIN
+cliente c WHERE (p.NCedula = nuCedula) AND (p.NCedula = c.NCedula) ;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDetalleCarga
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDetalleCarga`(idCarga int)
+BEGIN
+
+Select * from detallecarga where IdCarga = idCarga;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDevolucionIdCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDevolucionIdCliente`(in idCliente int)
+BEGIN
+
+Select * from devoluciones where  IdCliente = idCliente;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDevolucionIdDevolucion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDevolucionIdDevolucion`(in id int)
+BEGIN
+
+Select * from devoluciones where  IdDevoluciones = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDevolucionIdUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDevolucionIdUsuario`(in idUsuario int)
+BEGIN
+
+Select * from devoluciones where  idUsuario = idUsuario;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDireccionCliente_NombreDireccion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDireccionCliente_NombreDireccion`(in nomDir varchar(30))
+BEGIN
+
+START TRANSACTION;
+
+SELECT D.Direccion, C.NombreLocal, P.PrimerNombre FROM direcciones D INNER JOIN cliente C
+ON D.IdCliente = C.IdCliente INNER JOIN persona P ON P.Ncedula = C.NCedula 
+WHERE D.Direccion LIKE CONCAT('%',nomDir,'%') AND C.Estado = 1;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarDireccionProveedor_NombreDireccion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarDireccionProveedor_NombreDireccion`(in nomDir varchar(30))
+BEGIN
+
+START TRANSACTION;
+
+SELECT D.Direccion, Pro.NombreProveedor  FROM direcciones D INNER JOIN proveedor Pro
+ON D.IdProveedor = Pro.IdProveedor WHERE D.Direccion LIKE CONCAT('%',nomDir,'%') AND Pro.Estado = 1;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaCompraIdFacturaCompra
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaCompraIdFacturaCompra`(in id varchar(20))
+BEGIN
+
+START TRANSACTION;
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaIngreso, F.TipoCompra, P.NombreProveedor, F.MontoTotal, F.NPedido, 
+F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F INNER JOIN proveedor AS P 
+ON P.IdProveedor =  F.IdProveedor INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+where F.IdFacturaCompra = id;
+
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaCompraIdUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaCompraIdUsuario`(in idUsuario int)
+BEGIN
+
+START TRANSACTION;
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaIngreso, F.TipoCompra, P.NombreProveedor, F.MontoTotal, 
+F.NPedido,F.NEntrega,F.IdTipoPago, F.NDeReferencia FROM facturacompra AS F INNER JOIN proveedor AS P ON P.IdProveedor =  F.IdProveedor 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula where F.IdUsuario = idUsuario;
+
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaCompraNombreProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaCompraNombreProveedor`(in nombreProveedor varchar(30))
+BEGIN
+
+START TRANSACTION;
+
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaIngreso, F.TipoCompra, P.NombreProveedor, F.MontoTotal, 
+F.NPedido,F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F INNER JOIN proveedor AS P 
+ON P.IdProveedor =  F.IdProveedor INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula INNER JOIN tipopago AS T 
+where P.NombreProveedor = nombreProveedor AND  F.IdTipoPago = T.Id;
+
+COMMIT;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaCompraParEditarNuFactura
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaCompraParEditarNuFactura`(in id varchar(20))
+BEGIN
+
+SELECT F.IdFacturaCompra, F.FechaCompra, F.TipoCompra, P.NombreProveedor, F.MontoTotal, 
+F.NPedido, F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F INNER JOIN proveedor AS P 
+ON P.IdProveedor =  F.IdProveedor INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id WHERE F.IdFacturaCompra = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaCompraPorFecha
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaCompraPorFecha`(in desdeFecha datetime, in hastaFecha datetime)
+BEGIN
+
+START TRANSACTION;
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaIngreso, F.TipoCompra, P.NombreProveedor, F.MontoTotal, 
+F.NPedido, F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F INNER JOIN proveedor AS P 
+ON P.IdProveedor =  F.IdProveedor INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula INNER JOIN tipopago AS T
+WHERE (FechaIngreso >= desdeFecha) AND (FechaIngreso <= hastaFecha) AND  F.IdTipoPago = T.Id;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaDeVentaQueNoTieneDevolucion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaDeVentaQueNoTieneDevolucion`( in FacturaVentaid varchar(20))
+BEGIN
+select fv.IdFacturaVenta, fv.FechaVenta, fv.FechaIngreso, fv.MontoVenta,
+u.NombreUsuario, c.NombreLocal from facturaventa fv inner join cliente c
+inner join usuario u where (fv.IdFacturaVenta=FacturaVentaid) and
+(fv.IdCliente=c.IdCliente) and (fv.IdUsuario=u.IdUsuario) and NOt exists
+ (select * from devoluciones d where fv.IdFacturaVenta=d.IdFacturaVenta);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaDeVentaQueTieneDevolucion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaDeVentaQueTieneDevolucion`( in idFacturaVenta varchar(20))
+BEGIN
+select fv.IdFacturaVenta, fv.FechaVenta,d.FechaDevolucion, fv.MontoVenta,
+d.ReintegroAlCliente,d.ValorTotal,u.NombreUsuario, c.NombreLocal from facturaventa fv inner join cliente c
+inner join usuario u inner join devoluciones d where (fv.IdFacturaVenta=idFacturaVenta) and
+(fv.IdCliente=c.IdCliente) and (d.IdUsuario=u.IdUsuario) and 
+ (fv.IdFacturaVenta=d.IdFacturaVenta);
+ end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaVentaIdFacturaVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaVentaIdFacturaVenta`(in id int)
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre,C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+WHERE F.IdFacturaVenta = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaVentaIdUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaVentaIdUsuario`(in idUsuario int)
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre,C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+WHERE F.IdUsuario = idUsuario;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaVentaNombreLocal
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaVentaNombreLocal`(in nombreDelLocal varchar(20))
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre, C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+WHERE  C.IdCliente = F.IdCliente AND C.NombreLocal = nombreDelLocal;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarFacturaVentaPorFecha
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarFacturaVentaPorFecha`(in desdeFecha datetime, in hastaFecha datetime)
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre,C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+WHERE (FechaVenta >= desdeFecha) AND (FechaVenta <= hastaFecha);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarProductoParaAgregarDetalle
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoParaAgregarDetalle`(in codigoProducto varchar (15))
+BEGIN
+
+SELECT P.IdProducto, P.Nombre, U.UME FROM producto AS P INNER JOIN umes AS U
+ON P.IdProducto = codigoProducto AND P.IdUME = U.IdUME;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarProductoParaVender
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoParaVender`(in codigo varchar(15), 
+in cantidadSolicitada float)
+BEGIN
+
+DECLARE cantidadStock float;
+
+SET cantidadStock = (SELECT Existencias FROM producto WHERE IdProducto = codigo);
+
+IF(cantidadSolicitada  <=  cantidadStock)
+THEN
+
+SELECT P.IdProducto, P.Nombre, P.PrecioVenta, U.UME FROM producto AS P INNER JOIN umes AS U
+ON P.IdUME = U.IdUme WHERE P.IdProducto = codigo;
+
+ELSE
+SELECT '-2' AS ERROR;    /*Cantidad solicitada mayor a cantidad en Stock*/
+
+END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarProductoPorNombre
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductoPorNombre`(NombreABuscar varchar(25))
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c WHERE (NombreABuscar=p.Nombre) AND
+(p.IdClasificacion=c.IdClasificacion) AND (p.IdUme=u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarProductosQueTenganMenorOIgualCantidadDeExistencias
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarProductosQueTenganMenorOIgualCantidadDeExistencias`(CantidadDeExistencias int(11))
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c WHERE (p.Existencias <= CantidadDeExistencias)
+AND (p.IdClasificacion = c.IdClasificacion) AND (p.IdUme = u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarRutaId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarRutaId`(in idRuta INT)
+BEGIN
+
+SELECT * FROM rutas WHERE IdRutas = idRuta AND Estado = 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarRutaNombre
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarRutaNombre`(in nomRuta varchar(10))
+BEGIN
+
+SELECT * FROM rutas WHERE NombreRuta = nomRuta;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarTodosLosProductosDeUnaFacturaDeVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarTodosLosProductosDeUnaFacturaDeVenta`(in idFactura varchar(20))
+BEGIN
+select p.IdProducto, p.Nombre, df.Cantidad from detallefacturaventa df inner join producto p 
+inner join facturaventa fv where (fv.IdFacturaVenta=idFactura) and 
+(df.IdFacturaVenta=fv.IdFacturaVenta) and (df.IdProducto=p.IdProducto);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarUnProductoPorIdProducto
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarUnProductoPorIdProducto`(ProductoId varchar(15))
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c where (ProductoId = p.IdProducto) AND
+(p.IdClasificacion=c.IdClasificacion) AND (p.IdUme=u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure BuscarUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarUsuario`(in cedula varchar(20))
+BEGIN
+
+SELECT p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, u.NombreUsuario, u.Estado FROM persona p INNER JOIN
+usuario u WHERE (p.NCedula = cedula) AND (p.NCedula = u.NCedula);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarContraseña
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarContraseña`(in nuCedula varchar(20), in nuevaContraseña varchar(20), 
+in contraseñaAnterior varchar(20))
+BEGIN
+
+DECLARE consultaContraseñaAnterior varchar(20);
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+
+SELECT '0' AS ERROR;
+ROLLBACK;
+
+END;
+
+START TRANSACTION;
+
+SET consultaContraseñaAnterior := (SELECT Contraseña FROM usuario WHERE NCedula = nuCedula);
+
+IF (consultaContraseñaAnterior = contraseñaAnterior)
+THEN
+
+UPDATE usuario SET Contraseña = nuevaContraseña WHERE NCedula = nuCedula;
+SELECT '1' AS EXITO;
+COMMIT;
+
+ELSE
+SELECT '2' AS ERROR; /*No coinciden las contraseñas*/
+END IF;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoCamion`(in id varchar(20))
+BEGIN
+
+DECLARE situacion BIT(1);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+Start transaction;
+
+SET situacion := (SELECT Estado FROM camion WHERE IdCamion = id);
+
+IF(situacion = 1)
+THEN
+UPDATE  camion SET Estado= 0 WHERE IdCamion = id;
+SELECT '2' AS EXITO;
+
+ELSE
+UPDATE  camion SET Estado= 1 WHERE IdCamion = id;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoCliente`(in cedula varchar(20))
+BEGIN
+
+DECLARE situacion BIT(1);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+Start transaction;
+
+SET situacion := (SELECT Estado FROM cliente WHERE NCedula = cedula);
+
+IF(situacion = 1)
+THEN
+UPDATE  cliente SET Estado= 0 WHERE NCedula=cedula;
+SELECT '2' AS EXITO;
+
+ELSE
+UPDATE  cliente SET Estado= 1 WHERE NCedula=cedula;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoDeCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoDeCliente`(in clienteId int(11))
+BEGIN
+
+DECLARE estadoAnterior BIT(1);
+
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+SET estadoAnterior := (SELECT Estado FROM cliente WHERE IdCliente = clienteId);
+
+IF(estadoAnterior = 1)
+THEN
+UPDATE cliente SET Estado = 0 WHERE IdCliente = clienteId;
+SELECT '2' AS EXITO;
+ELSE
+UPDATE cliente SET Estado = 1 WHERE IdCliente = clienteId;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoProveedor`(in cedula varchar(20))
+BEGIN
+DECLARE situacion BIT(1);
+
+DECLARE Id int(11);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+Start transaction;
+Set Id := (SELECT IdProveedor FROM proveedor WHERE NCedula = cedula);
+SET situacion := (SELECT Estado FROM proveedor WHERE IdProveedor = Id);
+
+IF(situacion = 1)
+THEN
+UPDATE  proveedor SET Estado= 0 WHERE IdProveedor = Id;
+SELECT '2' AS EXITO;
+
+ELSE
+UPDATE  proveedor SET Estado= 1 WHERE IdProveedor = Id;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoRutas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoRutas`(in Id int(11))
+BEGIN
+DECLARE situacion BIT(1);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+Start transaction;
+
+SET situacion := (SELECT Estado FROM rutas WHERE IdRutas = Id);
+
+IF(situacion = 1)
+THEN
+UPDATE  rutas SET Estado= 0 WHERE IdRutas = Id;
+SELECT '2' AS EXITO;
+
+ELSE
+UPDATE  rutas SET Estado= 1 WHERE IdRutas = Id;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CambiarEstadoUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoUsuario`(in cedula varchar(20))
+BEGIN
+
+DECLARE situacion BIT(1);
+DECLARE EXIT handler for sqlexception
+  BEGIN
+     SELECT  '1' as ERROR;
+  ROLLBACK;
+END;
+Start transaction;
+
+SET situacion := (SELECT Estado FROM usuario WHERE NCedula = cedula);
+
+IF(situacion = 1)
+THEN
+UPDATE  usuario SET Estado= 0 WHERE NCedula=cedula;
+SELECT '2' AS EXITO;
+
+ELSE
+UPDATE  usuario SET Estado= 1 WHERE NCedula=cedula;
+SELECT '2' AS EXITO;
+
+END IF;
+Commit;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ConsultarIdUltimaFacturaCompraIngresada
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarIdUltimaFacturaCompraIngresada`()
+BEGIN
+
+SELECT IdFacturaCompra FROM facturacompra  order by FechaIngreso desc limit 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure CrearEnlaceCamionRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CrearEnlaceCamionRuta`(in idCamion varchar(10), in idRuta int)
+BEGIN
+
+IF NOT EXISTS (SELECT IdCamion FROM enlacecamionruta WHERE IdCamion = idCamion) 
+THEN
+INSERT INTO enlacecamionruta (IdCamion, IdRutas) VALUES (idCamion, idRuta);
+END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevolverElIdUsuarioDelUsuarioActivo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevolverElIdUsuarioDelUsuarioActivo`()
+BEGIN
+
+SELECT IdUsuario FROM usuario WHERE NombreUsuario = LEFT(CURRENT_USER(),INSTR(CURRENT_USER(), '@')-1);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevolverIdDevolucionMedianteIdFacturaDeVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevolverIdDevolucionMedianteIdFacturaDeVenta`(in numerofactura varchar(20))
+BEGIN
+select IdDevoluciones from devoluciones where IdFacturaVenta=numerofactura;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevolverNombreClientePorCodigo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevolverNombreClientePorCodigo`(in codigo varchar(20))
+BEGIN
+select NombreLocal from cliente where IdCliente=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevolverPrecioDeUnProductoPorCodigo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevolverPrecioDeUnProductoPorCodigo`(in codigo varchar(15))
+BEGIN
+select PrecioVenta from producto where IdProducto=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevolverUltimoIdFactura
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevolverUltimoIdFactura`()
+BEGIN
+SELECT MAX(IdFacturaVenta) FROM facturaventa;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure DevuelveElDiaDePagoConPLazoDeDiasAsignado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DevuelveElDiaDePagoConPLazoDeDiasAsignado`(in plazodias int)
+BEGIN
+
+select DATE_ADD(NOW(),INTERVAL plazoDias DAY);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarCamion`(in id varchar(10), marca varchar(10), estilo varchar(10), 
+color varchar(10), fechaCompra datetime, idUsario int, capacidad varchar(10))
+BEGIN
+
+update Camion set Marca = marca, Estilo = estilo, Color = color, 
+FechaCompra = fechaCompra, IdUsuario = idUsuario, Capacidad = capacidad where IdCamion = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarClasificacion`(id int, nombre varchar(20))
+BEGIN
+
+update Clasificacion set Nombre = nombre where IdClasificacion = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarDevolucionId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarDevolucionId`(in id int, in idFacturaVenta varchar(20), 
+in idCliente int, in idUsuario int,  in valorTotal float, in reintegroAlCliente float)
+BEGIN
+
+START transaction;
+
+update devoluciones set IdFacturaVenta = idFacturaVenta, IdCliente = idCliente, 
+IdUsuario = idUsuario, ValorTotal = valorTotal, ReintegroAlCliente = reintegroAlCliente 
+where Id = id;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarDevolucionIdCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarDevolucionIdCliente`(in id int, in idFacturaVenta varchar(20), 
+in idCliente int, in idUsuario int,  in valorTotal float, in reintegroAlCliente float)
+BEGIN
+
+START transaction;
+
+update devoluciones set IdFacturaVenta = idFacturaVenta, IdCliente = idCliente, 
+IdUsuario = idUsuario, ValorTotal = valorTotal, ReintegroAlCliente = reintegroAlCliente 
+where IdCliente = idCliente;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarDevolucionIdUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarDevolucionIdUsuario`(in id int, in idFacturaVenta varchar(20), 
+in idCliente int, in idUsuario int,  in valorTotal float, in reintegroAlCliente float)
+BEGIN
+
+START transaction;
+
+update devoluciones set IdFacturaVenta = idFacturaVenta, IdCliente = idCliente, 
+IdUsuario = idUsuario, ValorTotal = valorTotal, ReintegroAlCliente = reintegroAlCliente 
+where IdUsuario = idUsuario;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarFacturaDeCompra
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarFacturaDeCompra`(in idFactura varchar(20), 
+in nuevoIdFactura varchar (20), in fechaDeCompra datetime,in tipoDeCompra bit, in proveedorID int, 
+in montoComprado float, in nPedido varchar(15), in nEntrega varchar(15), in tipoPagoID int, 
+in nReferencia varchar(40), in contraseñaConectado varchar(20), in usuarioConectado varchar(20))
+BEGIN
+DECLARE tipoCompraRegistrada bit;
+DECLARE loginUsuario varchar(20);
+DECLARE loginContraseña varchar(20);
+DECLARE usuarioID int;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '2' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+SET loginUsuario =              (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET usuarioID =            (SELECT IdUsuario FROM usuario WHERE NombreUsuario =  loginUsuario);
+SET loginContraseña =           (SELECT Contraseña FROM Usuario WHERE IdUsuario = usuarioID);
+SET tipoCompraRegistrada = (SELECT TipoCompra FROM facturacompra WHERE IdFacturaCompra = idFactura);
+
+
+IF((loginUsuario = usuarioConectado)  AND (loginContraseña = contraseñaConectado))
+THEN
+
+UPDATE facturacompra SET IdFacturaCompra = nuevoIdFactura, FechaCompra = fechaDeCompra,
+TipoCompra = tipoDeCompra, IdProveedor = proveedorID, MontoTotal = montoComprado,
+NPedido = nPedido, NEntrega = nEntrega, IdTipoPago = tipoPagoID, NDeReferencia = nReferencia
+WHERE IdFacturaCompra = idFactura;
+
+	IF (tipoCompraRegistrada = 0)
+	THEN
+	UPDATE cuentaspendientes SET IdFacturaCompra = nuevoIdFactura WHERE IdFacturaCompra = idFactura;
+	END IF;
+
+    
+SELECT '1' AS EXITO; /*Exito*/
+COMMIT;
+ELSE
+SELECT '3' AS ERROR; /*Error de contraseña*/
+
+END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EditarRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EditarRuta`(in idR int(11),in nombre varchar(20),in des varchar(45))
+BEGIN
+DECLARE comparacion varchar(20);
+declare idRu int (11);
+declare exit handler for sqlexception
+begin
+select '2' error;
+end;
+
+
+START TRANSACTION;
+SET comparacion := (Select NombreRuta From rutas where NombreRuta = nombre);
+set idRu := (select IdRutas from rutas where NombreRuta = nombre);
+
+IF ((comparacion = nombre) and (idRu != idR))
+THEN
+SELECT '3' AS ERROR;
+ELSE
+update rutas set NombreRuta=nombre,Descripcion=des where IdRutas=idR;
+select '1' exito;
+end if;
+commit;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarCamion`(in Id varchar(10))
+BEGIN
+
+update Camion set Estado = 0 where IdCamion = Id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarCamionDeRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarCamionDeRuta`(in placa varchar(20),in di varchar(20),in ruta int(11))
+BEGIN
+
+declare idD int(11);
+declare exit handler for sqlexception
+begin
+SELECT '2' AS error;
+end;
+set idD := (select iddias from dias where Dia=di);
+DELETE FROM enlacecamionruta WHERE (IdCamion = placa) and ( IdDia=idD)and(IdRutas=ruta) ;
+ SELECT '1' AS EXITO;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarClasificacion`(in codigo int(11))
+BEGIN
+DELETE FROM clasificacion WHERE IdClasificacion=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarClienteDeRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarClienteDeRuta`(in cedula varchar(20),in di varchar(20),in ruta int(11))
+BEGIN
+declare idCli int(11);
+declare idD int(11);
+declare exit handler for sqlexception
+begin
+SELECT '2' AS error;
+end;
+set idD := (select iddias from dias where Dia=di);
+set idCli :=(select IdCliente from cliente where NCedula=cedula);
+DELETE FROM enlacerutacliente WHERE (IdCliente = idCli) and ( IdDia=idD)and(IdRutas=ruta) ;
+ SELECT '1' AS EXITO;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarCuentaPendiente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarCuentaPendiente`(idFacturaCuentaPendiente varchar(20))
+BEGIN
+
+UPDATE cuentaspendientes SET Estado = 0 WHERE IdFactura = idFacturaCuentaPendiente;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarEnlaceCamionRuta-IdCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarEnlaceCamionRuta-IdCamion`(in idCamion varchar(10))
+BEGIN
+
+DELETE FROM enlacecamionruta WHERE IdCamion = idCamion;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarProducto
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarProducto`(codigo varchar(15))
+BEGIN
+DELETE FROM producto WHERE IdProducto=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarRutaId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarRutaId`(in id int)
+BEGIN
+
+UPDATE Rutas SET Estado = 0 WHERE IdRuta = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarRutaNombre
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarRutaNombre`(in nombre varchar(10))
+BEGIN
+
+UPDATE Rutas SET Estado = 0 WHERE NombreRuta LIKE nombre;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure EliminarUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarUME`(in codigo int(11))
+BEGIN
+DELETE FROM umes WHERE IdUME=codigo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarCamion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarCamion`(in NPlaca varchar(20),
+in marcaE varchar(20),
+in estiloE varchar(20),in colorE varchar(20),in fecha datetime,
+in capacidadE float(20),in modeloE varchar(20))
+BEGIN
+Declare usuarioActual varchar(20);
+Declare idUsuarioActual int(11);
+Declare exit handler for sqlexception
+Begin
+select '2' as error;
+end;
+
+
+Start transaction ;
+SET usuarioActual := (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET idUsuarioActual := (SELECT IdUsuario FROM usuario WHERE NombreUsuario = usuarioActual);
+
+insert into camion (IdCamion,Marca,Estilo,Color,FechaCompra,IdUsuario,
+Capacidad,Estado,Modelo)values (NPlaca,marcaE,estiloE,colorE,fecha,idUsuarioActual,
+capacidadE,1,modeloE);
+select '1' as exito;
+Commit;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarCliente`(in cedula varchar(45), in primerNombre varchar(20),
+in segundoNombre varchar(20), in primerApellido varchar(20),in segundoApellido varchar(20),
+in nivel varchar(20),
+in nombreLocal varchar(20),in direc varchar(20),in Razon varchar(45))
+BEGIN
+declare id int(11);
+
+DECLARE EXIT handler For sqlexception
+  BEGIN
+  select '2' as error;
+ 
+  ROLLBACK;
+END;
+START TRANSACTION;
+insert into persona (NCedula,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido)values 
+(cedula,primerNombre,segundoNombre,primerApellido,segundoApellido);
+insert into cliente (NCedula,Nivel,Estado,NombreLocal,RazónSocial) values(cedula,nivel,1,nombreLocal,Razon);
+
+Set id:= (Select IdCliente from cliente where NCedula = cedula);
+insert into direcciones(Direccion,IdCliente)values(direc,id);
+select '1' as exito;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarDetalleCarga
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarDetalleCarga`(in productoId varchar(15), in nuevaCantidad float)
+BEGIN
+DECLARE ultimoID int;
+
+
+SET ultimoID := (select MAX(IdCarga) FROM carga);
+
+
+update producto set Existencias=(Existencias-nuevaCantidad) 
+where IdProducto=productoId;
+
+INSERT INTO detallecarga (IdProducto, Cantidad, IdCarga) 
+VALUES (productoId, nuevaCantidad, ultimoID);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarDetalleCargaViejo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarDetalleCargaViejo`(in productoId int, in nuevaCantidad int, 
+in cantKilos float, in cargaId int)
+BEGIN
+DECLARE ultimoID int;
+DECLARE productoIDanterior int;
+DECLARE detalleId int;
+
+SET productoIDanterior := (SELECT IdProducto FROM detallecarga WHERE  IdCarga = cargaId AND IdProducto = productoId);
+
+IF (productoIDanterior = productoId)
+THEN
+SET detalleId := (SELECT IdDetalleCarga FROM detallecarga WHERE IdProducto = productoId);
+
+UPDATE detallecarga SET Cantidad = (Cantidad + nuevaCantidad), Kilos = (Kilos + cantKilos) 
+WHERE IdDetalleCarga = detalleId;
+
+ELSE 
+SET ultimoID := (SELECT LAST_INSERT_ID() FROM carga);
+
+INSERT INTO detallecarga (IdProducto, Cantidad, Kilos, IdCarga) 
+VALUES (productoId, nuevaCantidad, cantKilos, ultimoID);
+END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarDevolucion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarDevolucion`(in idFacturaVenta varchar(20), 
+in idUsuario int(11), in valorTotal float, in reintegroAlCliente float)
+BEGIN
+
+DECLARE idDevolucion int;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+
+SELECT '1' AS ERROR;
+
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+INSERT INTO devoluciones (IdFacturaVenta, IdUsuario, FechaDevolucion, ValorTotal,
+ReintegroAlCliente) 
+VALUES (idFacturaVenta, idUsuario, now(), valorTotal, reintegroAlCliente);
+
+SELECT '2' AS ERROR;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarProveedor`(in cedula varchar(20), 
+in Nombre varchar(20),in direc varchar(20),in telefono varchar(20),in correoEntrante varchar(20))
+BEGIN
+declare id int(11);
+declare exit handler for sqlexception
+Begin
+select '2' as error;
+Rollback;
+end; 
+
+START TRANSACTION;
+
+insert into proveedor (NCedula,Estado,NombreProveedor) values(cedula,1,Nombre);
+Set id:= (Select IdProveedor from proveedor where NCedula = cedula);
+insert into direcciones(Direccion,IdProveedor)values(direc,id);
+insert into telefono(NCedula,IdProveedor,NTelefono)values(cedula,id,telefono);
+Insert into correo(NCedula,Correo,IdProveedor)values (cedula,correoEntrante,id);
+select '1' as exito;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarRuta`(in nombreNuevaRuta varchar(20),
+ in descripcion varchar(50))
+BEGIN
+
+DECLARE comparacion varchar(20);
+
+START TRANSACTION;
+
+SET comparacion := (Select NombreRuta From rutas where NombreRuta = nombreNuevaRuta);
+
+IF (comparacion = nombreNuevaRuta)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO rutas (NombreRuta, Descripcion,Estado) VALUES (nombreNuevaRuta, descripcion,1);
+SELECT '2' AS EXITO;
+END IF;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure IngresarUsuario
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IngresarUsuario`(in cedula varchar(20), in primerNombre varchar(20),
+in segundoNombre varchar(20), in primerApellido varchar(20),in segundoApellido varchar(20),
+in nombreUsuario varchar(20), in contraseña varchar(20))
+BEGIN
+DECLARE EXIT handler For sqlexception
+  BEGIN
+  select '2' as error;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+insert into persona (NCedula,PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido)values 
+(cedula,primerNombre,segundoNombre,primerApellido,segundoApellido);
+insert into usuario (NCedula,NombreUsuario,Contraseña,Estado) values(cedula,nombreUsuario,contraseña,1);
+ select '1' as exito;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ListarFacturasDeCompra
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarFacturasDeCompra`()
+BEGIN
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaCompra, F.TipoCompra, P.NombreProveedor, 
+F.MontoTotal, F.NPedido, F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F 
+INNER JOIN proveedor AS P ON P.IdProveedor =  F.IdProveedor 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+ORDER BY FechaCompra;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ListarFacturasDeCompraDelMes
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarFacturasDeCompraDelMes`()
+BEGIN
+
+SELECT F.IdFacturaCompra, Per.PrimerNombre, F.FechaCompra, F.TipoCompra, P.NombreProveedor,
+F.MontoTotal, F.NPedido, F.NEntrega, T.TipoDePago, F.NDeReferencia FROM facturacompra AS F 
+INNER JOIN proveedor AS P ON P.IdProveedor =  F.IdProveedor 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+WHERE F.FechaCompra > DATE_ADD(NOW(), INTERVAL -1 MONTH) AND F.FechaCompra < NOW()
+ORDER BY FechaCompra;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ListarFacturasDeVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarFacturasDeVenta`()
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre,C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+ORDER BY FechaVenta;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ListarFacturasDeVentaDelMes
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ListarFacturasDeVentaDelMes`()
+BEGIN
+
+SELECT F.IdFacturaVenta, Per.PrimerNombre,C.NombreLocal, F.FechaVenta, F.MontoVenta, T.TipoDePago, F.TipoVenta 
+FROM facturaventa AS F 
+INNER JOIN usuario AS U ON F.IdUsuario = U.IdUsuario
+INNER JOIN persona AS Per ON Per.NCedula = U.NCedula 
+INNER JOIN tipopago AS T ON F.IdTipoPago = T.Id
+INNER JOIN cliente C ON C.IdCliente = F.IdCliente
+WHERE F.FechaVenta > DATE_ADD(NOW(), INTERVAL -1 MONTH) AND F.FechaVenta < NOW()
+ORDER BY FechaVenta;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosClientes
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosClientes`()
+BEGIN
+select c.IdCliente, p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, c.Nivel, c.Estado,d.Direccion, c.NombreLocal,c.RazónSocial from persona p inner join
+cliente c inner join direcciones d where p.NCedula=c.NCedula and d.IdCliente=c.IdCliente;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosClientesActivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosClientesActivos`()
+BEGIN
+select C.IdCliente, p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, c.Nivel,d.Direccion, c.NombreLocal,C.RazónSocial from persona p inner join
+cliente c inner join direcciones d where p.NCedula=c.NCedula and d.IdCliente=c.IdCliente and c.Estado=1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosProveedores
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosProveedores`()
+BEGIN
+select p.NCedula, p.NombreProveedor,p.Estado,c.Correo ,
+d.Direccion, t.NTelefono from proveedor p inner join
+correo c inner join direcciones d inner join telefono t where 
+p.NCedula=c.NCedula and d.IdProveedor=p.IdProveedor and t.IdProveedor=p.IdProveedor;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosProveedoresActivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosProveedoresActivos`()
+BEGIN
+select p.NCedula, p.NombreProveedor,c.Correo ,
+d.Direccion, t.NTelefono from proveedor p inner join
+correo c inner join direcciones d inner join telefono t where 
+p.NCedula=c.NCedula and d.IdProveedor=p.IdProveedor and t.IdProveedor=p.IdProveedor and p.Estado=1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosUsuarios
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosUsuarios`()
+BEGIN
+select p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, u.NombreUsuario,u.Estado from persona p inner join
+usuario u where (p.NCedula=u.NCedula) ;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosUsuariosActivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosUsuariosActivos`()
+BEGIN
+select p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, 
+p.SegundoApellido, u.NombreUsuario from persona p inner join
+usuario u where (p.NCedula=u.NCedula and u.Estado=1) ;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MosotrarTodoslosUsuariosInactivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MosotrarTodoslosUsuariosInactivos`()
+BEGIN
+
+SELECT p.NCedula, p.PrimerNombre, p.SegundoNombre, p.PrimerApellido, p.SegundoApellido, u.NombreUsuario 
+FROM persona p INNER JOIN usuario u WHERE (p.NCedula = u.NCedula AND u.Estado = 0) ;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostarCamionesPorRutaId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostarCamionesPorRutaId`(in Id int(11))
+BEGIN
+
+SELECT C.IdCamion, C.Marca, C.Estilo,C.Modelo,d.Dia FROM camion AS C INNER JOIN enlacecamionruta AS E 
+
+inner join dias d ON 
+E.IdRutas = Id AND E.IdCamion = C.IdCamion  and E.IdDia=d.iddias ; 
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostarCamionesPorRutaNombre
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostarCamionesPorRutaNombre`(in NombreR varchar(20))
+BEGIN
+declare Id int(11);
+SET Id := (SELECT IdRutas FROM rutas WHERE NombreRuta = NombreR);
+SELECT C.IdCamion, C.Marca, C.Estilo,C.Modelo FROM camion AS C INNER JOIN enlacecamionruta AS E ON 
+E.IdRutas = Id AND E.IdCamion = C.IdCamion ; 
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostarClientesPorRutaId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostarClientesPorRutaId`(in Id int(11))
+BEGIN
+
+
+SELECT C.IdCliente, C.NombreLocal, C.NCedula,P.PrimerNombre,C.RazónSocial, D.Direccion,Di.Dia FROM cliente AS C INNER JOIN direcciones AS D
+ON C.IdCliente = D.IdCliente INNER JOIN enlacerutacliente AS E INNER JOIN persona P INNER JOIN 
+dias Di
+ON E.IdRutas = Id AND E.IdCliente = C.IdCliente And P.NCedula= C.NCedula
+and E.IdDia=Di.iddias ; 
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostarClientesPorRutaNombre
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostarClientesPorRutaNombre`(in NombreR varchar(20))
+BEGIN
+declare Id int(11);
+SET Id := (SELECT IdRutas FROM rutas WHERE NombreRuta = NombreR);
+SELECT C.NombreLocal, C.NCedula, D.Direccion FROM cliente AS C INNER JOIN direcciones AS D
+ON C.IdCliente = D.IdCliente INNER JOIN enlacerutacliente AS E ON 
+E.IdRutas = Id AND E.IdCliente = C.IdCliente ; 
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarCamiones
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarCamiones`()
+BEGIN
+ Select c.IdCamion,c.Marca,c.Estilo,c.Color,c.FechaCompra,u.NombreUsuario,
+ c.Capacidad,c.Modelo,c.Estado from camion c inner join usuario u 
+ where c.IdUsuario=u.IdUsuario;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarCamionesActivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarCamionesActivos`()
+BEGIN
+ Select c.IdCamion,c.Marca,c.Estilo,c.Color,c.FechaCompra,u.NombreUsuario,
+ c.Capacidad,c.Modelo from camion c inner join usuario u where c.Estado=1 and c.IdUsuario=u.IdUsuario; 
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarCamionesInactivos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarCamionesInactivos`()
+BEGIN
+
+SELECT * from Camion where Estado = 0;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarCargas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarCargas`()
+BEGIN
+
+SELECT * FROM  carga ;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarCargasAsignadasACamiones
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarCargasAsignadasACamiones`()
+BEGIN
+
+SELECT Car.IdCarga, Cam.IdCamion, Cam.Marca, Cam.Color FROM carga Car INNER JOIN camion Cam
+ON Car.IdCamion = Cam.IdCamion AND Cam.Estado = 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarClasificacion`()
+BEGIN
+
+select * from Clasificacion;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarClientesParaSeleccionPV
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarClientesParaSeleccionPV`()
+BEGIN
+SELECT C.IdCliente, p.NCedula, p.PrimerNombre, p.PrimerApellido, 
+p.SegundoApellido, c.NombreLocal, C.RazónSocial 
+FROM persona p 
+INNER JOIN cliente c 
+INNER JOIN direcciones d 
+WHERE p.NCedula=c.NCedula AND d.IdCliente=c.IdCliente AND c.Estado=1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarDetalleDeCarga
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarDetalleDeCarga`(in cargaId int)
+BEGIN
+
+SELECT d.IdDetalleCarga, p.Nombre, d.Cantidad FROM
+detallecarga d INNER JOIN producto p WHERE (d.IdProducto=p.IdProducto)and(d.IdCarga=cargaId);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarFacturasDeVenta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarFacturasDeVenta`()
+BEGIN
+select fv.IdFacturaVenta, fv.FechaVenta,  fv.MontoVenta,
+u.NombreUsuario,p.PrimerNombre, c.NombreLocal, fv.TipoVenta from facturaventa fv inner join cliente c
+inner join usuario u inner join persona p  where 
+(p.NCedula=c.NCedula)and
+(fv.IdCliente=c.IdCliente) and (fv.IdUsuario=u.IdUsuario) and NOt exists
+ (select * from devoluciones d where fv.IdFacturaVenta=d.IdFacturaVenta);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarFacturasDeVentaSinDevoluciones
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarFacturasDeVentaSinDevoluciones`()
+BEGIN
+select fv.IdFacturaVenta, fv.FechaVenta,  fv.MontoVenta,
+u.NombreUsuario, c.NombreLocal from facturaventa fv inner join cliente c
+inner join usuario u  where 
+(fv.IdCliente=c.IdCliente) and (fv.IdUsuario=u.IdUsuario) and NOt exists
+ (select * from devoluciones d where fv.IdFacturaVenta=d.IdFacturaVenta);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarLasFacturasQueTienenDevolucion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarLasFacturasQueTienenDevolucion`()
+BEGIN
+select fv.IdFacturaVenta, fv.FechaVenta,d.FechaDevolucion, fv.MontoVenta,
+d.ReintegroAlCliente,d.ValorTotal,u.NombreUsuario, c.NombreLocal from facturaventa fv inner join cliente c
+inner join usuario u  inner join devoluciones d where 
+(fv.IdCliente=c.IdCliente) and (d.IdUsuario=u.IdUsuario) and 
+(fv.IdFacturaVenta=d.IdFacturaVenta);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarNombresDeProveedores
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarNombresDeProveedores`()
+BEGIN
+
+SELECT NombreProveedor FROM Proveedor WHERE Estado = 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarRutas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarRutas`()
+BEGIN
+Select * from rutas;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarRutasActivas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarRutasActivas`()
+BEGIN
+Select * from rutas where Estado=1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTipoPago
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTipoPago`()
+BEGIN
+
+SELECT TipoDePago FROM tipopago;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodasLasClasificaciones
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodasLasClasificaciones`( )
+BEGIN
+
+SELECT * FROM clasificacion;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodasLasCuentasPorCobrar
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodasLasCuentasPorCobrar`()
+BEGIN
+
+SELECT f.IdFacturaVenta, u.NombreUsuario, f.FechaVenta,c.MontoAdeudado,p.PrimerNombre, 
+f.MontoVenta, c.MontoCancelado,  c.FechaVencimiento FROM
+facturaventa f INNER JOIN persona p INNER JOIN cliente cl INNER JOIN cuentaspendientes c INNER JOIN usuario u WHERE
+(f.IdFacturaVenta=c.IdFacturaVenta) AND (c.TipoCuenta=0) AND (c.Estado=1) AND (f.IdUSuario=u.IdUSuario)
+AND (p.NCedula=cl.NCedula) AND (f.IdCliente = cl.IdCliente);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodasLasCuentasPorPagar
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodasLasCuentasPorPagar`()
+BEGIN
+
+SELECT f.IdFacturaCompra, u.NombreUsuario, f.FechaCompra, c.MontoAdeudado, f.FechaIngreso, p.NombreProveedor, 
+f.MontoTotal, f.NPedido, f.NEntrega, c.MontoCancelado, c.FechaVencimiento FROM
+facturacompra f INNER JOIN proveedor p INNER JOIN cuentaspendientes c INNER JOIN usuario u WHERE
+(f.IdFacturaCompra=c.IdFacturaCompra) AND (c.TipoCuenta=1) AND (c.Estado=1) AND (f.IdUSuario=u.IdUSuario)
+AND (p.IdProveedor=f.IdProveedor);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodosLosProductos
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodosLosProductos`()
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c WHERE (p.IdClasificacion=c.IdClasificacion)
+AND (p.IdUme=u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodosLosProductosPorTipoDeClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodosLosProductosPorTipoDeClasificacion`(in clasificacion varchar(40))
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c WHERE (clasificacion=c.Nombre) AND
+(p.IdClasificacion=c.IdClasificacion) AND (p.IdUme=u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarTodosLosUMES
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarTodosLosUMES`( )
+BEGIN
+
+SELECT * FROM umes;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrarUMES
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrarUMES`()
+BEGIN
+
+SELECT UME FROM umes;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrartodasLasPlacas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrartodasLasPlacas`()
+BEGIN
+
+SELECT IdCamion FROM camion;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrartodosLosProductoDesechadosPorNDevolución
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrartodosLosProductoDesechadosPorNDevolución`(in idDevoluciones int(11))
+BEGIN
+select p.IdProducto, p.Nombre, pr.Cantidad, pr.Detalle  from producto p 
+inner join productosdesechados pr where (pr.IdDevolucion=idDevoluciones) and 
+ (pr.IdProducto=p.IdProducto);
+ end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrartodosLosProductoReintegradosPorNDevolución
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrartodosLosProductoReintegradosPorNDevolución`(in idDevoluciones int(11))
+BEGIN
+select p.IdProducto, p.Nombre, pr.Cantidad  from producto p 
+inner join productoreintegrado pr where (pr.IdDevolucion=idDevoluciones) and 
+ (pr.IdProducto=p.IdProducto);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure MostrartodosLosProductosPorUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MostrartodosLosProductosPorUME`( UME varchar(10))
+BEGIN
+SELECT p.IdProducto, p.Nombre, c.Nombre, p.Existencias, p.PrecioVenta, u.UME FROM
+producto p INNER JOIN umes u INNER JOIN clasificacion c WHERE (UME=u.UME) AND
+(p.IdClasificacion=c.IdClasificacion) AND (p.IdUme=u.IdUme);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaCarga
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaCarga`(in camionId varchar(10))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+  BEGIN
+     SELECT '1' AS ERROR;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+
+INSERT INTO carga (IdCamion, FechaCarga) VALUES (camionId, now());
+SELECT '2' AS EXITO;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaClasificacion`(in nuvaclasificacion varchar(40))
+BEGIN
+DECLARE clas varchar(40);
+START TRANSACTION;
+SET clas := (SELECT Nombre FROM Clasificacion WHERE Nombre = nuvaclasificacion);
+
+IF (clas = nuvaclasificacion)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO Clasificacion (Nombre) VALUES (nuvaclasificacion);
+SELECT '2' AS EXITO;
+END IF;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaCuentaPendiente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaCuentaPendiente`(TipoCuenta bit(1), IdFactura varchar(20), FechaCreacion date,
+MontoAdeudado float, Estado bit(1), FechaVencimiento datetime)
+BEGIN
+
+INSERT INTO cuentaspendientes (TipoCuenta, IdFactura, FechaCreacion, MontoCancelado, MontoAdeudado, Estado, 
+FechaVencimiento) VALUES (TipoCuenta, IdFactura, now(), 0, MontoAdeudado, 1, FechaVencimiento);
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaDireccionCliente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaDireccionCliente`(in direc varchar (100), in id int)
+BEGIN
+
+DECLARE dir varchar(100);
+
+SET dir := (SELECT Direccion FROM direcciones WHERE Direccion = direc AND IdCliente = id);
+IF (dir = direc)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO direcciones (Direccion, IdCliente) VALUES (direc, id);
+SELECT '2' AS EXITO;
+END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaDireccionProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaDireccionProveedor`(in direc varchar(100), in id int)
+BEGIN
+DECLARE vardireccion varchar(100);
+
+START TRANSACTION;
+SET vardireccion = (SELECT Direccion FROM direcciones WHERE Direccion = direc AND IdProveedor = id);
+
+IF (vardireccion = direc)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO direcciones (Direccion, IdProveedor) VALUES (direc, id);
+SELECT '2' AS EXITO;
+END IF;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaFacturaCompraContado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaFacturaCompraContado`(in idFacturaCompra varchar(20),
+in fechaCompra datetime, in tipoCompra bit, in idProveedor int, in montoTotal float, 
+in nPedido varchar(15), in nEntrega varchar(15), in idTipoPago int, in nDeReferencia int)
+BEGIN
+
+DECLARE usuarioActual varchar(20);
+DECLARE idUsuarioActual int;
+
+DECLARE exit handler for sqlexception
+BEGIN
+SELECT '1' AS ERROR;
+  ROLLBACK;
+END;
+
+START TRANSACTION;
+
+SET usuarioActual := (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET idUsuarioActual := (SELECT IdUsuario FROM usuario WHERE NombreUsuario = usuarioActual);
+
+
+INSERT INTO facturacompra (IdFacturaCompra, IdUsuario, FechaCompra, FechaIngreso, TipoCompra, 
+IdProveedor, MontoTotal, NPedido, NEntrega, IdTipoPago, NDeReferencia)
+
+VALUES (idFacturaCompra, idUsuarioActual, fechaCompra, now(), tipoCompra, idProveedor, montoTotal,
+nPedido, nEntrega, idTipoPago, nDeReferencia);
+SELECT '2' AS EXITO;
+COMMIT;
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaFacturaCompraCredito
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaFacturaCompraCredito`(in idFacCompra varchar(20),
+ in fechadeCompra datetime, in tipodeCompra bit, in proveedorId int, 
+ in NmontoTotal float, in nuPedido varchar(15), in nuEntrega varchar(15), in tipoPagoId int, 
+ in nuDeReferencia int, in montoCancel float, in plazoDias int)
+BEGIN
+
+DECLARE usuarioActual varchar(20);
+DECLARE idUsuarioActual int;
+
+
+
+START TRANSACTION;
+SET usuarioActual := (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET idUsuarioActual := (SELECT IdUsuario FROM usuario WHERE NombreUsuario = usuarioActual);
+
+INSERT INTO facturacompra (IdFacturaCompra, IdUsuario, FechaCompra, FechaIngreso, TipoCompra, 
+IdProveedor, MontoTotal, NPedido, NEntrega, IdTipoPago, NDeReferencia)
+
+VALUES (idFacCompra, idUsuarioActual, fechadeCompra, NOW(), tipodeCompra, proveedorId, NmontoTotal,
+nuPedido, nuEntrega, tipoPagoId, nuDeReferencia);
+
+INSERT INTO cuentaspendientes (TipoCuenta, IdFacturaCompra, FechaCreacion, MontoCancelado, 
+MontoAdeudado, Estado, FechaVencimiento) 
+VALUES (1, idFacCompra, NOW(), montoCancel, (NmontoTotal - montoCancel), 1, DATE_ADD(NOW(),INTERVAL plazoDias DAY));
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaFacturaDeVentaContado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaFacturaDeVentaContado`(in MontoVendido float, 
+in ClienteID int, in TipoPagoId int, in NuReferencia int)
+BEGIN
+
+DECLARE usuarioActual varchar(20);
+DECLARE idUsuarioActual int;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+SET usuarioActual := (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET idUsuarioActual := (SELECT IdUsuario FROM usuario WHERE NombreUsuario = usuarioActual);
+
+INSERT INTO facturaventa (FechaVenta, MontoVenta, TipoVenta, IdUsuario, IdCliente, 
+IdTipoPago, NDeReferencia)
+VALUES (NOW(), MontoVendido, 1, idUsuarioActual, ClienteID, TipoPagoId, NuReferencia);
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaFacturaDeVentaCredito
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaFacturaDeVentaCredito`(in MontoVendido float, 
+in ClienteID int, in TipoPagoId int, in NuReferencia varchar(40), in plazoDias int, in montoCancel float)
+BEGIN
+
+
+DECLARE usuarioActual varchar(20);
+DECLARE idUsuarioActual int;
+DECLARE id int;
+
+
+START TRANSACTION;
+SET usuarioActual := (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+SET idUsuarioActual := (SELECT IdUsuario FROM usuario WHERE NombreUsuario = usuarioActual);
+
+INSERT INTO facturaventa (FechaVenta, MontoVenta, TipoVenta, IdUsuario, IdCliente, 
+IdTipoPago, NDeReferencia)
+VALUES (NOW(), MontoVendido, 0, idUsuarioActual, ClienteID, TipoPagoId, NuReferencia);
+
+SET id = (Select IdFacturaVenta from facturaventa order by IdFacturaVenta desc limit 1);
+
+INSERT INTO cuentaspendientes (TipoCuenta, FechaCreacion, MontoCancelado, 
+MontoAdeudado, Estado, FechaVencimiento, IdFacturaVenta) 
+
+VALUES (0, NOW(), montoCancel, (MontoVendido - montoCancel), 1, 
+DATE_ADD(NOW(),INTERVAL plazoDias DAY), id);
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevaRuta
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaRuta`(in nombreNuevaRuta varchar(20), in descripcion varchar(50))
+BEGIN
+
+DECLARE comparacion varchar(20);
+
+START TRANSACTION;
+
+SET comparacion := (Select NombreRuta From rutas where NombreRuta = nombreNuevaRuta AND Estado = 1);
+
+IF (comparacion = nombreNuevaRuta)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO rutas (NombreRuta, Descripcion, Estado) VALUES (nombreNuevaRuta, descripcion, 1);
+SELECT '2' AS EXITO;
+END IF;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevoAbono
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoAbono`(in IdCuentaPendiente int(11), in MontoAbono float,
+in TipoPago varchar(20))
+BEGIN
+
+DECLARE saldo float;
+DECLARE Tipo int(11);
+Declare idCuenta int(11);
+START TRANSACTION;
+Set Tipo :=(Select Id from tipopago where TipoDePago=TipoPago);
+Set idCuenta:= (Select IdCuentasPendientes from cuentaspendientes where IdFacturaCompra=IdCuentaPendiente);
+INSERT INTO abono(IdCuentasPendientes, MontodeAbono, FechaDeAbono, TipoDePago)
+VALUES (idCuenta, MontoAbono, NOW(), Tipo);
+
+UPDATE cuentaspendientes SET MontoAdeudado = (MontoAdeudado - MontoAbono), 
+MontoCancelado = (MontoCancelado + MontoAbono) WHERE IdCuentasPendientes = idCuenta;
+
+SET saldo := (SELECT MontoAdeudado FROM cuentaspendientes WHERE IdCuentasPendientes = idCuenta);
+
+IF(saldo = 0)
+THEN
+UPDATE cuentaspendientes SET Estado = 0 where IdCuentasPendientes = idCuenta;
+END IF;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevoAbonoVentas
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoAbonoVentas`(in IdCuentaPendiente int(11), in MontoAbono float,
+in TipoPago varchar(20))
+BEGIN
+
+DECLARE saldo float;
+DECLARE Tipo int(11);
+Declare idCuenta int(11);
+START TRANSACTION;
+Set Tipo :=(Select Id from tipopago where TipoDePago=TipoPago);
+Set idCuenta:= (Select IdCuentasPendientes from cuentaspendientes where IdFacturaVenta=IdCuentaPendiente);
+INSERT INTO abono(IdCuentasPendientes, MontodeAbono, FechaDeAbono, TipoDePago)
+VALUES (idCuenta, MontoAbono, NOW(), Tipo);
+
+UPDATE cuentaspendientes SET MontoAdeudado = (MontoAdeudado - MontoAbono), 
+MontoCancelado = (MontoCancelado + MontoAbono) WHERE IdCuentasPendientes = idCuenta;
+
+SET saldo := (SELECT MontoAdeudado FROM cuentaspendientes WHERE IdCuentasPendientes = idCuenta);
+
+IF(saldo = 0)
+THEN
+UPDATE cuentaspendientes SET Estado = 0 where IdCuentasPendientes = idCuenta;
+END IF;
+
+SELECT '2' AS EXITO;
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevoProductoReintegrado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoProductoReintegrado`(in idFacturaVenta varchar(20), in idCliente int(11),
+in idUsuario int(11), in valorTotal float, in reintegroAlCliente float)
+BEGIN
+
+DECLARE idDevolucion int;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+
+SELECT '1' AS ERROR;
+
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+INSERT INTO devoluciones (IdFacturaVenta, IdCliente, IdUsuario, FechaDevolucion, ValorTotal,
+ReintegroAlCliente) 
+VALUES (idFacturaVenta, idCliente, idUsuario, now(), valorTotal, reintegroAlCliente);
+
+SELECT '2' AS exito;
+
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevoProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoProveedor`(in cedula varchar(20), in nombre varchar(30))
+BEGIN
+
+DECLARE ced varchar(20);
+START TRANSACTION;
+SET ced := (SELECT NCedula FROM proveedor WHERE NCedula = cedula);
+IF (ced = cedula)
+THEN
+SELECT '1' AS ERROR;
+ELSE
+INSERT INTO proveedor (NCedula, Estado, NombreProveedor) VALUES (cedula, 1, nombre);
+SELECT '2' AS EXITO;
+END IF;
+COMMIT;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure NuevoUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevoUME`(in nuevoUme varchar (10))
+BEGIN
+DECLARE umeAnterior varchar(10);
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+
+SELECT '1' AS ERROR;
+ROLLBACK;
+
+END;
+
+START TRANSACTION;
+
+SET umeAnterior := (SELECT UME FROM umes WHERE UME = nuevoUme);
+
+IF(umeAnterior = nuevoUme)
+THEN
+SELECT '3' AS EXISTE;
+
+ELSE
+INSERT INTO umes (UME) VALUES (nuevoUme);
+SELECT '2' AS EXITO;
+
+END IF;
+
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerClasificacion`(in _id int(11))
+BEGIN	
+SELECT Nombre FROM clasificacion WHERE IdClasificacion= _id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerDetallesDeFacturaCompraPorID
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesDeFacturaCompraPorID`(in id varchar(20))
+BEGIN
+
+SELECT D.IdProducto, P.Nombre, D.PrecioCompra, D.Cantidad FROM detallefacturacompra AS D 
+INNER JOIN producto AS P ON P.IdProducto = D.IdProducto WHERE D.IdFacturaCompra = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerDetallesDeFacturaPorID
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesDeFacturaPorID`(in id varchar(20))
+BEGIN
+
+SELECT D.IdProducto, P.Nombre, D.PrecioCompra, D.Cantidad FROM detallefacturacompra AS D 
+INNER JOIN producto AS P ON P.IdProducto = D.IdProducto AND D.IdFacturaCompra = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerDetallesDeFacturaVentaPorID
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesDeFacturaVentaPorID`(in id varchar(20))
+BEGIN
+
+SELECT D.IdProducto, P.Nombre, D.Cantidad, D.MontoDescuento, D.PrecioVenta  
+FROM detallefacturaventa AS D 
+INNER JOIN producto AS P 
+ON P.IdProducto = D.IdProducto 
+WHERE D.IdFacturaVenta = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerIdClasificacion
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerIdClasificacion`(in _nombre varchar(20))
+BEGIN	
+SELECT IdClasificacion FROM clasificacion WHERE Nombre= _nombre;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerIdClientePorCodigo
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerIdClientePorCodigo`(in codigoCliente int)
+BEGIN
+
+SELECT IdCliente FROM cliente WHERE IdCliente = codigoCliente;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerIdProveedor
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerIdProveedor`(in nombre varchar(30))
+BEGIN
+
+SELECT IdProveedor FROM proveedor WHERE NombreProveedor = nombre;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerIdUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerIdUME`(in _nombre varchar(10))
+BEGIN	
+SELECT IdUme FROM umes WHERE UME= _nombre;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerIdUsuarioConectado
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerIdUsuarioConectado`()
+BEGIN
+
+DECLARE usuarioActual varchar(20);
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+SELECT '1' AS ERROR;
+ROLLBACK;
+END;
+
+START TRANSACTION;
+
+
+SELECT IdUsuario FROM usuario WHERE NombreUsuario = (SELECT LEFT(CURRENT_USER(), INSTR(CURRENT_USER(), '@') - 1));
+
+COMMIT;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerNombreProveedorporId
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerNombreProveedorporId`(in id varchar(20))
+BEGIN
+
+SELECT NombreProveedor FROM proveedor WHERE IdProveedor = id AND Estado = 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtenerUME
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerUME`(in _id int(11))
+BEGIN	
+SELECT UME FROM umes WHERE IdUME= _id;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure ObtnerIdTipoPago
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bdmyf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtnerIdTipoPago`(in nombreTipo varchar(45))
+BEGIN
+
+SELECT Id FROM tipopago WHERE TipoDePago = nombreTipo;
+
+END$$
+
+DELIMITER ;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
