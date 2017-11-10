@@ -16,8 +16,8 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 
 public class IngresoFacturaCompra extends javax.swing.JPanel {
 
-    String tx_idFacturaCompra, tx_nPedido, tx_nEntrega, tx_fechaDeCompra;
-    int tx_idProveedor, tx_idTipoPago, tx_nDeReferencia, plazoDias;
+    String tx_idFacturaCompra, tx_nPedido, tx_nEntrega, tx_fechaDeCompra,tx_nDeReferencia;
+    int tx_idProveedor, tx_idTipoPago, plazoDias;
     boolean tx_tipoDeCompra;
     float tx_montoTotal, montoCanclado;
     static ArrayList<Object> listaParaMostrar = new ArrayList<>();
@@ -44,7 +44,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             } else {
                 tx_idTipoPago = 1;
             }
-            tx_nDeReferencia = Integer.parseInt(txtN_Referencia.getText());
+            tx_nDeReferencia = txtN_Referencia.getText();
             tx_montoTotal = Float.parseFloat(txtMontoDeCompra_IngresarFacturaCompra.getText());
             plazoDias = Integer.parseInt(txtPlazoDias_IngresarFacturaCompra.getText());
             montoCanclado = Float.parseFloat(txtMontoCancelado_IngresarFacturaCompra.getText());

@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class FacturaDeCompra {
 
-    String idFacturaCompra, nPedido, nEntrega, fechaDeCompra;
-    int idProveedor, idTipoPago, nDeReferencia, plazoDeDias;
+    String idFacturaCompra, nPedido, nEntrega, fechaDeCompra,nDeReferencia;
+    int idProveedor, idTipoPago, plazoDeDias;
     boolean tipoDeCompra;
     float montoTotal, montoCancelado;
 
     public FacturaDeCompra(String IdFacturaCompra, String NuPedido, String NuEntrega, int IDProveedor,
-            int IDTipoPago, int NDeReferencia, String FechaDeCompra, boolean TipoDeCompra, float MontoTotal,
+            int IDTipoPago, String NDeReferencia, String FechaDeCompra, boolean TipoDeCompra, float MontoTotal,
             float montoCancelado, int plazoDeDias) {
         this.idFacturaCompra = IdFacturaCompra;
         this.nPedido = NuPedido;
@@ -65,11 +65,11 @@ public class FacturaDeCompra {
         this.idTipoPago = idTipoPago;
     }
 
-    public int getnDeReferencia() {
+    public String getnDeReferencia() {
         return nDeReferencia;
     }
 
-    public void setnDeReferencia(int nDeReferencia) {
+    public void setnDeReferencia(String nDeReferencia) {
         this.nDeReferencia = nDeReferencia;
     }
 
