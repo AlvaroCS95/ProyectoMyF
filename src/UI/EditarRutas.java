@@ -1,6 +1,12 @@
-
 package UI;
 
+import LogicaDeNegocios.CoordinadorDeRutas;
+import Modelos.Ruta;
+import static UI.GestorDeRutas.VisualizarRutasActivas;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,20 +16,37 @@ import javax.swing.JOptionPane;
 public class EditarRutas extends javax.swing.JDialog {
 
     int IdRutas;
-    String NombreRuta,DescripcionRuta;
-    public EditarRutas(java.awt.Frame parent, boolean modal,int Id,String Nombre,String Descripcion) {
+    String NombreRuta, DescripcionRuta;
+
+    public EditarRutas(java.awt.Frame parent, boolean modal, int Id, String Nombre, String Descripcion) {
         super(parent, modal);
         initComponents();
-        this.IdRutas=Id;
-        this.NombreRuta=Nombre;
-        this.DescripcionRuta=Descripcion;
+        this.IdRutas = Id;
+        this.NombreRuta = Nombre;
+        this.DescripcionRuta = Descripcion;
         txtNombreRuta_GestorRuta.setText(NombreRuta);
         txtDescripcion_GestorRuta.setText(DescripcionRuta);
         setLocationRelativeTo(null);
         cerrar();
     }
 
-   
+    public void editarRuta() throws SQLException, ClassNotFoundException {
+        CoordinadorDeRutas elCordinador = new CoordinadorDeRutas();
+        NombreRuta = txtNombreRuta_GestorRuta.getText();
+        DescripcionRuta = txtDescripcion_GestorRuta.getText();
+        Ruta laRuta = new Ruta(NombreRuta, DescripcionRuta);
+        ResultSet respuesta = elCordinador.EditarRuta(IdRutas, laRuta);
+        if (respuesta.next()) {
+            if (respuesta.getString(1).equals("1")) {
+                VisualizarRutasActivas();
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, " Error al editar la ruta \n Es probable que en nombre de la nuta \n ya este en uso verifique sus datos.");
+            }
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,34 +141,42 @@ public class EditarRutas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptar_GestorRutasingresarRutas(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar_GestorRutasingresarRutas
-       
+        try {
+            editarRuta();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarRutas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarRutas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAceptar_GestorRutasingresarRutas
-
-    private void btnLimpiar_GestorRutas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar_GestorRutas1ActionPerformed
+       public void limpiarCampos(){
        txtDescripcion_GestorRuta.setText("");
-       txtNombreRuta_GestorRuta.setText("");
+        txtNombreRuta_GestorRuta.setText("");
+       }
+    private void btnLimpiar_GestorRutas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar_GestorRutas1ActionPerformed
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiar_GestorRutas1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
- public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(
+                        null,
+                        "Desea salir de esta ventana",
+                        "Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnAceptar_GestorRutas;

@@ -34,7 +34,16 @@ public class GestorDeRutas extends Coneccion{
             return resultadoConsulta;
         }
     }
-     
+     public ResultSet EditarRuta(int id, Ruta laRuta) throws SQLException, ClassNotFoundException{
+     EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        resultadoConsulta = consulta.executeQuery("call EditarRuta"
+                + "("+id+",'"+laRuta.getNombre()+"','"+laRuta.getDescripcion()+"') ");
+        return resultadoConsulta;
+     }
      public ResultSet IngresarClienteARuta(int idRuta, String cedula,int idD) throws 
             ClassNotFoundException, SQLException {
         EstablecerConexion();
@@ -80,7 +89,7 @@ public class GestorDeRutas extends Coneccion{
             return resultadoConsulta;
         }
     }
-      public ResultSet EliminarCamionDeRuta(String cedula,String idD,int Idr) throws 
+      public ResultSet EliminarCamionDeRuta(String placa,String idD,int Idr) throws 
             ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -89,7 +98,7 @@ public class GestorDeRutas extends Coneccion{
         consulta = conexion.createStatement();
         try {
             resultadoConsulta = consulta.executeQuery("call EliminarCamionDeRuta"
-                    + "('"+cedula+"','"+idD+"',"+Idr+"); ");
+                    + "('"+placa+"','"+idD+"',"+Idr+"); ");
             return resultadoConsulta;
         } catch (SQLException ex) {
             return resultadoConsulta;

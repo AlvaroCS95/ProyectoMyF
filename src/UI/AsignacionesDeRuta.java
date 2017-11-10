@@ -90,7 +90,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         }
     }
 
-    public void AgregarClientes(int dia) throws ClassNotFoundException, SQLException {
+    public void AgregarClientes(int dia, String NombreDia) throws ClassNotFoundException, SQLException {
 
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
 
@@ -100,32 +100,32 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                     String cedula = TablaAsignarCliente.getValueAt(i, 1).toString();
                     String Local = TablaAsignarCliente.getValueAt(i, 0).toString();
                     ResultSet Respuesta;
-                    JOptionPane.showMessageDialog(null, idRuta + "\n" + cedula + "\n" + dia);
+
                     Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, dia);
                     try {
                         if (Respuesta.next()) {
 
                             if (Respuesta.getString(1).equals("1")) {
-                      
+
                             } else {
                                 JOptionPane.showMessageDialog(null, "Error en la asignacion");
                             }
                         }
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "El local " + Local + "\t tiene conflictos con los dias de asignación");
+                        JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad al dia \t" + NombreDia);
                         return;
                     }
 
                 }
-                JOptionPane.showMessageDialog(null, "Operación finalizada");
-
+                JOptionPane.showMessageDialog(null, "Los Clientes se han ingreso con exito al dia:\t " + NombreDia);
             }
+
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
         }
 
     }
 
-    public void AgregarCamiones(int dia) {
+    public void AgregarCamiones(int dia, String NombreDia) {
 
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
         try {
@@ -142,20 +142,20 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                             if (Respuesta.getString(1).equals("1")) {
 
                             } else {
-                                JOptionPane.showMessageDialog(null, "Existe un fallo en la asignación");
+                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a la ruta \t" + NombreDia);
+
                             }
                         }
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\t tiene conflictos con los dias de asignación");
+                        JOptionPane.showMessageDialog(null, "No tiene permisos, comuniquese con el administrador");
                         return;
                     }
 
                 }
-                JOptionPane.showMessageDialog(null, "Operación finalizada");
-
+                JOptionPane.showMessageDialog(null, "Los camiones se han ingreso con exito al dia:\t " + NombreDia);
             }
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
-            return;
+            JOptionPane.showMessageDialog(null, "Hola prueba");
         }
 
     }
@@ -459,44 +459,50 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
 
         if (Lunes.isSelected()) {
 
-            AgregarClientes(1);
-            AgregarCamiones(1);
+            AgregarClientes(1, "Lunes");
+            AgregarCamiones(1, "Lunes");
 
         }
         if (Martes.isSelected()) {
 
-            AgregarClientes(2);
-            AgregarCamiones(2);
+            AgregarClientes(2, "Martes");
+            AgregarCamiones(2, "Martes");
         }
         if (Miercoles.isSelected()) {
 
-            AgregarClientes(3);
-            AgregarCamiones(3);
+            AgregarClientes(3, "Miercoles");
+            AgregarCamiones(3, "Miercoles");
         }
         if (Juevez.isSelected()) {
 
-            AgregarClientes(4);
-            AgregarCamiones(4);
+            AgregarClientes(4, "Jueves");
+            AgregarCamiones(4, "Jueves");
         }
         if (Viernes.isSelected()) {
 
-            AgregarClientes(5);
-            AgregarCamiones(5);
+            AgregarClientes(5, "Viernes");
+            AgregarCamiones(5, "Viernes");
         }
         if (Sabado.isSelected()) {
 
-            AgregarClientes(6);
-            AgregarCamiones(6);
+            AgregarClientes(6, "Sabado");
+            AgregarCamiones(6, "Sabado");
         }
         if (Domingo.isSelected()) {
 
-            AgregarClientes(7);
-            AgregarCamiones(7);
+            AgregarClientes(7, "Domingo");
+            AgregarCamiones(7, "Domingo");
         } else if (!Lunes.isSelected() && !Martes.isSelected() && !Miercoles.isSelected()
                 && !Juevez.isSelected() && !Viernes.isSelected() && !Sabado.isSelected()
                 && !Domingo.isSelected()) {
             JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
         }
+        LimpiarTablas();
+    }
+
+    public void LimpiarTablas() {
+        modeloVerClientes.setRowCount(0);
+        modeloVerCamiones.setRowCount(0);
         InicializarFiltroClientes(TablaAsignarCliente);
         InicializarFiltroClientes(TablaAsignarCamion);
     }

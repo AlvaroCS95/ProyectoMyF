@@ -39,6 +39,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
         Asignacion = new javax.swing.JMenuItem();
         MostrarInformacion = new javax.swing.JMenuItem();
         EliminarRuta = new javax.swing.JMenuItem();
+        Editar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableListarRutas_GestorDeRutas = new javax.swing.JTable();
         jLabel52 = new javax.swing.JLabel();
@@ -78,6 +79,17 @@ public class GestorDeRutas extends javax.swing.JPanel {
             }
         });
         Menu.add(EliminarRuta);
+
+        Editar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EditIcon.png"))); // NOI18N
+        Editar.setText("Editar");
+        Editar.setActionCommand("");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+        Menu.add(Editar);
 
         TableListarRutas_GestorDeRutas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -325,12 +337,23 @@ laRuta.setVisible(true);
         DetallesDeRuta losDetalles= new  DetallesDeRuta(null,true, id,  Nombre);
         losDetalles.setVisible(true);
     }//GEN-LAST:event_MostrarInformacionActionPerformed
+     public void editar(){
+     int id=(int) TableListarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,0);
+      String Nombre=TableListarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,1).toString();
+      String Detalle=TableListarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,2).toString();
+        EditarRutas editar= new EditarRutas(null, true, id, Nombre, Detalle);
+        editar.setVisible(true);
+     }
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+   editar();
+    }//GEN-LAST:event_EditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton AgregarRuta;
     private javax.swing.JMenuItem Asignacion;
     public static javax.swing.JButton BuscarRuta;
+    private javax.swing.JMenuItem Editar;
     private javax.swing.JMenuItem EliminarRuta;
     private javax.swing.JPopupMenu Menu;
     private javax.swing.JMenuItem MostrarInformacion;

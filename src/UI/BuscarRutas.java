@@ -98,6 +98,7 @@ public class BuscarRutas extends javax.swing.JDialog {
         Inactivar = new javax.swing.JMenuItem();
         MostarDetalles = new javax.swing.JMenuItem();
         Asignacion = new javax.swing.JMenuItem();
+        Editar = new javax.swing.JMenuItem();
         jLabel6 = new javax.swing.JLabel();
         cbxOpcionesBuscarRuta_GestorDeRutas = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -143,6 +144,16 @@ public class BuscarRutas extends javax.swing.JDialog {
             }
         });
         Menu.add(Asignacion);
+
+        Editar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EditIcon.png"))); // NOI18N
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+        Menu.add(Editar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -229,7 +240,14 @@ filtro();
 BuscarRuta();
 
     }//GEN-LAST:event_txtBuscarRuta_GestorDeRutaKeyTyped
- public void eliminarRutas(int id) throws ClassNotFoundException, SQLException {
+ public void editar(){
+     int id=(int) TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,0);
+      String Nombre=TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,1).toString();
+      String Detalle=TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar,2).toString();
+        EditarRutas editar= new EditarRutas(null, true, id, Nombre, Detalle);
+        editar.setVisible(true);
+     }
+    public void eliminarRutas(int id) throws ClassNotFoundException, SQLException {
         Icon icono = new ImageIcon(getClass().getResource("/Imagenes/eliminar.png"));
 
         String estado = TableBuscarRutas_GestorDeRutas.getValueAt(FilaSeleccionadaParaEliminar, 3).toString();
@@ -342,6 +360,10 @@ BuscarRuta();
         }
     }//GEN-LAST:event_ActivarActionPerformed
 
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+editar();        // TODO add your handling code here:
+    }//GEN-LAST:event_EditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +371,7 @@ BuscarRuta();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Activar;
     private javax.swing.JMenuItem Asignacion;
+    private javax.swing.JMenuItem Editar;
     private javax.swing.JMenuItem Inactivar;
     private javax.swing.JPopupMenu Menu;
     private javax.swing.JMenuItem MostarDetalles;
