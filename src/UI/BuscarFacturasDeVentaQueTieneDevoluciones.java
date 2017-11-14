@@ -293,6 +293,9 @@ int FilaSeleccionada;
     }//GEN-LAST:event_btListarFacturas_BuscarFacturasDeVentasActionPerformed
 
     private void btAceptar_BuscarFacturasDeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_BuscarFacturasDeVentasActionPerformed
+        LimpiarTablas(VisualizarYEditarDevoluciones.TablaDetalleFacturaDeVenta_VisualizarDevoluciones, VisualizarYEditarDevoluciones.ModeloDetalleProductosVisualizar);
+        LimpiarTablas(VisualizarYEditarDevoluciones.TablaProductosDesechados_VisualizarDevoluciones, VisualizarYEditarDevoluciones.ModeloProductosDesechadosVisualizar);
+        LimpiarTablas(VisualizarYEditarDevoluciones.TablaReintegro_Devoluciones, VisualizarYEditarDevoluciones.ModeloProductosReintegradosVisualizar);
         if (seleccion == false) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Primero seleccione una fila");

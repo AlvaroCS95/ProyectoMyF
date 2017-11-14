@@ -365,7 +365,7 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
 
         if (ElBuscarFacturasDeVentaQueTieneDevoluciones.isVisible() == true) {
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "ya tiene una ventana de buscar factura que tiene devolucion abierta.");
+            JOptionPane.showMessageDialog(null, "Ya tiene una ventana de buscar factura que tiene devolucion abierta.");
             ElBuscarFacturasDeVentaQueTieneDevoluciones.toFront();
         } else {
             ElBuscarFacturasDeVentaQueTieneDevoluciones.setVisible(true);
