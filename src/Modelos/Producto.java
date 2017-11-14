@@ -8,17 +8,20 @@ public class Producto {
     float Existencias;
     float Precio;
     int IdUME;
+    boolean exento;
 
     public Producto() {
     }
 
-    public Producto(String Codigo, String Nombre, int IdClasificacion, float Existencias, float Precio, int IdUME) {
+    public Producto(String Codigo, String Nombre, int IdClasificacion, float Existencias, float Precio, int IdUME, 
+            boolean exen) {
         this.Codigo = Codigo;
         this.Nombre = Nombre;
         this.IdClasificacion = IdClasificacion;
         this.Existencias = Existencias;
         this.Precio = Precio;
         this.IdUME = IdUME;
+        this.exento = exen;
     }
 
     public float getExistencias() {
@@ -67,6 +70,14 @@ public class Producto {
 
     public void setIdUME(int IdUME) {
         this.IdUME = IdUME;
+    }
+
+    public boolean isExento() {
+        return exento;
+    }
+
+    public void setExento(boolean exento) {
+        this.exento = exento;
     }
 
 }

@@ -437,7 +437,7 @@ public void VisualizarCamion(JTable Listar) {
             float existencias=Float.parseFloat(TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 3).toString());
             String codigo=TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 0).toString();
             String nombre=TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 1).toString();
-            Producto producto=new Producto(codigo,nombre,0,existencias,0,0);
+            Producto producto=new Producto(codigo,nombre,0,existencias,0,0, false);
             IngresarDetalleDeCarga detalleCarga=new IngresarDetalleDeCarga(producto);
             detalleCarga.setVisible(true);
         }
@@ -475,7 +475,7 @@ public void VisualizarCamion(JTable Listar) {
             String nombre=TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 1).toString();
             float cantidad=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
             existencias=existencias+cantidad;
-            Producto producto=new Producto(codigo,nombre,0,existencias,0,0);
+            Producto producto=new Producto(codigo,nombre,0,existencias,0,0,false);
             IngresarDetalleDeCarga detalleCarga=new IngresarDetalleDeCarga(producto);
             detalleCarga.setVisible(true);
         }

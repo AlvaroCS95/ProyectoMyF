@@ -75,7 +75,7 @@ public class IngresarProductos extends javax.swing.JPanel {
                 float precio = Float.parseFloat(txtPrecio_IngresarInventario.getText());
                 String UME = (String) cmbxUME_IngresarProductos.getSelectedItem();
                 int IdUME = elCoordinadorDeInventario.ObtenerIdUME(UME);
-                Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, 0, precio, IdUME);
+                Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, 0, precio, IdUME, false);
                 if (elCoordinadorDeInventario.AgregarProducto(elProducto) == true) {
                     JOptionPane.showMessageDialog(null, "Producto insertado exitosamente");
                 } else {

@@ -230,6 +230,14 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
     }
 
+    public String VerificarSiExento() {
+        if (jCheckExento.isSelected()) {
+            return "Sí";
+        } else {
+            return "No";
+        }
+    }
+
     public void AgregarProductoComoDetalle() {
 
         if (!txtCodigoDetalleFactura.getText().isEmpty() && !txtCantidadDetalleFactura.getText().isEmpty()
@@ -243,13 +251,13 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 if (resultadoConsulta != null) {
                     modelo = (DefaultTableModel) JTIngresoDetalleFacturaCompra.getModel();
 
-                    filas = new Object[5];
+                    filas = new Object[6];
                     for (int i = 0; i < 3; i++) {
                         filas[i] = resultadoConsulta.getObject(i + 1);
-
                     }
                     filas[3] = precio;
                     filas[4] = cantidad;
+                    filas[5] = VerificarSiExento();
                     modelo.addRow(filas);
                     JTIngresoDetalleFacturaCompra.setModel(modelo);
                 } else {
@@ -273,10 +281,10 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     }
 
     public boolean VerificarUltimoId() {
-        int ultimoId;
+        String ultimoId;
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
         ultimoId = coordinador.ConsultaUltimoIdDeFactura();
-        if (ultimoId != 0) {
+        if (!ultimoId.equals("0")) {
             int pregunta = JOptionPane.showConfirmDialog(null, "<html> La ultima factura ingresada fue: <b>" + ultimoId
                     + "</b>.\nDesea agregar estos detalles a esa factura?");
             if (pregunta == JOptionPane.YES_OPTION) {
@@ -295,6 +303,15 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
         return true;
     }
+    
+    public boolean ObtenerDatoSiExento(int fila){
+        String dato = JTIngresoDetalleFacturaCompra.getValueAt(fila, 5).toString();
+        if (dato.equals("Sí")) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void IngresarDetalles() {
         try {
@@ -305,7 +322,8 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                     String codigo = JTIngresoDetalleFacturaCompra.getValueAt(i, 0).toString();
                     float precio = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 3).toString());
                     float cantidad = Float.parseFloat(JTIngresoDetalleFacturaCompra.getValueAt(i, 4).toString());
-                    Producto NuevoDetalle = new Producto(codigo, "", 0, cantidad, precio, 0);
+                    boolean exento = ObtenerDatoSiExento(i);
+                    Producto NuevoDetalle = new Producto(codigo, "", 0, cantidad, precio, 0,exento);
                     boolean sentinela = coordinador.AgregarDetalle(NuevoDetalle);
                     if (sentinela) {
                         exitos++;
@@ -380,6 +398,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtPrecioDeCompra = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jCheckExento = new javax.swing.JCheckBox();
 
         setAutoscrolls(true);
         setPreferredSize(new java.awt.Dimension(990, 631));
@@ -556,11 +575,11 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código", "Nombre del producto", "UME", "Precio de compra", "Cantidad"
+                "Código", "Nombre del producto", "UME", "Precio de compra", "Cantidad", "Exento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -575,13 +594,14 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(2).setResizable(false);
             JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(3).setResizable(false);
             JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(4).setResizable(false);
+            JTIngresoDetalleFacturaCompra.getColumnModel().getColumn(5).setResizable(false);
         }
 
         panel_IngreosFacturaCompra.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 880, 960, 300));
 
         jLDetalles.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLDetalles.setText("Ingreso de los detalles de la factura  de compra");
-        panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 690, 710, -1));
+        panel_IngreosFacturaCompra.add(jLDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 690, 1110, -1));
 
         boton_ListoDatosFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         boton_ListoDatosFacturaCompra.setToolTipText("Crea la factura de compra.");
@@ -605,7 +625,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 JBBuscarParaAgregarDetalleActionPerformed(evt);
             }
         });
-        panel_IngreosFacturaCompra.add(JBBuscarParaAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 770, -1, -1));
+        panel_IngreosFacturaCompra.add(JBBuscarParaAgregarDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 810, 110, 30));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel9.setText("Código:");
@@ -624,6 +644,10 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jLabel11.setText("Cantidad:");
         panel_IngreosFacturaCompra.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 770, -1, -1));
+
+        jCheckExento.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jCheckExento.setText("Exento");
+        panel_IngreosFacturaCompra.add(jCheckExento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 770, -1, -1));
 
         scroll_IngresoFacturaCompra.setViewportView(panel_IngreosFacturaCompra);
 
@@ -677,6 +701,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     public static javax.swing.JComboBox cbxProveedor_IngresarFacturaCompra;
     private javax.swing.JComboBox cbxTipoCompra_IngresarFacturaCompra;
     public static javax.swing.JComboBox cbxTipoPago_FacturaCompra;
+    private javax.swing.JCheckBox jCheckExento;
     private com.toedter.calendar.JDateChooser jDCFecha_Compra;
     private javax.swing.JLabel jLDetalles;
     private javax.swing.JLabel jLabel1;

@@ -298,10 +298,11 @@ public class GestorFacturaDeCompra extends Coneccion {
     public ResultSet AgregarDetalleFacturaCompra(Producto nuevoProducto) {
         try {
             EstablecerConexion();
-            llamadaAlMetodo = conexion.prepareCall("CALL AgregarDetalleFacturaCompra(?, ?, ?);");
+            llamadaAlMetodo = conexion.prepareCall("CALL AgregarDetalleFacturaCompra(?, ?, ?, ?);");
             llamadaAlMetodo.setString(1, nuevoProducto.getCodigo());
             llamadaAlMetodo.setFloat(2, nuevoProducto.getExistencias());
             llamadaAlMetodo.setFloat(3, nuevoProducto.getPrecio());
+            llamadaAlMetodo.setBoolean(4, nuevoProducto.isExento());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
 

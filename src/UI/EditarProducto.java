@@ -423,7 +423,7 @@ public class EditarProducto extends javax.swing.JFrame {
                 String UME = (String) cmbxUME_EditarProductos.getSelectedItem();
                 float existencias = Float.parseFloat(txtExistencias_EditarProductos.getText());
                 int IdUME = elCoordinadorDeInventario.ObtenerIdUME(UME);
-                Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, existencias, precio, IdUME);
+                Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, existencias, precio, IdUME, false);
                 if (elCoordinadorDeInventario.EditarProducto(elProducto) == true) {
                     JOptionPane.showMessageDialog(null, "Producto editado exitosamente");
                     VisualizarProductos.VisualizarTodosProductos();
