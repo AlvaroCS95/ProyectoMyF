@@ -16,7 +16,6 @@ public class GestorDeCamiones extends Coneccion {
 
     public GestorDeCamiones() {
     }
-
     public ResultSet InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;

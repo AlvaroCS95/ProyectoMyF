@@ -17,7 +17,6 @@ public class GestorDeProveedores extends Coneccion {
         ResultSet Respuesta=null;
         consulta= conexion.createStatement();
         
-   
 
         try {
             Respuesta= consulta.executeQuery("call IngresarProveedor('"+elProveedor.getCedulaJuridica()

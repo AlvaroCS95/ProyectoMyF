@@ -23,7 +23,6 @@ public class FacturaDeCompra {
         this.montoCancelado = montoCancelado;
         this.plazoDeDias = plazoDeDias;
     }
-
     public String getIdFacturaCompra() {
         return idFacturaCompra;
     }

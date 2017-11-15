@@ -19,6 +19,7 @@ public class CoordinadorDeFacturaCompra {
 
     public CoordinadorDeFacturaCompra() {
     }
+    
 
     public boolean CrearFacturaCompra(FacturaDeCompra nuevaFactura) {
 

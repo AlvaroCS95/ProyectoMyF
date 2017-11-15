@@ -17,7 +17,6 @@ public class GestorDeCuentasPorPagar extends Coneccion {
 
     public GestorDeCuentasPorPagar() {
     }
-
     public ResultSet ListarCuentasPorPagar() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;

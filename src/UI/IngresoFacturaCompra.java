@@ -66,7 +66,6 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "¡Error en ingreso, verifique los datos!");
             }
-
         }
     }
 

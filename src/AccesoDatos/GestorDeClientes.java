@@ -21,7 +21,6 @@ public class GestorDeClientes extends Coneccion {
         Statement consulta;
         ResultSet Respuesta = null;
         consulta = conexion.createStatement();
-
         try {
             Respuesta = consulta.executeQuery("call IngresarCliente ('" + elCliente.getCedula()
                     + "','" + elCliente.getPrimerNombre() + "','" + elCliente.getSegundoNombre()

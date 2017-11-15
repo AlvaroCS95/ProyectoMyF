@@ -21,6 +21,7 @@ public class CoordinadorDeProductosDesechados {
         return elGestorProductosDesechados.IngresarProductosDesechados(ElProductosDesechado);
     }
     
+    
     public ResultSet MostrartodosLosProductoDesechadosPorNDevolución(int IdDevolucion) throws SQLException, ClassNotFoundException {
          GestorProductosDesechados elGestorProductosDesechados = new GestorProductosDesechados();
         return elGestorProductosDesechados.MostrartodosLosProductoDesechadosPorNDevolución(IdDevolucion);

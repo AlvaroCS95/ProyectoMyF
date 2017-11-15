@@ -11,6 +11,7 @@ public class CoordinadorDeCamion {
 
     public CoordinadorDeCamion() {
     }
+    
 
     public ResultSet InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();

@@ -19,4 +19,5 @@ public class CoordinadorDeCuentasPorCobrar {
          GestorDeCuentasPorCobrar elGestor= new GestorDeCuentasPorCobrar();
          return elGestor.ListarCuentasPorCobrar();
     }
+     
 }

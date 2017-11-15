@@ -349,12 +349,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_listarFacturasDeCompra1AncestorAdded
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea Salir?", "Cerrar Salir");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
 
             System.exit(0);
-
         } else {
             return;
         }

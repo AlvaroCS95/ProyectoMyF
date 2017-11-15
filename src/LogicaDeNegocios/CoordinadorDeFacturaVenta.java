@@ -42,8 +42,7 @@ public class CoordinadorDeFacturaVenta {
                                 fila[i] = 0;
                             }else{
                                 fila[i] = (precio * 0.13);
-                            }
-                            
+                            }                            
                         } else if (i == 6) {
                             fila[i] = 0;
                         } else if (i == 7) {

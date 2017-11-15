@@ -33,7 +33,6 @@ public class GestorFacturaDeCompra extends Coneccion {
             llamadaAlMetodo.setString(9, nuevaFactura.getnDeReferencia());
             llamadaAlMetodo.execute();
             resultadoConsulta = llamadaAlMetodo.getResultSet();
-
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
