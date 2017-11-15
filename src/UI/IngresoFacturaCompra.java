@@ -483,6 +483,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         panel_IngreosFacturaCompra.add(cbxTipoCompra_IngresarFacturaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 156, -1));
 
         jDCFecha_Compra.setToolTipText("Seleccione la fecha de la compra.");
+        jDCFecha_Compra.setDateFormatString("dd/MM/yyyy");
         panel_IngreosFacturaCompra.add(jDCFecha_Compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 156, -1));
 
         btAceptar_IngresarDetalleFacturaCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N

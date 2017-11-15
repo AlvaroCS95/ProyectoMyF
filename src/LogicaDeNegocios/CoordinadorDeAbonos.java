@@ -14,6 +14,11 @@ public class CoordinadorDeAbonos {
         GestorDeAbonos elGestor= new GestorDeAbonos();
         return elGestor.IngresarAbono(elAbono);
     }
+     public ResultSet ListarAbonos(String nfactura,boolean tipofactura) throws ClassNotFoundException, SQLException{
+        GestorDeAbonos elGestor= new GestorDeAbonos();
+        return elGestor.ListarAbonos(nfactura,tipofactura);
+    }
+      
      public ResultSet IngresarAbonosVentas(Abono elAbono) throws ClassNotFoundException, SQLException{
         GestorDeAbonos elGestor= new GestorDeAbonos();
         return elGestor.IngresarAbonoVentas(elAbono);

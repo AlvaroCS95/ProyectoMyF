@@ -40,6 +40,27 @@ public class GestorDeAbonos extends Coneccion {
            
             return resultadoConsulta;
         }
-     
+    
+    }
+      
+       public ResultSet ListarAbonos(String nfactura,boolean tipofactura) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            if(tipofactura==false){
+           
+              resultadoConsulta = consulta.executeQuery(" call MostrarAbonosAproveedores ('"+nfactura+"');");
+            }else if(tipofactura==true){
+                int id= Integer.parseInt(nfactura);
+              resultadoConsulta = consulta.executeQuery(" call MostrarAbonosAclientes ("+id+");");
+            }
+          
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
     }
 }

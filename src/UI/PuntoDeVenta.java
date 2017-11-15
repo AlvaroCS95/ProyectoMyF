@@ -882,7 +882,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jLPlazoDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 570, -1, -1));
 
         jSDiasPlazo_PuntoDeVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jSDiasPlazo_PuntoDeVenta.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
+        jSDiasPlazo_PuntoDeVenta.setModel(new javax.swing.SpinnerListModel(new String[] {"7", "15", "30"}));
         jSDiasPlazo_PuntoDeVenta.setToolTipText("Cantidad de días plazo para pagar.");
         jSDiasPlazo_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(jSDiasPlazo_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 80, -1));
