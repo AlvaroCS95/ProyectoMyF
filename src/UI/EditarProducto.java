@@ -427,6 +427,7 @@ public class EditarProducto extends javax.swing.JFrame {
                 if (elCoordinadorDeInventario.EditarProducto(elProducto) == true) {
                     JOptionPane.showMessageDialog(null, "Producto editado exitosamente");
                     VisualizarProductos.VisualizarTodosProductos();
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la actualización");
                 }

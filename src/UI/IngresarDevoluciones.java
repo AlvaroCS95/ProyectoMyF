@@ -416,7 +416,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btLimpiar_IngresarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarDevolucionesActionPerformed
-        // TODO add your handling code here:
+       
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("Seguro que desea limpiar todas las tablas", "Limpiar tablas");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
             try {
@@ -455,18 +455,19 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
             //try {
                 UsuarioActivo = DevolverIdUsuarioActivo();
+               
                 if (VerificarQueAlMenosUnaTablaNoEsteVacia() == true) {
                     JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
                     return;
                 } else {
-                
+                 JOptionPane.showMessageDialog(null, "else");
                     int factura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
                    LaDevolucionAIngresar= new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
                     
                     try {
-                        
+                        JOptionPane.showMessageDialog(null, "try");
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                            
+                            JOptionPane.showMessageDialog(null, "if");
                            // try {
                             boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
                             if (SeIngresoLosDetalles == true) {

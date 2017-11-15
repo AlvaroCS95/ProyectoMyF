@@ -87,7 +87,7 @@ public class IngresarAbono extends javax.swing.JDialog {
 
         if (ContieneCamposVacios() != true) {
             
-            if (MontoPendiente >= Integer.parseInt(txtMontoAbono_Abonos.getText())) {
+            if (MontoPendiente >= Float.parseFloat(txtMontoAbono_Abonos.getText())) {
                 CoordinadorDeAbonos elCoordinador = new CoordinadorDeAbonos();
                 float MontoAbono = Float.parseFloat(txtMontoAbono_Abonos.getText());
                 Abono elAbono = new Abono(IdCuenta, MontoAbono, TipoDePago());

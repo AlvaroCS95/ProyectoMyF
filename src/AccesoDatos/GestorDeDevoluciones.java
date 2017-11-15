@@ -36,10 +36,10 @@ public class GestorDeDevoluciones extends Coneccion {
 
             try {
             resultadoConsulta = consulta.executeQuery("call IngresarDevolucion"
-                    + "(" + LaDevolucion.getNumeroFactura()+ "," + LaDevolucion.getCedulaUsuario()
-                    + "," + LaDevolucion.getValorTotal()+ "," + LaDevolucion.getReintegroAlCliente()+ ");");
+                    + "(" + LaDevolucion.getNumeroFactura()+ ",'" + LaDevolucion.getCedulaUsuario()
+                    + "'," + LaDevolucion.getValorTotal()+ "," + LaDevolucion.getReintegroAlCliente()+ ");");
           exito=true;
-    
+            
         } catch (Exception e) {
            return exito=false;        
         }

@@ -78,8 +78,10 @@ public class IngresarProductos extends javax.swing.JPanel {
                 Modelos.Producto elProducto = new Modelos.Producto(codigo, nombre, IdClasificacion, 0, precio, IdUME, false);
                 if (elCoordinadorDeInventario.AgregarProducto(elProducto) == true) {
                     JOptionPane.showMessageDialog(null, "Producto insertado exitosamente");
+                    Limpiar();
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la inserción");
+                    return;
                 }
             } catch (Exception e) {
 

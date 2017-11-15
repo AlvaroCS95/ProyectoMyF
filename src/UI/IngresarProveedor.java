@@ -226,10 +226,8 @@ public void Limpiar() {
 
     public boolean VerificaCamposVacios() {
         if (txtCedulaJuridica_IngresarProveedor.getText().equals("")
-                || txtCorreo_IngresarProveedor.getText().equals("")
                 || txtDireccion_IngresarProveedor.getText().equals("")
-                || txtNombre_IngresarProveedor.getText().equals("")
-                || txtTelefono_IngresarProveedor.getText().equals("")) {
+                || txtNombre_IngresarProveedor.getText().equals("")) {
             return true;
         } else {
             return false;

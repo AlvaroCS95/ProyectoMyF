@@ -142,6 +142,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
 
         menu = new javax.swing.JPopupMenu();
         AgregarAbonos = new javax.swing.JMenuItem();
+        verAbonos = new javax.swing.JMenuItem();
         jLabel52 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCuentasPorPagar = new javax.swing.JTable();
@@ -158,6 +159,16 @@ public class CuentasPorPagar extends javax.swing.JPanel {
             }
         });
         menu.add(AgregarAbonos);
+
+        verAbonos.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        verAbonos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DetalleFactura.png"))); // NOI18N
+        verAbonos.setText("Ver abonos");
+        verAbonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verAbonosActionPerformed(evt);
+            }
+        });
+        menu.add(verAbonos);
 
         jLabel52.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(0, 102, 112));
@@ -244,6 +255,19 @@ public class CuentasPorPagar extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbxMostar_CuentasActionPerformed
 
+    private void verAbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAbonosActionPerformed
+        String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+        DetallesAbonos eldetalle = null;
+        try {
+            eldetalle = new DetallesAbonos(null, true, IdCuenta,abono);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CuentasPorPagar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CuentasPorPagar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        eldetalle.setVisible(true);
+    }//GEN-LAST:event_verAbonosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AgregarAbonos;
@@ -253,6 +277,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu menu;
     public static javax.swing.JTable tbCuentasPorPagar;
+    private javax.swing.JMenuItem verAbonos;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -231,9 +231,7 @@ public class EditarProveedor extends javax.swing.JDialog {
 
     public boolean VerificaCamposVacios() {
         if (txtCedulaJuridica_EditarProveedor.getText().equals("")
-                || txtCorreo_EditarProveedor.getText().equals("")
-                || txtNombre_EditarProveedor.getText().equals("")
-                || txtTelefono_EditarProveedor.getText().equals("")) {
+                || txtNombre_EditarProveedor.getText().equals("")) {
             return true;
         } else {
             return false;
@@ -262,7 +260,7 @@ public class EditarProveedor extends javax.swing.JDialog {
                     dispose();
                     ListarProveedor.VisualizarProveedores();
                     if (ListarProveedor.panelHabilitado == true) {
-                        
+
                         BuscarProveedores.VisualizarTodosLosProveedores();
 
                     }
