@@ -234,4 +234,19 @@ public class CoordinadorDeFacturaCompra {
         }
 
     }
+    public ArrayList<Object> DevolverListaDefcaturasConDeuda() {
+        try {
+            GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
+            resultado = gestor.ObtenerCuentasConDeuda();
+            while (resultado.next()) {
+                for (int i = 0; i < 1; i++) {
+                    listaParaRetornar.add(resultado.getObject(i + 1));
+
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaParaRetornar;
+    }
 }

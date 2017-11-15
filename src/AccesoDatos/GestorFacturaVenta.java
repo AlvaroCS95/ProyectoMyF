@@ -1,4 +1,3 @@
-
 package AccesoDatos;
 
 import Modelos.FacturaDeVenta;
@@ -305,12 +304,12 @@ public class GestorFacturaVenta extends Coneccion {
 
         return resultadoConsulta;
     }
-    
+
     public ResultSet ObtenerDetallesDeFactura(String idFactura) {
         try {
             EstablecerConexion();
             consulta = conexion.createStatement();
-            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaVentaPorID('"+idFactura+"');");
+            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaVentaPorID('" + idFactura + "');");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -318,7 +317,7 @@ public class GestorFacturaVenta extends Coneccion {
         }
         return resultadoConsulta;
     }
-    
+
     public int ObtenerUltimaIdFacturaVenta() throws ClassNotFoundException, SQLException {
         int IdUsuarioActivo = 0;
         try {
@@ -336,7 +335,7 @@ public class GestorFacturaVenta extends Coneccion {
         }
         return IdUsuarioActivo;
     }
-    
+
     public String ObtenerFechaDePagoConDiasDePLazo(int PlazoDias) throws ClassNotFoundException, SQLException {
         String FechaPago = "";
         try {
@@ -345,7 +344,7 @@ public class GestorFacturaVenta extends Coneccion {
             Statement statement = conexion.createStatement();
             ResultSet resulset;
 
-            String busca = "call DevuelveElDiaDePagoConPLazoDeDiasAsignado('"+PlazoDias+"')";
+            String busca = "call DevuelveElDiaDePagoConPLazoDeDiasAsignado('" + PlazoDias + "')";
             resulset = statement.executeQuery(busca);
             while (resulset.next()) {
                 FechaPago = resulset.getString(1);
@@ -353,5 +352,18 @@ public class GestorFacturaVenta extends Coneccion {
         } catch (Exception e) {
         }
         return FechaPago;
+    }
+
+    public ResultSet ObtenerCuentasConDeuda(){
+        ResultSet resulset = null;
+        try {
+            EstablecerConexion();
+            Statement statement = conexion.createStatement();
+            resulset = statement.executeQuery("call BuscarFacturasDeVentaConDeuda()");
+
+        } catch (Exception e) {
+            return resulset;
+        }
+        return resulset;
     }
 }

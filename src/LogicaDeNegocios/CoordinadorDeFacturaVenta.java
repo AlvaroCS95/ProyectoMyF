@@ -166,7 +166,7 @@ public class CoordinadorDeFacturaVenta {
         return elGestorDeFacturasDeVentas.ListarFacturasDeVentaQueNoTienenDevoluciones();
     }
 
-    public ResultSet ListarFacturasDeVenta(){
+    public ResultSet ListarFacturasDeVenta() {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.ListarFacturasDeVenta();
     }
@@ -190,7 +190,7 @@ public class CoordinadorDeFacturaVenta {
         GestorFacturaVenta elGestorDeFacturasDeVentas = new GestorFacturaVenta();
         return elGestorDeFacturasDeVentas.BuscarTodosLosProductosDeUnaFacturaDeVenta(NumeroDeFactura);
     }
-    
+
     public ResultSet Buscar(int tipoBusqueda, String criterioUno, String criterioDos) {
         GestorFacturaVenta gestorDeBusqueda = new GestorFacturaVenta();
 
@@ -211,7 +211,7 @@ public class CoordinadorDeFacturaVenta {
         }
         return resultado;
     }
-    
+
     public ResultSet ListarFacturasVentaDelUltimoMes() {
 
         GestorFacturaVenta gestor = new GestorFacturaVenta();
@@ -219,7 +219,7 @@ public class CoordinadorDeFacturaVenta {
 
         return resultado;
     }
-    
+
     public void ObtenerDetallesDeFactura(String idFactura) {
         GestorFacturaVenta gestor = new GestorFacturaVenta();
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
@@ -236,13 +236,30 @@ public class CoordinadorDeFacturaVenta {
         }
 
     }
-    
+
     public int DevolverUltimoIdFacturaVenta() throws SQLException, ClassNotFoundException {
         GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
         return elGestorFacturaVenta.ObtenerUltimaIdFacturaVenta();
     }
+
     public String ObtenerFechaDePagoConDiasDePLazo(int PlazoDias) throws SQLException, ClassNotFoundException {
         GestorFacturaVenta elGestorFacturaVenta = new GestorFacturaVenta();
         return elGestorFacturaVenta.ObtenerFechaDePagoConDiasDePLazo(PlazoDias);
+    }
+
+    public ArrayList<Object> DevolverListaDefcaturasConDeuda() {
+        try {
+            GestorFacturaVenta gestor = new GestorFacturaVenta();
+            resultado = gestor.ObtenerCuentasConDeuda();
+            while (resultado.next()) {
+                for (int i = 0; i < 1; i++) {
+                    listaParaRetornar.add(resultado.getObject(i + 1));
+
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CoordinadorDeFacturaVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaParaRetornar;
     }
 }
