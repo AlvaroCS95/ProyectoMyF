@@ -17,6 +17,7 @@ import static UI.ListarFacturas.ListarFacturasDelUltimoMes;
 import static UI.ListarProveedor.VisualizarProveedores;
 import static UI.ListarUsuarios.VisualizarUsuarios;
 import static UI.PuntoDeVenta.ListarTiposDePago;
+import static UI.IngresoFacturaCompra.ListarTiposDePagoFC;
 import static UI.PuntoDeVenta.jSDiasPlazo_PuntoDeVenta;
 import static UI.VisualizarProductos.VisualizarTodosProductos;
 import java.awt.Toolkit;
@@ -339,7 +340,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     private void ingresoFacturaCompra1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresoFacturaCompra1AncestorAdded
         ListarProveedores();
-        ListarTiposDePago();
+        ListarTiposDePagoFC();
         scroll_IngresoFacturaCompra.getVerticalScrollBar().setUnitIncrement(15);
     }//GEN-LAST:event_ingresoFacturaCompra1AncestorAdded
 

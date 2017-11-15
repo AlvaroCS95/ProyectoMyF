@@ -254,7 +254,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        txtTotalAPagar_PuntoDeVenta.setText("" + total);
+        txtTotalAPagar_PuntoDeVenta.setText("" + formato.format(total));
     }
 
     public void VerificarDatosParaAgregarAlaLista() {
@@ -376,7 +376,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             totalDescuento += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
         }
-        txtDescuento_PuntoDeVenta.setText("" + totalDescuento);
+        txtDescuento_PuntoDeVenta.setText("" + formato.format(totalDescuento));
     }
 
     public void AplicarDescuento() {
@@ -388,11 +388,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             AgregarCodigoAListaDeDescuentos(fila);
             float subtotal = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 7).toString());
             float descuentoAcumulado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+            float descuento = 0, nuevoTotal = 0;
 
-            float nuevoTotal = subtotal - (subtotal * cantidadDescuento);
-            float descuento = (subtotal * cantidadDescuento) + descuentoAcumulado;
-            TablaFacturacion_PuntoDeVenta.setValueAt(descuento, fila, 6);
-            TablaFacturacion_PuntoDeVenta.setValueAt(nuevoTotal, fila, 7);
+            nuevoTotal = subtotal - (subtotal * cantidadDescuento);
+            descuento = (subtotal * cantidadDescuento) + descuentoAcumulado;
+
+            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(descuento), fila, 6);
+            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(nuevoTotal), fila, 7);
             ActualizarDescuentoFinal();
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 0 y 100.",
@@ -550,7 +552,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             MontoCancelado = Float.parseFloat(txtMontoDePago_PuntoDeVenta.getText());
             Vuelto = TotalVendido - MontoCancelado;
             if (Vuelto < 0) {
-                Vuelto = Vuelto * -1;                
+                Vuelto = Vuelto * -1;
             }
         }
 

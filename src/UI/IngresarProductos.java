@@ -304,6 +304,7 @@ public class IngresarProductos extends javax.swing.JPanel {
 
     private void btAceptar_IngresarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarInventarioActionPerformed
         NuevoProducto();
+        Limpiar();
     }//GEN-LAST:event_btAceptar_IngresarInventarioActionPerformed
 
     private void btCancelar_IngresarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarInventarioActionPerformed

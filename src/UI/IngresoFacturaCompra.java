@@ -105,7 +105,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
     }
 
-    public static void ListarTiposDePago() {
+    public static void ListarTiposDePagoFC() {
         listaParaMostrar.clear();
 
         cbxTipoPago_FacturaCompra.removeAllItems();
@@ -673,7 +673,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxTipoCompra_IngresarFacturaCompraActionPerformed
 
     private void cbxTipoPago_FacturaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxTipoPago_FacturaCompraMouseClicked
-        ListarTiposDePago();
+        ListarTiposDePagoFC();
     }//GEN-LAST:event_cbxTipoPago_FacturaCompraMouseClicked
 
     private void txtMontoDeCompra_IngresarFacturaCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoDeCompra_IngresarFacturaCompraKeyPressed
