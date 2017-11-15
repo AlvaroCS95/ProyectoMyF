@@ -355,7 +355,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public void QuitarArticulosRepetidos(String codigoAEliminar) {
         int cantidadFilas = TablaFacturacion_PuntoDeVenta.getRowCount();
         String codigoActual;
-
         for (int i = 0; i < cantidadFilas; i++) {
             codigoActual = TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString();
             if (codigoActual.equals(codigoAEliminar)) {
