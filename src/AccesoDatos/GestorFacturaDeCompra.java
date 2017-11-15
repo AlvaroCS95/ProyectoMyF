@@ -326,17 +326,30 @@ public class GestorFacturaDeCompra extends Coneccion {
         }
         return resultadoConsulta;
     }
-    
+
     public ResultSet ObtenerDetallesDeFactura(String idFactura) {
         try {
             EstablecerConexion();
             consulta = conexion.createStatement();
-            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaCompraPorID('"+idFactura+"');");
+            resultadoConsulta = consulta.executeQuery("CALL ObtenerDetallesDeFacturaCompraPorID('" + idFactura + "');");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultadoConsulta;
+    }
+
+    public ResultSet ObtenerCuentasConDeuda() {
+        ResultSet resulset = null;
+        try {
+            EstablecerConexion();
+            Statement statement = conexion.createStatement();
+            resulset = statement.executeQuery("call BuscarFacturasDeCompraConDeuda()");
+
+        } catch (Exception e) {
+            return resulset;
+        }
+        return resulset;
     }
 }

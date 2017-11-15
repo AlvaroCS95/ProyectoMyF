@@ -2,6 +2,8 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeFacturaCompra;
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,6 +72,7 @@ public class ListarFacturas extends javax.swing.JPanel {
                 modelo.addColumn("N° entrega");
                 modelo.addColumn("Tipo de pago");
                 modelo.addColumn("N° de referencia");
+                modelo.addColumn("Estado de la factura");
                 break;
 
             case "Venta":
@@ -80,9 +83,53 @@ public class ListarFacturas extends javax.swing.JPanel {
                 modelo.addColumn("Monto de venta");
                 modelo.addColumn("Tipo de pago");
                 modelo.addColumn("Tipo de venta");
+                modelo.addColumn("Estado de la factura");
                 break;
         }
 
+    }
+
+    public static void DefinirEstadoCuenta(ResultSet listaDeFacturas, boolean tipoFactura) {
+
+        String nFactura = "";
+        String pend = "Pendiente";
+        String canc = "Cancelado";
+        if (tipoFactura) {
+            CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
+            listaParaMostrar = coordinador.DevolverListaDefcaturasConDeuda();
+            for (int j = 0; j < modelo.getRowCount(); j++) {
+                nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(j, 0).toString();
+
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+
+                    if (nFactura.equals(listaParaMostrar.get(i).toString())) {
+                        jt_ListarFacturasDeCompraVenta.setValueAt("Pendiente", j, 10);
+                        break;
+                    } else {
+                        jt_ListarFacturasDeCompraVenta.setValueAt("Cancelado", j, 10);
+                    }
+
+                }
+            }
+
+        } else {
+            CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
+            listaParaMostrar = coordinador.DevolverListaDefcaturasConDeuda();
+            for (int j = 0; j < modelo.getRowCount(); j++) {
+                nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(j, 0).toString();
+
+                for (int i = 0; i < listaParaMostrar.size(); i++) {
+
+                    if (nFactura.equals(listaParaMostrar.get(i).toString())) {
+                        jt_ListarFacturasDeCompraVenta.setValueAt("Pendiente", j, 7);
+                        break;
+                    } else {
+                        jt_ListarFacturasDeCompraVenta.setValueAt("Cancelado", j, 7);
+                    }
+
+                }
+            }
+        }
     }
 
     public static void LlenarDatosTabla(ResultSet listaDeFacturas) {
@@ -101,6 +148,8 @@ public class ListarFacturas extends javax.swing.JPanel {
                                 } else {
                                     filas[i] = "Crédito";
                                 }
+                            } else if (i == 7) {
+                                filas[i] = "";
                             } else {
                                 filas[i] = listaDeFacturas.getObject(i + 1);
                             }
@@ -111,6 +160,7 @@ public class ListarFacturas extends javax.swing.JPanel {
                     Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jt_ListarFacturasDeCompraVenta.setModel(modelo);
+                DefinirEstadoCuenta(listaDeFacturas, false);
                 break;
 
             case "Compra":
@@ -126,6 +176,8 @@ public class ListarFacturas extends javax.swing.JPanel {
                                 } else {
                                     filas[i] = "Crédito";
                                 }
+                            } else if (i == 10) {
+                                filas[i] = "";
                             } else {
                                 filas[i] = listaDeFacturas.getObject(i + 1);
                             }
@@ -136,6 +188,7 @@ public class ListarFacturas extends javax.swing.JPanel {
                     Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jt_ListarFacturasDeCompraVenta.setModel(modelo);
+                DefinirEstadoCuenta(listaDeFacturas, true);
                 break;
         }
     }
@@ -471,7 +524,7 @@ public class ListarFacturas extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jt_ListarFacturasDeCompraVenta);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 1010, 400));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 1160, 400));
 
         jLTitulo.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLTitulo.setText("Se está mostrando las facturas de ");
@@ -584,10 +637,12 @@ public class ListarFacturas extends javax.swing.JPanel {
             cbx_SeleccionBusqueda.setVisible(true);
             jComboBox1.setVisible(false);
             cbx_SeleccionBusqueda.setSelectedIndex(0);
+            TiposDeLista();
         } else {
             cbx_SeleccionBusqueda.setVisible(false);
             jComboBox1.setVisible(true);
             jComboBox1.setSelectedIndex(0);
+            TiposDeLista();
         }
     }//GEN-LAST:event_cbxMostrar_FacturasItemStateChanged
 
