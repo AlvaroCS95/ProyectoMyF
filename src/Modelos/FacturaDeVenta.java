@@ -19,7 +19,6 @@ public class FacturaDeVenta {
         this.montoDescuento = descuento;
         this.precioVendido = precioVendido;
     }
-
     public void CrearFacturaVentaCredito(float monto, int idCliente, int idTipoPago, String nuReferencia, int plazoDias,
             float montoCancelado) {
         this.MontoDeVenta = monto;

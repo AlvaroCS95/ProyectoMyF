@@ -21,6 +21,5 @@ public class GestorDeCuentasPorCobrar extends Coneccion{
         } catch (Exception e) {
             return ResultadoConsulta;
         }
-
     }
 }

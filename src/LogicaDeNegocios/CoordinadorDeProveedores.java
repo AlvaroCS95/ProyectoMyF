@@ -19,7 +19,7 @@ public class CoordinadorDeProveedores {
         GestorDeProveedores elGestorDeProveedores = new GestorDeProveedores();
         return elGestorDeProveedores.InsertarProveedor(elProveedor);
     }
- 
+
     
     public ResultSet EditarProveedor(Proveedor elProveedor) throws ClassNotFoundException, SQLException {
         GestorDeProveedores elGestorDeProveedores = new GestorDeProveedores();

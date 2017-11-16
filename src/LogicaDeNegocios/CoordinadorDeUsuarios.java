@@ -17,7 +17,6 @@ public class CoordinadorDeUsuarios {
         Respuesta = elGestorDeUsuarios.InsertarUsuario(elUsuario);
 
         return Respuesta;
-
     }
 
     public ResultSet EditarUsuario(Usuario elUsuario) throws ClassNotFoundException, SQLException {

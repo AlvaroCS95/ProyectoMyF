@@ -14,7 +14,6 @@ public class CoordinadorDeInventario {
         GestorDeInventario elGestorDeInventario = new GestorDeInventario();
         return elGestorDeInventario.ObtenerPrecioDeUnProducto(CodigoProducto,NumeroFactura);
     }
-
     public boolean AgregarProducto(Producto elProducto) throws ClassNotFoundException, SQLException {
         boolean Respuesta;
         GestorDeInventario elGestorDeInventario = new GestorDeInventario();

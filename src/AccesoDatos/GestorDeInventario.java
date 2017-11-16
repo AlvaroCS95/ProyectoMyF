@@ -69,7 +69,6 @@ public class GestorDeInventario extends Coneccion {
 
             return false;
         }
-
     }
 
     public boolean InsertarProducto(Producto elProducto) throws SQLException, ClassNotFoundException {

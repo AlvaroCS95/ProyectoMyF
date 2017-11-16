@@ -18,7 +18,7 @@ public class CoordinadorDeProductosReintegrados {
         GestorProductoReintegrados elGestorProductoReintegrados = new GestorProductoReintegrados();
         return elGestorProductoReintegrados.IngresarProductosReintegrados(ElProductosReintegrados);
     }
-    
+   
     public ResultSet MostrartodosLosProductoReintegradosPorNDevolución(int IdDevolucion) throws SQLException, ClassNotFoundException {
          GestorProductoReintegrados elGestorProductoReintegrados = new GestorProductoReintegrados();
         return elGestorProductoReintegrados.MostrartodosLosProductoReintegradosPorNDevolución(IdDevolucion);

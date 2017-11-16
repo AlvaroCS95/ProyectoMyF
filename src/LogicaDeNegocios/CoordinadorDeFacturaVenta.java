@@ -36,13 +36,16 @@ public class CoordinadorDeFacturaVenta {
                             } else {
                                 fila[i] = resultado.getObject(i + 1);
                             }
-                        } else if (i == 5) {
+                        } else if (i == 5) {// aquí va el IV
                             precio = Float.parseFloat(resultado.getObject(3).toString());
-                            fila[i] = (precio * 0.13);
+                            if (resultado.getBoolean(5)) {
+                                fila[i] = 0;
+                            }else{
+                                fila[i] = (precio * 0.13);
+                            }                            
                         } else if (i == 6) {
                             fila[i] = 0;
                         } else if (i == 7) {
-
                             if (precioAcumulado == 0) {
                                 subTotal += ((precio + Float.parseFloat(fila[5].toString())) * nuevaCantidadAcumulada);
                                 fila[i] = subTotal;

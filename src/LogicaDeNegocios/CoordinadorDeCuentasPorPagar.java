@@ -21,4 +21,5 @@ public class CoordinadorDeCuentasPorPagar {
          GestorDeCuentasPorPagar elGestor= new GestorDeCuentasPorPagar();
          return elGestor.ListarCuentasPorPagar();
     }
+    
 }

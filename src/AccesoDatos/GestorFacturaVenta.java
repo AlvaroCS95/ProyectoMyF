@@ -13,7 +13,6 @@ public class GestorFacturaVenta extends Coneccion {
     CallableStatement llamadaAlMetodo;
     ResultSet resultadoConsulta = null;
     Statement consulta;
-
     public ResultSet BuscarProductoParaVender(String codigoProducto, float cantidadSolicitada) {
         try {
             EstablecerConexion();

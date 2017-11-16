@@ -10,7 +10,6 @@ public class CoordinadorDeRutas {
 
     public CoordinadorDeRutas() {
     }
-
     public ResultSet ListarRutasActivas() throws ClassNotFoundException, SQLException {
         GestorDeRutas elGestorDeRutas = new GestorDeRutas();
         return elGestorDeRutas.ListarRutasActivas();
