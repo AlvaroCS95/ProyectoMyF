@@ -4,6 +4,7 @@ import LogicaDeNegocios.CoordinadorDeClientes;
 
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
 import LogicaDeNegocios.CoordinarDeImpresion;
+import LogicaDeNegocios.IMPRIMIR;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -36,14 +37,16 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 CrearFacturaVentaCreditoConAbono();
                                 AgregarDetalleAFactura();
                                 ResumenVentaCreditoConAbono();
-                                CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                             //   CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                                IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir);
                                 LimpiarDatos();
                             }
                         } else {
                             CrearFacturaVentaCreditoSinAbono();
                             AgregarDetalleAFactura();
                             ResumenVentaCreditoSinAbono();
-                            CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                           // CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                            IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir);
                             LimpiarDatos();
                         }
                         break;
@@ -53,7 +56,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(true);
-                                CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                               // CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                                IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir);
                                 LimpiarDatos();
                             }
                         } else if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Seleccione...")) {
@@ -64,7 +68,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(false);
-                                CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                               // CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                               IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir);
                                 LimpiarDatos();
                             } else {
                                 JOptionPane.showMessageDialog(null, "Debe indicar el numero de referencia con el cual canceló\n"
