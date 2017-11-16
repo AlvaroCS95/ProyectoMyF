@@ -1,15 +1,8 @@
+==========                                                                                
+          FACTURA DE VENTA                                                                
+ Fecha: null                                                                              
                                                                                           
- 	           Distribuidora MyF
-	      Aramed de Jesús Sequeira Vega
-		        Cé          
- dula: 5-256-190
-	       Tels: 83031359 / 88197499
-	     Email: aramedsequeira@y          
- ahoo.es
-			       Nicoya, Guanacaste
------------------------------------------
-          
-   Hora y fecha: 22:29:38 15/11/2017                                                      
+                                                                                          
                                                                                           
                                                                                           
                                                                                           
