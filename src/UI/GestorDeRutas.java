@@ -52,7 +52,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
 
         Asignacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         Asignacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ruta.png"))); // NOI18N
-        Asignacion.setText("Asignaciones de Ruta");
+        Asignacion.setText("Asignaciones de ruta");
         Asignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AsignacionActionPerformed(evt);
@@ -276,6 +276,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
         modeloVerClientes.addColumn("Nombre de local");
         modeloVerClientes.addColumn("Cedula");
         modeloVerClientes.addColumn("Dirección");
+        modeloVerClientes.addColumn("Dia de asignacion");
         filas = new Object[modeloVerClientes.getColumnCount()];
         Listar.setModel(modeloVerClientes);
     }
@@ -290,7 +291,9 @@ public class GestorDeRutas extends javax.swing.JPanel {
         modeloVerCamiones.addColumn("N° Placa");
         modeloVerCamiones.addColumn("Marca");
         modeloVerCamiones.addColumn("Estilo");
+        modeloVerCamiones.addColumn("Dia de asignacion");
         modeloVerCamiones.addColumn("Modelo");
+        
         filas = new Object[modeloVerCamiones.getColumnCount()];
         Listar.setModel(modeloVerCamiones);
     }

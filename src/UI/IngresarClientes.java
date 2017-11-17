@@ -161,6 +161,9 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtRazonSocial_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtRazonSocial_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
+        txtCedula_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtCedula_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

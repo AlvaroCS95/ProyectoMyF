@@ -30,6 +30,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         Ruta.setText(Nombre);
         this.Id = id;
         ListarClientesPorBusqueda(Id);
+         DetallesCamiones.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +39,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
 
         Menu = new javax.swing.JPopupMenu();
         Eliminar = new javax.swing.JMenuItem();
+        DetallesCamiones = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         DetallesRuta = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +56,16 @@ public class DetallesDeRuta extends javax.swing.JDialog {
             }
         });
         Menu.add(Eliminar);
+
+        DetallesCamiones.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        DetallesCamiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/camion-de-reparto (1).png"))); // NOI18N
+        DetallesCamiones.setText("Mostrar carga");
+        DetallesCamiones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetallesCamionesActionPerformed(evt);
+            }
+        });
+        Menu.add(DetallesCamiones);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,10 +144,12 @@ public class DetallesDeRuta extends javax.swing.JDialog {
     private void DetallesRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetallesRutaActionPerformed
 
         if (DetallesRuta.getSelectedItem().equals("Clientes")) {
+             DetallesCamiones.setVisible(false);
             ListarClientesPorBusqueda(Id);
             estado = false;
 
         } else if (DetallesRuta.getSelectedItem().equals("Camiones")) {
+            DetallesCamiones.setVisible(true);
             ListarCamionesPorBusqueda(Id);
             estado = true;
 
@@ -213,6 +227,11 @@ public class DetallesDeRuta extends javax.swing.JDialog {
         FilaSeleccionadaParaEliminar = TablaDetalles.getSelectedRow();
         SeleccionDeFila = true;        // TODO add your handling code here:
     }//GEN-LAST:event_TablaDetallesMousePressed
+
+    private void DetallesCamionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetallesCamionesActionPerformed
+//        String placa = TablaDetalles.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+//        VisualizarDetallesDeCarga cargas= new VisualizarDetallesDeCarga(Id);
+    }//GEN-LAST:event_DetallesCamionesActionPerformed
 
     public static void ListarClientesPorBusqueda(int id) {
         try {
@@ -300,6 +319,7 @@ public class DetallesDeRuta extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JMenuItem DetallesCamiones;
     private javax.swing.JComboBox DetallesRuta;
     private javax.swing.JMenuItem Eliminar;
     private javax.swing.JPopupMenu Menu;

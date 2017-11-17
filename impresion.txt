@@ -9,19 +9,22 @@
 
  				       Factura Contado
 
-N.Fac: 105
+N.Fac: 108
 Ced.Cli: 14
 Cli: Pulperia
 F.pago: Efectivo
 N.Ref: 0
-Hora-Fecha:23:29:38 16/11/2017
+Hora-Fecha:23:52:25 16/11/2017
 ----*---------------------*----
 Cod  Cant  Descr        Ttl
-03  1.0  Postadecer 3559.5
-Total de venta: 3559.5
-Monto de descuento: 395.50Paga con: 4000.0
-Su vuelto: 440.5
+03   10.0   Postadecer 39550.0
+--------------------------------
+
+Total de venta: 39550.0
+Monto de descuento: 0
+Paga con: 40000.0
+Su vuelto: 450.0
 Muchas gracias por preferirnos
-                                   
-                                   
-                                   
+                                      
+                                      
+                                      

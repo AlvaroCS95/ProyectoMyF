@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class AsignacionesDeRuta extends javax.swing.JDialog {
 
@@ -58,39 +59,60 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         });
     }
 
-    public void AgregarTablaCamion() {
+    public void AgregarTablaCamion(String dia) {
 
         if (SeleccionDeFila == false) {
             JOptionPane.showMessageDialog(null, "Primero selecione un camion de la lista.");
         } else {
-            String Camiones[] = new String[4];
-            Camiones[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-            Camiones[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-            Camiones[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
-            Camiones[3] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
-            modeloVerCamiones.addRow(Camiones);
-            TablaAsignarCamion.setModel(modeloVerCamiones);
+            if (verificarexistencia(TablaAsignarCamion, dia) == false) {
+                String Camiones[] = new String[5];
+                Camiones[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+                Camiones[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+                Camiones[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+                Camiones[3] = dia;
+                Camiones[4] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 2).toString();
 
+                modeloVerCamiones.addRow(Camiones);
+                TablaAsignarCamion.setModel(modeloVerCamiones);
+            }
         }
     }
 
-    public void AgregarTablaCliente() {
+    public boolean verificarexistencia(JTable tabla, String dia) {
+        String obj = "";
+        String ced = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+
+            if (tabla.getValueAt(i, 1).toString().equals(ced)
+                    && tabla.getValueAt(i, 3).toString().equals(dia)) {
+                obj = tabla.getValueAt(i, 0).toString();
+                JOptionPane.showMessageDialog(null, obj + "\t  ha sido asigando con anterioridad al dia" + " " + dia);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void AgregarTablaCliente(String dia) {
 
         if (SeleccionDeFila == false) {
             JOptionPane.showMessageDialog(null, "Primero selecione un cliente de la lista.");
         } else {
-            String Cliente[] = new String[3];
-            Cliente[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
-            Cliente[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-            Cliente[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
 
-            modeloVerClientes.addRow(Cliente);
-            TablaAsignarCliente.setModel(modeloVerClientes);
-
+            if (verificarexistencia(TablaAsignarCliente, dia) == false) {
+                String Cliente[] = new String[4];
+                Cliente[0] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 8).toString();
+                Cliente[1] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
+                Cliente[2] = TablaAsignaciones.getValueAt(FilaSeleccionadaParaEliminar, 7).toString();
+                Cliente[3] = dia;
+                modeloVerClientes.addRow(Cliente);
+                TablaAsignarCliente.setModel(modeloVerClientes);
+            }
         }
+
     }
 
-    public void AgregarClientes(int dia, String NombreDia) throws ClassNotFoundException, SQLException {
+    public void AgregarClientes() throws ClassNotFoundException, SQLException {
 
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
 
@@ -99,25 +121,28 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 for (int i = 0; i < TablaAsignarCliente.getRowCount(); i++) {
                     String cedula = TablaAsignarCliente.getValueAt(i, 1).toString();
                     String Local = TablaAsignarCliente.getValueAt(i, 0).toString();
+                    String diaLetras=TablaAsignarCliente.getValueAt(i, 3).toString();
                     ResultSet Respuesta;
 
-                    Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, dia);
+                    Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, diaAsignacion(TablaAsignarCliente,i));
                     try {
                         if (Respuesta.next()) {
 
                             if (Respuesta.getString(1).equals("1")) {
 
                             } else {
-                                JOptionPane.showMessageDialog(null, "Error en la asignacion");
+                          JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad al dia \t" + diaLetras);
+                        
                             }
                         }
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad al dia \t" + NombreDia);
+                        JOptionPane.showMessageDialog(null, "No tiene permisos");
+                        
                         return;
                     }
 
                 }
-                JOptionPane.showMessageDialog(null, "Los Clientes se han ingreso con exito al dia:\t " + NombreDia);
+                JOptionPane.showMessageDialog(null, "Se ha finalizado la operación.");
             }
 
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
@@ -125,7 +150,34 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
 
     }
 
-    public void AgregarCamiones(int dia, String NombreDia) {
+    public int diaAsignacion(JTable tabla, int i) {
+        int dia = 0;
+        if (tabla.getValueAt(i, 3).toString().equals("Lunes")) {
+            dia = 1;
+          
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Martes")) {
+            dia = 2;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Miercoles")) {
+            dia = 3;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Jueves")) {
+            dia = 4;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Viernes")) {
+            dia = 5;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Sabado")) {
+            dia = 6;
+            if (tabla.getValueAt(i, 3).toString().equals("Domingo")) {
+                dia = 7;
+            }
+        }
+        return dia;
+    }
+
+    public void AgregarCamiones() {
 
         CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
         try {
@@ -133,29 +185,30 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 for (int i = 0; i < TablaAsignarCamion.getRowCount(); i++) {
 
                     String placa = TablaAsignarCamion.getValueAt(i, 0).toString();
-
+                    String diaLetras=TablaAsignarCamion.getValueAt(i, 3).toString();
                     ResultSet Respuesta;
-                    Respuesta = elCoordinador.AgregarCamionARuta(placa, idRuta, dia);
+                    Respuesta = elCoordinador.AgregarCamionARuta(placa, idRuta, diaAsignacion(TablaAsignarCamion,i));
                     try {
                         if (Respuesta.next()) {
 
                             if (Respuesta.getString(1).equals("1")) {
 
                             } else {
-                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a la ruta \t" + NombreDia);
+                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a la ruta \t" + diaLetras);
 
                             }
                         }
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "No tiene permisos, comuniquese con el administrador");
+                        JOptionPane.showMessageDialog(null, "No tiene permisos");
+                    
                         return;
                     }
 
                 }
-                JOptionPane.showMessageDialog(null, "Los camiones se han ingreso con exito al dia:\t " + NombreDia);
+                  JOptionPane.showMessageDialog(null, "Se ha finalizado la operación.");
             }
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Hola prueba");
+           
         }
 
     }
@@ -177,8 +230,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuCamion = new javax.swing.JPopupMenu();
-        AgregarCamion = new javax.swing.JMenuItem();
+        menu = new javax.swing.JPopupMenu();
+        Agregar = new javax.swing.JMenuItem();
         menuClientes = new javax.swing.JPopupMenu();
         RemoverCliente = new javax.swing.JMenuItem();
         menuCamiones = new javax.swing.JPopupMenu();
@@ -206,13 +259,15 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
         Sabado = new javax.swing.JCheckBox();
         Domingo = new javax.swing.JCheckBox();
 
-        AgregarCamion.setText("Asignar");
-        AgregarCamion.addActionListener(new java.awt.event.ActionListener() {
+        Agregar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ingresar-boton-de-flecha-en-esquema-de-cuadrado.png"))); // NOI18N
+        Agregar.setText("Asignar");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarCamionActionPerformed(evt);
+                AgregarActionPerformed(evt);
             }
         });
-        menuCamion.add(AgregarCamion);
+        menu.add(Agregar);
 
         RemoverCliente.setText("Remover");
         RemoverCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +304,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
 
             }
         ));
-        TablaAsignaciones.setComponentPopupMenu(menuCamion);
+        TablaAsignaciones.setComponentPopupMenu(menu);
         TablaAsignaciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaAsignacionesMouseClicked(evt);
@@ -377,38 +432,37 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
                                     .addComponent(cbxOpcionesFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(Lunes)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Martes)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Miercoles)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Juevez)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Viernes)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Sabado)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Domingo)
-                                    .addGap(37, 37, 37))
-                                .addComponent(jLabel1))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(RutaDeAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(28, 28, 28)
+                                            .addComponent(Lunes)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Martes)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Miercoles)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Juevez)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Viernes)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(Sabado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(Domingo)))
+                                    .addGap(37, 37, 37)))
                             .addGap(81, 81, 81)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAceptar_GestorRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(btnLimpiar_GestorRutas1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RutaDeAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(342, 342, 342))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,46 +511,8 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLimpiar_GestorRutas1ActionPerformed
     public void Agregar() throws ClassNotFoundException, SQLException {
 
-        if (Lunes.isSelected()) {
-
-            AgregarClientes(1, "Lunes");
-            AgregarCamiones(1, "Lunes");
-
-        }
-        if (Martes.isSelected()) {
-
-            AgregarClientes(2, "Martes");
-            AgregarCamiones(2, "Martes");
-        }
-        if (Miercoles.isSelected()) {
-
-            AgregarClientes(3, "Miercoles");
-            AgregarCamiones(3, "Miercoles");
-        }
-        if (Juevez.isSelected()) {
-
-            AgregarClientes(4, "Jueves");
-            AgregarCamiones(4, "Jueves");
-        }
-        if (Viernes.isSelected()) {
-
-            AgregarClientes(5, "Viernes");
-            AgregarCamiones(5, "Viernes");
-        }
-        if (Sabado.isSelected()) {
-
-            AgregarClientes(6, "Sabado");
-            AgregarCamiones(6, "Sabado");
-        }
-        if (Domingo.isSelected()) {
-
-            AgregarClientes(7, "Domingo");
-            AgregarCamiones(7, "Domingo");
-        } else if (!Lunes.isSelected() && !Martes.isSelected() && !Miercoles.isSelected()
-                && !Juevez.isSelected() && !Viernes.isSelected() && !Sabado.isSelected()
-                && !Domingo.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
-        }
+        AgregarCamiones();
+        AgregarClientes();
         LimpiarTablas();
     }
 
@@ -518,14 +534,81 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAceptar_GestorRutasingresarRutas
     public void OpcionFiltro() {
         if (opcionFiltro == false) {
-            AgregarTablaCliente();
+            if (Lunes.isSelected()) {
+
+                AgregarTablaCliente("Lunes");
+
+            }
+            if (Martes.isSelected()) {
+
+                AgregarTablaCliente("Martes");
+            }
+            if (Miercoles.isSelected()) {
+
+                AgregarTablaCliente("Miercoles");
+            }
+            if (Juevez.isSelected()) {
+
+                AgregarTablaCliente("Jueves");
+            }
+            if (Viernes.isSelected()) {
+
+                AgregarTablaCliente("Viernes");
+            }
+            if (Sabado.isSelected()) {
+
+                AgregarTablaCliente("Sabado");
+            }
+            if (Domingo.isSelected()) {
+                AgregarTablaCliente("Domingo");
+
+            } else if (!Lunes.isSelected() && !Martes.isSelected() && !Miercoles.isSelected()
+                    && !Juevez.isSelected() && !Viernes.isSelected() && !Sabado.isSelected()
+                    && !Domingo.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
+            }
+
         } else if (opcionFiltro == true) {
-            AgregarTablaCamion();
+
+            if (Lunes.isSelected()) {
+
+                AgregarTablaCamion("Lunes");
+
+            }
+            if (Martes.isSelected()) {
+
+                AgregarTablaCamion("Martes");
+            }
+            if (Miercoles.isSelected()) {
+
+                AgregarTablaCamion("Miercoles");
+            }
+            if (Juevez.isSelected()) {
+
+                AgregarTablaCamion("Jueves");
+            }
+            if (Viernes.isSelected()) {
+
+                AgregarTablaCamion("Viernes");
+            }
+            if (Sabado.isSelected()) {
+
+                AgregarTablaCamion("Sabado");
+            }
+            if (Domingo.isSelected()) {
+                AgregarTablaCamion("Domingo");
+
+            } else if (!Lunes.isSelected() && !Martes.isSelected() && !Miercoles.isSelected()
+                    && !Juevez.isSelected() && !Viernes.isSelected() && !Sabado.isSelected()
+                    && !Domingo.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Por favor seleccione al menos un dia");
+            }
+
         }
     }
-    private void AgregarCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarCamionActionPerformed
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         OpcionFiltro();
-    }//GEN-LAST:event_AgregarCamionActionPerformed
+    }//GEN-LAST:event_AgregarActionPerformed
 
     private void cbxOpcionesFiltrarfiltarBusqueda(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOpcionesFiltrarfiltarBusqueda
         TipoDeFiltro();
@@ -564,7 +647,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AgregarCamion;
+    private javax.swing.JMenuItem Agregar;
     public static javax.swing.JLabel Asignados;
     private javax.swing.JCheckBox Domingo;
     private javax.swing.JCheckBox Juevez;
@@ -589,7 +672,7 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JPopupMenu menuCamion;
+    private javax.swing.JPopupMenu menu;
     private javax.swing.JPopupMenu menuCamiones;
     private javax.swing.JPopupMenu menuClientes;
     // End of variables declaration//GEN-END:variables

@@ -49,7 +49,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 CrearFacturaVentaCreditoConAbono();
                                 AgregarDetalleAFactura();
                                 ResumenVentaCreditoConAbono();
-                                CuerpoDelTextoAImprimir +=  "\nTotal de venta: " + TotalVendido + "\n"
+                                CuerpoDelTextoAImprimir += "\n--------------------------------\n"
+                                        +"\nTotal de venta: " + TotalVendido + "\n"
                                         +"\nAbono:" + MontoAbonado + "\n"
                                         + "Monto pendiente: " + TotalConAbono + "\n"
                                         + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
@@ -63,7 +64,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                             CrearFacturaVentaCreditoSinAbono();
                             AgregarDetalleAFactura();
                             ResumenVentaCreditoSinAbono();
-                            CuerpoDelTextoAImprimir += "\nTotal de venta: " + TotalVendido + "\n"
+                            CuerpoDelTextoAImprimir +="\n--------------------------------\n"
+                                    +"\nTotal de venta: " + TotalVendido + "\n"
                                     + "\nAbono:" + MontoAbonado + "\n"
                                     + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
                                     + "\nMonto pendiente: " + TotalVendido + "\n"
@@ -79,7 +81,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(true);
                                 CuerpoDelTextoAImprimir
-                                        +="\nTotal de venta: " + TotalVendido + "\n"
+                                        += "\n--------------------------------\n"
+                                        + "\nTotal de venta: " + TotalVendido + "\n"
                                         + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
                                         + "\nPaga con: " + MontoCancelado + "\n"
                                         + "Su vuelto: " + Vuelto + "\n"
@@ -92,10 +95,16 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                     "¡Faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                         } else {
                             if (ValidarPagoNOEfectivo()) {// pago diferente de efectivo
+                                MontoCancelado=Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(false);
-                                // CoordinarDeImpresion elCoordinador = new CoordinarDeImpresion(CuerpoDelTextoAImprimir);
+                                 CuerpoDelTextoAImprimir+= "\n--------------------------------\n"
+                                        + "\nTotal de venta: " + TotalVendido + "\n"
+                                        + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
+                                        + "\nPaga con: " + MontoCancelado + "\n"
+                                        + "Su vuelto: " + Vuelto + "\n"
+                                        + "Muchas gracias por preferirnos";
                                 IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
                                 LimpiarDatos();
                             } else {
@@ -607,7 +616,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             }
 
             facturaVenta.AgregarDetalleFacturaVentaContado(codigo, cantidadVendida, descuentoAplicado, precioVendido);
-            CuerpoDelTextoAImprimir += "\n" + codigo + "  " + cantidadVendida + "  " + des + " " + precioVendido;
+            CuerpoDelTextoAImprimir += "\n" + codigo + "   " + cantidadVendida + "   " + des + " " + precioVendido;
         }
 
         if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")) {
@@ -618,12 +627,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             }
         }
 
-//        CuerpoDelTextoAImprimir += "\nAbono:" + MontoAbonado + "\n"
-//                + "Total con Abono: " + TotalConAbono + "\n"
-//                + "Total Vendido: " + TotalVendido + "\n"
-//                + "Paga con: " + MontoCancelado + "\n"
-//                + "Su vuelto: " + Vuelto + "\n"
-//                + "Muchas gracias por preferirnos";
+
     }
 
     public void LimpiarDatos() {
