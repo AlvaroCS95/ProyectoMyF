@@ -53,7 +53,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                         +"\nAbono:" + MontoAbonado + "\n"
                                         + "Monto pendiente: " + TotalConAbono + "\n"
                                         + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
-                                        + "Paga con: " + MontoCancelado + "\n"
+                                        + "\nPaga con: " + MontoCancelado + "\n"
                                         + "Su vuelto: " + (MontoCancelado - MontoAbonado) + "\n"
                                         + "Muchas gracias por preferirnos";
                                 IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
@@ -66,7 +66,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                             CuerpoDelTextoAImprimir += "\nTotal de venta: " + TotalVendido + "\n"
                                     + "\nAbono:" + MontoAbonado + "\n"
                                     + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
-                                    + "Monto pendiente: " + TotalVendido + "\n"
+                                    + "\nMonto pendiente: " + TotalVendido + "\n"
                                     + "Muchas gracias por preferirnos";
                             IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
                             LimpiarDatos();
