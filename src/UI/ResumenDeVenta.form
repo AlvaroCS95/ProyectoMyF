@@ -45,12 +45,12 @@
                           <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLTextoTotal" min="-2" pref="157" max="-2" attributes="0"/>
-                      <Component id="jLTextoPagaCon" min="-2" pref="163" max="-2" attributes="0"/>
-                      <Component id="jLTextoVuelto" min="-2" pref="169" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLTextoPagaCon" alignment="1" pref="319" max="32767" attributes="0"/>
+                      <Component id="jLTextoTotal" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jLTextoVuelto" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="160" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jBAceptar" alignment="0" max="32767" attributes="0"/>
           </Group>
