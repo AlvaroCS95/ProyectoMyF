@@ -143,7 +143,6 @@ public class IngresarUME extends javax.swing.JFrame {
         txtBuscar_IngresarUME = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUME_IngresarUME = new javax.swing.JTable();
-        btEliminar_IngresarUME = new javax.swing.JButton();
         lbSubtitulo_IngresarUME = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -199,14 +198,6 @@ public class IngresarUME extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbUME_IngresarUME);
 
-        btEliminar_IngresarUME.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
-        btEliminar_IngresarUME.setToolTipText("Oprimir para guardar datos de camión");
-        btEliminar_IngresarUME.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminar_IngresarUMEActionPerformed(evt);
-            }
-        });
-
         lbSubtitulo_IngresarUME.setFont(new java.awt.Font("Papyrus", 1, 12)); // NOI18N
         lbSubtitulo_IngresarUME.setText("Ingreso de UMES");
 
@@ -232,13 +223,11 @@ public class IngresarUME extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbBuscar_IngresarClasificacion)
                         .addGap(32, 32, 32)
-                        .addComponent(txtBuscar_IngresarUME, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEliminar_IngresarUME))
+                        .addComponent(txtBuscar_IngresarUME, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
             .addGroup(layout.createSequentialGroup()
@@ -253,11 +242,10 @@ public class IngresarUME extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbBuscar_IngresarClasificacion)
-                                .addComponent(txtBuscar_IngresarUME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btEliminar_IngresarUME))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbBuscar_IngresarClasificacion)
+                            .addComponent(txtBuscar_IngresarUME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -292,16 +280,11 @@ public class IngresarUME extends javax.swing.JFrame {
         BuscarUME();
     }//GEN-LAST:event_txtBuscar_IngresarUMEKeyTyped
 
-    private void btEliminar_IngresarUMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminar_IngresarUMEActionPerformed
-        ELiminarUME();
-    }//GEN-LAST:event_btEliminar_IngresarUMEActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bNombre_IngresarUME;
     public static javax.swing.JButton btAceptar_IngresarUME;
     public static javax.swing.JButton btCancelar_IngresarUME;
-    public static javax.swing.JButton btEliminar_IngresarUME;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBuscar_IngresarClasificacion;

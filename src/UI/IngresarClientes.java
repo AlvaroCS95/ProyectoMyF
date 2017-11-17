@@ -123,7 +123,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtDireccion_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtDireccion_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
 
-        cbxNivel_IngresarCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "★", "★★", "★★★", "★★★★", "★★★★★" }));
+        cbxNivel_IngresarCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "★", "★★", "★★★", "★★★★", "★★★★★" }));
         cbxNivel_IngresarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxNivel_IngresarClienteActionPerformed(evt);
@@ -302,12 +302,13 @@ public void LimpiarCampos() {
         txtDireccion_IngresarCliente.setText("");
         txtNombreLocal_IngresarCliente.setText("");
         txtRazonSocial_IngresarCliente.setText("");
+        cbxNivel_IngresarCliente.setSelectedItem("Seleccione...");
     }
 
  public boolean VerificarCamposVacios() {
 
         if (txtPrimerNombre_IngresarCliente.getText().equals("")
-               
+               ||cbxNivel_IngresarCliente.getSelectedItem().equals("Seleccione...")
                 || txtPrimerApellido_IngresarCliente.getText().equals("")
                 || txtSegundoApellido_IngresarCliente.getText().equals("")
                 || txtCedula_IngresarCliente.getText().equals("")
