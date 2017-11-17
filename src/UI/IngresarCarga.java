@@ -412,6 +412,7 @@ public void VisualizarCamion(JTable Listar) {
        
                   if(!estáEnLaTabla(codigo)){
                     existencias=existencias-cantidad;
+                    
                     modelo = (DefaultTableModel)TablaProductosCargados_IngresarCarga.getModel();
                     filas = new Object[modelo.getColumnCount()];
                     filas[0] = codigo;
@@ -425,6 +426,9 @@ public void VisualizarCamion(JTable Listar) {
                   }
                   else{
                     existencias=existencias-cantidad;
+                    
+                    float cantidadIngresadaAnteriormente=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt( fila,3).toString());
+                    cantidad=cantidad+cantidadIngresadaAnteriormente;
                     TablaProductosCargados_IngresarCarga.setValueAt(""+existencias, fila, 2);
                      TablaProductosCargados_IngresarCarga.setValueAt(""+cantidad, fila, 3);
                      int fila=DevolverPosicion(codigo);
