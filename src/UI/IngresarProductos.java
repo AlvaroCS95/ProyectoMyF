@@ -63,7 +63,7 @@ public class IngresarProductos extends javax.swing.JPanel {
         if (VerificarCamposVacios_Producto() == false) {
 
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
-            return;
+           
         } else {
             try {
                 CoordinadorDeInventario elCoordinadorDeInventario = new CoordinadorDeInventario();
@@ -80,12 +80,15 @@ public class IngresarProductos extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Producto insertado exitosamente");
                     Limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error en la inserción");
-                    return;
+                    JOptionPane.showMessageDialog(null, "Error en la inserción","ERROR",JOptionPane.ERROR_MESSAGE);
+                   
                 }
-            } catch (Exception e) {
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null, "Error proveniente de la base de datos","ERROR",JOptionPane.ERROR_MESSAGE);
 
-            }
+        } catch (ClassNotFoundException ex) {
+          JOptionPane.showMessageDialog(null, "Error de clase no encontrada","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
         }
     }
 
