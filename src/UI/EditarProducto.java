@@ -531,7 +531,7 @@ public class EditarProducto extends javax.swing.JFrame {
     private javax.swing.JButton btIngClasificacion_EditarProductos;
     private javax.swing.JButton btIngUME_IngresarProductos;
     public static javax.swing.JButton btLimpiar_IngresarInventario;
-    private static javax.swing.JComboBox<String> cmbxClasificacion_EditarProductos;
+    public static javax.swing.JComboBox<String> cmbxClasificacion_EditarProductos;
     private static javax.swing.JComboBox<String> cmbxUME_EditarProductos;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
