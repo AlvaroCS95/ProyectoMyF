@@ -140,7 +140,6 @@ public class IngresarClasificacion extends javax.swing.JFrame {
         btCancelar_IngresarClasificacion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClasificacion_IngresarClasificacion = new javax.swing.JTable();
-        btEliminar_IngresarClasificacion = new javax.swing.JButton();
         txtBuscar_IngresarClasificacion = new javax.swing.JTextField();
         lbBuscar_IngresarClasificacion = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -187,14 +186,6 @@ public class IngresarClasificacion extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbClasificacion_IngresarClasificacion);
 
-        btEliminar_IngresarClasificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
-        btEliminar_IngresarClasificacion.setToolTipText("Oprimir para guardar datos de camión");
-        btEliminar_IngresarClasificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminar_IngresarClasificacionActionPerformed(evt);
-            }
-        });
-
         txtBuscar_IngresarClasificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscar_IngresarClasificacionKeyTyped(evt);
@@ -236,13 +227,11 @@ public class IngresarClasificacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbBuscar_IngresarClasificacion)
                         .addGap(18, 18, 18)
-                        .addComponent(txtBuscar_IngresarClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEliminar_IngresarClasificacion))
+                        .addComponent(txtBuscar_IngresarClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
@@ -253,23 +242,17 @@ public class IngresarClasificacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(lbTitulo_IngresarClasificacion)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbTitulo_IngresarClasificacion)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbBuscar_IngresarClasificacion)
-                                    .addComponent(txtBuscar_IngresarClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbSubtitulo_IngresarClasificacion)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEliminar_IngresarClasificacion)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbBuscar_IngresarClasificacion)
+                            .addComponent(txtBuscar_IngresarClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbSubtitulo_IngresarClasificacion)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -299,10 +282,6 @@ public class IngresarClasificacion extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btCancelar_IngresarClasificacionActionPerformed
 
-    private void btEliminar_IngresarClasificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminar_IngresarClasificacionActionPerformed
-        EliminarClasificacion();
-    }//GEN-LAST:event_btEliminar_IngresarClasificacionActionPerformed
-
     private void txtBuscar_IngresarClasificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_IngresarClasificacionKeyTyped
         txtBuscar();
     }//GEN-LAST:event_txtBuscar_IngresarClasificacionKeyTyped
@@ -311,7 +290,6 @@ public class IngresarClasificacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_IngresarClasificacion;
     public static javax.swing.JButton btCancelar_IngresarClasificacion;
-    public static javax.swing.JButton btEliminar_IngresarClasificacion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBuscar_IngresarClasificacion;
