@@ -20,6 +20,7 @@ import static UI.PuntoDeVenta.ListarTiposDePago;
 import static UI.IngresoFacturaCompra.ListarTiposDePagoFC;
 import static UI.PuntoDeVenta.jSDiasPlazo_PuntoDeVenta;
 import static UI.VisualizarProductos.VisualizarTodosProductos;
+import static UI.VisualizaryEditarCargas.ListarCargas;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -232,9 +233,28 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         });
         JTCamiones.addTab("Lista de camiones", listarCamiones1);
 
+        ingresarCarga1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                ingresarCarga1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(ingresarCarga1);
 
         JTCamiones.addTab("Ingresar Cargas", jScrollPane1);
+
+        visualizaryEditarCargas1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                visualizaryEditarCargas1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         JTCamiones.addTab("Visualización de cargas", visualizaryEditarCargas1);
 
         JTInicio.addTab("Camiones", JTCamiones);
@@ -433,6 +453,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         ListarClasificaciones();
         ListarUMES();
     }//GEN-LAST:event_ingresarProductos2AncestorAdded
+
+    private void visualizaryEditarCargas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizaryEditarCargas1AncestorAdded
+       ListarCargas();
+    }//GEN-LAST:event_visualizaryEditarCargas1AncestorAdded
+
+    private void ingresarCarga1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresarCarga1AncestorAdded
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);

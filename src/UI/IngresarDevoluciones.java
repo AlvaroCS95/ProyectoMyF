@@ -460,14 +460,14 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
                     return;
                 } else {
-                 JOptionPane.showMessageDialog(null, "else");
+                
                     int factura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
                    LaDevolucionAIngresar= new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
                     
                     try {
-                        JOptionPane.showMessageDialog(null, "try");
+                   
                         if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                            JOptionPane.showMessageDialog(null, "if");
+                       
                            // try {
                             boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
                             if (SeIngresoLosDetalles == true) {
