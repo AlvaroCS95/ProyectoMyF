@@ -2,6 +2,7 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeAbonos;
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
+import LogicaDeNegocios.IMPRIMIR;
 import Modelos.Abono;
 import static UI.CuentasPorPagar.VisualizarCuentasPorCobrar;
 import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
@@ -9,8 +10,13 @@ import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.PuntoDeVenta.listaParaMostrar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class IngresarAbono extends javax.swing.JDialog {
@@ -18,12 +24,16 @@ public class IngresarAbono extends javax.swing.JDialog {
     int IdCuenta = 0;
     float MontoPendiente = 0;
     boolean Abono = false;
+    static String txt = "", cliente;
+    public static Date date = new Date();
+    public static DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
-    public IngresarAbono(java.awt.Frame parent, boolean modal, int idCuenta, float montoPendiente, boolean abono) {
+    public IngresarAbono(java.awt.Frame parent, boolean modal, int idCuenta, float montoPendiente, boolean abono, String Cli) {
         super(parent, modal);
         this.IdCuenta = idCuenta;
         this.Abono = abono;
         this.MontoPendiente = montoPendiente;
+        this.cliente = Cli;
         initComponents();
         txtIdCuenta_Abonos.setText(String.valueOf(idCuenta));
         ListarTiposDePago();
@@ -86,26 +96,32 @@ public class IngresarAbono extends javax.swing.JDialog {
     public void IngresarAbono() throws ClassNotFoundException, SQLException {
 
         if (ContieneCamposVacios() != true) {
-            
+
             if (MontoPendiente >= Float.parseFloat(txtMontoAbono_Abonos.getText())) {
                 CoordinadorDeAbonos elCoordinador = new CoordinadorDeAbonos();
                 float MontoAbono = Float.parseFloat(txtMontoAbono_Abonos.getText());
                 Abono elAbono = new Abono(IdCuenta, MontoAbono, TipoDePago());
-                ResultSet ResultadoDeConsulta;
+                ResultSet ResultadoDeConsulta=null;
+                String tipo="";
                 if (Abono == false) {
                     ResultadoDeConsulta = elCoordinador.IngresarAbonos(elAbono);
-                } else {
+                } else if(Abono==true) {
                     ResultadoDeConsulta = elCoordinador.IngresarAbonosVentas(elAbono);
                 }
 
                 if (ResultadoDeConsulta.next()) {
                     if (ResultadoDeConsulta.getString(1).equals("2")) {
                         JOptionPane.showMessageDialog(null, "Se ingreso el abono exitosamente");
+                        
+
                         if (Abono == false) {
-                              VisualizarCuentasPorPagar(tbCuentasPorPagar);
+                            VisualizarCuentasPorPagar(tbCuentasPorPagar);
+                            tipo="Proveedor";
                         } else {
-                          VisualizarCuentasPorCobrar(tbCuentasPorPagar);
+                            VisualizarCuentasPorCobrar(tbCuentasPorPagar);
+                           tipo="Cliente";
                         }
+                         imprimir(tipo);
                         dispose();
 
                     } else {
@@ -124,6 +140,34 @@ public class IngresarAbono extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Por favor indique los "
                     + "\n datos que se le solicitan gracias.");
         }
+
+    }
+
+    public static int CantidadDeFilas(String txt) {
+        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(txt);
+        int lines = 1;
+        while (m.find()) {
+            lines++;
+        }
+        return lines;
+    }
+
+    public void imprimir(String abonar) throws SQLException, ClassNotFoundException {
+        txt="";
+        CoordinadorDeAbonos elCoordinador= new CoordinadorDeAbonos();
+        int Id= elCoordinador.DevolverUltimoIdFacturaAbono();
+        txt += "         FACTURA DE ABONO"
+                +"\nN.Fac de abono:"+Id
+                + "\nN.Fac a abonar:" + txtIdCuenta_Abonos.getText()
+                + "\n"+abonar+":" + cliente
+                + "\nFec.Abn:" + hourdateFormat.format(date)
+                + "\nT.Pago:" + TipoDePago()
+                + "\nMonto de abono:" + txtMontoAbono_Abonos.getText()
+                + "\nMonto pendiente:" + (MontoPendiente - (Float.parseFloat(txtMontoAbono_Abonos.getText())))
+                + "\n\n\n\n______________________________"
+                + "\n\t\t\t       Firma autorizada";
+
+        IMPRIMIR imprimir = new IMPRIMIR(txt, CantidadDeFilas(txt), txt.length());
 
     }
 
@@ -246,7 +290,7 @@ public class IngresarAbono extends javax.swing.JDialog {
                             .addComponent(txtNDeReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(txtMontoAbono_Abonos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btAceptar_Abono)
                     .addComponent(btLimpiar_Abono))
@@ -266,6 +310,7 @@ public class IngresarAbono extends javax.swing.JDialog {
     private void btAceptar_AbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_AbonoActionPerformed
         try {
             IngresarAbono();
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IngresarAbono.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

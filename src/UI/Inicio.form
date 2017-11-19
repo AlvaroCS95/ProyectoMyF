@@ -257,15 +257,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="UI.ResumenEstadistico" name="resumenEstadistico1">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Estadistica de productos">
-                    <Property name="tabTitle" type="java.lang.String" value="Estadistica de productos"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JTabbedPane" name="JTClientes">

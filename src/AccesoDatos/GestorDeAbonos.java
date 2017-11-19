@@ -4,6 +4,7 @@ import Modelos.Abono;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class GestorDeAbonos extends Coneccion {
 
@@ -24,6 +25,23 @@ public class GestorDeAbonos extends Coneccion {
             return resultadoConsulta;
         }
      
+    }
+    public int ObtenerUltimaIdFacturaAbonos() throws ClassNotFoundException, SQLException {
+        int IdUsuarioActivo = 0;
+        try {
+            EstablecerConexion();
+
+            Statement statement = conexion.createStatement();
+            ResultSet resulset;
+
+            String busca = "call DevolverUltimoIdFacturaAbono()";
+            resulset = statement.executeQuery(busca);
+            while (resulset.next()) {
+                IdUsuarioActivo = resulset.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return IdUsuarioActivo;
     }
      public ResultSet IngresarAbonoVentas(Abono elAbono) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
@@ -52,9 +70,11 @@ public class GestorDeAbonos extends Coneccion {
             if(tipofactura==false){
            
               resultadoConsulta = consulta.executeQuery(" call MostrarAbonosAproveedores ('"+nfactura+"');");
+                
             }else if(tipofactura==true){
                 int id= Integer.parseInt(nfactura);
               resultadoConsulta = consulta.executeQuery(" call MostrarAbonosAclientes ("+id+");");
+                 
             }
           
             return resultadoConsulta;

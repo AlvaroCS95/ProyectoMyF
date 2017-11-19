@@ -10,13 +10,20 @@ import LogicaDeNegocios.CoordinadorDeUsuarios;
 import LogicaDeNegocios.CoordinadorDeDevoluciones;
 import LogicaDeNegocios.CoordinadorDeProductosReintegrados;
 import LogicaDeNegocios.CoordinadorDeProductosDesechados;
+import LogicaDeNegocios.IMPRIMIR;
 import Modelos.Devolucion;
+
 import Modelos.ProductosDesechados;
 import Modelos.ProductosReintegrados;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,11 +40,15 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     public static int FilaSeleccionadaDesechado;
     public boolean SeleccionDesechado = false;
     public float ReintegradoAlCliente = 0;
+    static String txt;
+    static int filas, palabras;
+    public static Date date = new Date();
+    public static DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
     public IngresarDevoluciones() {
         initComponents();
     }
-    
+
     public static DefaultTableModel ModeloProductosReintegrados = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int columna) {
@@ -50,7 +61,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             return false;
         }
     };
-    
+
     public static DefaultTableModel ModeloDetalleProductos = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int fila, int columna) {
@@ -416,7 +427,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btLimpiar_IngresarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarDevolucionesActionPerformed
-       
+
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("Seguro que desea limpiar todas las tablas", "Limpiar tablas");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
             try {
@@ -433,7 +444,76 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btLimpiar_IngresarDevolucionesActionPerformed
+public void imprimir(int UsuarioActivo, float reintegro){
 
+                                       txt = "      FACTURA DE DEVOLUCION\n"
+                                    + "N.Fac:" + txtNFactura_IngresarDevoluciones.getText()
+                                    + "\nCli:" + txtNombreLocal_IngresarDevoluciones.getText()
+                                    + "\nUsuario Fac:" + txtNombreUsuario_IngresarDevoluciones.getText()
+                                    + "\nFecha V:" + txtFechaDeVenta_IngresarDevoluciones.getText()
+                                    + "\nMonto de venta:" + txtMontoDeVenta_IngresarDevoluciones.getText()
+                                    + "\nUsuarios dev:" + UsuarioActivo
+                                    + "\nFecha D: " + hourdateFormat.format(date);
+
+                            if (TablaProductosDesechados_Devoluciones.getRowCount() != 0) {
+
+                                txt += "\n*Detalle\n\n"
+                                        + "      Productos desechados\n"
+                                        + "\nCod   Cant     Descr";
+                                for (int i = 0; i < TablaProductosDesechados_Devoluciones.getRowCount(); i++) {
+                                    String codigo = TablaProductosDesechados_Devoluciones.getValueAt(i, 0).toString();
+                                    String Descripcion = TablaProductosDesechados_Devoluciones.getValueAt(i, 1).toString();
+                                    float Cantidad = Float.parseFloat(TablaProductosDesechados_Devoluciones.getValueAt(i, 2).toString());
+                                    String Detalle = TablaProductosDesechados_Devoluciones.getValueAt(i, 3).toString();
+
+                                    String des = "";
+                                    if (Descripcion.length() >= 10) {
+
+                                        des = Descripcion.replaceAll(" ", "");
+                                        des = des.substring(0, 10);
+                                    } else {
+
+                                        des = String.format("%1$-10s", Descripcion);
+
+                                    }
+
+                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+
+                                    txt += "\n*" + Detalle;
+                                }
+                                 
+                            }
+                            if (TablaReintegro_Devoluciones.getRowCount() != 0) {
+
+                                txt += "\n\n      Productos Reintegrados\n"
+                                        +"\nCod   Cant     Descr";
+                                for (int i = 0; i < TablaReintegro_Devoluciones.getRowCount(); i++) {
+                                    String codigo = TablaReintegro_Devoluciones.getValueAt(i, 0).toString();
+                                    String Descripcion = TablaReintegro_Devoluciones.getValueAt(i, 1).toString();
+                                    float Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(i, 2).toString());
+
+                                    String des = "";
+                                    if (Descripcion.length() >= 10) {
+
+                                        des = Descripcion.replaceAll(" ", "");
+                                        des = des.substring(0, 10);
+                                    } else {
+
+                                        des = String.format("%1$-10s", Descripcion);
+
+                                    }
+
+                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+
+                                }
+                            }
+                                   txt+= "\n\n------*------------*---------"+
+                                    "\nTotal de devolucion:"+RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()
+                                    +"\nTotal de  reintegro:"+reintegro
+                                    +"\nTotal de desecho:"+(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()-reintegro)
+                                    + "\n\n------------Fin--------------";
+                            IMPRIMIR imprimir = new IMPRIMIR(txt, CantidadDeFilas(txt), txt.length());
+}
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (buscarFacturaDeVenta.isVisible() == true) {
@@ -446,7 +526,14 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public static int CantidadDeFilas(String txt) {
+        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(txt);
+        int lines = 1;
+        while (m.find()) {
+            lines++;
+        }
+        return lines;
+    }
     private void btReintegro_IngresarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReintegro_IngresarDevolucionesActionPerformed
         int UsuarioActivo = 0;
         Devolucion LaDevolucionAIngresar;
@@ -454,46 +541,49 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("Seguro que desea ingesar esta devolución", "IngresarTablas");
         if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
             //try {
-                UsuarioActivo = DevolverIdUsuarioActivo();
-               
-                if (VerificarQueAlMenosUnaTablaNoEsteVacia() == true) {
-                    JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
-                    return;
-                } else {
-                
-                    int factura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
-                   LaDevolucionAIngresar= new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
-                    
-                    try {
-                   
-                        if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
-                       
-                           // try {
-                            boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
-                            if (SeIngresoLosDetalles == true) {
+            UsuarioActivo = DevolverIdUsuarioActivo();
+
+            if (VerificarQueAlMenosUnaTablaNoEsteVacia() == true) {
+                JOptionPane.showMessageDialog(null, "Primero debe de ingresar un producto a desecho o rintegro");
+                return;
+            } else {
+
+                int factura = Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
+
+                LaDevolucionAIngresar = new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
+
+                try {
+
+                    if (ElCoordinadorDeDevoluciones.AgregarDevoluciones(LaDevolucionAIngresar) == true) {
+
+                        // try {
+                        boolean SeIngresoLosDetalles = IngresarDetalleDeLaDevolucion(txtNFactura_IngresarDevoluciones.getText());
+                        if (SeIngresoLosDetalles == true) {
+                            imprimir(UsuarioActivo,ReintegradoAlCliente);
                             JOptionPane.showMessageDialog(null, "Se ingreso la devolucion con exito");
                             LimpiarTablas(TablaReintegro_Devoluciones, ModeloProductosReintegrados);
                             LimpiarTablas(TablaDetalleFacturaDeVenta_Devoluciones, ModeloDetalleProductos);
                             LimpiarTablas(TablaProductosDesechados_Devoluciones, ModeloProductosDesechados);
                             LimpiarCamposDeLaFactura();
-                            } else {
-                            JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
-                            }
                            
-                            //fin else se inserto
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se puede ingresar los detalles");
                         }
-                    } catch (ClassNotFoundException ex) {
-                        //Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
-                          JOptionPane.showMessageDialog(null, "class notfound");
-                    } catch (SQLException ex) {
-                       // Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
-                          JOptionPane.showMessageDialog(null, "sqlexception");
+
+                        //fin else se inserto
                     }
-                    
-                }//fin else si las tablas estan vacias.
-          //  } catch (Exception e) {
-          //      JOptionPane.showMessageDialog(null, "Ocurrio un error a la hora de ingresar las devoluciones, por favor vuelva intentarlo");
-           // }
+                } catch (ClassNotFoundException ex) {
+                    //Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "class notfound");
+                } catch (SQLException ex) {
+                    // Logger.getLogger(IngresarDevoluciones.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "sqlexception");
+                }
+
+            }//fin else si las tablas estan vacias.
+            //  } catch (Exception e) {
+            //      JOptionPane.showMessageDialog(null, "Ocurrio un error a la hora de ingresar las devoluciones, por favor vuelva intentarlo");
+            // }
 
         } else {
             return;
@@ -565,7 +655,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Primero seleccione el producto al que quiera agregar a desechos");
         } else {
             CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
-            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaProductosDesechados_Devoluciones, CodigoDelProducto) == true)   || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto)==0)) {
+            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaProductosDesechados_Devoluciones, CodigoDelProducto) == true) || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto) == 0)) {
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Ya tiene este producto agregado para desecharlo.\n"
                         + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.\nO ya no tiene producto para ingresar");
@@ -627,7 +717,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
     private void btAgegarReintegro_DevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgegarReintegro_DevolucionesActionPerformed
         // TODO add your handling code here:
-          String CodigoDelProducto = "";
+        String CodigoDelProducto = "";
         String NombreDelProducto = "";
         float Cantidad = 0;
         float CantidadMaxima = 0;
@@ -638,7 +728,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
 
         } else {
             CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();
-            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaReintegro_Devoluciones, CodigoDelProducto) == true)   || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto)==0)) {
+            if ((BuscarSiExisteUnProductoEnUnaTablaDeterminada(TablaReintegro_Devoluciones, CodigoDelProducto) == true) || (BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoDelProducto) == 0)) {
                 getToolkit().beep();
                 JOptionPane.showMessageDialog(null, "Ya tiene este producto agregado para reintegrar.\n"
                         + "Si desea hacer un cambio, dirijase al producto y con un doble clic en el podrá editarlo.\nO no tiene mas producto para ingresar");
@@ -691,11 +781,10 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         CantidadActual = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(FilaSeleccionada, 2).toString());
         CantidadRestante = BuscarCantidadRestanteDeUnProducto(TablaDetalleFacturaDeVenta_Devoluciones, CodigoProducto);
         CantidadMaximaParaEditar = CantidadActual + CantidadRestante;
-        
-        if(evt.getButton()==MouseEvent.BUTTON3){
-        FilaSeleccionadaReintegro = TablaReintegro_Devoluciones.getSelectedRow();
-        }else 
-        if (evt.getClickCount() == 2) {
+
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            FilaSeleccionadaReintegro = TablaReintegro_Devoluciones.getSelectedRow();
+        } else if (evt.getClickCount() == 2) {
             int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿esta seguro que desea editar a: " + NombreProducto + "?", "Editar Producto");
             if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
                 try {
@@ -726,7 +815,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 return;
             }
         }//fin else doble clicke
-        
+
     }//GEN-LAST:event_TablaReintegro_DevolucionesMouseClicked
 
     private void TablaProductosDesechados_DevolucionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductosDesechados_DevolucionesMouseClicked
@@ -779,8 +868,9 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 return;
             }
         }//fin else doble click
-        else if(evt.getButton()==MouseEvent.BUTTON3){
-          FilaSeleccionadaDesechado = TablaProductosDesechados_Devoluciones.getSelectedRow();}
+        else if (evt.getButton() == MouseEvent.BUTTON3) {
+            FilaSeleccionadaDesechado = TablaProductosDesechados_Devoluciones.getSelectedRow();
+        }
     }//GEN-LAST:event_TablaProductosDesechados_DevolucionesMouseClicked
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
@@ -926,7 +1016,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         float ElPrecioDelProductoBuscado = 0;
         CoordinadorDeInventario ElProductoBuscado = new CoordinadorDeInventario();
         try {
-            ElPrecioDelProductoBuscado = ElProductoBuscado.DevolverPrecio(CodigoProducto,NumeroFactura);
+            ElPrecioDelProductoBuscado = ElProductoBuscado.DevolverPrecio(CodigoProducto, NumeroFactura);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error buscando el precio", "Error", JOptionPane.ERROR_MESSAGE);
@@ -972,11 +1062,11 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
                 ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
                 ValorTotalDeLaDevolucion += RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
                 ReintegradoAlCliente = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
-               
+
             } else {
                 ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaProductosDesechados_Devoluciones);
-                ReintegradoAlCliente=0;
-           
+                ReintegradoAlCliente = 0;
+
             }
 
         } else if (VerificarQueTablaReintegrosNoEstaVacia() == false) {
@@ -988,7 +1078,7 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
             } else {
                 ValorTotalDeLaDevolucion = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
                 ReintegradoAlCliente = RecogerValortotalDeUnaTabla(TablaReintegro_Devoluciones);
-               
+
             }
         }
         return ValorTotalDeLaDevolucion;
@@ -999,12 +1089,12 @@ public class IngresarDevoluciones extends javax.swing.JPanel {
         float PrecioVenta = 0;
         float Cantidad = 0;
         String CodigoProducto = "";
-        int NumeroFactura=Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
-        
+        int NumeroFactura = Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
+
         for (int Contador = 0; Contador < TablaARecogerPrecios.getRowCount(); Contador++) {
             CodigoProducto = TablaARecogerPrecios.getValueAt(Contador, 0).toString();
             Cantidad = Float.parseFloat(TablaARecogerPrecios.getValueAt(Contador, 2).toString());
-            PrecioVenta = DevolverPrecioDeUnProducto(CodigoProducto,NumeroFactura);
+            PrecioVenta = DevolverPrecioDeUnProducto(CodigoProducto, NumeroFactura);
             PrecioRecogido += Cantidad * PrecioVenta;
         }
         return PrecioRecogido;

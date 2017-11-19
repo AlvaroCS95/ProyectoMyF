@@ -23,5 +23,8 @@ public class CoordinadorDeAbonos {
         GestorDeAbonos elGestor= new GestorDeAbonos();
         return elGestor.IngresarAbonoVentas(elAbono);
     }
-     
+      public int DevolverUltimoIdFacturaAbono() throws SQLException, ClassNotFoundException {
+        GestorDeAbonos elGestorFacturaVenta = new GestorDeAbonos();
+        return elGestorFacturaVenta.ObtenerUltimaIdFacturaAbonos();
+    }
 }

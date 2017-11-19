@@ -68,9 +68,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                     +"\nTotal de venta: " + TotalVendido + "\n"
                                     + "\nAbono:" + MontoAbonado + "\n"
                                     + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
-                                    + "\nMonto pendiente: " + TotalVendido + "\n"
+                                    + "\nMonto pendiente: " + TotalVendido + "\n\n\n"
                                     + "Muchas gracias por preferirnos";
-                            IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
+//                            IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
                             LimpiarDatos();
                         }
                         break;
@@ -85,10 +85,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                         + "\nTotal de venta: " + TotalVendido + "\n"
                                         + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
                                         + "\nPaga con: " + MontoCancelado + "\n"
-                                        + "Su vuelto: " + Vuelto + "\n"
+                                        + "Su vuelto: " + Vuelto + "\n\n\n"
                                         + "Muchas gracias por preferirnos";
                                 IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
                                 LimpiarDatos();
+                            }else{
+                                JOptionPane.showMessageDialog(null, "¡Debe ingresar un monto de pago que sea mayor o igual al total a pagar!",
+                    "¡Error!", JOptionPane.ERROR_MESSAGE);
                             }
                         } else if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Seleccione...")) {
                             JOptionPane.showMessageDialog(null, "!Debe selecionar una forma de pago!",
@@ -103,7 +106,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                         + "\nTotal de venta: " + TotalVendido + "\n"
                                         + "Monto de descuento: "+txtDescuento_PuntoDeVenta.getText()
                                         + "\nPaga con: " + MontoCancelado + "\n"
-                                        + "Su vuelto: " + Vuelto + "\n"
+                                        + "Su vuelto: " + Vuelto + "\n\n\n\n"
                                         + "Muchas gracias por preferirnos";
                                 IMPRIMIR imprimir = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
                                 LimpiarDatos();
@@ -155,6 +158,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         return false;
     }
 
+        
     public boolean ValidarPagoNOEfectivo() {
         if (!cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")
                 && !cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Seleccione...")) {
@@ -298,7 +302,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        JOptionPane.showMessageDialog(null, formato.format(total));
         txtTotalAPagar_PuntoDeVenta.setText("" + formato.format(total));
     }
 
@@ -531,9 +534,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         float totalVendido, montoAbonado;
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
-
+        String totalvendidocambiar="";
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
+        //totalvendidocambiar = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
+        totalvendidocambiar = txtTotalAPagar_PuntoDeVenta.getText();
+        totalvendidocambiar = totalvendidocambiar.replace(",", ".");
+        totalVendido = Float.parseFloat(totalvendidocambiar);
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -562,7 +568,11 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        totalVendido = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
+        String totalvendidocambiar;
+        totalvendidocambiar = txtTotalAPagar_PuntoDeVenta.getText();
+        totalvendidocambiar = totalvendidocambiar.replace(",", ".");
+        totalVendido = Float.parseFloat(totalvendidocambiar);
+        
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = 1;

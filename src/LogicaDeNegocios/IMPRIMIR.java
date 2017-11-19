@@ -49,7 +49,7 @@ public class IMPRIMIR {
       String Encabezado
             = "\n\t        Distribuidora MyF\n"
             + "\t  Aramed de Jesus Sequeira Vega\n"
-            + "\t\t      Cedula: 5-256-190\n"
+             + "\t\t      Cedula: 5-256-190\n"
             + "\t   Tels: 83031359 / 88197499\n"
             + "\t  Email: aramedsequeira@yahoo.es\n"
             + "\t\t\t       Nicoya, Guanacaste\n"

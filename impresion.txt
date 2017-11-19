@@ -7,24 +7,19 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
- 				       Factura Contado
+          FACTURA DE ABONO
+N.Fac de abono:41
+N.Fac a abonar:8956478
+Proveedor:Los pinguinos
+Fec.Abn:00:46:37 19/11/2017
+T.Pago:Efectivo
+Monto de abono:5000
+Monto pendiente:9875.0
 
-N.Fac: 108
-Ced.Cli: 14
-Cli: Pulperia
-F.pago: Efectivo
-N.Ref: 0
-Hora-Fecha:23:52:25 16/11/2017
-----*---------------------*----
-Cod  Cant  Descr        Ttl
-03   10.0   Postadecer 39550.0
---------------------------------
 
-Total de venta: 39550.0
-Monto de descuento: 0
-Paga con: 40000.0
-Su vuelto: 450.0
-Muchas gracias por preferirnos
-                                      
-                                      
-                                      
+
+______________________________
+			       Firma autorizada
+                                 
+                                 
+                                 
