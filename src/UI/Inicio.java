@@ -5,6 +5,9 @@ import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
 import static UI.CuentasPorPagar.cbxMostar_Cuentas;
 import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
+import static UI.IngresarCarga.TablaListarCamiones_Cargas;
+import static UI.IngresarCarga.VisualizarTodosProductosCargas;
+
 import static UI.IngresarProductos.ListarClasificaciones;
 import static UI.IngresarProductos.ListarUMES;
 import static UI.IngresoFacturaCompra.ListarProveedores;
@@ -233,6 +236,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         ingresarCarga1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                ingresarCarga1AncestorMoved(evt);
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 ingresarCarga1AncestorAdded(evt);
@@ -457,8 +461,14 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_visualizaryEditarCargas1AncestorAdded
 
     private void ingresarCarga1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorAdded
-        // TODO add your handling code here:
+        VisualizarCamion(TablaListarCamiones_Cargas);
+        
+        VisualizarTodosProductosCargas();       // TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorAdded
+
+    private void ingresarCarga1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresarCarga1AncestorMoved
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);

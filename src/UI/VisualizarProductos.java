@@ -451,7 +451,7 @@ public class VisualizarProductos extends javax.swing.JPanel {
 
     }
 
-    public static void VisualizarProductos(String Filtro) {
+  public static void VisualizarProductos(String Filtro) {
         try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
