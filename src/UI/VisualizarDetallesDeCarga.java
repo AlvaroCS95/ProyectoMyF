@@ -35,10 +35,10 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
         if (cmbxFiltrar_VisualizarDetalleDeCarga.getSelectedItem() == "Por Id") {
             columnaABuscar = 0;
         }
-        if (cmbxFiltrar_VisualizarDetalleDeCarga.getSelectedItem() == "Por Camión") {
+        if (cmbxFiltrar_VisualizarDetalleDeCarga.getSelectedItem() == "Por Producto") {
             columnaABuscar = 1;
         }
-        if (cmbxFiltrar_VisualizarDetalleDeCarga.getSelectedItem() == "Por Fecha") {
+        if (cmbxFiltrar_VisualizarDetalleDeCarga.getSelectedItem() == "Por Cantidad") {
             columnaABuscar = 2;
         }
       
@@ -136,6 +136,12 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
 
         cmbxFiltrar_VisualizarDetalleDeCarga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Por Id", "Por Producto", "Por Cantidad" }));
 
+        txtBuscar_VisualizarDetalleDeCarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscar_VisualizarDetalleDeCargaKeyTyped(evt);
+            }
+        });
+
         btCancelar_VisualizarDetalleDeCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
         btCancelar_VisualizarDetalleDeCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +225,10 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
     private void btActualizar_VisualizarDetalleDeCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizar_VisualizarDetalleDeCargaActionPerformed
       ListarDetalleDeCarga();
     }//GEN-LAST:event_btActualizar_VisualizarDetalleDeCargaActionPerformed
+
+    private void txtBuscar_VisualizarDetalleDeCargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_VisualizarDetalleDeCargaKeyTyped
+       txtBuscar();
+    }//GEN-LAST:event_txtBuscar_VisualizarDetalleDeCargaKeyTyped
 
     /**
      * @param args the command line arguments
