@@ -421,14 +421,13 @@ public void VisualizarCamion(JTable Listar) {
                     filas[3]= ""+cantidad;
                     modelo.addRow(filas);
                     TablaProductosCargados_IngresarCarga.setModel(modelo);
-
-                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,TablaProductos1_IngresarCargas.getSelectedRow(), 3);
+                     int fila=DevolverPosicion(codigo);
+                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
                   }
                   else{
                     existencias=existencias-cantidad;
                     
-                    float cantidadIngresadaAnteriormente=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt( fila,3).toString());
-                    cantidad=cantidad+cantidadIngresadaAnteriormente;
+                  
                     TablaProductosCargados_IngresarCarga.setValueAt(""+existencias, fila, 2);
                      TablaProductosCargados_IngresarCarga.setValueAt(""+cantidad, fila, 3);
                      int fila=DevolverPosicion(codigo);
