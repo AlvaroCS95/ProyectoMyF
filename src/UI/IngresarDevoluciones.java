@@ -507,8 +507,8 @@ public void imprimir(int UsuarioActivo, float reintegro){
 
                                 }
                             }
-                                   txt+= "\n\n------*------------*---------"+
-                                    "\nTotal de devolucion:"+RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()
+                                   txt+= "\n\n------*---------------*---------"+
+                                    "\nTotal de devolucion:"+(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()-reintegro)
                                     +"\nTotal de  reintegro:"+reintegro
                                     +"\nTotal de desecho:"+(RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()-reintegro)
                                     + "\n\n------------Fin--------------";
@@ -550,7 +550,7 @@ public void imprimir(int UsuarioActivo, float reintegro){
 
                 int factura = Integer.parseInt(txtNFactura_IngresarDevoluciones.getText());
 
-                LaDevolucionAIngresar = new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente(), ReintegradoAlCliente);
+                LaDevolucionAIngresar = new Devolucion(UsuarioActivo, factura, RecolectarElValorTotalDeLaDevoluciónAdemasDelTotalReintegradoAlCliente()-ReintegradoAlCliente, ReintegradoAlCliente);
 
                 try {
 

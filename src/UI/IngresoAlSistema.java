@@ -29,6 +29,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         Coneccion cc = new Coneccion();
 
         if (!pswContraseña_IngresoAlSistema.getText().isEmpty()) {
+            
             if (!txtNombreUsario_IngresoAlSistema.getText().isEmpty()) {
                 char[] Contraseña = pswContraseña_IngresoAlSistema.getPassword();
                 ContraseñaDeUsuario = new String(Contraseña);

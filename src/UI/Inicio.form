@@ -390,6 +390,7 @@
               <SubComponents>
                 <Component class="UI.IngresarCarga" name="ingresarCarga1">
                   <Events>
+                    <EventHandler event="ancestorMoved" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="ingresarCarga1AncestorMoved"/>
                     <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="ingresarCarga1AncestorAdded"/>
                   </Events>
                 </Component>

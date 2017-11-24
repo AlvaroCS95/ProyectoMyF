@@ -6,9 +6,7 @@ import LogicaDeNegocios.CoordinadorDeInventario;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
-import static UI.VisualizarProductos.Tabla1_ActualizacionProductos;
-import static UI.VisualizarProductos.VisualizarTodosProductos;
-import static UI.VisualizaryEditarCargas.ListarCargas;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
@@ -35,8 +33,7 @@ public class IngresarCarga extends javax.swing.JPanel {
     static int fila;
     public IngresarCarga() {
         initComponents();
-         //VisualizarCamion(TablaListarCamiones_ListarCamiones);
-        //VisualizarTodosProductos();
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,10 +45,10 @@ public class IngresarCarga extends javax.swing.JPanel {
         btCancelar_IngresarCarga = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        TablaListarCamiones_ListarCamiones = new javax.swing.JTable();
+        TablaListarCamiones_Cargas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<>();
+        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<String>();
         txtBuscar_VisualizarProductos = new javax.swing.JTextField();
         btnAgregar_IngresarCarga = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -103,7 +100,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         jLabel4.setText("Elegir Camión:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
-        TablaListarCamiones_ListarCamiones.setModel(new javax.swing.table.DefaultTableModel(
+        TablaListarCamiones_Cargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -114,12 +111,12 @@ public class IngresarCarga extends javax.swing.JPanel {
 
             }
         ));
-        TablaListarCamiones_ListarCamiones.addMouseListener(new java.awt.event.MouseAdapter() {
+        TablaListarCamiones_Cargas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaListarCamiones_ListarCamionesMousePressed(evt);
+                TablaListarCamiones_CargasMousePressed(evt);
             }
         });
-        jScrollPane5.setViewportView(TablaListarCamiones_ListarCamiones);
+        jScrollPane5.setViewportView(TablaListarCamiones_Cargas);
 
         add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 838, 133));
 
@@ -248,7 +245,7 @@ public void VisualizarCamion(JTable Listar) {
         }
 
     }
-           public void VisualizarTodosProductos() {
+           public static void VisualizarTodosProductosCargas() {
         try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
@@ -333,10 +330,12 @@ public void VisualizarCamion(JTable Listar) {
         }
         trsFiltro.setRowFilter(RowFilter.regexFilter(busqueda, columnaABuscar));
     }
-   public void Limpiar(){
-   VisualizarCamion(TablaListarCamiones_ListarCamiones);
+   
+    
+    public  void Limpiar(){
+        VisualizarCamion(TablaListarCamiones_Cargas);
         
-        VisualizarTodosProductos();
+        VisualizarTodosProductosCargas();
 
         modelo = new DefaultTableModel() {
             public boolean isCellEditable(int fila, int columna) {
@@ -356,9 +355,9 @@ public void VisualizarCamion(JTable Listar) {
 
     private void btAceptar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarCargaActionPerformed
         try {
-            if(TablaListarCamiones_ListarCamiones.getSelectedRowCount()>0&&TablaProductosCargados_IngresarCarga.getRowCount()>0){
+            if(TablaListarCamiones_Cargas.getSelectedRowCount()>0&&TablaProductosCargados_IngresarCarga.getRowCount()>0){
 
-                String placa=TablaListarCamiones_ListarCamiones.getValueAt(TablaListarCamiones_ListarCamiones.getSelectedRow(),0).toString();
+                String placa=TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(),0).toString();
                 Carga laCarga=new Carga(placa);
                 ArrayList <DetalleCarga> laListaDetalle=new ArrayList();
                 int filas=TablaProductosCargados_IngresarCarga.getRowCount();
@@ -388,9 +387,9 @@ public void VisualizarCamion(JTable Listar) {
         }
     }//GEN-LAST:event_btAceptar_IngresarCargaActionPerformed
 
-    private void TablaListarCamiones_ListarCamionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarCamiones_ListarCamionesMousePressed
+    private void TablaListarCamiones_CargasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarCamiones_CargasMousePressed
 
-    }//GEN-LAST:event_TablaListarCamiones_ListarCamionesMousePressed
+    }//GEN-LAST:event_TablaListarCamiones_CargasMousePressed
 
     private void txtBuscar_VisualizarProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_VisualizarProductosKeyTyped
         txtBuscar();
@@ -509,7 +508,7 @@ public void Eliminar() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EliminarProducto_IngresarCarga;
-    public static javax.swing.JTable TablaListarCamiones_ListarCamiones;
+    public static javax.swing.JTable TablaListarCamiones_Cargas;
     private static javax.swing.JTable TablaProductos1_IngresarCargas;
     private static javax.swing.JTable TablaProductosCargados_IngresarCarga;
     private javax.swing.JButton btAceptar_IngresarCarga;
@@ -529,3 +528,4 @@ public void Eliminar() {
     private javax.swing.JTextField txtBuscar_VisualizarProductos;
     // End of variables declaration//GEN-END:variables
 }
+   

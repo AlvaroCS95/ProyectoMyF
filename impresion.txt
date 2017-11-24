@@ -7,19 +7,29 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
-          FACTURA DE ABONO
-N.Fac de abono:41
-N.Fac a abonar:8956478
-Proveedor:Los pinguinos
-Fec.Abn:00:46:37 19/11/2017
-T.Pago:Efectivo
-Monto de abono:5000
-Monto pendiente:9875.0
+ 				   Factura Credito Sin Abono
+
+N.Fac: 6
+Ced.Cli: 1
+Cli: Los almendros
+F.pago: Seleccione...
+N.Ref: 0
+Plazo de días: 7
+Fecha de pago: 2017-11-30 18:45:39.0
+Hora-Fecha:18:45:20 23/11/2017
+----*---------------------*----
+Cod  Cant  Descr        Ttl
+003   10.0   Queso      6215.0
+--------------------------------
+
+Total sin desc:6215.0
+Total con desc:6215.0
+Monto de descuento: 0
+Abono:0.0
+Monto pendiente: 6215.0
 
 
-
-______________________________
-			       Firma autorizada
-                                 
-                                 
-                                 
+Muchas gracias por preferirnos
+                                           
+                                           
+                                           
