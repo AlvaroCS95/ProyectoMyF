@@ -12,11 +12,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class CoordinadorEstadistico {
 
-    ResultSet listaProductos = null, listaVentas = null, listaCompras = null;
+    ResultSet listaProductos = null, listaVentas = null, listaCompras = null, listaNombres = null;
     ArrayList<String> lista;
     Object[] fila = new Object[7];
     GestorEstadistico gestor = new GestorEstadistico();
-    
 
     public void ConsultarListaDeProductos() {
         try {
@@ -25,7 +24,6 @@ public class CoordinadorEstadistico {
             while (listaProductos.next()) {
                 for (int i = 0; i < 1; i++) {
                     lista.add(listaProductos.getString(i + 1));
-//                    JOptionPane.showMessageDialog(null, listaProductos.getObject(i + 1));
                 }
             }
         } catch (SQLException ex) {
@@ -41,32 +39,32 @@ public class CoordinadorEstadistico {
         listaCompras = gestor.ConsultarListaDeCompras(codigoProducto, fechaDesde, fechaHasta);
     }
 
-    public DefaultTableModel MontarListaDetalles(DefaultTableModel modelo,String fechaDesde, String fechaHasta) {
+    public DefaultTableModel MontarListaDetalles(DefaultTableModel modelo, String fechaDesde, String fechaHasta) {
         try {
             ConsultarListaDeProductos();
             for (int i = 0; i < lista.size(); i++) {
                 ObtenerComprasDeProducto(lista.get(i), fechaDesde, fechaHasta);
                 ObtenerVentasDeProducto(lista.get(i), fechaDesde, fechaHasta);
-                if (listaCompras.next() || listaVentas.next()) {
 
-                    fila[0] = listaCompras.getObject(1);
-                    // cantidad comprada
+                fila[0] = lista.get(i);
+                fila[1] = BuscarNombreProducto(lista.get(i));
 
-                    fila[1] = listaCompras.getObject(2);
+                if (listaCompras.next()) {
                     fila[2] = ObtenerCantidadComprada();
-
-                    // Inversion realizada
                     fila[3] = ObtenerInversion();
+                } else {
+                    fila[2] = "0";
+                    fila[3] = "0";
+                }
 
-                    // Cantidad vendida
+                if (listaVentas.next()) {
                     fila[4] = ObtenerCantidadVendida();
-
-                    // Ganancia obtendia
                     fila[5] = ObtenerPrecioVenta();
-
                     fila[6] = Float.parseFloat(fila[5].toString()) - Float.parseFloat(fila[3].toString());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Lista vacía");
+                    fila[4] = "0";
+                    fila[5] = "0";
+                    fila[6] = "0";
                 }
                 modelo.addRow(fila);
             }
@@ -74,6 +72,21 @@ public class CoordinadorEstadistico {
             Logger.getLogger(CoordinadorEstadistico.class.getName()).log(Level.SEVERE, null, ex);
         }
         return modelo;
+    }
+
+    public String BuscarNombreProducto(String codigo) {
+        GestorEstadistico gestor = new GestorEstadistico();
+        listaNombres = gestor.COnsultarCodigoYNombreProducto(codigo);
+        try {
+            if (listaNombres.next()) {
+                codigo = listaNombres.getString(2);
+            } else {
+                codigo = "Desconocido";
+            }
+        } catch (SQLException ex) {
+            codigo = "Desconocido";
+        }
+        return codigo;
     }
 
     public Float ObtenerCantidadComprada() {
@@ -84,7 +97,7 @@ public class CoordinadorEstadistico {
                 cantidad += Float.parseFloat(listaCompras.getString(3));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CoordinadorEstadistico.class.getName()).log(Level.SEVERE, null, ex);
+            return cantidad;
         }
         return cantidad;
     }
@@ -97,7 +110,7 @@ public class CoordinadorEstadistico {
                 inversion += (Float.parseFloat(listaCompras.getString(3)) * Float.parseFloat(listaCompras.getString(4)));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CoordinadorEstadistico.class.getName()).log(Level.SEVERE, null, ex);
+            return inversion;
         }
         return inversion;
     }
@@ -110,7 +123,7 @@ public class CoordinadorEstadistico {
                 cantidad += Float.parseFloat(listaVentas.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CoordinadorEstadistico.class.getName()).log(Level.SEVERE, null, ex);
+            return cantidad;
         }
         return cantidad;
     }
@@ -123,7 +136,7 @@ public class CoordinadorEstadistico {
                 totalVendido += Float.parseFloat(listaVentas.getString(2));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CoordinadorEstadistico.class.getName()).log(Level.SEVERE, null, ex);
+            return totalVendido;
         }
         return totalVendido;
     }

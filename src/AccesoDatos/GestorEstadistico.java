@@ -66,5 +66,22 @@ public class GestorEstadistico extends Coneccion {
         }
         return resultadoConsulta;
     }
+    
+    public ResultSet COnsultarCodigoYNombreProducto(String codigoProducto) {
+        try {
+            EstablecerConexion();
+            llamadaAlMetodo = conexion.prepareCall("CALL BuscarCodigoYNombreProducto(?);");
+            llamadaAlMetodo.setString(1, codigoProducto);
+            llamadaAlMetodo.execute();
+            resultadoConsulta = llamadaAlMetodo.getResultSet();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorFacturaDeCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultadoConsulta;
+    }
 
 }
