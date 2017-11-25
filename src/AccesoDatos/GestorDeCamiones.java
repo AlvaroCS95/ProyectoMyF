@@ -52,10 +52,11 @@ public class GestorDeCamiones extends Coneccion {
         EstablecerConexion();
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("Call ActualizarCarga(?,?,?);");
+            llamadaAlMetodo = conexion.prepareCall("{call ActualizarCarga(?,?,?,?)}");
             llamadaAlMetodo.setInt(1, laCarga.getIdCarga());
             llamadaAlMetodo.setString(2, laCarga.getIdCamion());
             llamadaAlMetodo.setString(3, laCarga.getFechaCarga());
+            llamadaAlMetodo.setInt(4, laCarga.getUsuario());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;
@@ -151,9 +152,9 @@ public class GestorDeCamiones extends Coneccion {
         EstablecerConexion();
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?)}");
+            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?)}");
             llamadaAlMetodo.setString(1, laCarga.getIdCamion());
-    
+            llamadaAlMetodo.setInt(2, laCarga.getUsuario());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;

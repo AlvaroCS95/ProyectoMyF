@@ -34,6 +34,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
   private TableRowSorter trsFiltro;
    static Object[] filas;
    static DefaultTableModel modelo;
+   
     public VisualizaryEditarCargas() {
         initComponents();
     }
@@ -85,6 +86,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
             modelo.addColumn("Id de Carga");
             modelo.addColumn("Placa de Camión");
             modelo.addColumn("Fecha de Carga");
+             modelo.addColumn("Usuario responsable");
          
             filas = new Object[modelo.getColumnCount()];
             CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
@@ -110,7 +112,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
 
         }
    }
-           
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,9 +125,11 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtBuscar_VisualizarCargas = new javax.swing.JTextField();
-        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<>();
+        cmbxFiltrar_VisualizarCargas = new javax.swing.JComboBox<String>();
         btActualizar_VisualizarCargas = new javax.swing.JButton();
 
+        Editar_VisualizarCargas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Editar_VisualizarCargas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editarMenu.png"))); // NOI18N
         Editar_VisualizarCargas.setText("Editar");
         Editar_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +138,8 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         });
         menuEmergente_VisualizarCargas.add(Editar_VisualizarCargas);
 
+        detalles_VisualizarCargas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        detalles_VisualizarCargas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DetalleFactura.png"))); // NOI18N
         detalles_VisualizarCargas.setText("Detalles");
         detalles_VisualizarCargas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,10 +251,11 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
     String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
     Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
     int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+    String usuario=tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
 
         EditarCarga editarCarga;
       try {
-          editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga);
+          editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga,usuario);
           editarCarga.setVisible(true);
       } catch (ClassNotFoundException ex) {
           Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
@@ -276,13 +283,13 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
     }//GEN-LAST:event_btActualizar_VisualizarCargasActionPerformed
 int fila=0;
     private void tablaCargas_VisualizarCargasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasKeyPressed
-        // TODO add your handling code here:
+       
         
         
     }//GEN-LAST:event_tablaCargas_VisualizarCargasKeyPressed
 
     private void tablaCargas_VisualizarCargasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasMouseClicked
-        // TODO add your handling code here: 
+        
         if (evt.getButton() == MouseEvent.BUTTON1) {
             fila = tablaCargas_VisualizarCargas.getSelectedRow();
         } else if (evt.getButton() == MouseEvent.BUTTON3) {
@@ -291,13 +298,13 @@ int fila=0;
     }//GEN-LAST:event_tablaCargas_VisualizarCargasMouseClicked
 
     private void detalles_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detalles_VisualizarCargasActionPerformed
-      String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
+    String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
     Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
     int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
-   
+    String Usuario=tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
         VisualizarDetallesDeCarga visualizarDetalle;
          
-         visualizarDetalle = new  VisualizarDetallesDeCarga(IdCarga);
+         visualizarDetalle = new  VisualizarDetallesDeCarga(IdCarga,PlacaDeCamion,Usuario,FechaCarga);
           visualizarDetalle.setVisible(true);
    
     }//GEN-LAST:event_detalles_VisualizarCargasActionPerformed

@@ -6,15 +6,16 @@ import java.util.Date;
 
 public class Carga {
     String IdCamion;
-    int IdCarga;
+    int IdCarga,usuario;
     String FechaCarga;
+    
 
     ArrayList <DetalleCarga> laListaDeCarga;
 
-    public Carga( String IdCamion) {
+    public Carga( String IdCamion,int IdUsuario) {
        
         this.IdCamion = IdCamion;
-      
+        this.usuario=IdUsuario;
          laListaDeCarga=new ArrayList();
     }
 
@@ -39,6 +40,15 @@ public class Carga {
     public int getIdCarga() {
         return IdCarga;
     }
+
+    public int getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
 
     public String getFechaCarga() {
         return FechaCarga;

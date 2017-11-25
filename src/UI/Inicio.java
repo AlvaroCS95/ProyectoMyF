@@ -7,6 +7,7 @@ import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
 import static UI.IngresarCarga.TablaListarCamiones_Cargas;
 import static UI.IngresarCarga.VisualizarTodosProductosCargas;
+import static UI.IngresarCarga.VisualizarUsuariosParaCargas;
 
 import static UI.IngresarProductos.ListarClasificaciones;
 import static UI.IngresarProductos.ListarUMES;
@@ -463,7 +464,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private void ingresarCarga1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorAdded
         VisualizarCamion(TablaListarCamiones_Cargas);
         
-        VisualizarTodosProductosCargas();       // TODO add your handling code here:
+        VisualizarTodosProductosCargas(); 
+        VisualizarUsuariosParaCargas();// TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorAdded
 
     private void ingresarCarga1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorMoved

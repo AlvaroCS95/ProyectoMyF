@@ -33,6 +33,10 @@ public class CoordinadorDeUsuarios {
         GestorDeUsuarios elGestorDeUsuarios = new GestorDeUsuarios();
         return elGestorDeUsuarios.ListarUsuariosActivos();
     }
+ public ResultSet ListarUsuariosActivosParaCargas() throws SQLException, ClassNotFoundException {
+        GestorDeUsuarios elGestorDeUsuarios = new GestorDeUsuarios();
+        return elGestorDeUsuarios.ListarUsuariosActivosParaCargas();
+    }
 
     public ResultSet ListarTodosLosUsuariosActivos() throws SQLException, ClassNotFoundException {
         GestorDeUsuarios elGestorDeUsuarios = new GestorDeUsuarios();
