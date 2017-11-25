@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -17,13 +18,13 @@ public class DetallesAbonos extends javax.swing.JDialog {
     String factura;
     static ResultSet listaDeAbonos = null;
 
-    public DetallesAbonos(java.awt.Frame parent, boolean modal, String nFactura,boolean tipofactura) throws SQLException, ClassNotFoundException{
+    public DetallesAbonos(java.awt.Frame parent, boolean modal, String nFactura, boolean tipofactura) throws SQLException, ClassNotFoundException {
         super(parent, modal);
         initComponents();
         jlTituloDetalles.setText("Detalles de abonos de factura  N° " + nFactura);
         setLocationRelativeTo(null);
         this.factura = nFactura;
-        this.tipoDeFactura=tipofactura;
+        this.tipoDeFactura = tipofactura;
         LlenarListaDetalles();
     }
 
@@ -36,13 +37,12 @@ public class DetallesAbonos extends javax.swing.JDialog {
 
     }
 
-    public void LlenarListaDetalles() throws SQLException, ClassNotFoundException  {
+    public void LlenarListaDetalles() throws SQLException, ClassNotFoundException {
         EstablecerModelo();
         filas = new Object[modelo.getColumnCount()];
         CoordinadorDeAbonos elcoordinador = new CoordinadorDeAbonos();
-       
-            listaDeAbonos = elcoordinador.ListarAbonos(factura,tipoDeFactura);
-        
+
+        listaDeAbonos = elcoordinador.ListarAbonos(factura, tipoDeFactura);
 
         try {
             while (listaDeAbonos.next()) {
@@ -53,6 +53,9 @@ public class DetallesAbonos extends javax.swing.JDialog {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "¡Esta cuenta no tiene abonos!", "¡Escoja otro registro!",
+                    JOptionPane.WARNING_MESSAGE);
         }
         tablaAbonos.setModel(modelo);
     }

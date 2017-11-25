@@ -209,6 +209,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBuscar_VisualizarDetalleDeCarga">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscar_VisualizarDetalleDeCargaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCancelar_VisualizarDetalleDeCarga">
           <Properties>
