@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeClientes;
@@ -11,13 +7,9 @@ import static UI.ListarClientes.TablaListarClientes_ListarClientes;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Laura
- */
 public class IngresarClientes extends javax.swing.JDialog {
 
-   String Cedula,
+    String Cedula,
             PrimerNombre,
             SegundoNombre,
             PrimerApellido,
@@ -25,34 +17,29 @@ public class IngresarClientes extends javax.swing.JDialog {
             Direccion,
             NombreLocal,
             NivelDeCliente,
-           RazonSocial;
+            RazonSocial;
+
     public IngresarClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-       
+
         initComponents();
-         setLocationRelativeTo(null);
-         cerrar();
+        setLocationRelativeTo(null);
+        cerrar();
     }
 
-  
-    @SuppressWarnings("unchecked")
-    public void cerrar(){
-addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
+    public void cerrar() {
+        addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                 int Decision = JOptionPane.showConfirmDialog(
-                null,
-                "Desea salir de esta ventana",
-                "Salir",
-                JOptionPane.YES_NO_OPTION);
+                int Decision = JOptionPane.showConfirmDialog(null,"Desea salir de esta ventana","Salir",
+                        JOptionPane.YES_NO_OPTION);
 
-        if (Decision == JOptionPane.YES_OPTION) {
-            ListarUsuarios.panel=false;
-            dispose();
-        }
+                if (Decision == JOptionPane.YES_OPTION) {
+                    ListarUsuarios.panel = false;
+                    dispose();
+                }
             }
         });
-}
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -69,7 +56,6 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         txtSegundoApellido_IngresarCliente = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtDireccion_IngresarCliente = new javax.swing.JTextField();
         cbxNivel_IngresarCliente = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         btAceptar_IngresarCliente = new javax.swing.JButton();
@@ -79,59 +65,76 @@ addWindowListener(new java.awt.event.WindowAdapter() {
         jLabel15 = new javax.swing.JLabel();
         txtRazonSocial_IngresarCliente = new javax.swing.JTextField();
         txtCedula_IngresarCliente = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txAreaDireccion_IngresarCliente = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingreso de clientes");
+        setPreferredSize(new java.awt.Dimension(890, 651));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel12.setText("Ingreso de clientes");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 63, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/list_add_user.png"))); // NOI18N
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 16, 163, -1));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setAlignmentX(5.0F);
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 159, 640, 9));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("Primer nombre");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 220, -1, -1));
 
         txtPrimerNombre_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerNombre_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtPrimerNombre_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 220, 163, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Segundo nombre");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 264, -1, -1));
 
         txtSegundoNombre_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoNombre_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtSegundoNombre_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 261, 163, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Primer apellido");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
 
         txtPrimerApellido_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerApellido_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtPrimerApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Segundo apellido");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
 
         txtSegundoApellido_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoApellido_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtSegundoApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 170, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel9.setText("Cédula");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 305, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setText("Dirección");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
 
-        txtDireccion_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        txtDireccion_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-
-        cbxNivel_IngresarCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "★", "★★", "★★★", "★★★★", "★★★★★" }));
+        cbxNivel_IngresarCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "A", "B", "C", "D", "E" }));
         cbxNivel_IngresarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxNivel_IngresarClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(cbxNivel_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, -1));
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel11.setText("Nivel de cliente");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
 
         btAceptar_IngresarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_IngresarCliente.setToolTipText("Oprimir para guardar cliente");
@@ -140,6 +143,7 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                 btAceptar_IngresarClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btAceptar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
 
         btLimpiar_IngresarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_IngresarCliente.setToolTipText("Oprima para limpiar campos");
@@ -148,151 +152,36 @@ addWindowListener(new java.awt.event.WindowAdapter() {
                 btLimpiar_IngresarClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btLimpiar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 510, 64, -1));
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel14.setText("Nombre local");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
         txtNombreLocal_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreLocal_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtNombreLocal_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 170, -1));
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel15.setText("Razón Social");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, -1, -1));
 
         txtRazonSocial_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtRazonSocial_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtRazonSocial_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 160, -1));
 
         txtCedula_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCedula_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
+        getContentPane().add(txtCedula_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 160, 28));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(470, 470, 470)
-                        .addComponent(btLimpiar_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(btAceptar_IngresarCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel15)
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCedula_IngresarCliente)
-                            .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 26, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(57, 57, 57)
-                            .addComponent(jLabel12)
-                            .addGap(287, 287, 287)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(jLabel3)
-                            .addGap(43, 43, 43)
-                            .addComponent(txtPrimerNombre_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(77, 77, 77)
-                            .addComponent(jLabel8)
-                            .addGap(79, 79, 79)
-                            .addComponent(txtPrimerApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(38, 38, 38)
-                            .addComponent(txtSegundoNombre_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(76, 76, 76)
-                            .addComponent(jLabel7)
-                            .addGap(71, 71, 71)
-                            .addComponent(txtSegundoApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addGap(340, 340, 340)
-                            .addComponent(jLabel10)
-                            .addGap(113, 113, 113)
-                            .addComponent(txtDireccion_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addGap(46, 46, 46)
-                            .addComponent(cbxNivel_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(83, 83, 83)
-                            .addComponent(jLabel14)
-                            .addGap(91, 91, 91)
-                            .addComponent(txtNombreLocal_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 27, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(303, Short.MAX_VALUE)
-                .addComponent(txtCedula_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtRazonSocial_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAceptar_IngresarCliente)
-                    .addComponent(btLimpiar_IngresarCliente))
-                .addGap(20, 20, 20))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 16, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addComponent(jLabel12))
-                        .addComponent(jLabel13))
-                    .addGap(15, 15, 15)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(44, 44, 44)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(txtPrimerNombre_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(jLabel8))
-                        .addComponent(txtPrimerApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
-                            .addComponent(jLabel6))
-                        .addComponent(txtSegundoNombre_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)
-                        .addComponent(txtSegundoApellido_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addComponent(jLabel9))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addComponent(jLabel10))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(txtDireccion_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(24, 24, 24)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbxNivel_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNombreLocal_IngresarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel14))))
-                    .addGap(0, 104, Short.MAX_VALUE)))
-        );
+        txAreaDireccion_IngresarCliente.setColumns(20);
+        txAreaDireccion_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        txAreaDireccion_IngresarCliente.setLineWrap(true);
+        txAreaDireccion_IngresarCliente.setRows(5);
+        txAreaDireccion_IngresarCliente.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txAreaDireccion_IngresarCliente);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 210, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -302,27 +191,28 @@ public void LimpiarCampos() {
         txtSegundoNombre_IngresarCliente.setText("");
         txtPrimerApellido_IngresarCliente.setText("");
         txtSegundoApellido_IngresarCliente.setText("");
-        txtDireccion_IngresarCliente.setText("");
+        txAreaDireccion_IngresarCliente.setText("");
         txtNombreLocal_IngresarCliente.setText("");
         txtRazonSocial_IngresarCliente.setText("");
         cbxNivel_IngresarCliente.setSelectedItem("Seleccione...");
     }
 
- public boolean VerificarCamposVacios() {
+    public boolean VerificarCamposVacios() {
 
         if (txtPrimerNombre_IngresarCliente.getText().equals("")
-               ||cbxNivel_IngresarCliente.getSelectedItem().equals("Seleccione...")
+                || cbxNivel_IngresarCliente.getSelectedItem().equals("Seleccione...")
                 || txtPrimerApellido_IngresarCliente.getText().equals("")
                 || txtSegundoApellido_IngresarCliente.getText().equals("")
                 || txtCedula_IngresarCliente.getText().equals("")
-                || txtDireccion_IngresarCliente.getText().equals("")
+                || txAreaDireccion_IngresarCliente.getText().equals("")
                 || txtNombreLocal_IngresarCliente.getText().equals("")) {
 
             return true;
         }
         return false;
     }
-  public void IngresarCliente() {
+
+    public void IngresarCliente() {
         if (VerificarCamposVacios() == true) {
 
             JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
@@ -334,36 +224,36 @@ public void LimpiarCampos() {
                 SegundoNombre = txtSegundoNombre_IngresarCliente.getText();
                 PrimerApellido = txtPrimerApellido_IngresarCliente.getText();
                 SegundoApellido = txtSegundoApellido_IngresarCliente.getText();
-                Direccion = txtDireccion_IngresarCliente.getText();
+                Direccion = txAreaDireccion_IngresarCliente.getText();
                 NombreLocal = txtNombreLocal_IngresarCliente.getText();
-                RazonSocial=txtRazonSocial_IngresarCliente.getText();
+                RazonSocial = txtRazonSocial_IngresarCliente.getText();
                 CoordinadorDeClientes elCoordinadorDeClientes = new CoordinadorDeClientes();
-                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,RazonSocial);
-               ResultSet respuesta=null;
-               respuesta= elCoordinadorDeClientes.AgregarCliente(elCliente);
-                if(respuesta.next()){
-                 if (respuesta.getString(1).equals("1")) {
-                    JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
-                    LimpiarCampos();
-                    ListarClientes.VisualizarClientes(TablaListarClientes_ListarClientes); 
+                Cliente elCliente = new Cliente(NivelDeCliente, Direccion, Cedula, NombreLocal, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, RazonSocial);
+                ResultSet respuesta = null;
+                respuesta = elCoordinadorDeClientes.AgregarCliente(elCliente);
+                if (respuesta.next()) {
+                    if (respuesta.getString(1).equals("1")) {
+                        JOptionPane.showMessageDialog(null, "Cliente insertado exitosamente");
+                        LimpiarCampos();
+                        ListarClientes.VisualizarClientes(TablaListarClientes_ListarClientes);
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error en la inserción");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error en la inserción");
+                    }
                 }
-                }
-               
+
             } catch (Exception e) {
             }
         }
     }
     private void cbxNivel_IngresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNivel_IngresarClienteActionPerformed
-        if (cbxNivel_IngresarCliente.getSelectedItem().equals("★")) {
+        if (cbxNivel_IngresarCliente.getSelectedItem().equals("A")) {
             NivelDeCliente = "Uno";
-        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("★★")) {
+        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("B")) {
             NivelDeCliente = "Dos";
-        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("★★★")) {
+        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("C")) {
             NivelDeCliente = "Tres";
-        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("★★★★")) {
+        } else if (cbxNivel_IngresarCliente.getSelectedItem().equals("D")) {
             NivelDeCliente = "Cuatro";
         } else {
             NivelDeCliente = "Cinco";
@@ -375,13 +265,10 @@ public void LimpiarCampos() {
     }//GEN-LAST:event_btAceptar_IngresarClienteActionPerformed
 
     private void btLimpiar_IngresarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarClienteActionPerformed
-        LimpiarCampos();        // TODO add your handling code here:
+        LimpiarCampos();     
     }//GEN-LAST:event_btLimpiar_IngresarClienteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btAceptar_IngresarCliente;
     public static javax.swing.JButton btLimpiar_IngresarCliente;
@@ -397,9 +284,10 @@ public void LimpiarCampos() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextArea txAreaDireccion_IngresarCliente;
     private javax.swing.JTextField txtCedula_IngresarCliente;
-    public static javax.swing.JTextField txtDireccion_IngresarCliente;
     public javax.swing.JTextField txtNombreLocal_IngresarCliente;
     public static javax.swing.JTextField txtPrimerApellido_IngresarCliente;
     public static javax.swing.JTextField txtPrimerNombre_IngresarCliente;
