@@ -67,7 +67,7 @@ public class IngresarProductos extends javax.swing.JPanel {
         } else {
             try {
                 CoordinadorDeInventario elCoordinadorDeInventario = new CoordinadorDeInventario();
-                String codigo = txtCodigo_IngresarInventario.getText();
+                String codigo =lbClasificacion_IngresarProductos.getText()+ txtCodigo_IngresarInventario.getText();
                 String nombre = txtNombre_IngresarInventario.getText();
 
                 String clasificacion = (String) cmbxClasificacion_IngresarProductos.getSelectedItem();
@@ -175,17 +175,18 @@ public class IngresarProductos extends javax.swing.JPanel {
         jLabel40 = new javax.swing.JLabel();
         txtCodigo_IngresarInventario = new javax.swing.JTextField();
         txtNombre_IngresarInventario = new javax.swing.JTextField();
-        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<String>();
+        cmbxClasificacion_IngresarProductos = new javax.swing.JComboBox<>();
         btIngClasificacion_IngresarProductos = new javax.swing.JButton();
         btLimpiar_IngresarInventario = new javax.swing.JButton();
         btAceptar_IngresarInventario = new javax.swing.JButton();
         btCancelar_IngresarInventario = new javax.swing.JButton();
         btActualizar_IngresarProductos = new javax.swing.JButton();
         txtPrecio_IngresarInventario = new javax.swing.JTextField();
-        cmbxUME_IngresarProductos = new javax.swing.JComboBox<String>();
+        cmbxUME_IngresarProductos = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         btIngUME_IngresarProductos = new javax.swing.JButton();
+        lbClasificacion_IngresarProductos = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -211,7 +212,12 @@ public class IngresarProductos extends javax.swing.JPanel {
         txtCodigo_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtCodigo_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
         txtCodigo_IngresarInventario.setToolTipText("Codigo del nuevo producto");
-        add(txtCodigo_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 163, -1));
+        txtCodigo_IngresarInventario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigo_IngresarInventarioKeyTyped(evt);
+            }
+        });
+        add(txtCodigo_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 160, 150, -1));
 
         txtNombre_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombre_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
@@ -223,6 +229,11 @@ public class IngresarProductos extends javax.swing.JPanel {
         JScrollPane pane = new JScrollPane(cmbxClasificacion_IngresarProductos,
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        cmbxClasificacion_IngresarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbxClasificacion_IngresarProductosActionPerformed(evt);
+            }
+        });
         add(cmbxClasificacion_IngresarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 163, -1));
 
         btIngClasificacion_IngresarProductos.setText("Ingresar Clasificación");
@@ -270,11 +281,6 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         txtPrecio_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrecio_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
-        txtPrecio_IngresarInventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecio_IngresarInventarioActionPerformed(evt);
-            }
-        });
         txtPrecio_IngresarInventario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecio_IngresarInventarioKeyTyped(evt);
@@ -301,6 +307,10 @@ public class IngresarProductos extends javax.swing.JPanel {
             }
         });
         add(btIngUME_IngresarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 560, 163, -1));
+
+        lbClasificacion_IngresarProductos.setFont(new java.awt.Font("Segoe Print", 1, 12)); // NOI18N
+        lbClasificacion_IngresarProductos.setText("-");
+        add(lbClasificacion_IngresarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 20, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIngClasificacion_IngresarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngClasificacion_IngresarProductosActionPerformed
@@ -332,9 +342,25 @@ public class IngresarProductos extends javax.swing.JPanel {
         Limpiar();
     }//GEN-LAST:event_btLimpiar_IngresarInventarioActionPerformed
 
-    private void txtPrecio_IngresarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecio_IngresarInventarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecio_IngresarInventarioActionPerformed
+    private void cmbxClasificacion_IngresarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxClasificacion_IngresarProductosActionPerformed
+       try{
+           if(!cmbxClasificacion_IngresarProductos.getSelectedItem().equals("Seleccione...")){
+        String clasificacion=(String)cmbxClasificacion_IngresarProductos.getSelectedItem();
+        clasificacion=clasificacion.toUpperCase();
+        char [] inicioDeCodigo= clasificacion.toCharArray();
+        lbClasificacion_IngresarProductos.setText(""+inicioDeCodigo[0]);}
+           else{
+           lbClasificacion_IngresarProductos.setText("-");
+           }
+       }
+       catch(NullPointerException n){
+       
+       }
+    }//GEN-LAST:event_cmbxClasificacion_IngresarProductosActionPerformed
+
+    private void txtCodigo_IngresarInventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigo_IngresarInventarioKeyTyped
+        ValidarSoloNumeros(evt);
+    }//GEN-LAST:event_txtCodigo_IngresarInventarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -353,6 +379,7 @@ public class IngresarProductos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel lbClasificacion_IngresarProductos;
     public static javax.swing.JTextField txtCodigo_IngresarInventario;
     public static javax.swing.JTextField txtNombre_IngresarInventario;
     public static javax.swing.JTextField txtPrecio_IngresarInventario;

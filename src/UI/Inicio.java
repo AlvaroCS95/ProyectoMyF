@@ -354,8 +354,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_listarCamiones1AncestorAdded
 
     private void ingresarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarProductos1AncestorAdded
-        ListarUMES();
-        ListarClasificaciones();        // TODO add your handling code here:
+        IngresarProductos.ListarUMES();
+        IngresarProductos.ListarClasificaciones();        // TODO add your handling code here:
     }//GEN-LAST:event_ingresarProductos1AncestorAdded
 
     private void ingresoFacturaCompra1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresoFacturaCompra1AncestorAdded

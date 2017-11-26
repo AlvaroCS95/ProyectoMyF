@@ -157,13 +157,11 @@ public class ControlDeExistenciasDeProductos extends javax.swing.JFrame {
                 }
                   Tabla_ControlDeExistencias.setModel(modelo);
             }
-            else{
-            JOptionPane.showMessageDialog(null, "c mamó");
-            }
+           
         } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "Revisar SQL");
+         JOptionPane.showMessageDialog(null, "No se pudo realizar la acción\n por problemas de conexión con la base de datos","ERROR",JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
-        JOptionPane.showMessageDialog(null, "Class Not Found");
+             JOptionPane.showMessageDialog(null, "No se pudo realizar la acción\n por problemas al encontrar la clase","ERROR",JOptionPane.ERROR_MESSAGE);
         }
 
     }
