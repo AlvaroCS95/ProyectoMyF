@@ -35,8 +35,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public PuntoDeVenta() {
         initComponents();
-        //  cmbxFormaDePago_PuntoDeVenta.setEnabled(false);
-        ListarTiposDePago();
 
     }
 
@@ -244,6 +242,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 jCAbonar_PuntoVenta.setEnabled(true);
                 jSDiasPlazo_PuntoDeVenta.setEnabled(true);
                 cmbxFormaDePago_PuntoDeVenta.setEnabled(false);
+                cmbxFormaDePago_PuntoDeVenta.setSelectedIndex(0);
                 break;
         }
     }
@@ -959,6 +958,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         jSDiasPlazo_PuntoDeVenta.setModel(new javax.swing.SpinnerListModel(new String[] {"7", "15", "30"}));
         jSDiasPlazo_PuntoDeVenta.setToolTipText("Cantidad de días plazo para pagar.");
         jSDiasPlazo_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jSDiasPlazo_PuntoDeVenta.setEnabled(false);
         add(jSDiasPlazo_PuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 80, -1));
 
         jCAbonar_PuntoVenta.setText("Abonar a esta venta.");
