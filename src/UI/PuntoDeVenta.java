@@ -32,9 +32,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public float TotalVendido = 0, TotalConAbono = 0, MontoAbonado = 0;
     static float MontoCancelado = 0;
     static float Vuelto = 0;
-    static String cambio="";
-    
-    
+    static String cambio = "";
 
     public PuntoDeVenta() {
         initComponents();
@@ -52,7 +50,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 AgregarDetalleAFactura();
                                 ResumenVentaCreditoConAbono();
                                 CuerpoDelTextoAImprimir += "\n--------------------------------\n"
-                                        + "\nTotal sin desc:" + (TotalVendido + Float.parseFloat(txtDescuento_PuntoDeVenta.getText())) 
+                                        + "\nTotal sin desc:" + (TotalVendido + Float.parseFloat(txtDescuento_PuntoDeVenta.getText()))
                                         + "\nTotal con desc:" + (TotalVendido)
                                         + "\nMonto de descuento: " + txtDescuento_PuntoDeVenta.getText()
                                         + "\nAbono:" + MontoAbonado + "\n"
@@ -103,12 +101,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                     "¡Faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                         } else {
                             if (ValidarPagoNOEfectivo()) {// pago diferente de efectivo
-                                MontoCancelado = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
+                                MontoCancelado = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(false);
                                 CuerpoDelTextoAImprimir += "\n--------------------------------\n"
-                                        + "\nTotal sin desc:" + (TotalVendido + Float.parseFloat(txtDescuento_PuntoDeVenta.getText())) 
+                                        + "\nTotal sin desc:" + (TotalVendido + Float.parseFloat(txtDescuento_PuntoDeVenta.getText()))
                                         + "\nTotal con desc:" + (TotalVendido)
                                         + "\nMonto de descuento: " + txtDescuento_PuntoDeVenta.getText()
                                         + "\nPaga con: " + MontoCancelado + "\n"
@@ -175,17 +173,17 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public boolean ValidarPagoEfectivo() {
-        if (!txtMontoDePago_PuntoVenta.getText().isEmpty() && !txt_TotalAPagarPuntoDeVenta.getText().equals("----------------------------")) {
-            float totalAPagar = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
+        if (!txtMontoDePago_PuntoVenta.getText().isEmpty() && !txt_TotalPuntoDeVenta.getText().isEmpty()) {
+            float totalAPagar = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
             float montoDePago = Float.parseFloat(txtMontoDePago_PuntoVenta.getText());
             if (montoDePago >= totalAPagar) {
                 return true;
+            } else {
+                return false;
             }
         } else {
-            JOptionPane.showMessageDialog(null, "¡Debe ingresar un monto de pago que sea mayor o igual al total a pagar!",
-                    "¡Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-        return false;
     }
 
     public boolean ExigirAbono() {
@@ -305,12 +303,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public void CalcularTotalAPagar() {
         float total = 0;
-        String ca="";
+        String ca = "";
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        ca=formato.format(total);
-        txt_TotalAPagarPuntoDeVenta.setText("" +ca.replaceAll(",", "."));
+        ca = formato.format(total);
+        txt_TotalPuntoDeVenta.setText("" + ca.replaceAll(",", "."));
     }
 
     public void VerificarDatosParaAgregarAlaLista() {
@@ -518,7 +516,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        float totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
+        float totalVendido = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -541,7 +539,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
+        totalVendido = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -570,7 +568,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
+        totalVendido = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = 1;
@@ -651,7 +649,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             txtDescuento_PuntoDeVenta.setText("0");
             txtMontoDePago_PuntoVenta.setText("");
             txtNDeReferencia.setText("0");
-            txt_TotalAPagarPuntoDeVenta.setText("----------------------------");
+            txt_TotalPuntoDeVenta.setText("");
             jCAbonar_PuntoVenta.setSelected(false);
         } else {
             JOptionPane.showMessageDialog(null, "¡Primero ingrese algún artículo a la lista!",
@@ -662,24 +660,24 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public void CalcularVuelto(boolean tipoPago) {
         CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
         if (tipoPago) {
-            coordinador.CalcularVuelto(tipoPago, txt_TotalAPagarPuntoDeVenta.getText(),
+            coordinador.CalcularVuelto(tipoPago, txt_TotalPuntoDeVenta.getText(),
                     txtMontoDePago_PuntoVenta.getText());
         } else {
-            coordinador.CalcularVuelto(tipoPago, txt_TotalAPagarPuntoDeVenta.getText(),
+            coordinador.CalcularVuelto(tipoPago, txt_TotalPuntoDeVenta.getText(),
                     cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
         }
     }
 
     public void ResumenVentaCreditoConAbono() {
         CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
-        coordinador.ResumenVentaCredito(txt_TotalAPagarPuntoDeVenta.getText(),
+        coordinador.ResumenVentaCredito(txt_TotalPuntoDeVenta.getText(),
                 cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString(),
                 jSDiasPlazo_PuntoDeVenta.getValue().toString());
     }
 
     public void ResumenVentaCreditoSinAbono() {
         CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
-        coordinador.ResumenVentaCredito(txt_TotalAPagarPuntoDeVenta.getText(),
+        coordinador.ResumenVentaCredito(txt_TotalPuntoDeVenta.getText(),
                 "No abona nada.", jSDiasPlazo_PuntoDeVenta.getValue().toString());
     }
 
@@ -755,7 +753,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         jCAbonar_PuntoVenta = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
-        txt_TotalAPagarPuntoDeVenta = new javax.swing.JLabel();
+        txt_TotalPuntoDeVenta = new javax.swing.JTextField();
 
         jmIAgregarDescuento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anadir.png"))); // NOI18N
         jmIAgregarDescuento.setText("Agregar descuento");
@@ -977,9 +975,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 40, 30));
         add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 140, 30));
 
-        txt_TotalAPagarPuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
-        txt_TotalAPagarPuntoDeVenta.setText("----------------------------");
-        add(txt_TotalAPagarPuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 330, 170, 30));
+        txt_TotalPuntoDeVenta.setEditable(false);
+        txt_TotalPuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        add(txt_TotalPuntoDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 330, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarAlaListaAgregarProductoALaLista(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAlaListaAgregarProductoALaLista
@@ -1005,7 +1003,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_TablaFacturacion_PuntoDeVentaMouseClicked
 
     private void jmICompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmICompletoActionPerformed
-        txtMontoDePago_PuntoVenta.setText(txt_TotalAPagarPuntoDeVenta.getText());
+        txtMontoDePago_PuntoVenta.setText(txt_TotalPuntoDeVenta.getText());
     }//GEN-LAST:event_jmICompletoActionPerformed
 
     private void cmbxTipoVenta_PuntoDeVentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxTipoVenta_PuntoDeVentaItemStateChanged
@@ -1077,6 +1075,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public static javax.swing.JTextField txtDescuento_PuntoDeVenta;
     public static javax.swing.JTextField txtMontoDePago_PuntoVenta;
     private javax.swing.JTextField txtNDeReferencia;
-    public static javax.swing.JLabel txt_TotalAPagarPuntoDeVenta;
+    public static javax.swing.JTextField txt_TotalPuntoDeVenta;
     // End of variables declaration//GEN-END:variables
 }
