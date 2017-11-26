@@ -462,13 +462,23 @@ public class ListarFacturas extends javax.swing.JPanel {
     }
 
     public void VisualizarDetallesDeFactura() {
-        String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
+
         if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
+            String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
+            String Nombre = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 2).toString();;
+
+            String Fecha = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 3).toString();
+            String tipo = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 5).toString();
             CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
-            coordinador.ObtenerDetallesDeFactura(nFactura);
+            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo);
         } else {
+            String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
+            String Nombre = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 4).toString();;
+
+            String Fecha = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 2).toString();
+            String tipo = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 8).toString();
             CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-            coordinador.ObtenerDetallesDeFactura(nFactura);
+            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

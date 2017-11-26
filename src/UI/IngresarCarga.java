@@ -1,18 +1,28 @@
-
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeCamion;
 import LogicaDeNegocios.CoordinadorDeInventario;
 import LogicaDeNegocios.CoordinadorDeUsuarios;
+import LogicaDeNegocios.IMPRIMIR;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
+import java.text.SimpleDateFormat;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -25,16 +35,19 @@ import javax.swing.table.TableRowSorter;
  */
 public class IngresarCarga extends javax.swing.JPanel {
 
-   
     private TableRowSorter trsFiltro;
     static Object[] filas;
     static DefaultTableModel modelo;
-    String usuario;
+    static String usuario, CuerpoDelTextoAImprimir;
     Carga laCarga;
     static int fila;
+    static String fecha;
+    public static Date date = new Date();
+    public static DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
     public IngresarCarga() {
         initComponents();
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,7 +57,6 @@ public class IngresarCarga extends javax.swing.JPanel {
         btLimpiar_IngresarCarga = new javax.swing.JButton();
         btAceptar_IngresarCarga = new javax.swing.JButton();
         btCancelar_IngresarCarga = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablaListarCamiones_Cargas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -62,6 +74,9 @@ public class IngresarCarga extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaUsuarios_IngresarCarga = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        Jdia = new com.toedter.calendar.JDateChooser();
 
         setMaximumSize(new java.awt.Dimension(916, 622));
         setMinimumSize(new java.awt.Dimension(916, 622));
@@ -99,10 +114,6 @@ public class IngresarCarga extends javax.swing.JPanel {
             }
         });
         add(btCancelar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 47, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel4.setText("Elegir Usuario:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, -1, -1));
 
         TablaListarCamiones_Cargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,6 +238,25 @@ public class IngresarCarga extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Elegir Camión:");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setText("Elegir Usuario:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setText("Fecha de ejecución");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 260, 160, -1));
+
+        Jdia.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                JdiaAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        add(Jdia, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 300, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 public void VisualizarCamion(JTable Listar) {
         try {
@@ -255,10 +285,9 @@ public void VisualizarCamion(JTable Listar) {
             }
             while (resultadoConsulta.next()) {
                 for (int i = 0; i < modelo.getColumnCount(); i++) {
-                    
-                        
-                        filas[i] = resultadoConsulta.getObject(i + 1);
-                    
+
+                    filas[i] = resultadoConsulta.getObject(i + 1);
+
                 }
                 modelo.addRow(filas);
                 Listar.setModel(modelo);
@@ -270,7 +299,8 @@ public void VisualizarCamion(JTable Listar) {
         }
 
     }
-public static void VisualizarUsuariosParaCargas() {
+
+    public static void VisualizarUsuariosParaCargas() {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
 
@@ -283,7 +313,7 @@ public static void VisualizarUsuariosParaCargas() {
 
             modelo.addColumn("Id");
             modelo.addColumn("Usuario");
-            
+
             filas = new Object[modelo.getColumnCount()];
             TablaUsuarios_IngresarCarga.setModel(modelo);
             if (resultadoConsulta == null) {
@@ -292,10 +322,9 @@ public static void VisualizarUsuariosParaCargas() {
             }
             while (resultadoConsulta.next()) {
                 for (int i = 0; i < modelo.getColumnCount(); i++) {
-                    
-                        
-                        filas[i] = resultadoConsulta.getObject(i + 1);
-                    
+
+                    filas[i] = resultadoConsulta.getObject(i + 1);
+
                 }
                 modelo.addRow(filas);
                 TablaUsuarios_IngresarCarga.setModel(modelo);
@@ -307,7 +336,8 @@ public static void VisualizarUsuariosParaCargas() {
         }
 
     }
-           public static void VisualizarTodosProductosCargas() {
+
+    public static void VisualizarTodosProductosCargas() {
         try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
@@ -347,7 +377,8 @@ public static void VisualizarUsuariosParaCargas() {
         }
 
     }
- public void txtBuscar() {
+
+    public void txtBuscar() {
 
         txtBuscar_VisualizarProductos.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
@@ -370,6 +401,7 @@ public static void VisualizarUsuariosParaCargas() {
         trsFiltro = new TableRowSorter(TablaProductos1_IngresarCargas.getModel());
         TablaProductos1_IngresarCargas.setRowSorter(trsFiltro);
     }
+
     public void filtroPalabraClave(String busqueda) {
         int columnaABuscar = 0;
         if (cmbxFiltrarProductos_IngresarCargas.getSelectedItem() == "Codigo") {
@@ -392,11 +424,10 @@ public static void VisualizarUsuariosParaCargas() {
         }
         trsFiltro.setRowFilter(RowFilter.regexFilter(busqueda, columnaABuscar));
     }
-   
-    
-    public  void Limpiar(){
+
+    public void Limpiar() {
         VisualizarCamion(TablaListarCamiones_Cargas);
-        
+
         VisualizarTodosProductosCargas();
 
         modelo = new DefaultTableModel() {
@@ -410,44 +441,92 @@ public static void VisualizarUsuariosParaCargas() {
         modelo.addColumn("Cantidad");
 
         filas = new Object[modelo.getColumnCount()];
-        TablaProductosCargados_IngresarCarga.setModel(modelo);}
+        TablaProductosCargados_IngresarCarga.setModel(modelo);
+    }
     private void btLimpiar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiar_IngresarCargaActionPerformed
         Limpiar();
     }//GEN-LAST:event_btLimpiar_IngresarCargaActionPerformed
+    public static int CantidadDeFilas(String txt) {
+        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(txt);
+        int lines = 1;
+        while (m.find()) {
+            lines++;
+        }
+        return lines;
+    }
 
-    private void btAceptar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarCargaActionPerformed
-        try {
-            if(TablaListarCamiones_Cargas.getSelectedRowCount()>0&&TablaProductosCargados_IngresarCarga.getRowCount()>0){
+    public void IngresarCargas() {
+        if (TablaListarCamiones_Cargas.getSelectedRowCount() > 0 && TablaProductosCargados_IngresarCarga.getRowCount() > 0 
+                && TablaUsuarios_IngresarCarga.getSelectedRowCount() > 0&& Jdia.getDate()!=null) {
+                fecha= new SimpleDateFormat("yyyy/MM/dd").format(Jdia.getDate());
+            try {
+                CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
 
-                String placa=TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(),0).toString();
-                int usuario=Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
-                Carga laCarga=new Carga(placa,usuario);
-                ArrayList <DetalleCarga> laListaDetalle=new ArrayList();
-                int filas=TablaProductosCargados_IngresarCarga.getRowCount();
-                for(int i=0;i<filas;i++){
-                    String elCodigo=TablaProductosCargados_IngresarCarga.getValueAt(i,0).toString();
-                    float cantidad=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(i,3).toString());
-                    DetalleCarga detalle=new DetalleCarga(elCodigo,cantidad);
+                String placa = TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(), 0).toString();
+                int usuario = Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
+                Carga laCarga = new Carga(placa, usuario, fecha);
+                String NombreUsuario = TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 1).toString();
+                ArrayList<DetalleCarga> laListaDetalle = new ArrayList();
+
+                int id = elCoordinador.ObtenerUltimoIdCarga();
+                int filas = TablaProductosCargados_IngresarCarga.getRowCount();
+
+                CuerpoDelTextoAImprimir = "";
+                CuerpoDelTextoAImprimir += "\n-----INFORMACION DE CARGA-----"
+                        + "\n\nN.Carga:" + (id + 1)
+                        + "\nF.Creacion:" + hourdateFormat.format(date)
+                        + "\nU.Responsable:" + NombreUsuario
+                        + "\nCamion:" + placa
+                        + "\n____________________________\n";
+                CuerpoDelTextoAImprimir += "Cod   Cant      Descr";
+                // JOptionPane.showMessageDialog(null, id);
+                for (int i = 0; i < filas; i++) {
+                    String elCodigo = TablaProductosCargados_IngresarCarga.getValueAt(i, 0).toString();
+                    float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(i, 3).toString());
+                    DetalleCarga detalle = new DetalleCarga(elCodigo, cantidad);
                     laListaDetalle.add(detalle);
-                }
-                laCarga.setLaListaDeCarga(laListaDetalle);
-                CoordinadorDeCamion elCoordinador=new CoordinadorDeCamion();
 
-                if(elCoordinador.InsertarCarga(laCarga)){
+                    String Descripcion = TablaProductosCargados_IngresarCarga.getValueAt(i, 1).toString();
+                    String des = "";
+                    if (Descripcion.length() >= 10) {
+
+                        des = Descripcion.replaceAll(" ", "");
+                        des = des.substring(0, 10);
+                    } else {
+
+                        des = String.format("%1$-10s", Descripcion);
+
+                    }
+
+                    CuerpoDelTextoAImprimir += "\n" + elCodigo + "     " + cantidad + "      " + des;
+
+                }
+                CuerpoDelTextoAImprimir += "\n\n\n-------------Fin-------------";
+
+                laCarga.setLaListaDeCarga(laListaDetalle);
+
+                if (elCoordinador.InsertarCarga(laCarga)) {
                     JOptionPane.showMessageDialog(null, "¡Carga ingresada exitosamente!");
+                    IMPRIMIR impresora = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
+
                     Limpiar();
                     VisualizaryEditarCargas.ListarCargas();
                 }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(IngresarCarga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(IngresarCarga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-            JOptionPane.showMessageDialog(null, "Recuerde seleccionar un camión "
-                                           + "\ny ingresar productos a la carga", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException ex) {
-
-        } catch (ClassNotFoundException ex) {
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Recuerde:\n Seleccionar un camión. "
+                    + "\n Ingresar productos a la carga. \n Seleccionar un usuario responsable. \n Seleccionar el día que se ejecutara la carga.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    private void btAceptar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarCargaActionPerformed
+       
+        IngresarCargas();
+
+
     }//GEN-LAST:event_btAceptar_IngresarCargaActionPerformed
 
     private void TablaListarCamiones_CargasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaListarCamiones_CargasMousePressed
@@ -457,67 +536,67 @@ public static void VisualizarUsuariosParaCargas() {
     private void txtBuscar_VisualizarProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_VisualizarProductosKeyTyped
         txtBuscar();
     }//GEN-LAST:event_txtBuscar_VisualizarProductosKeyTyped
-    public static boolean estáEnLaTabla(String codigo){
-      boolean estáEnLaTabla=false;
-     
-      int filas=TablaProductosCargados_IngresarCarga.getRowCount();
-      for(int i=0;i<filas;i++){
-      String elCodigo=TablaProductosCargados_IngresarCarga.getValueAt(i,0).toString();
-      if(elCodigo.equals(codigo)){
-      estáEnLaTabla= true;
-      fila=i;
-      }
-      }
-      return estáEnLaTabla;
-      } 
-    public static void cargarProducto(float cantidad, float existencias,String codigo, String nombre){
-       
-                  if(!estáEnLaTabla(codigo)){
-                    existencias=existencias-cantidad;
-                    
-                    modelo = (DefaultTableModel)TablaProductosCargados_IngresarCarga.getModel();
-                    filas = new Object[modelo.getColumnCount()];
-                    filas[0] = codigo;
-                    filas[1] = nombre;
-                    filas[2] = existencias;
-                    filas[3]= ""+cantidad;
-                    modelo.addRow(filas);
-                    TablaProductosCargados_IngresarCarga.setModel(modelo);
-                     int fila=DevolverPosicion(codigo);
-                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
-                  }
-                  else{
-                    existencias=existencias-cantidad;
-                    
-                  
-                    TablaProductosCargados_IngresarCarga.setValueAt(""+existencias, fila, 2);
-                     TablaProductosCargados_IngresarCarga.setValueAt(""+cantidad, fila, 3);
-                     int fila=DevolverPosicion(codigo);
-                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
-                  
-                  }
+    public static boolean estáEnLaTabla(String codigo) {
+        boolean estáEnLaTabla = false;
+
+        int filas = TablaProductosCargados_IngresarCarga.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            String elCodigo = TablaProductosCargados_IngresarCarga.getValueAt(i, 0).toString();
+            if (elCodigo.equals(codigo)) {
+                estáEnLaTabla = true;
+                fila = i;
+            }
+        }
+        return estáEnLaTabla;
+    }
+
+    public static void cargarProducto(float cantidad, float existencias, String codigo, String nombre) {
+
+        if (!estáEnLaTabla(codigo)) {
+            existencias = existencias - cantidad;
+
+            modelo = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
+            filas = new Object[modelo.getColumnCount()];
+            filas[0] = codigo;
+            filas[1] = nombre;
+            filas[2] = existencias;
+            filas[3] = "" + cantidad;
+            modelo.addRow(filas);
+            TablaProductosCargados_IngresarCarga.setModel(modelo);
+            int fila = DevolverPosicion(codigo);
+            TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
+        } else {
+            existencias = existencias - cantidad;
+
+            TablaProductosCargados_IngresarCarga.setValueAt("" + existencias, fila, 2);
+            TablaProductosCargados_IngresarCarga.setValueAt("" + cantidad, fila, 3);
+            int fila = DevolverPosicion(codigo);
+            TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
+
+        }
     }
     private void btnAgregar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar_IngresarCargaActionPerformed
-        if(TablaProductos1_IngresarCargas.getSelectedRowCount() > 0){
-            float existencias=Float.parseFloat(TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 3).toString());
-            String codigo=TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 0).toString();
-            String nombre=TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 1).toString();
-            Producto producto=new Producto(codigo,nombre,0,existencias,0,0, false);
-            IngresarDetalleDeCarga detalleCarga=new IngresarDetalleDeCarga(producto);
+        if (TablaProductos1_IngresarCargas.getSelectedRowCount() > 0) {
+            float existencias = Float.parseFloat(TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 3).toString());
+            String codigo = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 0).toString();
+            String nombre = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 1).toString();
+            Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregar_IngresarCargaActionPerformed
- public static int DevolverPosicion(String codigo){
-     int fila=0;
-     int filas=TablaProductos1_IngresarCargas.getRowCount();
-      for(int i=0;i<filas;i++){
-      String elCodigo=TablaProductos1_IngresarCargas.getValueAt(i,0).toString();
-      if(elCodigo.equals(codigo)){
-      fila=i;
-      }
-      }
-      return fila;
- }
+    public static int DevolverPosicion(String codigo) {
+        int fila = 0;
+        int filas = TablaProductos1_IngresarCargas.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            String elCodigo = TablaProductos1_IngresarCargas.getValueAt(i, 0).toString();
+            if (elCodigo.equals(codigo)) {
+                fila = i;
+            }
+        }
+        return fila;
+    }
+
     public void Cancelar() {
         int Decision = JOptionPane.showConfirmDialog(
                 null,
@@ -530,35 +609,35 @@ public static void VisualizarUsuariosParaCargas() {
         }
     }
     private void btCancelar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar_IngresarCargaActionPerformed
-       Cancelar();
+        Cancelar();
     }//GEN-LAST:event_btCancelar_IngresarCargaActionPerformed
 
     private void btEditar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditar_IngresarCargaActionPerformed
-        if(TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0){
-            float existencias=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 2).toString());
-            String codigo=TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 0).toString();
-            String nombre=TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 1).toString();
-            float cantidad=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
-            existencias=existencias+cantidad;
-            Producto producto=new Producto(codigo,nombre,0,existencias,0,0,false);
-            IngresarDetalleDeCarga detalleCarga=new IngresarDetalleDeCarga(producto);
+        if (TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0) {
+            float existencias = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 2).toString());
+            String codigo = TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 0).toString();
+            String nombre = TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 1).toString();
+            float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
+            existencias = existencias + cantidad;
+            Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btEditar_IngresarCargaActionPerformed
-public void Eliminar() {
+    public void Eliminar() {
         boolean eliminado = false;
         if (TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0) {
-            
-                while (TablaProductosCargados_IngresarCarga.getSelectedRowCount() != 0) {
-                    DefaultTableModel dtm = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
-                   float cantidad=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
-                    float existencias=Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 2).toString());
-                     String codigo=(String) TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 0);
-                    existencias=existencias+cantidad;
-                     dtm.removeRow(TablaProductosCargados_IngresarCarga.getSelectedRow());
-                     int fila=DevolverPosicion(codigo);
-                    TablaProductos1_IngresarCargas.setValueAt(""+existencias,fila, 3);
-  
+
+            while (TablaProductosCargados_IngresarCarga.getSelectedRowCount() != 0) {
+                DefaultTableModel dtm = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
+                float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
+                float existencias = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 2).toString());
+                String codigo = (String) TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 0);
+                existencias = existencias + cantidad;
+                dtm.removeRow(TablaProductosCargados_IngresarCarga.getSelectedRow());
+                int fila = DevolverPosicion(codigo);
+                TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
+
             }
         }
     }
@@ -568,12 +647,18 @@ public void Eliminar() {
     }//GEN-LAST:event_EliminarProducto_IngresarCargaActionPerformed
 
     private void TablaUsuarios_IngresarCargaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuarios_IngresarCargaMousePressed
-        
+
     }//GEN-LAST:event_TablaUsuarios_IngresarCargaMousePressed
+
+    private void JdiaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_JdiaAncestorAdded
+
+
+    }//GEN-LAST:event_JdiaAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EliminarProducto_IngresarCarga;
+    public static com.toedter.calendar.JDateChooser Jdia;
     public static javax.swing.JTable TablaListarCamiones_Cargas;
     private static javax.swing.JTable TablaProductos1_IngresarCargas;
     private static javax.swing.JTable TablaProductosCargados_IngresarCarga;
@@ -587,9 +672,10 @@ public void Eliminar() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -597,4 +683,3 @@ public void Eliminar() {
     private javax.swing.JTextField txtBuscar_VisualizarProductos;
     // End of variables declaration//GEN-END:variables
 }
-   

@@ -36,7 +36,7 @@ public class EditarCarga extends javax.swing.JFrame {
         this.IdCarga = idCamion;
         this.usuario = usu;
         txtIdCarga_EditarCarga.setText("" + IdCarga);
-        DateFechaCarga_EditarCarga.setDate(FechaCarga);
+       
         ListarTodasLasPlacas();
         ListarTodasLosUsuarios();
         jComboPlacas_EditarCarga.setSelectedItem(PlacaDeCamion);
@@ -90,10 +90,8 @@ public class EditarCarga extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtIdCarga_EditarCarga = new javax.swing.JTextField();
         jComboPlacas_EditarCarga = new javax.swing.JComboBox<String>();
-        DateFechaCarga_EditarCarga = new com.toedter.calendar.JDateChooser();
         btAceptar_EditarCarga = new javax.swing.JButton();
         btSalir_EditarCarga = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -107,8 +105,6 @@ public class EditarCarga extends javax.swing.JFrame {
         jLabel2.setText("Id de Carga:");
 
         jLabel3.setText("Placa de Camión:");
-
-        jLabel4.setText("Fecha de Carga:");
 
         txtIdCarga_EditarCarga.setEnabled(false);
 
@@ -139,18 +135,16 @@ public class EditarCarga extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(154, 154, 154)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 81, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(DateFechaCarga_EditarCarga, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                                     .addComponent(txtIdCarga_EditarCarga)
                                     .addComponent(jComboPlacas_EditarCarga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -168,31 +162,26 @@ public class EditarCarga extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtIdCarga_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jComboPlacas_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btAceptar_EditarCarga))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btAceptar_EditarCarga)
+                        .addGap(36, 36, 36)
+                        .addComponent(btSalir_EditarCarga))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtIdCarga_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboPlacas_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboUsuarios_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DateFechaCarga_EditarCarga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btSalir_EditarCarga)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboUsuarios_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,7 +192,7 @@ public class EditarCarga extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -236,7 +225,7 @@ public class EditarCarga extends javax.swing.JFrame {
             Carga laCarga = new Carga();
             laCarga.setIdCamion(jComboPlacas_EditarCarga.getSelectedItem().toString());
             laCarga.setUsuario(ObtenerIdUsuario());
-            laCarga.setFechaCarga(ObtenerFecha());
+            
             laCarga.setIdCarga(Integer.parseInt(txtIdCarga_EditarCarga.getText()));
             CoordinadorDeCamion elCoordinadorDeCamion = new CoordinadorDeCamion();
             try {
@@ -265,18 +254,13 @@ public class EditarCarga extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAceptar_EditarCargaActionPerformed
 
-    public String ObtenerFecha() {
-
-        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-        return String.valueOf(formatoDeFecha.format(DateFechaCarga_EditarCarga.getDate()));
-    }
+    
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser DateFechaCarga_EditarCarga;
     private javax.swing.JButton btAceptar_EditarCarga;
     private javax.swing.JButton btSalir_EditarCarga;
     public static javax.swing.JComboBox<String> jComboPlacas_EditarCarga;
@@ -284,7 +268,6 @@ public class EditarCarga extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtIdCarga_EditarCarga;

@@ -121,23 +121,29 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 for (int i = 0; i < TablaAsignarCliente.getRowCount(); i++) {
                     String cedula = TablaAsignarCliente.getValueAt(i, 1).toString();
                     String Local = TablaAsignarCliente.getValueAt(i, 0).toString();
-                    String diaLetras=TablaAsignarCliente.getValueAt(i, 3).toString();
+                    String diaLetras = TablaAsignarCliente.getValueAt(i, 3).toString();
                     ResultSet Respuesta;
 
-                    Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, diaAsignacion(TablaAsignarCliente,i));
+                    Respuesta = elCoordinador.AgregarClienteARuta(idRuta, cedula, diaAsignacion(TablaAsignarCliente, i));
                     try {
                         if (Respuesta.next()) {
 
                             if (Respuesta.getString(1).equals("1")) {
 
-                            } else {
-                          JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad al dia \t" + diaLetras);
-                        
-                            }
+                            }else if (Respuesta.getString(1).equals("3")) {
+
+                            JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad a otra ruta el dia \t" + diaLetras);
+
+                        } else if (Respuesta.getString(1).equals("2")) {
+
+                            JOptionPane.showMessageDialog(null, "El local " + Local + "\t se ha asignado con anterioridad a esta ruta el dia \t" + diaLetras);
+
                         }
+                        } 
+
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "No tiene permisos");
-                        
+
                         return;
                     }
 
@@ -153,25 +159,25 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     public int diaAsignacion(JTable tabla, int i) {
         int dia = 0;
         if (tabla.getValueAt(i, 3).toString().equals("Lunes")) {
-            dia = 1;
-          
+            dia = 2;
+
         }
         if (tabla.getValueAt(i, 3).toString().equals("Martes")) {
-            dia = 2;
-        }
-        if (tabla.getValueAt(i, 3).toString().equals("Miercoles")) {
             dia = 3;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Jueves")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Miercoles")) {
             dia = 4;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Viernes")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Jueves")) {
             dia = 5;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Sabado")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Viernes")) {
             dia = 6;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Sabado")) {
+            dia = 7;
             if (tabla.getValueAt(i, 3).toString().equals("Domingo")) {
-                dia = 7;
+                dia = 1;
             }
         }
         return dia;
@@ -185,30 +191,33 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
                 for (int i = 0; i < TablaAsignarCamion.getRowCount(); i++) {
 
                     String placa = TablaAsignarCamion.getValueAt(i, 0).toString();
-                    String diaLetras=TablaAsignarCamion.getValueAt(i, 3).toString();
+                    String diaLetras = TablaAsignarCamion.getValueAt(i, 3).toString();
                     ResultSet Respuesta;
-                    Respuesta = elCoordinador.AgregarCamionARuta(placa, idRuta, diaAsignacion(TablaAsignarCamion,i));
+                    Respuesta = elCoordinador.AgregarCamionARuta(placa, idRuta, diaAsignacion(TablaAsignarCamion, i));
                     try {
                         if (Respuesta.next()) {
 
                             if (Respuesta.getString(1).equals("1")) {
 
-                            } else {
-                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a la ruta \t" + diaLetras);
+                            } else if (Respuesta.getString(1).equals("3")) {
+                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a otra ruta el \t" + diaLetras);
+
+                            } else if (Respuesta.getString(1).equals("2")) {
+                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a esta ruta \t" + diaLetras);
 
                             }
                         }
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "No tiene permisos");
-                    
+
                         return;
                     }
 
                 }
-                  JOptionPane.showMessageDialog(null, "Se ha finalizado la operación.");
+                JOptionPane.showMessageDialog(null, "Se ha finalizado la operación.");
             }
         } catch (ClassNotFoundException | SQLException | HeadlessException e) {
-           
+
         }
 
     }

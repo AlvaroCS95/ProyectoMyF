@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class GestorDeCamiones extends Coneccion {
 
@@ -52,11 +53,10 @@ public class GestorDeCamiones extends Coneccion {
         EstablecerConexion();
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("{call ActualizarCarga(?,?,?,?)}");
+            llamadaAlMetodo = conexion.prepareCall("{call ActualizarCarga(?,?,?)}");
             llamadaAlMetodo.setInt(1, laCarga.getIdCarga());
             llamadaAlMetodo.setString(2, laCarga.getIdCamion());
-            llamadaAlMetodo.setString(3, laCarga.getFechaCarga());
-            llamadaAlMetodo.setInt(4, laCarga.getUsuario());
+            llamadaAlMetodo.setInt(3, laCarga.getUsuario());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;
@@ -64,7 +64,19 @@ public class GestorDeCamiones extends Coneccion {
             return false;
         }
     }
+public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
 
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call EliminarCarga(" + Placa + "); ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
     public ResultSet CambiarEstadoCamion(String Placa) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -92,6 +104,20 @@ public class GestorDeCamiones extends Coneccion {
             return resultadoConsulta;
         }
     }
+      public ResultSet ObtenerUltimaIdFacturaCarga() throws ClassNotFoundException, SQLException {
+        
+         EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call DevolverUltimoIdFacturaCarga ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+      }
  public ResultSet ListarCargas() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -152,9 +178,10 @@ public class GestorDeCamiones extends Coneccion {
         EstablecerConexion();
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?)}");
+            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?,?)}");
             llamadaAlMetodo.setString(1, laCarga.getIdCamion());
             llamadaAlMetodo.setInt(2, laCarga.getUsuario());
+            llamadaAlMetodo.setString(3,laCarga.getFechaEjecucion());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CoordinadorDeFacturaCompra {
 
@@ -219,17 +220,18 @@ public class CoordinadorDeFacturaCompra {
         return "0";// No trae nada
     }
 
-    public void ObtenerDetallesDeFactura(String idFactura) {
+    public void ObtenerDetallesDeFactura(String idFactura,String nombre,String fecha,String tipo) {
         GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
-        try {
+        try { 
             if (resultado.next()) {
-                DetallesFacturaCompraVenta detalles = new DetallesFacturaCompraVenta(null, true, idFactura, true);
+                 DetallesFacturaCompraVenta detalles = 
+                         new DetallesFacturaCompraVenta(null, true, idFactura, true,nombre,tipo,fecha);
                 resultado.previous();
                 detalles.LlenarListaDetalles(resultado);
                 detalles.setVisible(true);
             }
-
+               
         } catch (SQLException ex) {
             Logger.getLogger(CoordinadorDeFacturaCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
