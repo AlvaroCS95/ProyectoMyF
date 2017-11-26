@@ -3,8 +3,14 @@ package UI;
 import LogicaDeNegocios.CoordinadorEstadistico;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ResumenEstadistico extends javax.swing.JPanel {
 
@@ -45,7 +51,7 @@ public class ResumenEstadistico extends javax.swing.JPanel {
 
     public void EstablecerNotaDeValance() {
         String textoParaMostrar = "El balance de inversión respecto a ganancia para el periodo";
-        textoParaMostrar += " " + ObtenerFechaDesde() + " hasta " + ObtenerFechaHasta() + " es de " + ObtenerResultadoBalance()+".";
+        textoParaMostrar += " " + ObtenerFechaDesde() + " hasta " + ObtenerFechaHasta() + " es de " + ObtenerResultadoBalance() + ".";
         Jl_TituloBalance.setText(textoParaMostrar);
     }
 
@@ -83,6 +89,36 @@ public class ResumenEstadistico extends javax.swing.JPanel {
         }
     }
 
+    public void GraficarDatos() {
+        if (jt_Estadistica.getRowCount() > 0) {
+            JFreeChart grafica;
+            DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+            float cantComprado = 0, cantVendido = 0;
+            String nombre = "";
+            for (int i = 0; i < jt_Estadistica.getRowCount(); i++) {
+                nombre = jt_Estadistica.getValueAt(i, 1).toString();
+                cantComprado = Float.parseFloat(jt_Estadistica.getValueAt(i, 2).toString());
+                cantVendido = Float.parseFloat(jt_Estadistica.getValueAt(i, 4).toString());
+
+                Datos.addValue(cantComprado, "Compra", nombre);
+                Datos.addValue(cantVendido, "Venta", nombre);
+            }
+            grafica = ChartFactory.createBarChart("Productos Comprados/Vendidos",
+                    "Productos", "Compras/Ventas", Datos,
+                    PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel panelGrafica = new ChartPanel(grafica);
+            JFrame ventanaGrafico = new JFrame("Grafico");
+            ventanaGrafico.getContentPane().add(panelGrafica);
+            ventanaGrafico.pack();
+            ventanaGrafico.setVisible(true);
+            ventanaGrafico.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            ventanaGrafico.setLocationRelativeTo(this);
+            ventanaGrafico.setAlwaysOnTop(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay datos para graficar", "¡Tabla vacía!", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -97,6 +133,7 @@ public class ResumenEstadistico extends javax.swing.JPanel {
         jt_Estadistica = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         Jl_TituloBalance = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Estadistica de productos");
@@ -139,6 +176,13 @@ public class ResumenEstadistico extends javax.swing.JPanel {
 
         Jl_TituloBalance.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Grafico.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +194,9 @@ public class ResumenEstadistico extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(205, 205, 205)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +210,7 @@ public class ResumenEstadistico extends javax.swing.JPanel {
                                 .addComponent(jdc_FechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(47, 47, 47)
                         .addComponent(jButton1)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,16 +222,18 @@ public class ResumenEstadistico extends javax.swing.JPanel {
                                 .addGap(46, 46, 46)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jdc_FechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jl_Desde))
-                                        .addGap(9, 9, 9)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jl_Hasta)
-                                            .addComponent(jdc_FechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(21, 21, 21))))
+                                        .addGap(21, 21, 21))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton2)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jdc_FechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jl_Desde))
+                                            .addGap(9, 9, 9)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jl_Hasta)
+                                                .addComponent(jdc_FechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -204,10 +252,15 @@ public class ResumenEstadistico extends javax.swing.JPanel {
         ConsultarDatos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        GraficarDatos();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Jl_TituloBalance;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

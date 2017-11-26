@@ -103,7 +103,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         JTFacturacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
-        puntoDeVenta1.setPreferredSize(new java.awt.Dimension(1300, 610));
         puntoDeVenta1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -354,12 +353,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         VisualizarCamion(TablaListarCamiones_ListarCamiones);        // TODO add your handling code here:
     }//GEN-LAST:event_listarCamiones1AncestorAdded
 
-    private void puntoDeVenta1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_puntoDeVenta1AncestorAdded
-        ListarTiposDePago();
-        ((JSpinner.DefaultEditor) jSDiasPlazo_PuntoDeVenta.getEditor()).getTextField().setEditable(false);
-        jSDiasPlazo_PuntoDeVenta.setEnabled(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_puntoDeVenta1AncestorAdded
-
     private void ingresarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarProductos1AncestorAdded
         ListarUMES();
         ListarClasificaciones();        // TODO add your handling code here:
@@ -460,19 +453,23 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_ingresarProductos2AncestorAdded
 
     private void visualizaryEditarCargas1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizaryEditarCargas1AncestorAdded
-       ListarCargas();
+        ListarCargas();
     }//GEN-LAST:event_visualizaryEditarCargas1AncestorAdded
 
     private void ingresarCarga1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorAdded
         VisualizarCamion(TablaListarCamiones_Cargas);
-        
-        VisualizarTodosProductosCargas(); 
+
+        VisualizarTodosProductosCargas();
         VisualizarUsuariosParaCargas();// TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorAdded
 
     private void ingresarCarga1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorMoved
+
+    private void puntoDeVenta1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_puntoDeVenta1AncestorAdded
+        ListarTiposDePago();
+    }//GEN-LAST:event_puntoDeVenta1AncestorAdded
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
@@ -483,7 +480,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane JTCamiones;
     private javax.swing.JTabbedPane JTClientes;
-    private javax.swing.JTabbedPane JTFacturacion;
+    public javax.swing.JTabbedPane JTFacturacion;
     public static javax.swing.JTabbedPane JTInicio;
     private javax.swing.JTabbedPane JTInventario;
     private javax.swing.JTabbedPane JTProveedores;

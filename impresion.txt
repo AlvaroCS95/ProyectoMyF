@@ -7,19 +7,24 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
- 
------INFORMACION DE CARGA-----
+ 				       Factura Contado
 
-N.Carga:27
-F.Creacion:26/11/2017
-U.Responsable:Alvaro
-Camion:8956
-____________________________
-Cod   Cant      Descr
-003     6.0      Queso     
-002     6.0      Natilla   
-01     6.0      Chuletaahu
-004     6.0      Choriso   
+N.Fac: 60
+Ced.Cli: 12
+Cli: poiuytrewq
+F.pago: Efectivo
+N.Ref: 0
+Hora-Fecha:21:54:27 25/11/2017
+----*---------------------*----
+Cod  Cant  Descr        Ttl
+6   1.0   Costillade 3390.0
+--------------------------------
+
+Total sin desc:3390.0
+Total con desc:3390.0
+Monto de descuento: 0
+Paga con: 30000.0
+Su vuelto: 26610.0
 
 
 -------------Fin-------------
