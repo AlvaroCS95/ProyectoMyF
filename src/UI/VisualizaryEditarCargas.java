@@ -8,7 +8,6 @@ package UI;
 import LogicaDeNegocios.CoordinadorDeCamion;
 import LogicaDeNegocios.CoordinadorDeInventario;
 import static UI.IngresarProductos.cmbxUME_IngresarProductos;
-import static UI.VisualizarProductos.cmbxFiltrar2_VisualizarProductos1;
 import static UI.VisualizarProductos.modelo;
 import static UI.VisualizarProductos.txtBuscar_VisualizarProductos;
 import java.awt.event.KeyAdapter;
@@ -25,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import static UI.VisualizarProductos.cmbxFiltrar_VisualizarProductos;
 
 /**
  *
