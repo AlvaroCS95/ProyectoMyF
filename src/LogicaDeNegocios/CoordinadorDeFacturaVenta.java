@@ -63,12 +63,8 @@ public class CoordinadorDeFacturaVenta {
         }
         return fila;
     }
-
-    public float ObtenerNuevaCantidad(float cantidadAnterior, float nuevaCantidad) {
-        JOptionPane.showMessageDialog(null, "Nueva cantidad solicitada: " + (nuevaCantidad - cantidadAnterior));
-        return (nuevaCantidad - cantidadAnterior);
-    }
-
+    
+    
     public void CrearFacturaVentaContado(float monto, int idCliente, int idTipoPago, String nuReferencia) {
         FacturaDeVenta nuevaFactura = new FacturaDeVenta();
         nuevaFactura.CrearFacturaDeVentaContado(monto, idCliente, idTipoPago, nuReferencia);

@@ -3,6 +3,7 @@ package UI;
 
 import LogicaDeNegocios.CoordinadorDeCamion;
 import LogicaDeNegocios.CoordinadorDeInventario;
+import LogicaDeNegocios.CoordinadorDeUsuarios;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
@@ -58,6 +59,9 @@ public class IngresarCarga extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         btEditar_IngresarCarga = new javax.swing.JButton();
         EliminarProducto_IngresarCarga = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TablaUsuarios_IngresarCarga = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(916, 622));
         setMinimumSize(new java.awt.Dimension(916, 622));
@@ -75,7 +79,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btLimpiar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 40, 48, -1));
+        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, 48, -1));
 
         btAceptar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_IngresarCarga.setToolTipText("Para ingresar una carga");
@@ -84,7 +88,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btAceptar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btAceptar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1121, 37, 51, -1));
+        add(btAceptar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 560, 51, -1));
 
         btCancelar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
         btCancelar_IngresarCarga.setToolTipText("Para salir de la ventana");
@@ -94,11 +98,11 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btCancelar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btCancelar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1178, 37, 47, -1));
+        add(btCancelar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 47, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel4.setText("Elegir Camión:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+        jLabel4.setText("Elegir Usuario:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, -1, -1));
 
         TablaListarCamiones_Cargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,7 +122,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(TablaListarCamiones_Cargas);
 
-        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 838, 133));
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 838, 133));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Agregar Producto:");
@@ -192,7 +196,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btEditar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 50, 40));
+        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 460, 50, 40));
 
         EliminarProducto_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
         EliminarProducto_IngresarCarga.setToolTipText("Para llenar las tablas con los datos ");
@@ -201,7 +205,28 @@ public class IngresarCarga extends javax.swing.JPanel {
                 EliminarProducto_IngresarCargaActionPerformed(evt);
             }
         });
-        add(EliminarProducto_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 48, -1));
+        add(EliminarProducto_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 510, 48, -1));
+
+        TablaUsuarios_IngresarCarga.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Usuario"
+            }
+        ));
+        TablaUsuarios_IngresarCarga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TablaUsuarios_IngresarCargaMousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(TablaUsuarios_IngresarCarga);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 100, 260, 130));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel6.setText("Elegir Camión:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 public void VisualizarCamion(JTable Listar) {
         try {
@@ -237,6 +262,43 @@ public void VisualizarCamion(JTable Listar) {
                 }
                 modelo.addRow(filas);
                 Listar.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+
+        } catch (ClassNotFoundException ex) {
+
+        }
+
+    }
+public static void VisualizarUsuariosParaCargas() {
+        try {
+            DefaultTableModel modelo = new DefaultTableModel() {
+
+                public boolean isCellEditable(int fila, int columna) {
+                    return false;
+                }
+            };
+            CoordinadorDeUsuarios elCoordinador = new CoordinadorDeUsuarios();
+            ResultSet resultadoConsulta = elCoordinador.ListarUsuariosActivosParaCargas();
+
+            modelo.addColumn("Id");
+            modelo.addColumn("Usuario");
+            
+            filas = new Object[modelo.getColumnCount()];
+            TablaUsuarios_IngresarCarga.setModel(modelo);
+            if (resultadoConsulta == null) {
+                JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            while (resultadoConsulta.next()) {
+                for (int i = 0; i < modelo.getColumnCount(); i++) {
+                    
+                        
+                        filas[i] = resultadoConsulta.getObject(i + 1);
+                    
+                }
+                modelo.addRow(filas);
+                TablaUsuarios_IngresarCarga.setModel(modelo);
             }
         } catch (SQLException ex) {
 
@@ -358,7 +420,8 @@ public void VisualizarCamion(JTable Listar) {
             if(TablaListarCamiones_Cargas.getSelectedRowCount()>0&&TablaProductosCargados_IngresarCarga.getRowCount()>0){
 
                 String placa=TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(),0).toString();
-                Carga laCarga=new Carga(placa);
+                int usuario=Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
+                Carga laCarga=new Carga(placa,usuario);
                 ArrayList <DetalleCarga> laListaDetalle=new ArrayList();
                 int filas=TablaProductosCargados_IngresarCarga.getRowCount();
                 for(int i=0;i<filas;i++){
@@ -504,12 +567,17 @@ public void Eliminar() {
         Eliminar();
     }//GEN-LAST:event_EliminarProducto_IngresarCargaActionPerformed
 
+    private void TablaUsuarios_IngresarCargaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaUsuarios_IngresarCargaMousePressed
+        
+    }//GEN-LAST:event_TablaUsuarios_IngresarCargaMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EliminarProducto_IngresarCarga;
     public static javax.swing.JTable TablaListarCamiones_Cargas;
     private static javax.swing.JTable TablaProductos1_IngresarCargas;
     private static javax.swing.JTable TablaProductosCargados_IngresarCarga;
+    public static javax.swing.JTable TablaUsuarios_IngresarCarga;
     private javax.swing.JButton btAceptar_IngresarCarga;
     private javax.swing.JButton btCancelar_IngresarCarga;
     private javax.swing.JButton btEditar_IngresarCarga;
@@ -521,8 +589,10 @@ public void Eliminar() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField txtBuscar_VisualizarProductos;
     // End of variables declaration//GEN-END:variables

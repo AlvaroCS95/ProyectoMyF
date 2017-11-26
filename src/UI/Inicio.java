@@ -7,6 +7,7 @@ import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
 import static UI.IngresarCarga.TablaListarCamiones_Cargas;
 import static UI.IngresarCarga.VisualizarTodosProductosCargas;
+import static UI.IngresarCarga.VisualizarUsuariosParaCargas;
 
 import static UI.IngresarProductos.ListarClasificaciones;
 import static UI.IngresarProductos.ListarUMES;
@@ -71,6 +72,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         visualizarProductos1 = new UI.VisualizarProductos();
         ingresarDevoluciones1 = new UI.IngresarDevoluciones();
         visualizarYEditarDevoluciones1 = new UI.VisualizarYEditarDevoluciones();
+        resumenEstadistico1 = new UI.ResumenEstadistico();
         JTClientes = new javax.swing.JTabbedPane();
         listarClientes1 = new UI.ListarClientes();
         JTUsuarios = new javax.swing.JTabbedPane();
@@ -173,6 +175,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         JTInventario.addTab("Visualización de productos", visualizarProductos1);
         JTInventario.addTab("Devoluciones", ingresarDevoluciones1);
         JTInventario.addTab("Visualizar Devoluciones", visualizarYEditarDevoluciones1);
+        JTInventario.addTab("Resumen de ventas", resumenEstadistico1);
 
         JTInicio.addTab("Inventario", JTInventario);
 
@@ -463,7 +466,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private void ingresarCarga1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorAdded
         VisualizarCamion(TablaListarCamiones_Cargas);
         
-        VisualizarTodosProductosCargas();       // TODO add your handling code here:
+        VisualizarTodosProductosCargas(); 
+        VisualizarUsuariosParaCargas();// TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorAdded
 
     private void ingresarCarga1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorMoved
@@ -505,6 +509,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.ListarProveedor listarProveedor1;
     private UI.ListarUsuarios listarUsuarios1;
     private UI.PuntoDeVenta puntoDeVenta1;
+    private UI.ResumenEstadistico resumenEstadistico1;
     private UI.VisualizarProductos visualizarProductos1;
     private UI.VisualizarYEditarDevoluciones visualizarYEditarDevoluciones1;
     private UI.VisualizaryEditarCargas visualizaryEditarCargas1;

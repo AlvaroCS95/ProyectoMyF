@@ -67,7 +67,19 @@ public class GestorDeUsuarios extends Coneccion {
             return resultadoConsulta;
         }
     }
-    
+    public ResultSet ListarUsuariosActivosParaCargas() throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        Statement consulta;
+        ResultSet resultadoConsulta = null;
+
+        consulta = conexion.createStatement();
+        try {
+            resultadoConsulta = consulta.executeQuery("call MostarUsuariosParaCargas ");
+            return resultadoConsulta;
+        } catch (SQLException ex) {
+            return resultadoConsulta;
+        }
+    }
      public ResultSet ListarTodosLosUsuariosActivos() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
