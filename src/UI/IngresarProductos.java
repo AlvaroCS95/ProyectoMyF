@@ -67,7 +67,7 @@ public class IngresarProductos extends javax.swing.JPanel {
         } else {
             try {
                 CoordinadorDeInventario elCoordinadorDeInventario = new CoordinadorDeInventario();
-                String codigo =lbClasificacion_IngresarProductos.getText()+ txtCodigo_IngresarInventario.getText();
+                String codigo =txtCodigo_IngresarInventario.getText();
                 String nombre = txtNombre_IngresarInventario.getText();
 
                 String clasificacion = (String) cmbxClasificacion_IngresarProductos.getSelectedItem();
