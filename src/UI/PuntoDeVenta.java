@@ -32,6 +32,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public float TotalVendido = 0, TotalConAbono = 0, MontoAbonado = 0;
     static float MontoCancelado = 0;
     static float Vuelto = 0;
+    static String cambio="";
+    
+    
 
     public PuntoDeVenta() {
         initComponents();
@@ -302,10 +305,12 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public void CalcularTotalAPagar() {
         float total = 0;
+        String ca="";
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        txt_TotalAPagarPuntoDeVenta.setText("" + formato.format(total));
+        ca=formato.format(total);
+        txt_TotalAPagarPuntoDeVenta.setText("" +ca.replaceAll(",", "."));
     }
 
     public void VerificarDatosParaAgregarAlaLista() {
@@ -513,9 +518,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        String totalParaCambiar = txt_TotalAPagarPuntoDeVenta.getText();
-        totalParaCambiar = totalParaCambiar.replace(",", ".");
-        float totalVendido = Float.parseFloat(totalParaCambiar);
+        float totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -537,12 +540,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         float totalVendido, montoAbonado;
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
-        String totalvendidocambiar = "";
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        //totalvendidocambiar = Float.parseFloat(txtTotalAPagar_PuntoDeVenta.getText());
-        totalvendidocambiar = txt_TotalAPagarPuntoDeVenta.getText();
-        totalvendidocambiar = totalvendidocambiar.replace(",", ".");
-        totalVendido = Float.parseFloat(totalvendidocambiar);
+        totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = facturaVenta.ObtenerIdTipoPago(cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString());
@@ -571,11 +570,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         int idCliente, idTipoPago, plazoDias;
         String nuReferencia;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        String totalvendidocambiar;
-        totalvendidocambiar = txt_TotalAPagarPuntoDeVenta.getText();
-        totalvendidocambiar = totalvendidocambiar.replace(",", ".");
-        totalVendido = Float.parseFloat(totalvendidocambiar);
-
+        totalVendido = Float.parseFloat(txt_TotalAPagarPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
         idTipoPago = 1;
