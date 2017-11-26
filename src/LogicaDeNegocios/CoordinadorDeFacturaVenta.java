@@ -219,12 +219,14 @@ public class CoordinadorDeFacturaVenta {
         return resultado;
     }
 
-    public void ObtenerDetallesDeFactura(String idFactura) {
+    public void ObtenerDetallesDeFactura(String idFactura,String nombre,String fecha,String tipo) {
         GestorFacturaVenta gestor = new GestorFacturaVenta();
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
         try {
             if (resultado.next()) {
-                DetallesFacturaCompraVenta detalles = new DetallesFacturaCompraVenta(null, true, idFactura, false);
+                DetallesFacturaCompraVenta detalles = new DetallesFacturaCompraVenta(null, true, idFactura, false
+                
+                ,nombre,tipo,fecha);
                 resultado.previous();
                 detalles.LlenarListaDetalles(resultado);
                 detalles.setVisible(true);

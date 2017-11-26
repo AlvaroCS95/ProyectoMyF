@@ -153,25 +153,25 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
     public int diaAsignacion(JTable tabla, int i) {
         int dia = 0;
         if (tabla.getValueAt(i, 3).toString().equals("Lunes")) {
-            dia = 1;
+            dia = 2;
           
         }
         if (tabla.getValueAt(i, 3).toString().equals("Martes")) {
-            dia = 2;
-        }
-        if (tabla.getValueAt(i, 3).toString().equals("Miercoles")) {
             dia = 3;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Jueves")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Miercoles")) {
             dia = 4;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Viernes")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Jueves")) {
             dia = 5;
         }
-        if (tabla.getValueAt(i, 3).toString().equals("Sabado")) {
+        if (tabla.getValueAt(i, 3).toString().equals("Viernes")) {
             dia = 6;
+        }
+        if (tabla.getValueAt(i, 3).toString().equals("Sabado")) {
+            dia = 7;
             if (tabla.getValueAt(i, 3).toString().equals("Domingo")) {
-                dia = 7;
+                dia = 1;
             }
         }
         return dia;
@@ -193,8 +193,12 @@ public class AsignacionesDeRuta extends javax.swing.JDialog {
 
                             if (Respuesta.getString(1).equals("1")) {
 
-                            } else {
-                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a la ruta \t" + diaLetras);
+                            } else if (Respuesta.getString(1).equals("3")){
+                             JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a otra ruta el \t" + diaLetras);
+
+                            }
+                            else if(Respuesta.getString(1).equals("2")) {
+                                JOptionPane.showMessageDialog(null, "El camion con placa " + placa + "\nHa sido asignado con anterioridad a esta ruta \t" + diaLetras);
 
                             }
                         }

@@ -1,10 +1,13 @@
 
 package UI;
 
+import LogicaDeNegocios.IMPRIMIR;
+import static UI.IngresarCarga.CantidadDeFilas;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
+    static String txt="";
 
     BuscarFacturasDeVentaQueTieneDevoluciones ElBuscarFacturasDeVentaQueTieneDevoluciones = new BuscarFacturasDeVentaQueTieneDevoluciones();
     public static DefaultTableModel ModeloProductosReintegradosVisualizar = new DefaultTableModel() {
@@ -64,6 +67,7 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        Imprimir = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1260, 690));
 
@@ -223,33 +227,47 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 102, 112));
         jLabel10.setText("Productos Desechados");
 
+        Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/printer_78349.png"))); // NOI18N
+        Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel8)
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(86, 86, 86))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btBuscarFacturaDeVentaConDevolucion_EditarDevoluciones)
                         .addGap(171, 171, 171))
-                    .addComponent(jSeparator6)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(386, 386, 386)
-                                .addComponent(jLabel44))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane3)))
-                        .addContainerGap())
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabel44)
+                        .addContainerGap(401, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
@@ -287,15 +305,7 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtFechaDeVenta_VisualizarDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel8)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addGap(96, 96, 96))))
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +321,9 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFechaDevolucion_VisualizarDevoluciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel44)
+                            .addComponent(Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -346,7 +358,7 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel43)
                                     .addGap(29, 29, 29))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
@@ -357,10 +369,79 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+public void imprimir(){
 
+                                       txt = "      FACTURA DE DEVOLUCION\n"
+                                    + "N.Fac:" + txtNFactura_VisualizarDevoluciones.getText()
+                                    + "\nCli:" + txtNombreLocal_VisualizarDevoluciones.getText()
+                                    + "\nUsuario::" + txtNombreUsuario_VisualizarDevoluciones.getText()
+                                    + "\nFecha V:" + txtFechaDeVenta_VisualizarDevoluciones.getText()
+                                    + "\nMonto de venta:" + txtMontoDeVenta_VisualizarDevoluciones.getText()
+                                    
+                                    + "\nFecha D: " + txtFechaDevolucion_VisualizarDevoluciones.getText();
+
+                            if (TablaProductosDesechados_VisualizarDevoluciones.getRowCount() != 0) {
+
+                                txt += "\n*Detalle\n\n"
+                                        + "      Productos desechados\n"
+                                        + "\nCod   Cant     Descr";
+                                for (int i = 0; i < TablaProductosDesechados_VisualizarDevoluciones.getRowCount(); i++) {
+                                    String codigo = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 0).toString();
+                                    String Descripcion = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 1).toString();
+                                    float Cantidad = Float.parseFloat(TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 2).toString());
+                                    String Detalle = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 3).toString();
+
+                                    String des = "";
+                                    if (Descripcion.length() >= 10) {
+
+                                        des = Descripcion.replaceAll(" ", "");
+                                        des = des.substring(0, 10);
+                                    } else {
+
+                                        des = String.format("%1$-10s", Descripcion);
+
+                                    }
+
+                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+
+                                    txt += "\n*" + Detalle;
+                                }
+                                 
+                            }
+                            if (TablaReintegro_Devoluciones.getRowCount() != 0) {
+
+                                txt += "\n\n      Productos Reintegrados\n"
+                                        +"\nCod   Cant     Descr";
+                                for (int i = 0; i < TablaReintegro_Devoluciones.getRowCount(); i++) {
+                                    String codigo = TablaReintegro_Devoluciones.getValueAt(i, 0).toString();
+                                    String Descripcion = TablaReintegro_Devoluciones.getValueAt(i, 1).toString();
+                                    float Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(i, 2).toString());
+
+                                    String des = "";
+                                    if (Descripcion.length() >= 10) {
+
+                                        des = Descripcion.replaceAll(" ", "");
+                                        des = des.substring(0, 10);
+                                    } else {
+
+                                        des = String.format("%1$-10s", Descripcion);
+
+                                    }
+
+                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+
+                                }
+                            }
+                                   txt+= "\n\n------*---------------*---------"+
+                                    "\nTotal de devolucion:"+txtMontoDevolucion_VisualizarDevoluciones.getText()
+                                    +"\nTotal de  reintegro:"+txtMontoReintegrado_VisualizarDevoluciones.getText()
+                                    +"\nTotal de desecho:"+txtMontoDevolucion_VisualizarDevoluciones.getText()
+                                    + "\n\n------------Fin--------------";
+                            IMPRIMIR imprimir = new IMPRIMIR(txt, CantidadDeFilas(txt), txt.length());
+}
     private void btBuscarFacturaDeVentaConDevolucion_EditarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarFacturaDeVentaConDevolucion_EditarDevolucionesActionPerformed
 
         if (ElBuscarFacturasDeVentaQueTieneDevoluciones.isVisible() == true) {
@@ -401,8 +482,13 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
 
     }//GEN-LAST:event_TablaDetalleFacturaDeVenta_VisualizarDevolucionesMousePressed
 
+    private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
+        imprimir();
+    }//GEN-LAST:event_ImprimirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton Imprimir;
     public static javax.swing.JTable TablaDetalleFacturaDeVenta_VisualizarDevoluciones;
     public static javax.swing.JTable TablaProductosDesechados_VisualizarDevoluciones;
     public static javax.swing.JTable TablaReintegro_Devoluciones;

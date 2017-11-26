@@ -10,17 +10,19 @@
  
 -----INFORMACION DE CARGA-----
 
-N.Carga:1
-F.Creacion:04/11/2017
+N.Carga:27
+F.Creacion:26/11/2017
 U.Responsable:Alvaro
-Camion:5285
+Camion:8956
 ____________________________
 Cod   Cant      Descr
-1     5.0      Queso     
-2     15.0      Chuletaahu
+003     6.0      Queso     
+002     6.0      Natilla   
+01     6.0      Chuletaahu
+004     6.0      Choriso   
 
 
 -------------Fin-------------
-                                  
-                                  
-                                  
+                                    
+                                    
+                                    

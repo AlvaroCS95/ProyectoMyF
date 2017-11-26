@@ -120,6 +120,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         menuEmergente_VisualizarCargas = new javax.swing.JPopupMenu();
         Editar_VisualizarCargas = new javax.swing.JMenuItem();
         detalles_VisualizarCargas = new javax.swing.JMenuItem();
+        Eliminar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCargas_VisualizarCargas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -147,6 +148,16 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
             }
         });
         menuEmergente_VisualizarCargas.add(detalles_VisualizarCargas);
+
+        Eliminar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DeleteIcon.png"))); // NOI18N
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+        menuEmergente_VisualizarCargas.add(Eliminar);
 
         setPreferredSize(new java.awt.Dimension(1360, 700));
 
@@ -257,6 +268,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
       try {
           editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga,usuario);
           editarCarga.setVisible(true);
+          ListarCargas();
       } catch (ClassNotFoundException ex) {
           Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -308,10 +320,33 @@ int fila=0;
           visualizarDetalle.setVisible(true);
    
     }//GEN-LAST:event_detalles_VisualizarCargasActionPerformed
+    public void EliminarCargas(int id) throws SQLException, ClassNotFoundException{
+    CoordinadorDeCamion elCoordinador= new CoordinadorDeCamion();
+     ResultSet respuesta=elCoordinador.EliminarCargas(id);
+     if(respuesta.next()){
+     if(respuesta.getString(1).equals("1")){
+     JOptionPane.showMessageDialog(null, "La carga ha sido eliminada exitosamente");
+     }else {
+     JOptionPane.showMessageDialog(null, "No tiene permisos para ejecutar esta accion");
+     }
+     }
+    }
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+         int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+      try {
+          EliminarCargas(IdCarga);
+          
+      } catch (SQLException ex) {
+          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }//GEN-LAST:event_EliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Editar_VisualizarCargas;
+    public static javax.swing.JMenuItem Eliminar;
     private javax.swing.JButton btActualizar_VisualizarCargas;
     private javax.swing.JComboBox<String> cmbxFiltrar_VisualizarCargas;
     private javax.swing.JMenuItem detalles_VisualizarCargas;
