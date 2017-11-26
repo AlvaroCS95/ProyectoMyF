@@ -56,8 +56,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenuBar1.add(Box.createHorizontalGlue());
         jMenuBar1.add(jMenu3);
         jMenuBar1.add(jMenu4);
-        UI.PuntoDeVenta p = new UI.PuntoDeVenta();
-        JTFacturacion.add("Facturacion", p);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,9 +63,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         JTInicio = new javax.swing.JTabbedPane();
         JTFacturacion = new javax.swing.JTabbedPane();
+        puntoDeVenta1 = new UI.PuntoDeVenta();
+        ingresoFacturaCompra1 = new UI.IngresoFacturaCompra();
         listarFacturasDeCompra1 = new UI.ListarFacturas();
         cuentasPorPagar1 = new UI.CuentasPorPagar();
-        ingresoFacturaCompra1 = new UI.IngresoFacturaCompra();
         JTInventario = new javax.swing.JTabbedPane();
         ingresarProductos2 = new UI.IngresarProductos();
         visualizarProductos1 = new UI.VisualizarProductos();
@@ -104,6 +103,28 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         JTFacturacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
+        puntoDeVenta1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                puntoDeVenta1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        JTFacturacion.addTab("Facturación", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carro.png")), puntoDeVenta1); // NOI18N
+
+        ingresoFacturaCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                ingresoFacturaCompra1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        JTFacturacion.addTab("Ingreso de facturas de compra", ingresoFacturaCompra1);
+
         listarFacturasDeCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -125,17 +146,6 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             }
         });
         JTFacturacion.addTab("Cuentas pendientes", cuentasPorPagar1);
-
-        ingresoFacturaCompra1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                ingresoFacturaCompra1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        JTFacturacion.addTab("Ingreso de facturas de compra", ingresoFacturaCompra1);
 
         JTInicio.addTab("Facturación", JTFacturacion);
 
@@ -457,6 +467,10 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_ingresarCarga1AncestorMoved
 
+    private void puntoDeVenta1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_puntoDeVenta1AncestorAdded
+        ListarTiposDePago();
+    }//GEN-LAST:event_puntoDeVenta1AncestorAdded
+
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
         return OpcionDelUsuario;
@@ -491,6 +505,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private UI.ListarFacturas listarFacturasDeCompra1;
     private UI.ListarProveedor listarProveedor1;
     private UI.ListarUsuarios listarUsuarios1;
+    private UI.PuntoDeVenta puntoDeVenta1;
     private UI.ResumenEstadistico resumenEstadistico1;
     private UI.VisualizarProductos visualizarProductos1;
     private UI.VisualizarYEditarDevoluciones visualizarYEditarDevoluciones1;

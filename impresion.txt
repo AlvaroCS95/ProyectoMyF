@@ -1,0 +1,35 @@
+
+	        Distribuidora MyF
+	  Aramed de Jesus Sequeira Vega
+		      Cedula: 5-256-190
+	   Tels: 83031359 / 88197499
+	  Email: aramedsequeira@yahoo.es
+			       Nicoya, Guanacaste
+--------------------------------
+
+ 				   Factura Credito Sin Abono
+
+N.Fac: 59
+Ced.Cli: 12
+Cli: poiuytrewq
+F.pago: Transacción bancaria
+N.Ref: 
+Plazo de días: 7
+Fecha de pago: 2017-12-02 20:33:01.0
+Hora-Fecha:20:29:32 25/11/2017
+----*---------------------*----
+Cod  Cant  Descr        Ttl
+7   1.0   Pechugaent 2260.0
+--------------------------------
+
+Total sin desc:2260.0
+Total con desc:2260.0
+Monto de descuento: 0
+Abono:500.0
+Monto pendiente: 2260.0
+
+
+Muchas gracias por preferirnos
+                                           
+                                           
+                                           
