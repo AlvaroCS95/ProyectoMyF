@@ -4,6 +4,7 @@ import LogicaDeNegocios.CoordinadorDeInventario;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 
@@ -14,7 +15,7 @@ public class IngresarProductos extends javax.swing.JPanel {
        //ListarUMES();
        //ListarClasificaciones();
     }
-
+    
     public static void ListarClasificaciones() {
         try {
             CoordinadorDeInventario elCoordinador = new CoordinadorDeInventario();
@@ -28,7 +29,7 @@ public class IngresarProductos extends javax.swing.JPanel {
             cmbxClasificacion_IngresarProductos.addItem("Seleccione...");
             cmbxClasificacion_IngresarProductos.setSelectedItem("Seleccione...");
             while (resultadoConsulta.next()) {
-                cmbxClasificacion_IngresarProductos.addItem(resultadoConsulta.getString(2));
+        cmbxClasificacion_IngresarProductos.addItem(resultadoConsulta.getString(2));
             }}
         } catch (SQLException ex) {
 
@@ -142,6 +143,9 @@ public class IngresarProductos extends javax.swing.JPanel {
             evt.consume();
 
         }
+        if (txtCodigo_IngresarInventario.getText().length()== 3)
+        {evt.consume();
+}
     }
 
     public void IngresarNuevoUME() {
@@ -217,7 +221,7 @@ public class IngresarProductos extends javax.swing.JPanel {
                 txtCodigo_IngresarInventarioKeyTyped(evt);
             }
         });
-        add(txtCodigo_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 160, 150, -1));
+        add(txtCodigo_IngresarInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 50, -1));
 
         txtNombre_IngresarInventario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombre_IngresarInventario.setForeground(new java.awt.Color(0, 102, 102));
@@ -310,7 +314,7 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         lbClasificacion_IngresarProductos.setFont(new java.awt.Font("Segoe Print", 1, 12)); // NOI18N
         lbClasificacion_IngresarProductos.setText("-");
-        add(lbClasificacion_IngresarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 20, 20));
+        add(lbClasificacion_IngresarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 20, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btIngClasificacion_IngresarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngClasificacion_IngresarProductosActionPerformed
@@ -345,6 +349,7 @@ public class IngresarProductos extends javax.swing.JPanel {
     private void cmbxClasificacion_IngresarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxClasificacion_IngresarProductosActionPerformed
        try{
            if(!cmbxClasificacion_IngresarProductos.getSelectedItem().equals("Seleccione...")){
+
         String clasificacion=(String)cmbxClasificacion_IngresarProductos.getSelectedItem();
         clasificacion=clasificacion.toUpperCase();
         char [] inicioDeCodigo= clasificacion.toCharArray();
@@ -357,7 +362,7 @@ public class IngresarProductos extends javax.swing.JPanel {
        
        }
     }//GEN-LAST:event_cmbxClasificacion_IngresarProductosActionPerformed
-
+    
     private void txtCodigo_IngresarInventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigo_IngresarInventarioKeyTyped
         ValidarSoloNumeros(evt);
     }//GEN-LAST:event_txtCodigo_IngresarInventarioKeyTyped
