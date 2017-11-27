@@ -190,6 +190,8 @@ public class IngresarAbono extends javax.swing.JDialog {
         txt_MontoPendiente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Abono de cuentas");
+        setPreferredSize(new java.awt.Dimension(640, 310));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
