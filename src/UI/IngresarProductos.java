@@ -144,7 +144,8 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         }
         if (txtCodigo_IngresarInventario.getText().length()== 3)
-        {evt.consume();
+        {    getToolkit().beep();
+            evt.consume();
 }
     }
 
