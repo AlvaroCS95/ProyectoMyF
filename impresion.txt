@@ -7,27 +7,19 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
- 				       Factura Contado
-
-N.Fac: 60
-Ced.Cli: 12
-Cli: poiuytrewq
-F.pago: Efectivo
-N.Ref: 0
-Hora-Fecha:21:54:27 25/11/2017
-----*---------------------*----
-Cod  Cant  Descr        Ttl
-6   1.0   Costillade 3390.0
---------------------------------
-
-Total sin desc:3390.0
-Total con desc:3390.0
-Monto de descuento: 0
-Paga con: 30000.0
-Su vuelto: 26610.0
+          FACTURA DE ABONO
+N.Fac de abono:0
+N.Fac a abonar:4379159836
+Proveedor:Progres
+Fec.Abn:19:15:28 26/11/2017
+T.Pago:Efectivo
+Monto de abono:54000
+Monto pendiente:0.0
 
 
--------------Fin-------------
-                                    
-                                    
-                                    
+
+______________________________
+			       Firma autorizada
+                                 
+                                 
+                                 
