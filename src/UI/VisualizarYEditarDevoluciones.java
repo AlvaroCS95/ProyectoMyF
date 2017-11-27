@@ -1,4 +1,3 @@
-
 package UI;
 
 import LogicaDeNegocios.IMPRIMIR;
@@ -7,8 +6,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
-    static String txt="";
 
+    static String txt = "";
+    
     BuscarFacturasDeVentaQueTieneDevoluciones ElBuscarFacturasDeVentaQueTieneDevoluciones = new BuscarFacturasDeVentaQueTieneDevoluciones();
     public static DefaultTableModel ModeloProductosReintegradosVisualizar = new DefaultTableModel() {
         @Override
@@ -28,12 +28,11 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
             return false;
         }
     };
-
+    
     public VisualizarYEditarDevoluciones() {
         initComponents();
     }
-
-   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -155,14 +154,6 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                 "Codigo Producto", "Nombre Producto", "Cantidad Desechada", "Detalle"
             }
         ));
-        TablaProductosDesechados_VisualizarDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaProductosDesechados_VisualizarDevolucionesMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaProductosDesechados_VisualizarDevolucionesMousePressed(evt);
-            }
-        });
         jScrollPane3.setViewportView(TablaProductosDesechados_VisualizarDevoluciones);
 
         TablaReintegro_Devoluciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -182,22 +173,6 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
             }
         });
         TablaReintegro_Devoluciones.getTableHeader().setReorderingAllowed(false);
-        TablaReintegro_Devoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaReintegro_DevolucionesMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaReintegro_DevolucionesMousePressed(evt);
-            }
-        });
-        TablaReintegro_Devoluciones.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TablaReintegro_DevolucionesKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TablaReintegro_DevolucionesKeyTyped(evt);
-            }
-        });
         jScrollPane2.setViewportView(TablaReintegro_Devoluciones);
 
         TablaDetalleFacturaDeVenta_VisualizarDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -208,11 +183,6 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                 "Codigo Producto", "Nombre Producto", "Cantidad Vendida"
             }
         ));
-        TablaDetalleFacturaDeVenta_VisualizarDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TablaDetalleFacturaDeVenta_VisualizarDevolucionesMousePressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(TablaDetalleFacturaDeVenta_VisualizarDevoluciones);
 
         jLabel8.setFont(new java.awt.Font("Lucida Fax", 3, 24)); // NOI18N
@@ -228,6 +198,9 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
         jLabel10.setText("Productos Desechados");
 
         Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/printer_78349.png"))); // NOI18N
+        Imprimir.setToolTipText("Imprime la devolución en pantalla");
+        Imprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Imprimir.setEnabled(false);
         Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ImprimirActionPerformed(evt);
@@ -372,115 +345,88 @@ public class VisualizarYEditarDevoluciones extends javax.swing.JPanel {
                 .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void imprimir(){
-
-                                       txt = "      FACTURA DE DEVOLUCION\n"
-                                    + "N.Fac:" + txtNFactura_VisualizarDevoluciones.getText()
-                                    + "\nCli:" + txtNombreLocal_VisualizarDevoluciones.getText()
-                                    + "\nUsuario::" + txtNombreUsuario_VisualizarDevoluciones.getText()
-                                    + "\nFecha V:" + txtFechaDeVenta_VisualizarDevoluciones.getText()
-                                    + "\nMonto de venta:" + txtMontoDeVenta_VisualizarDevoluciones.getText()
-                                    
-                                    + "\nFecha D: " + txtFechaDevolucion_VisualizarDevoluciones.getText();
-
-                            if (TablaProductosDesechados_VisualizarDevoluciones.getRowCount() != 0) {
-
-                                txt += "\n*Detalle\n\n"
-                                        + "      Productos desechados\n"
-                                        + "\nCod   Cant     Descr";
-                                for (int i = 0; i < TablaProductosDesechados_VisualizarDevoluciones.getRowCount(); i++) {
-                                    String codigo = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 0).toString();
-                                    String Descripcion = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 1).toString();
-                                    float Cantidad = Float.parseFloat(TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 2).toString());
-                                    String Detalle = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 3).toString();
-
-                                    String des = "";
-                                    if (Descripcion.length() >= 10) {
-
-                                        des = Descripcion.replaceAll(" ", "");
-                                        des = des.substring(0, 10);
-                                    } else {
-
-                                        des = String.format("%1$-10s", Descripcion);
-
-                                    }
-
-                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
-
-                                    txt += "\n*" + Detalle;
-                                }
-                                 
-                            }
-                            if (TablaReintegro_Devoluciones.getRowCount() != 0) {
-
-                                txt += "\n\n      Productos Reintegrados\n"
-                                        +"\nCod   Cant     Descr";
-                                for (int i = 0; i < TablaReintegro_Devoluciones.getRowCount(); i++) {
-                                    String codigo = TablaReintegro_Devoluciones.getValueAt(i, 0).toString();
-                                    String Descripcion = TablaReintegro_Devoluciones.getValueAt(i, 1).toString();
-                                    float Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(i, 2).toString());
-
-                                    String des = "";
-                                    if (Descripcion.length() >= 10) {
-
-                                        des = Descripcion.replaceAll(" ", "");
-                                        des = des.substring(0, 10);
-                                    } else {
-
-                                        des = String.format("%1$-10s", Descripcion);
-
-                                    }
-
-                                    txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
-
-                                }
-                            }
-                                   txt+= "\n\n------*---------------*---------"+
-                                    "\nTotal de devolucion:"+txtMontoDevolucion_VisualizarDevoluciones.getText()
-                                    +"\nTotal de  reintegro:"+txtMontoReintegrado_VisualizarDevoluciones.getText()
-                                    +"\nTotal de desecho:"+txtMontoDevolucion_VisualizarDevoluciones.getText()
-                                    + "\n\n------------Fin--------------";
-                            IMPRIMIR imprimir = new IMPRIMIR(txt, CantidadDeFilas(txt), txt.length());
-}
+public void imprimir() {
+        
+        txt = "      FACTURA DE DEVOLUCION\n"
+                + "N.Fac:" + txtNFactura_VisualizarDevoluciones.getText()
+                + "\nCli:" + txtNombreLocal_VisualizarDevoluciones.getText()
+                + "\nUsuario::" + txtNombreUsuario_VisualizarDevoluciones.getText()
+                + "\nFecha V:" + txtFechaDeVenta_VisualizarDevoluciones.getText()
+                + "\nMonto de venta:" + txtMontoDeVenta_VisualizarDevoluciones.getText()
+                + "\nFecha D: " + txtFechaDevolucion_VisualizarDevoluciones.getText();
+        
+        if (TablaProductosDesechados_VisualizarDevoluciones.getRowCount() != 0) {
+            
+            txt += "\n*Detalle\n\n"
+                    + "      Productos desechados\n"
+                    + "\nCod   Cant     Descr";
+            for (int i = 0; i < TablaProductosDesechados_VisualizarDevoluciones.getRowCount(); i++) {
+                String codigo = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 0).toString();
+                String Descripcion = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 1).toString();
+                float Cantidad = Float.parseFloat(TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 2).toString());
+                String Detalle = TablaProductosDesechados_VisualizarDevoluciones.getValueAt(i, 3).toString();
+                
+                String des = "";
+                if (Descripcion.length() >= 10) {
+                    
+                    des = Descripcion.replaceAll(" ", "");
+                    des = des.substring(0, 10);
+                } else {
+                    
+                    des = String.format("%1$-10s", Descripcion);
+                    
+                }
+                
+                txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+                
+                txt += "\n*" + Detalle;
+            }
+            
+        }
+        if (TablaReintegro_Devoluciones.getRowCount() != 0) {
+            
+            txt += "\n\n      Productos Reintegrados\n"
+                    + "\nCod   Cant     Descr";
+            for (int i = 0; i < TablaReintegro_Devoluciones.getRowCount(); i++) {
+                String codigo = TablaReintegro_Devoluciones.getValueAt(i, 0).toString();
+                String Descripcion = TablaReintegro_Devoluciones.getValueAt(i, 1).toString();
+                float Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(i, 2).toString());
+                
+                String des = "";
+                if (Descripcion.length() >= 10) {
+                    
+                    des = Descripcion.replaceAll(" ", "");
+                    des = des.substring(0, 10);
+                } else {
+                    
+                    des = String.format("%1$-10s", Descripcion);
+                    
+                }
+                
+                txt += "\n" + codigo + "    " + Cantidad + "      " + Descripcion;
+                
+            }
+        }
+        txt += "\n\n------*---------------*---------"
+                + "\nTotal de devolucion:" + txtMontoDevolucion_VisualizarDevoluciones.getText()
+                + "\nTotal de  reintegro:" + txtMontoReintegrado_VisualizarDevoluciones.getText()
+                + "\nTotal de desecho:" + txtMontoDevolucion_VisualizarDevoluciones.getText()
+                + "\n\n------------Fin--------------";
+        IMPRIMIR imprimir = new IMPRIMIR(txt, CantidadDeFilas(txt), txt.length());
+        Imprimir.setEnabled(false);
+    }
     private void btBuscarFacturaDeVentaConDevolucion_EditarDevolucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarFacturaDeVentaConDevolucion_EditarDevolucionesActionPerformed
-
+        
         if (ElBuscarFacturasDeVentaQueTieneDevoluciones.isVisible() == true) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ya tiene una ventana de buscar factura que tiene devolucion abierta.");
             ElBuscarFacturasDeVentaQueTieneDevoluciones.toFront();
         } else {
             ElBuscarFacturasDeVentaQueTieneDevoluciones.setVisible(true);
+            
         }
 
     }//GEN-LAST:event_btBuscarFacturaDeVentaConDevolucion_EditarDevolucionesActionPerformed
-
-    private void TablaProductosDesechados_VisualizarDevolucionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductosDesechados_VisualizarDevolucionesMouseClicked
-
-    }//GEN-LAST:event_TablaProductosDesechados_VisualizarDevolucionesMouseClicked
-
-    private void TablaProductosDesechados_VisualizarDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductosDesechados_VisualizarDevolucionesMousePressed
-
-    }//GEN-LAST:event_TablaProductosDesechados_VisualizarDevolucionesMousePressed
-
-    private void TablaReintegro_DevolucionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaReintegro_DevolucionesMouseClicked
-
-    }//GEN-LAST:event_TablaReintegro_DevolucionesMouseClicked
-
-    private void TablaReintegro_DevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaReintegro_DevolucionesMousePressed
-
-    }//GEN-LAST:event_TablaReintegro_DevolucionesMousePressed
-
-    private void TablaReintegro_DevolucionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaReintegro_DevolucionesKeyPressed
-
-    }//GEN-LAST:event_TablaReintegro_DevolucionesKeyPressed
-
-    private void TablaReintegro_DevolucionesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaReintegro_DevolucionesKeyTyped
-
-    }//GEN-LAST:event_TablaReintegro_DevolucionesKeyTyped
-
-    private void TablaDetalleFacturaDeVenta_VisualizarDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDetalleFacturaDeVenta_VisualizarDevolucionesMousePressed
-
-    }//GEN-LAST:event_TablaDetalleFacturaDeVenta_VisualizarDevolucionesMousePressed
 
     private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
         imprimir();

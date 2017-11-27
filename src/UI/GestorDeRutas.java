@@ -304,6 +304,7 @@ public class GestorDeRutas extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Eliminación exitosa");
 
                     VisualizarRutasActivas();
+                    modeloVerClientes.setRowCount(0);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en la eliminación");

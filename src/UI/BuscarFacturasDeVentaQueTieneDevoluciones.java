@@ -319,6 +319,7 @@ int FilaSeleccionada;
 
             //fin insertar tabla
             dispose();
+            UI.VisualizarYEditarDevoluciones.Imprimir.setEnabled(true);
         }
     }//GEN-LAST:event_btAceptar_BuscarFacturasDeVentasActionPerformed
 
