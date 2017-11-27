@@ -236,7 +236,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarAbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAbonosActionPerformed
-        int IdCuenta = Integer.parseInt(tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString());
+        String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
         float monto = Float.parseFloat(tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 3).toString());
         String cli= tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar,5).toString();
         IngresarAbono elAbono = new IngresarAbono(null, true, IdCuenta, monto,abono,cli);

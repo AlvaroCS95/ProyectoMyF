@@ -303,11 +303,11 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public void CalcularTotalAPagar() {
         float total = 0;
-        String ca = "";
+
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             total += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
         }
-        ca = formato.format(total);
+        String ca = formato.format(total);
         txt_TotalPuntoDeVenta.setText("" + ca.replaceAll(",", "."));
     }
 
@@ -429,7 +429,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             totalDescuento += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
         }
-        txtDescuento_PuntoDeVenta.setText("" + formato.format(totalDescuento));
+        String ca = formato.format(totalDescuento);
+        txtDescuento_PuntoDeVenta.setText(ca.replaceAll(",", "."));
     }
 
     public void AplicarDescuento() {
@@ -717,13 +718,26 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         return Fecha;
     }
 
+    public void RecalcularDescuento(Float descuento) {
+        float descuentoActual = Float.parseFloat(txtDescuento_PuntoDeVenta.getText());
+        descuentoActual = (descuentoActual - descuento);
+        String ca = formato.format(descuentoActual);
+        txtDescuento_PuntoDeVenta.setText(ca.replaceAll(",", "."));
+    }
+
+    public void QuitarProductoDeLaLista() {
+        float descuentoEncontrado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+        modelo.removeRow(fila);
+        RecalcularDescuento(descuentoEncontrado);
+        CalcularTotalAPagar();
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jppPuntoVenta = new javax.swing.JPopupMenu();
         jmIAgregarDescuento = new javax.swing.JMenuItem();
-        jppMontoPagoPuntoDeVenta = new javax.swing.JPopupMenu();
-        jmICompleto = new javax.swing.JMenuItem();
+        jmIQuitarDeLaLista = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -765,14 +779,15 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         });
         jppPuntoVenta.add(jmIAgregarDescuento);
 
-        jmICompleto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/efectivo.png"))); // NOI18N
-        jmICompleto.setText("Completo");
-        jmICompleto.addActionListener(new java.awt.event.ActionListener() {
+        jmIQuitarDeLaLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CancelIconn.png"))); // NOI18N
+        jmIQuitarDeLaLista.setText("Quitar de la lista");
+        jmIQuitarDeLaLista.setToolTipText("Quita el articluo seleccionado de la lista");
+        jmIQuitarDeLaLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmICompletoActionPerformed(evt);
+                jmIQuitarDeLaListaActionPerformed(evt);
             }
         });
-        jppMontoPagoPuntoDeVenta.add(jmICompleto);
+        jppPuntoVenta.add(jmIQuitarDeLaLista);
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -875,7 +890,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         txtMontoDePago_PuntoVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtMontoDePago_PuntoVenta.setToolTipText("Ingrese el monto con el cual va a cancelar esta venta.");
-        txtMontoDePago_PuntoVenta.setComponentPopupMenu(jppMontoPagoPuntoDeVenta);
         add(txtMontoDePago_PuntoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 380, 180, 30));
 
         FacturarVenta_PuntoDeVEnta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fullshopping.png"))); // NOI18N
@@ -1002,10 +1016,6 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TablaFacturacion_PuntoDeVentaMouseClicked
 
-    private void jmICompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmICompletoActionPerformed
-        txtMontoDePago_PuntoVenta.setText(txt_TotalPuntoDeVenta.getText());
-    }//GEN-LAST:event_jmICompletoActionPerformed
-
     private void cmbxTipoVenta_PuntoDeVentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbxTipoVenta_PuntoDeVentaItemStateChanged
         EstablecerTipoDeVenta();
     }//GEN-LAST:event_cmbxTipoVenta_PuntoDeVentaItemStateChanged
@@ -1040,6 +1050,10 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCAbonar_PuntoVentaActionPerformed
 
+    private void jmIQuitarDeLaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIQuitarDeLaListaActionPerformed
+        QuitarProductoDeLaLista();
+    }//GEN-LAST:event_jmIQuitarDeLaListaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FacturarVenta_PuntoDeVEnta;
@@ -1066,8 +1080,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem jmIAgregarDescuento;
-    private javax.swing.JMenuItem jmICompleto;
-    private javax.swing.JPopupMenu jppMontoPagoPuntoDeVenta;
+    private javax.swing.JMenuItem jmIQuitarDeLaLista;
     private javax.swing.JPopupMenu jppPuntoVenta;
     public static javax.swing.JTextField txtCantidadDeProducto_PuntoDeVenta;
     public static javax.swing.JTextField txtCodigo;
