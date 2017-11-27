@@ -20,23 +20,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIAgregarDescuentoActionPerformed"/>
           </Events>
         </MenuItem>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPopupMenu" name="jppMontoPagoPuntoDeVenta">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="jmICompleto">
+        <MenuItem class="javax.swing.JMenuItem" name="jmIQuitarDeLaLista">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/efectivo.png"/>
+              <Image iconType="3" name="/Imagenes/CancelIconn.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Completo"/>
+            <Property name="text" type="java.lang.String" value="Quitar de la lista"/>
+            <Property name="toolTipText" type="java.lang.String" value="Quita el articluo seleccionado de la lista"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmICompletoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmIQuitarDeLaListaActionPerformed"/>
           </Events>
         </MenuItem>
       </SubComponents>
@@ -332,7 +325,7 @@
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Ingrese el monto con el cual va a cancelar esta venta."/>
         <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jppMontoPagoPuntoDeVenta"/>
+          <ComponentRef name="default"/>
         </Property>
       </Properties>
       <AuxValues>

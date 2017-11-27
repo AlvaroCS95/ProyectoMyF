@@ -17,8 +17,8 @@ public class GestorDeAbonos extends Coneccion {
 
         consulta = conexion.createStatement();
         try {
-            resultadoConsulta = consulta.executeQuery("call NuevoAbono " + "(" + elAbono.getIdCuenta()
-                    + "," + elAbono.getMontoDeAbono() + ",'" + elAbono.getTipoDePago() + "');");
+            resultadoConsulta = consulta.executeQuery("call NuevoAbono " + "('"+elAbono.getIdCuenta()
+                    + "'," + elAbono.getMontoDeAbono() + ",'" + elAbono.getTipoDePago() + "');");
             return resultadoConsulta;
         } catch (Exception e) {
            

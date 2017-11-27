@@ -78,15 +78,14 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 246, 255));
 
         txtNombreUsario_IngresoAlSistema.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        txtNombreUsario_IngresoAlSistema.setText("root");
         txtNombreUsario_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su nombre de usuario");
 
         pswContraseña_IngresoAlSistema.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pswContraseña_IngresoAlSistema.setText("12345");
         pswContraseña_IngresoAlSistema.setToolTipText("Ingrese AQUÍ su contraseña");
         pswContraseña_IngresoAlSistema.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -166,20 +165,18 @@ public class IngresoAlSistema extends javax.swing.JFrame {
                                 .addComponent(lbContraseña_IngresoAlSistema)))
                         .addGap(18, 18, 18)
                         .addComponent(btIngresar_IngresoAlSistema)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
