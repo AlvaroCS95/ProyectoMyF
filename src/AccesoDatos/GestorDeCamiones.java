@@ -178,10 +178,11 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
         EstablecerConexion();
 
         try {
-            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?,?)}");
+            llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?,?,?)}");
             llamadaAlMetodo.setString(1, laCarga.getIdCamion());
             llamadaAlMetodo.setInt(2, laCarga.getUsuario());
             llamadaAlMetodo.setString(3,laCarga.getFechaEjecucion());
+            llamadaAlMetodo.setInt(4, laCarga.getIdRuta());
             llamadaAlMetodo.execute();
             llamadaAlMetodo.close();
             return true;

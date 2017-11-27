@@ -4,8 +4,11 @@ import java.awt.Dimension;
 import static UI.CuentasPorPagar.VisualizarCuentasPorPagar;
 import static UI.CuentasPorPagar.cbxMostar_Cuentas;
 import static UI.CuentasPorPagar.tbCuentasPorPagar;
+import static UI.GestorDeRutas.InicializarFiltroClientes;
+import static UI.GestorDeRutas.TablaDetallesRuta;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
 import static UI.IngresarCarga.TablaListarCamiones_Cargas;
+import static UI.IngresarCarga.VisualizarRutasParaCargas;
 import static UI.IngresarCarga.VisualizarTodosProductosCargas;
 import static UI.IngresarCarga.VisualizarUsuariosParaCargas;
 
@@ -441,6 +444,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
+        InicializarFiltroClientes(TablaDetallesRuta);
     }//GEN-LAST:event_gestorDeRutas1AncestorAdded
 
     private void visualizarProductos1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_visualizarProductos1AncestorAdded
@@ -461,6 +465,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         VisualizarTodosProductosCargas();
         VisualizarUsuariosParaCargas();// TODO add your handling code here:
+        try {
+            VisualizarRutasParaCargas();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ingresarCarga1AncestorAdded
 
     private void ingresarCarga1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ingresarCarga1AncestorMoved
