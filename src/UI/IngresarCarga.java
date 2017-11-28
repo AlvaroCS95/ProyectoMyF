@@ -297,7 +297,7 @@ public class IngresarCarga extends javax.swing.JPanel {
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 290, 260, 120));
     }// </editor-fold>//GEN-END:initComponents
-public void VisualizarCamion(JTable Listar) {
+public static void VisualizarCamion(JTable Listar) {
         try {
             DefaultTableModel modelo = new DefaultTableModel() {
 
@@ -375,7 +375,8 @@ public void VisualizarCamion(JTable Listar) {
         }
 
     }
-public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
+
+    public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
         try {
 
             DefaultTableModel modeloV = new DefaultTableModel() {
@@ -386,7 +387,6 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
             };
             modeloV.addColumn("N°Ruta");
             modeloV.addColumn("Nombre");
-           
 
             CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
             ResultSet resultadoConsulta = elCoordinador.ListarRutasActivas();
@@ -411,6 +411,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
 
         }
     }
+
     public static void VisualizarTodosProductosCargas() {
         try {
             modelo = new DefaultTableModel() {
@@ -499,7 +500,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
         trsFiltro.setRowFilter(RowFilter.regexFilter(busqueda, columnaABuscar));
     }
 
-    public void Limpiar() {
+    public static void Limpiar() {
         VisualizarCamion(TablaListarCamiones_Cargas);
 
         VisualizarTodosProductosCargas();
@@ -530,18 +531,18 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
     }
 
     public void IngresarCargas() {
-        if (TablaListarCamiones_Cargas.getSelectedRowCount() > 0 && TablaProductosCargados_IngresarCarga.getRowCount() > 0 
-                && TablaUsuarios_IngresarCarga.getSelectedRowCount() > 0&& Jdia.getDate()!=null
-                && TablaRutas_IngresarCarga.getSelectedRowCount()>0) {
-                fecha= new SimpleDateFormat("yyyy/MM/dd").format(Jdia.getDate());
+        if (TablaListarCamiones_Cargas.getSelectedRowCount() > 0 && TablaProductosCargados_IngresarCarga.getRowCount() > 0
+                && TablaUsuarios_IngresarCarga.getSelectedRowCount() > 0 && Jdia.getDate() != null
+                && TablaRutas_IngresarCarga.getSelectedRowCount() > 0) {
+            fecha = new SimpleDateFormat("yyyy/MM/dd").format(Jdia.getDate());
             try {
                 CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
 
                 String placa = TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(), 0).toString();
                 int usuario = Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
-                int Ruta=Integer.parseInt(TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0).toString());
-               
-                Carga laCarga = new Carga(placa, usuario, fecha,Ruta);
+                int Ruta = Integer.parseInt(TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0).toString());
+
+                Carga laCarga = new Carga(placa, usuario, fecha, Ruta);
                 String NombreUsuario = TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 1).toString();
                 ArrayList<DetalleCarga> laListaDetalle = new ArrayList();
 
@@ -581,13 +582,17 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
                 CuerpoDelTextoAImprimir += "\n\n\n-------------Fin-------------";
 
                 laCarga.setLaListaDeCarga(laListaDetalle);
-
-                if (elCoordinador.InsertarCarga(laCarga)) {
+                int respuest = elCoordinador.InsertarCarga(laCarga);
+                if (respuest == 1) {
                     JOptionPane.showMessageDialog(null, "¡Carga ingresada exitosamente!");
                     IMPRIMIR impresora = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
 
                     Limpiar();
                     VisualizaryEditarCargas.ListarCargas();
+                } else if (respuest == 2) {
+                    JOptionPane.showMessageDialog(null, "El usurio seleccionado ya posee una carga\n"
+                            + "asignada para el día " + fecha);
+                    
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(IngresarCarga.class.getName()).log(Level.SEVERE, null, ex);
@@ -600,7 +605,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
         }
     }
     private void btAceptar_IngresarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarCargaActionPerformed
-       
+
         IngresarCargas();
 
 
@@ -701,7 +706,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btEditar_IngresarCargaActionPerformed
-    public void Eliminar() {
+    public  void Eliminar() {
         boolean eliminado = false;
         if (TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0) {
 
@@ -737,9 +742,9 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
     }//GEN-LAST:event_TablaRutas_IngresarCargaMousePressed
 
     private void DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetallesActionPerformed
-        int id=(int) TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(),0);
-        String Nombre=TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(),1).toString();
-        DetallesDeRuta losDetalles= new  DetallesDeRuta(null,true, id,  Nombre);
+        int id = (int) TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0);
+        String Nombre = TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 1).toString();
+        DetallesDeRuta losDetalles = new DetallesDeRuta(null, true, id, Nombre);
         losDetalles.setVisible(true);
     }//GEN-LAST:event_DetallesActionPerformed
 

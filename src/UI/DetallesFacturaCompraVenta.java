@@ -1,9 +1,12 @@
 package UI;
 
+import LogicaDeNegocios.IMPRIMIR;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,31 +15,49 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
     static DefaultTableModel modelo;
     Object[] filas;
     int fila;
+    static String numeroFac;
     static boolean tipoDeFactura; // (true -> Compra) -- (false -> Venta)
+    static String txt="";
 
-    public DetallesFacturaCompraVenta(java.awt.Frame parent, boolean modal, String nFactura, boolean tipoFactura, String Nombre, String tipo, String fecha) {
+    public DetallesFacturaCompraVenta(java.awt.Frame parent, boolean modal, String nFactura,
+            boolean tipoFactura, String Nombre, String tipo, String fecha, String total) {
         super(parent, modal);
         initComponents();
-       
+
         setLocationRelativeTo(null);
         factura.setText(nFactura);
         nombrecliente.setText(Nombre);
         TipoPago.setText(tipo);
         Fecha.setText(fecha);
+        Total.setText(total);
+        this.numeroFac = nFactura;
         this.tipoDeFactura = tipoFactura;
+    }
+
+    public void imprimir() {
+
+    }
+
+    public static int CantidadDeFilas(String txt) {
+        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(txt);
+        int lines = 1;
+        while (m.find()) {
+            lines++;
+        }
+        return lines;
     }
 
     public static void EstablecerModelo() {
         modelo = new DefaultTableModel();
         if (tipoDeFactura) {
-             jlTituloDetalles.setText("Detalles de factura de compra a proveedores");
+            jlTituloDetalles.setText("Detalles de factura de compra a proveedores");
             Nom.setText("Proveedor");
             modelo.addColumn("Código");
             modelo.addColumn("Nombre");
             modelo.addColumn("Precio");
             modelo.addColumn("Cantidad");
         } else {
-              jlTituloDetalles.setText("Detalles de factura de compra a clientes");
+            jlTituloDetalles.setText("Detalles de factura de compra a clientes");
             Nom.setText("Cliente");
             modelo.addColumn("Código");
             modelo.addColumn("Nombre");
@@ -63,6 +84,54 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         jtDetallesFacturaCompra.setModel(modelo);
     }
 
+    public void Detalles() {
+        txt="";
+        String elCodigo = "";
+        String cantidad = "";
+        String precio = "";
+        String descr = "";
+        String descu = "";
+        ;
+        if (tipoDeFactura) {
+               txt += "\n-------FACTURA DE COMPRA-------"
+                    + "\n\nN.F:" + numeroFac
+                    + "\nFecha:" + Fecha.getText()
+                    + "\nN.Prove:" + nombrecliente.getText()
+                    + "\nT.Pago:" + TipoPago.getText()
+                    + "\n____________________________\n";
+            txt += "\nCod  Precio   Cant  Descr";
+            for (int i = 0; i < jtDetallesFacturaCompra.getRowCount(); i++) {
+                elCodigo = jtDetallesFacturaCompra.getValueAt(i, 0).toString();
+                descr = jtDetallesFacturaCompra.getValueAt(i, 1).toString();
+                precio = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
+                cantidad = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
+                txt += "\n" + elCodigo + "  " + precio + "   " + cantidad + "  " + descr;
+
+            }
+             txt += "\n______________________________\n"
+                    + "\nT.Pago:" + Total.getText();
+        } else {
+            txt += "\n-------FACTURA DE VENTA-------"
+                    + "\n\nN.F:" + numeroFac
+                    + "\nFecha:" + Fecha.getText()
+                    + "\nN.Cli:" + nombrecliente.getText()
+                    + "\nT.Pago:" + TipoPago.getText()
+                    + "\n______________________________\n";
+            txt += "\nCod  Precio  Descu   Cant  Descr";
+            for (int i = 0; i < jtDetallesFacturaCompra.getRowCount(); i++) {
+                elCodigo = jtDetallesFacturaCompra.getValueAt(i, 0).toString();
+                descr = jtDetallesFacturaCompra.getValueAt(i, 1).toString();
+                precio = jtDetallesFacturaCompra.getValueAt(i, 4).toString();
+                cantidad = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
+                descu = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
+                txt += "\n" + elCodigo + "  " + precio + "  " + descu + "   " + cantidad + "  " + descr;
+            }
+
+            txt += "\n______________________________\n"
+                    + "\nTotal a pagar :" + Total.getText();
+        }
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,6 +149,8 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         nombrecliente = new javax.swing.JLabel();
         TipoPago = new javax.swing.JLabel();
         Fecha = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Total = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -119,6 +190,11 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/printer_78349.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("N°Factura");
@@ -148,6 +224,13 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         Fecha.setForeground(new java.awt.Color(0, 153, 153));
         Fecha.setText("Fecha");
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel6.setText("Total");
+
+        Total.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        Total.setForeground(new java.awt.Color(0, 153, 153));
+        Total.setText("Total");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,13 +256,15 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(Nom)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Fecha)
                             .addComponent(TipoPago)
                             .addComponent(nombrecliente)
-                            .addComponent(factura))))
+                            .addComponent(factura)
+                            .addComponent(Total))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -203,7 +288,11 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(Fecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Total))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,16 +308,23 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbCerrarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Detalles();
+        IMPRIMIR imprimir=new IMPRIMIR(txt,CantidadDeFilas(txt),txt.length());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fecha;
     public static javax.swing.JLabel Nom;
     private javax.swing.JLabel TipoPago;
+    public static javax.swing.JLabel Total;
     private javax.swing.JLabel factura;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCerrar;
     public static javax.swing.JLabel jlTituloDetalles;

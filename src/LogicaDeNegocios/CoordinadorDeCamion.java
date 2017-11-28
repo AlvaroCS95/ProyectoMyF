@@ -17,10 +17,12 @@ public class CoordinadorDeCamion {
         return elGestorDeCamion.InsertarCamion(elCamion);
 
     }
-     public ResultSet EliminarCargas(int id) throws ClassNotFoundException, SQLException{
+
+    public ResultSet EliminarCargas(int id) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
         return elGestorDeCamion.EliminarCargas(id);
-                }
+    }
+
     public int ObtenerUltimoIdCarga() throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
         ResultSet r = elGestorDeCamion.ObtenerUltimaIdFacturaCarga();
@@ -33,17 +35,26 @@ public class CoordinadorDeCamion {
 
     }
 
-    public boolean InsertarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+    public int InsertarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
-        boolean insertóCarga = elGestorDeCamion.InsertarCarga(laCarga);
-        if (insertóCarga) {
-            if (!laCarga.getLaListaDeCarga().isEmpty()) {
-                for (DetalleCarga detalle : laCarga.getLaListaDeCarga()) {
-                    elGestorDeCamion.InsertarDetalleCarga(detalle);
+        ResultSet insertóCarga = elGestorDeCamion.InsertarCarga(laCarga);
+        if (insertóCarga.next()) {
+            if (insertóCarga.getString(1).equals("1")) {
+                if (!laCarga.getLaListaDeCarga().isEmpty()) {
+                    for (DetalleCarga detalle : laCarga.getLaListaDeCarga()) {
+                        elGestorDeCamion.InsertarDetalleCarga(detalle);
+                    }
                 }
+                return 1; // exitio
+            } else if (insertóCarga.getString(1).equals("3")) {
+                return 2;// usuario ya agregado
+
+            } else {
+                return 3;// error de llaves
             }
+
         }
-        return insertóCarga;
+        return 0;
     }
 
     public ResultSet EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {

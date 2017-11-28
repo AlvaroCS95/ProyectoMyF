@@ -220,13 +220,13 @@ public class CoordinadorDeFacturaCompra {
         return "0";// No trae nada
     }
 
-    public void ObtenerDetallesDeFactura(String idFactura,String nombre,String fecha,String tipo) {
+    public void ObtenerDetallesDeFactura(String idFactura,String nombre,String fecha,String tipo,String total) {
         GestorFacturaDeCompra gestor = new GestorFacturaDeCompra();
         resultado = gestor.ObtenerDetallesDeFactura(idFactura);
         try { 
             if (resultado.next()) {
                  DetallesFacturaCompraVenta detalles = 
-                         new DetallesFacturaCompraVenta(null, true, idFactura, true,nombre,tipo,fecha);
+                         new DetallesFacturaCompraVenta(null, true, idFactura, true,nombre,tipo,fecha,total);
                 resultado.previous();
                 detalles.LlenarListaDetalles(resultado);
                 detalles.setVisible(true);

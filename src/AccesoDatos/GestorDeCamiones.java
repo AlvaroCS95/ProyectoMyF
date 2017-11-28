@@ -17,38 +17,38 @@ public class GestorDeCamiones extends Coneccion {
 
     public GestorDeCamiones() {
     }
+
     public ResultSet InsertarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
-        ResultSet resultadoConsulta=null;
-        consulta= conexion.createStatement();
+        ResultSet resultadoConsulta = null;
+        consulta = conexion.createStatement();
         try {
-            resultadoConsulta= consulta.executeQuery("call IngresarCamion('"+elCamion.getNumeroDePlaca()+
-                    "','"+elCamion.getMarca()+"','"+elCamion.getEstilo()+"','"+elCamion.getColor()+
-                    "','"+elCamion.getFechaDeCompra()+"',"+elCamion.getCapacidad()+",'"+elCamion.getModelo()+"')");
+            resultadoConsulta = consulta.executeQuery("call IngresarCamion('" + elCamion.getNumeroDePlaca()
+                    + "','" + elCamion.getMarca() + "','" + elCamion.getEstilo() + "','" + elCamion.getColor()
+                    + "','" + elCamion.getFechaDeCompra() + "'," + elCamion.getCapacidad() + ",'" + elCamion.getModelo() + "')");
             return resultadoConsulta;
         } catch (Exception e) {
-             return resultadoConsulta;
+            return resultadoConsulta;
         }
 
-       
     }
 
     public ResultSet EditarCamion(Camion elCamion) throws ClassNotFoundException, SQLException {
-          EstablecerConexion();
+        EstablecerConexion();
         Statement consulta;
-        ResultSet resultadoConsulta=null;
-        consulta= conexion.createStatement();
+        ResultSet resultadoConsulta = null;
+        consulta = conexion.createStatement();
         try {
-            resultadoConsulta= consulta.executeQuery("call ActualizarCamion('"+elCamion.getNumeroDePlaca()+
-                    "','"+elCamion.getMarca()+"','"+elCamion.getEstilo()+"','"+elCamion.getColor()+
-                    "','"+elCamion.getFechaDeCompra()+"',"+elCamion.getCapacidad()+",'"+elCamion.getModelo()+"')");
+            resultadoConsulta = consulta.executeQuery("call ActualizarCamion('" + elCamion.getNumeroDePlaca()
+                    + "','" + elCamion.getMarca() + "','" + elCamion.getEstilo() + "','" + elCamion.getColor()
+                    + "','" + elCamion.getFechaDeCompra() + "'," + elCamion.getCapacidad() + ",'" + elCamion.getModelo() + "')");
             return resultadoConsulta;
         } catch (Exception e) {
-             return resultadoConsulta;
+            return resultadoConsulta;
         }
     }
-    
+
     public boolean EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
 
@@ -64,7 +64,8 @@ public class GestorDeCamiones extends Coneccion {
             return false;
         }
     }
-public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLException {
+
+    public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;
@@ -77,6 +78,7 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return resultadoConsulta;
         }
     }
+
     public ResultSet CambiarEstadoCamion(String Placa) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -104,9 +106,10 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return resultadoConsulta;
         }
     }
-      public ResultSet ObtenerUltimaIdFacturaCarga() throws ClassNotFoundException, SQLException {
-        
-         EstablecerConexion();
+
+    public ResultSet ObtenerUltimaIdFacturaCarga() throws ClassNotFoundException, SQLException {
+
+        EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;
 
@@ -117,8 +120,9 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
         } catch (SQLException ex) {
             return resultadoConsulta;
         }
-      }
- public ResultSet ListarCargas() throws ClassNotFoundException, SQLException {
+    }
+
+    public ResultSet ListarCargas() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;
@@ -131,7 +135,8 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return resultadoConsulta;
         }
     }
-  public ResultSet ListarDetalleDeCarga(int IdCarga) throws ClassNotFoundException, SQLException {
+
+    public ResultSet ListarDetalleDeCarga(int IdCarga) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement statement;
         ResultSet resultadoConsulta = null;
@@ -147,7 +152,7 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
         }
     }
 
- public ResultSet ListartodasLasPlacas() throws ClassNotFoundException, SQLException {
+    public ResultSet ListartodasLasPlacas() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
         ResultSet resultadoConsulta = null;
@@ -160,7 +165,7 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return resultadoConsulta;
         }
     }
- 
+
     public ResultSet ListarTodosLosCamiones() throws ClassNotFoundException, SQLException {
         EstablecerConexion();
         Statement consulta;
@@ -174,23 +179,25 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return resultadoConsulta;
         }
     }
-     public boolean InsertarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
-        EstablecerConexion();
 
+    public ResultSet InsertarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+        EstablecerConexion();
+        ResultSet resultado = null;
         try {
             llamadaAlMetodo = conexion.prepareCall("{Call NuevaCarga(?,?,?,?)}");
             llamadaAlMetodo.setString(1, laCarga.getIdCamion());
             llamadaAlMetodo.setInt(2, laCarga.getUsuario());
-            llamadaAlMetodo.setString(3,laCarga.getFechaEjecucion());
+            llamadaAlMetodo.setString(3, laCarga.getFechaEjecucion());
             llamadaAlMetodo.setInt(4, laCarga.getIdRuta());
             llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            resultado = llamadaAlMetodo.getResultSet();
+            return resultado;
         } catch (Exception e) {
-            return false;
+            return resultado;
         }
     }
-     public boolean InsertarDetalleCarga(DetalleCarga elDetalledeCarga) throws ClassNotFoundException, SQLException {
+
+    public boolean InsertarDetalleCarga(DetalleCarga elDetalledeCarga) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
 
         try {
@@ -204,7 +211,5 @@ public ResultSet EliminarCargas(int Placa) throws ClassNotFoundException, SQLExc
             return false;
         }
     }
-
-
 
 }

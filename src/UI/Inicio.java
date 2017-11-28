@@ -7,6 +7,8 @@ import static UI.CuentasPorPagar.tbCuentasPorPagar;
 import static UI.GestorDeRutas.InicializarFiltroClientes;
 import static UI.GestorDeRutas.TablaDetallesRuta;
 import static UI.GestorDeRutas.VisualizarRutasActivas;
+import static UI.IngresarCarga.Limpiar;
+
 import static UI.IngresarCarga.TablaListarCamiones_Cargas;
 import static UI.IngresarCarga.VisualizarRutasParaCargas;
 import static UI.IngresarCarga.VisualizarTodosProductosCargas;
@@ -465,6 +467,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         VisualizarTodosProductosCargas();
         VisualizarUsuariosParaCargas();// TODO add your handling code here:
+       Limpiar();
         try {
             VisualizarRutasParaCargas();
         } catch (ClassNotFoundException ex) {
