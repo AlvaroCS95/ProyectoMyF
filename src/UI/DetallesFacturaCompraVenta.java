@@ -99,17 +99,29 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                     + "\nN.Prove:" + nombrecliente.getText()
                     + "\nT.Pago:" + TipoPago.getText()
                     + "\n____________________________\n";
-            txt += "\nCod  Precio   Cant  Descr";
+            txt += "\nCod   Precio   Cant   Descr";
+            
             for (int i = 0; i < jtDetallesFacturaCompra.getRowCount(); i++) {
                 elCodigo = jtDetallesFacturaCompra.getValueAt(i, 0).toString();
                 descr = jtDetallesFacturaCompra.getValueAt(i, 1).toString();
                 precio = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
                 cantidad = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
-                txt += "\n" + elCodigo + "  " + precio + "   " + cantidad + "  " + descr;
+                elCodigo = String.format("%1$-4s", elCodigo);
+                
+                if (descr.length() >= 10) {
+
+                        descr = descr.replaceAll(" ", "");
+                        descr = descr.substring(0, 10);
+                    } else {
+
+                        descr = String.format("%1$-9s", descr);
+
+                    }
+                txt += "\n" + elCodigo + "  " + precio + "    " + cantidad + "   " + descr;
 
             }
              txt += "\n______________________________\n"
-                    + "\nT.Pago:" + Total.getText();
+                    + "\nTotal a pagar: "+ Total.getText();
         } else {
             txt += "\n-------FACTURA DE VENTA-------"
                     + "\n\nN.F:" + numeroFac
@@ -117,18 +129,28 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                     + "\nN.Cli:" + nombrecliente.getText()
                     + "\nT.Pago:" + TipoPago.getText()
                     + "\n______________________________\n";
-            txt += "\nCod  Precio  Descu   Cant  Descr";
+            txt += "\nCod  Precio  Descu  Cant  Descr";
             for (int i = 0; i < jtDetallesFacturaCompra.getRowCount(); i++) {
                 elCodigo = jtDetallesFacturaCompra.getValueAt(i, 0).toString();
                 descr = jtDetallesFacturaCompra.getValueAt(i, 1).toString();
                 precio = jtDetallesFacturaCompra.getValueAt(i, 4).toString();
                 cantidad = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
                 descu = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
-                txt += "\n" + elCodigo + "  " + precio + "  " + descu + "   " + cantidad + "  " + descr;
+                elCodigo = String.format("%1$-4s", elCodigo);
+                if (descr.length() >= 10) {
+
+                        descr = descr.replaceAll(" ", "");
+                        descr = descr.substring(0, 10);
+                    } else {
+
+                        descr = String.format("%1$-9s", descr);
+
+                    }
+                txt += "\n" + elCodigo + "  " + precio + "  " + descu + "    " + cantidad + "  " + descr;
             }
 
             txt += "\n______________________________\n"
-                    + "\nTotal a pagar :" + Total.getText();
+                    + "\nTotal a pagar: " + Total.getText();
         }
 
     }
