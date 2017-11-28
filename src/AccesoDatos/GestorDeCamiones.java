@@ -49,19 +49,19 @@ public class GestorDeCamiones extends Coneccion {
         }
     }
 
-    public boolean EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+    public ResultSet EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
         EstablecerConexion();
-
+        ResultSet respuesta=null;
         try {
             llamadaAlMetodo = conexion.prepareCall("{call ActualizarCarga(?,?,?)}");
             llamadaAlMetodo.setInt(1, laCarga.getIdCarga());
             llamadaAlMetodo.setString(2, laCarga.getIdCamion());
             llamadaAlMetodo.setInt(3, laCarga.getUsuario());
             llamadaAlMetodo.execute();
-            llamadaAlMetodo.close();
-            return true;
+            return  respuesta= llamadaAlMetodo.getResultSet();
+            
         } catch (Exception e) {
-            return false;
+            return respuesta;
         }
     }
 

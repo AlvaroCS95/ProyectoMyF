@@ -242,7 +242,7 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
         jLabel5.setText("Usuario responsable:");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel6.setText("Fecha de creación:");
+        jLabel6.setText("Fecha de ejecucion:");
 
         Carga.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         Carga.setForeground(new java.awt.Color(0, 102, 102));

@@ -556,7 +556,7 @@ public static void VisualizarCamion(JTable Listar) {
                         + "\nU.Responsable:" + NombreUsuario
                         + "\nCamion:" + placa
                         + "\n____________________________\n";
-                CuerpoDelTextoAImprimir += "Cod   Cant      Descr";
+                CuerpoDelTextoAImprimir += "Cod     Cant      Descr";
                 // JOptionPane.showMessageDialog(null, id);
                 for (int i = 0; i < filas; i++) {
                     String elCodigo = TablaProductosCargados_IngresarCarga.getValueAt(i, 0).toString();
@@ -566,6 +566,7 @@ public static void VisualizarCamion(JTable Listar) {
 
                     String Descripcion = TablaProductosCargados_IngresarCarga.getValueAt(i, 1).toString();
                     String des = "";
+                       elCodigo = String.format("%1$-4s", elCodigo);
                     if (Descripcion.length() >= 10) {
 
                         des = Descripcion.replaceAll(" ", "");

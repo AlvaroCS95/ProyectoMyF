@@ -335,6 +335,9 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         if (respuesta.next()) {
             if (respuesta.getString(1).equals("1")) {
                 JOptionPane.showMessageDialog(null, "La carga ha sido eliminada exitosamente");
+                 ListarCargas();
+            }else if(respuesta.getString(1).equals("3")){
+             JOptionPane.showMessageDialog(null, "La carga no se puede eliminar porque se encuentra en ruta");
             } else {
                 JOptionPane.showMessageDialog(null, "No tiene permisos para ejecutar esta accion");
             }

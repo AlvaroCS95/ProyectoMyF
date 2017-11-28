@@ -63,7 +63,7 @@ public class CoordinadorDeCamion {
 
     }
 
-    public boolean EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
+    public ResultSet EditarCarga(Carga laCarga) throws ClassNotFoundException, SQLException {
         GestorDeCamiones elGestorDeCamion = new GestorDeCamiones();
         return elGestorDeCamion.EditarCarga(laCarga);
 
