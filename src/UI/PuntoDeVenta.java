@@ -573,7 +573,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         totalVendido = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
         TotalVendido = totalVendido;
         idCliente = facturaVenta.ObtenerIdClientePorNumeroCedula(txtCodigo.getText());
-        idTipoPago = 1;
+        idTipoPago = 5;
         nuReferencia = txtNDeReferencia.getText();
         montoAbonado = 0;
         plazoDias = Integer.parseInt(jSDiasPlazo_PuntoDeVenta.getValue().toString());
@@ -605,7 +605,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String codigo;
         float cantidadVendida, descuentoAplicado, precioVendido;
         CoordinadorDeFacturaVenta facturaVenta = new CoordinadorDeFacturaVenta();
-        CuerpoDelTextoAImprimir += "Cod  Cant  Descr        Ttl";
+        CuerpoDelTextoAImprimir += "Cod. Cant. Descr.       Ttl.";
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             codigo = TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString();
             cantidadVendida = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 3).toString());
@@ -616,15 +616,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             if (Descripcion.length() >= 10) {
 
                 des = Descripcion.replaceAll(" ", "");
-                des = des.substring(0, 10);
-            } else {
-
                 des = String.format("%1$-10s", Descripcion);
-
+            } else {
+                des = String.format("%1$-10s", Descripcion);
             }
 
             facturaVenta.AgregarDetalleFacturaVentaContado(codigo, cantidadVendida, descuentoAplicado, precioVendido);
-            CuerpoDelTextoAImprimir += "\n" + codigo + "   " + cantidadVendida + "   " + des + " " + precioVendido;
+            CuerpoDelTextoAImprimir += "\n" + codigo + "  " + cantidadVendida + "  " + des + " " + precioVendido;
 
         }
 
