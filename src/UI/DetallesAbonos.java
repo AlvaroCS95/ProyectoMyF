@@ -21,11 +21,19 @@ public class DetallesAbonos extends javax.swing.JDialog {
     public DetallesAbonos(java.awt.Frame parent, boolean modal, String nFactura, boolean tipofactura) throws SQLException, ClassNotFoundException {
         super(parent, modal);
         initComponents();
-        jlTituloDetalles.setText("Detalles de abonos de factura  N° " + nFactura);
         setLocationRelativeTo(null);
         this.factura = nFactura;
         this.tipoDeFactura = tipofactura;
-        LlenarListaDetalles();
+        EstablecerTituloAbonos();
+
+    }
+
+    public void EstablecerTituloAbonos() {
+        if (LlenarListaDetalles()) {
+            jlTituloDetalles.setText("Abonos asociados a la factura  N° " + factura);
+        } else {
+            jlTituloDetalles.setText("NO EXISTEN abonos asociados a la factura N° " + factura);
+        }
     }
 
     public static void EstablecerModelo() {
@@ -37,27 +45,32 @@ public class DetallesAbonos extends javax.swing.JDialog {
 
     }
 
-    public void LlenarListaDetalles() throws SQLException, ClassNotFoundException {
+    public boolean LlenarListaDetalles() {
         EstablecerModelo();
         filas = new Object[modelo.getColumnCount()];
         CoordinadorDeAbonos elcoordinador = new CoordinadorDeAbonos();
-
-        listaDeAbonos = elcoordinador.ListarAbonos(factura, tipoDeFactura);
-
         try {
-            while (listaDeAbonos.next()) {
-                for (int i = 0; i < modelo.getColumnCount(); i++) {
-                    filas[i] = listaDeAbonos.getObject(i + 1);
+            listaDeAbonos = elcoordinador.ListarAbonos(factura, tipoDeFactura);
+            if (listaDeAbonos.next()) {
+                listaDeAbonos.beforeFirst();
+                while (listaDeAbonos.next()) {
+                    for (int i = 0; i < modelo.getColumnCount(); i++) {
+                        filas[i] = listaDeAbonos.getObject(i + 1);
+                    }
+                    modelo.addRow(filas);
                 }
-                modelo.addRow(filas);
+                tablaAbonos.setModel(modelo);
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ListarFacturas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "¡Esta cuenta no tiene abonos!", "¡Escoja otro registro!",
                     JOptionPane.WARNING_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DetallesAbonos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        tablaAbonos.setModel(modelo);
+        return false;
     }
 
 

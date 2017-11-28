@@ -98,23 +98,23 @@ public class IngresarClientes extends javax.swing.JDialog {
 
         txtSegundoNombre_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoNombre_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-        getContentPane().add(txtSegundoNombre_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 261, 163, -1));
+        getContentPane().add(txtSegundoNombre_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 261, 160, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Primer apellido");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
 
         txtPrimerApellido_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtPrimerApellido_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-        getContentPane().add(txtPrimerApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 170, -1));
+        getContentPane().add(txtPrimerApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 200, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Segundo apellido");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
 
         txtSegundoApellido_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtSegundoApellido_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-        getContentPane().add(txtSegundoApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 170, -1));
+        getContentPane().add(txtSegundoApellido_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, 200, -1));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel9.setText("Cédula");
@@ -122,7 +122,7 @@ public class IngresarClientes extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel10.setText("Dirección");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, -1, -1));
 
         cbxNivel_IngresarCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "A", "B", "C", "D", "E" }));
         cbxNivel_IngresarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +143,7 @@ public class IngresarClientes extends javax.swing.JDialog {
                 btAceptar_IngresarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btAceptar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
+        getContentPane().add(btAceptar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 520, -1, -1));
 
         btLimpiar_IngresarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_icon-icons.com_60872.png"))); // NOI18N
         btLimpiar_IngresarCliente.setToolTipText("Oprima para limpiar campos");
@@ -152,15 +152,15 @@ public class IngresarClientes extends javax.swing.JDialog {
                 btLimpiar_IngresarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btLimpiar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 510, 64, -1));
+        getContentPane().add(btLimpiar_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, 64, -1));
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel14.setText("Nombre local");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, -1, -1));
 
         txtNombreLocal_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNombreLocal_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
-        getContentPane().add(txtNombreLocal_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 170, -1));
+        getContentPane().add(txtNombreLocal_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 200, -1));
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel15.setText("Razón Social");
@@ -175,13 +175,14 @@ public class IngresarClientes extends javax.swing.JDialog {
         getContentPane().add(txtCedula_IngresarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 160, 28));
 
         txAreaDireccion_IngresarCliente.setColumns(20);
-        txAreaDireccion_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        txAreaDireccion_IngresarCliente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txAreaDireccion_IngresarCliente.setForeground(new java.awt.Color(0, 102, 102));
         txAreaDireccion_IngresarCliente.setLineWrap(true);
         txAreaDireccion_IngresarCliente.setRows(5);
         txAreaDireccion_IngresarCliente.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txAreaDireccion_IngresarCliente);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 210, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 200, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

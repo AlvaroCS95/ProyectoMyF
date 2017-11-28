@@ -324,9 +324,6 @@
           <Font name="Times New Roman" size="14" style="1"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Ingrese el monto con el cual va a cancelar esta venta."/>
-        <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

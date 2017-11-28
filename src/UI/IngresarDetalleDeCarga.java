@@ -18,8 +18,10 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
     String codigo;
     float existencias;
     String nombre;
-    public IngresarDetalleDeCarga(Producto producto) {
+    int opcionDeCarga;
+    public IngresarDetalleDeCarga(Producto producto,int opcion) {
         initComponents();
+        opcionDeCarga=opcion;
         codigo=producto.getCodigo();
         existencias=producto.getExistencias();
         nombre=producto.getNombre();
@@ -158,6 +160,10 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
     }
     private void txtCantidad_IngresarDetalleCargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidad_IngresarDetalleCargaKeyTyped
          ValidarSoloNumeros(evt);
+          char tecla = evt.getKeyChar();
+        if (tecla == KeyEvent.VK_ENTER) {
+            btAceptar_IngresarDetalleCarga.doClick();
+        }
     }//GEN-LAST:event_txtCantidad_IngresarDetalleCargaKeyTyped
 
     private void btAceptar_IngresarDetalleCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_IngresarDetalleCargaActionPerformed
@@ -166,7 +172,7 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
           float cantidad=Integer.parseInt(txtCantidad_IngresarDetalleCarga.getText());
         if(cantidad>0&&cantidad<=existencias){
         setVisible(false);
-        IngresarCarga.cargarProducto(cantidad,existencias,codigo,nombre);
+        IngresarCarga.cargarProducto(cantidad,existencias,codigo,nombre, opcionDeCarga);
         }}else{
       JOptionPane.showMessageDialog(null, "Recuerde que para agregar un producto a la carga del camión debe "
                                        + "\n  ingresar la cantidad del producto a cargar", "ERROR", JOptionPane.ERROR_MESSAGE);
