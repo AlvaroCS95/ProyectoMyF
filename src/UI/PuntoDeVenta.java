@@ -102,6 +102,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                         } else {
                             if (ValidarPagoNOEfectivo()) {// pago diferente de efectivo
                                 MontoCancelado = Float.parseFloat(txt_TotalPuntoDeVenta.getText());
+                                txtMontoDePago_PuntoVenta.setText(txt_TotalPuntoDeVenta.getText());
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
                                 CalcularVuelto(false);
@@ -937,6 +938,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         cmbxFormaDePago_PuntoDeVenta.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         cmbxFormaDePago_PuntoDeVenta.setToolTipText("Muestra las formas de pago admitidas.");
         cmbxFormaDePago_PuntoDeVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmbxFormaDePago_PuntoDeVenta.setEnabled(false);
         cmbxFormaDePago_PuntoDeVenta.setPreferredSize(new java.awt.Dimension(110, 23));
         cmbxFormaDePago_PuntoDeVenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
