@@ -65,7 +65,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         TablaListarCamiones_Cargas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<String>();
+        cmbxFiltrarProductos_IngresarCargas = new javax.swing.JComboBox<>();
         txtBuscar_VisualizarProductos = new javax.swing.JTextField();
         btnAgregar_IngresarCarga = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -111,7 +111,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btLimpiar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, 48, -1));
+        add(btLimpiar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 48, -1));
 
         btAceptar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Check_Icon_32.png"))); // NOI18N
         btAceptar_IngresarCarga.setToolTipText("Para ingresar una carga");
@@ -120,7 +120,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btAceptar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btAceptar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 540, 51, -1));
+        add(btAceptar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 540, 51, -1));
 
         btCancelar_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Delete_Icon_32.png"))); // NOI18N
         btCancelar_IngresarCarga.setToolTipText("Para salir de la ventana");
@@ -130,7 +130,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btCancelar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btCancelar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 47, -1));
+        add(btCancelar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 540, 47, -1));
 
         TablaListarCamiones_Cargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,7 +211,7 @@ public class IngresarCarga extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TablaProductosCargados_IngresarCarga);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 840, 140));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 840, 140));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("Productos agregados a carga:");
@@ -224,7 +224,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 btEditar_IngresarCargaActionPerformed(evt);
             }
         });
-        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 540, 50, 40));
+        add(btEditar_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 50, 40));
 
         EliminarProducto_IngresarCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cubo-de-basura.png"))); // NOI18N
         EliminarProducto_IngresarCarga.setToolTipText("Para llenar las tablas con los datos ");
@@ -233,7 +233,7 @@ public class IngresarCarga extends javax.swing.JPanel {
                 EliminarProducto_IngresarCargaActionPerformed(evt);
             }
         });
-        add(EliminarProducto_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 540, 48, -1));
+        add(EliminarProducto_IngresarCarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 48, -1));
 
         TablaUsuarios_IngresarCarga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -627,8 +627,8 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
         return estáEnLaTabla;
     }
 
-    public static void cargarProducto(float cantidad, float existencias, String codigo, String nombre) {
-
+    public static void cargarProducto(float cantidad, float existencias, String codigo, String nombre,int tipo) {
+          if(tipo==1){
         if (!estáEnLaTabla(codigo)) {
             existencias = existencias - cantidad;
 
@@ -642,7 +642,13 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
             TablaProductosCargados_IngresarCarga.setModel(modelo);
             int fila = DevolverPosicion(codigo);
             TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
-        } else {
+        } 
+        else{
+          JOptionPane.showMessageDialog(null, "             ¡¡Producto ingresado anteriormente!!  "
+                                            + "\n si desea cambiar la cantidad ingresada, edite cantidad del"
+                                            + "\n       producto en la tabla de productos cargados","ERROR",JOptionPane.ERROR_MESSAGE);
+        }                  
+          }else if(tipo==2){
             existencias = existencias - cantidad;
 
             TablaProductosCargados_IngresarCarga.setValueAt("" + existencias, fila, 2);
@@ -658,7 +664,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
             String codigo = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 0).toString();
             String nombre = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 1).toString();
             Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
-            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto,1);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregar_IngresarCargaActionPerformed
@@ -697,7 +703,7 @@ public static void VisualizarRutasParaCargas() throws ClassNotFoundException {
             float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
             existencias = existencias + cantidad;
             Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
-            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto,2);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btEditar_IngresarCargaActionPerformed
