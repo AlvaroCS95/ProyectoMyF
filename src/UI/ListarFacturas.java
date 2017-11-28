@@ -76,14 +76,15 @@ public class ListarFacturas extends javax.swing.JPanel {
                 break;
 
             case "Venta":
-                modelo.addColumn("N° Factura");
-                modelo.addColumn("Usuario encargado");
-                modelo.addColumn("Local del cliente");
-                modelo.addColumn("Fecha de venta");
-                modelo.addColumn("Monto de venta");
-                modelo.addColumn("Tipo de pago");
-                modelo.addColumn("Tipo de venta");
-                modelo.addColumn("Estado de la factura");
+                modelo.addColumn("N° factura");// 0
+                modelo.addColumn("Usuario encargado");//1
+                modelo.addColumn("Local del cliente");//2
+                modelo.addColumn("Fecha de venta");//3
+                modelo.addColumn("Monto de venta");//4
+                modelo.addColumn("Tipo de pago");//5
+                modelo.addColumn("Tipo de venta");//6
+                modelo.addColumn("Estado de la factura");//7
+                modelo.addColumn("N° factura de ruta");//8
                 break;
         }
 
@@ -142,6 +143,7 @@ public class ListarFacturas extends javax.swing.JPanel {
                 try {
                     while (listaDeFacturas.next()) {
                         for (int i = 0; i < modelo.getColumnCount(); i++) {
+//                            JOptionPane.showMessageDialog(null, "i "+i+"\nDato "+listaDeFacturas.getObject(i+1));
                             if (i == 6) {
                                 if (listaDeFacturas.getBoolean(i + 1) == true) {
                                     filas[i] = "Contado";
@@ -150,8 +152,15 @@ public class ListarFacturas extends javax.swing.JPanel {
                                 }
                             } else if (i == 7) {
                                 filas[i] = "";
-                            } else {
+                                filas[i + 1] = listaDeFacturas.getObject(i + 1);
+                            } else if (i < 8) {
                                 filas[i] = listaDeFacturas.getObject(i + 1);
+                            } else if (i == 8) {
+//                                if (listaDeFacturas.getString(i).equals("")) {
+//                                    filas[i] = "--";
+//                                } else {
+                                filas[i] = listaDeFacturas.getObject(i);
+//                                }
                             }
                         }
                         modelo.addRow(filas);
@@ -466,19 +475,19 @@ public class ListarFacturas extends javax.swing.JPanel {
         if (cbxMostrar_Facturas.getSelectedItem().equals("Venta")) {
             String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
             String Nombre = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 2).toString();
-            String Total=jt_ListarFacturasDeCompraVenta.getValueAt(fila, 4).toString();
+            String Total = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 4).toString();
             String Fecha = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 3).toString();
             String tipo = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 5).toString();
             CoordinadorDeFacturaVenta coordinador = new CoordinadorDeFacturaVenta();
-            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo,Total);
+            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo, Total);
         } else {
             String nFactura = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 0).toString();
             String Nombre = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 4).toString();;
-            String Total=jt_ListarFacturasDeCompraVenta.getValueAt(fila, 5).toString();
+            String Total = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 5).toString();
             String Fecha = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 2).toString();
             String tipo = jt_ListarFacturasDeCompraVenta.getValueAt(fila, 8).toString();
             CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo,Total);
+            coordinador.ObtenerDetallesDeFactura(nFactura, Nombre, Fecha, tipo, Total);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
