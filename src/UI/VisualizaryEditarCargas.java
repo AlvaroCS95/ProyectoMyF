@@ -31,14 +31,16 @@ import static UI.VisualizarProductos.cmbxFiltrar_VisualizarProductos;
  * @author usuario
  */
 public class VisualizaryEditarCargas extends javax.swing.JPanel {
-  private TableRowSorter trsFiltro;
-   static Object[] filas;
-   static DefaultTableModel modelo;
-   
+
+    private TableRowSorter trsFiltro;
+    static Object[] filas;
+    static DefaultTableModel modelo;
+
     public VisualizaryEditarCargas() {
         initComponents();
     }
-     public void filtroPalabraClave(String busqueda) {
+
+    public void filtroPalabraClave(String busqueda) {
         int columnaABuscar = 0;
         if (cmbxFiltrar_VisualizarCargas.getSelectedItem() == "Por Id") {
             columnaABuscar = 0;
@@ -49,12 +51,13 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         if (cmbxFiltrar_VisualizarCargas.getSelectedItem() == "Por Fecha") {
             columnaABuscar = 2;
         }
-      
+
         trsFiltro.setRowFilter(RowFilter.regexFilter(busqueda, columnaABuscar));
     }
- public void txtBuscar() {
 
-       txtBuscar_VisualizarCargas.addKeyListener(new KeyAdapter() {
+    public void txtBuscar() {
+
+        txtBuscar_VisualizarCargas.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 String cadena = (txtBuscar_VisualizarCargas.getText());
                 cadena = cadena.replace("a", "(a|á|A|Á)");
@@ -75,8 +78,9 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         trsFiltro = new TableRowSorter(tablaCargas_VisualizarCargas.getModel());
         tablaCargas_VisualizarCargas.setRowSorter(trsFiltro);
     }
-   public static void ListarCargas(){
-          try {
+
+    public static void ListarCargas() {
+        try {
             modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int fila, int columna) {
                     return false;
@@ -86,8 +90,9 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
             modelo.addColumn("Id de Carga");
             modelo.addColumn("Placa de Camión");
             modelo.addColumn("Fecha de Carga");
-             modelo.addColumn("Usuario responsable");
-         
+            modelo.addColumn("Usuario responsable");
+            modelo.addColumn("Estado de la carga");
+
             filas = new Object[modelo.getColumnCount()];
             CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
             ResultSet resultadoConsulta = null;
@@ -98,8 +103,17 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
                 while (resultadoConsulta.next()) {
                     for (int i = 0; i < modelo.getColumnCount(); i++) {
 
-                        filas[i] = resultadoConsulta.getObject(i + 1);
+                        if ((i + 1) == 5) {
+                        if (resultadoConsulta.getInt(i + 1) == 0) {
+                            filas[i] = "En MyF";
 
+                        } else {
+                            filas[i] = "En Ruta";
+                        }
+                    } else {
+                        filas[i] = resultadoConsulta.getObject(i + 1);
+                        
+                        }
                     }
                     modelo.addRow(filas);
 
@@ -111,8 +125,8 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
         } catch (ClassNotFoundException ex) {
 
         }
-   }
-      
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,49 +273,44 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscar_VisualizarCargasKeyTyped
 
     private void Editar_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_VisualizarCargasActionPerformed
-    String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
-    Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
-    int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
-    String usuario=tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
+        String PlacaDeCamion = tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
+        Date FechaCarga = ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
+        int IdCarga = Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+        String usuario = tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
 
         EditarCarga editarCarga;
-      try {
-          editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga,usuario);
-          editarCarga.setVisible(true);
-          ListarCargas();
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
-      }
-        
+        try {
+            editarCarga = new EditarCarga(PlacaDeCamion, FechaCarga, IdCarga, usuario);
+            editarCarga.setVisible(true);
+            ListarCargas();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_Editar_VisualizarCargasActionPerformed
 
-    
-    public static Date ParseFecha(String fecha)
-    {
+    public static Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = null;
         try {
             fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
+        } catch (ParseException ex) {
             System.out.println(ex);
         }
         return fechaDate;
     }
     private void btActualizar_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizar_VisualizarCargasActionPerformed
         ListarCargas();
-        
+
     }//GEN-LAST:event_btActualizar_VisualizarCargasActionPerformed
-int fila=0;
+    int fila = 0;
     private void tablaCargas_VisualizarCargasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasKeyPressed
-       
-        
-        
+
+
     }//GEN-LAST:event_tablaCargas_VisualizarCargasKeyPressed
 
     private void tablaCargas_VisualizarCargasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCargas_VisualizarCargasMouseClicked
-        
+
         if (evt.getButton() == MouseEvent.BUTTON1) {
             fila = tablaCargas_VisualizarCargas.getSelectedRow();
         } else if (evt.getButton() == MouseEvent.BUTTON3) {
@@ -310,37 +319,37 @@ int fila=0;
     }//GEN-LAST:event_tablaCargas_VisualizarCargasMouseClicked
 
     private void detalles_VisualizarCargasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detalles_VisualizarCargasActionPerformed
-    String PlacaDeCamion=tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
-    Date FechaCarga=ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
-    int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
-    String Usuario=tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
+        String PlacaDeCamion = tablaCargas_VisualizarCargas.getValueAt(fila, 1).toString();
+        Date FechaCarga = ParseFecha(tablaCargas_VisualizarCargas.getValueAt(fila, 2).toString());
+        int IdCarga = Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+        String Usuario = tablaCargas_VisualizarCargas.getValueAt(fila, 3).toString();
         VisualizarDetallesDeCarga visualizarDetalle;
-         
-         visualizarDetalle = new  VisualizarDetallesDeCarga(IdCarga,PlacaDeCamion,Usuario,FechaCarga);
-          visualizarDetalle.setVisible(true);
-   
+
+        visualizarDetalle = new VisualizarDetallesDeCarga(IdCarga, PlacaDeCamion, Usuario, FechaCarga);
+        visualizarDetalle.setVisible(true);
+
     }//GEN-LAST:event_detalles_VisualizarCargasActionPerformed
-    public void EliminarCargas(int id) throws SQLException, ClassNotFoundException{
-    CoordinadorDeCamion elCoordinador= new CoordinadorDeCamion();
-     ResultSet respuesta=elCoordinador.EliminarCargas(id);
-     if(respuesta.next()){
-     if(respuesta.getString(1).equals("1")){
-     JOptionPane.showMessageDialog(null, "La carga ha sido eliminada exitosamente");
-     }else {
-     JOptionPane.showMessageDialog(null, "No tiene permisos para ejecutar esta accion");
-     }
-     }
+    public void EliminarCargas(int id) throws SQLException, ClassNotFoundException {
+        CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
+        ResultSet respuesta = elCoordinador.EliminarCargas(id);
+        if (respuesta.next()) {
+            if (respuesta.getString(1).equals("1")) {
+                JOptionPane.showMessageDialog(null, "La carga ha sido eliminada exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No tiene permisos para ejecutar esta accion");
+            }
+        }
     }
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-         int IdCarga=Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
-      try {
-          EliminarCargas(IdCarga);
-          
-      } catch (SQLException ex) {
-          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
-      }
+        int IdCarga = Integer.parseInt(tablaCargas_VisualizarCargas.getValueAt(fila, 0).toString());
+        try {
+            EliminarCargas(IdCarga);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VisualizaryEditarCargas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_EliminarActionPerformed
 
 

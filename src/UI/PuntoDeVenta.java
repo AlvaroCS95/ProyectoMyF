@@ -557,7 +557,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 + "Cli: " + DevolverNombreLocalPorCedula(txtCodigo.getText()) + "\n"
                 + "F.pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
                 + "N.Ref: " + nuReferencia + "\n"
-                + "Plazo de días: " + plazoDias + "\n"
+                + "Plazo de dias: " + plazoDias + "\n"
                 + "Fecha de pago: " + DevolverFechaDePago(plazoDias) + "\n"
                 + "Hora-Fecha:" + hourdateFormat.format(date)
                 + "\n----*---------------------*----\n";
@@ -584,7 +584,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                 + "Cli: " + DevolverNombreLocalPorCedula(txtCodigo.getText()) + "\n"
                 + "F.pago: " + cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString() + "\n"
                 + "N.Ref: " + nuReferencia + "\n"
-                + "Plazo de días: " + plazoDias + "\n"
+                + "Plazo de dias: " + plazoDias + "\n"
                 + "Fecha de pago: " + DevolverFechaDePago(plazoDias) + "\n"
                 + "Hora-Fecha:" + hourdateFormat.format(date)
                 + "\n----*---------------------*----\n";
