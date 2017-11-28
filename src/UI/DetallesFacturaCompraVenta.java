@@ -57,7 +57,7 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
             modelo.addColumn("Precio");
             modelo.addColumn("Cantidad");
         } else {
-            jlTituloDetalles.setText("Detalles de factura de compra a clientes");
+            jlTituloDetalles.setText("Detalles de factura de venta a clientes");
             Nom.setText("Cliente");
             modelo.addColumn("Código");
             modelo.addColumn("Nombre");
@@ -176,6 +176,7 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(0, 102, 102));
 
         jlTituloDetalles.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jlTituloDetalles.setText("Informacion factura");
