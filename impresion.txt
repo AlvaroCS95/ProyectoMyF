@@ -7,28 +7,29 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
- 				       Factura Contado
+ 				   Factura Credito Sin Abono
 
-N.Fac: 103
-Ced.Cli: 1
-Cli: Los almendros
-F.pago: Cheque
-N.Ref: 98
-Hora-Fecha:22:47:30 27/11/2017
+N.Fac: 107
+Ced.Cli: 9
+Cli: t
+F.pago: Seleccione...
+N.Ref: 0
+Plazo de dias: 7
+Fecha de pago: 2017-12-04 23:13:52.0
+Hora-Fecha:23:13:18 27/11/2017
 ----*---------------------*----
-Cod  Cant  Descr        Ttl
-C001   2.0   Chuleta    2712.0
+Cod. Cant. Descr.       Ttl.
+M011  1.0  Camaron Limpio 2260.0
 --------------------------------
 
-Total sin desc:2712.0
-Total con desc:2712.0
+Total sin desc:2260.0
+Total con desc:2260.0
 Monto de descuento: 0
-Paga con: 2712.0
-Su vuelto: 0.0
-
+Abono:0.0
+Monto pendiente: 2260.0
 
 
 Muchas gracias por preferirnos
-                                          
-                                          
-                                          
+                                           
+                                           
+                                           
