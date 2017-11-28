@@ -27,7 +27,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     static Object[] filas;
     int FilaSeleccionadaParaEliminar;
     boolean SeleccionDeFila = false;
-   static boolean  abono=false;
+    static boolean abono = false;
 
     public CuentasPorPagar() {
         initComponents();
@@ -127,11 +127,11 @@ public class CuentasPorPagar extends javax.swing.JPanel {
         if (cbxMostar_Cuentas.getSelectedItem().equals("Cuentas por pagar a proveedores.")) {
             VisualizarCuentasPorPagar(tbCuentasPorPagar);
             Tutulo_Cuentas.setText("Mostrando cuentas por pagar a los proveedores");
-            abono=false;
+            abono = false;
         } else if (cbxMostar_Cuentas.getSelectedItem().equals("Cuentas por cobrar a clientes.")) {
             VisualizarCuentasPorCobrar(tbCuentasPorPagar);
             Tutulo_Cuentas.setText("Mostrando cuentas por cobrar a los clientes.");
-            abono=true;
+            abono = true;
         }
 
     }
@@ -236,11 +236,15 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AgregarAbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarAbonosActionPerformed
-        String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
-        float monto = Float.parseFloat(tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 3).toString());
-        String cli= tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar,5).toString();
-        IngresarAbono elAbono = new IngresarAbono(null, true, IdCuenta, monto,abono,cli);
-        elAbono.setVisible(true);
+        try {
+            String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            float monto = Float.parseFloat(tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 3).toString());
+            String cli = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
+            IngresarAbono elAbono = new IngresarAbono(null, true, IdCuenta, monto, abono, cli);
+            elAbono.setVisible(true);
+        }  catch (ArrayIndexOutOfBoundsException d) {
+            JOptionPane.showMessageDialog(null, "¡Debe seleccionar alguna factura!", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AgregarAbonosActionPerformed
 
     private void tbCuentasPorPagarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCuentasPorPagarMousePressed
@@ -257,16 +261,18 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxMostar_CuentasActionPerformed
 
     private void verAbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAbonosActionPerformed
-        String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
         DetallesAbonos eldetalle = null;
         try {
-            eldetalle = new DetallesAbonos(null, true, IdCuenta,abono);
+            String IdCuenta = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
+            eldetalle = new DetallesAbonos(null, true, IdCuenta, abono);
+            eldetalle.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CuentasPorPagar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(CuentasPorPagar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArrayIndexOutOfBoundsException d) {
+            JOptionPane.showMessageDialog(null, "¡Debe seleccionar alguna factura!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-        eldetalle.setVisible(true);
     }//GEN-LAST:event_verAbonosActionPerformed
 
 

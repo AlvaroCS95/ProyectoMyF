@@ -727,9 +727,11 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public void QuitarProductoDeLaLista() {
         float descuentoEncontrado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+        String codigo = TablaFacturacion_PuntoDeVenta.getValueAt(fila, 0).toString();
         modelo.removeRow(fila);
         RecalcularDescuento(descuentoEncontrado);
         CalcularTotalAPagar();
+        lista.remove(codigo);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
