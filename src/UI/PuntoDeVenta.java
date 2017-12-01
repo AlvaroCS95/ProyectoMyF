@@ -437,7 +437,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public void AplicarDescuento() {
         float cantidadDescuento = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el descuento que desea "
                 + "aplicar al producto " + ObtenerNombreProducto() + "."));
-        if (cantidadDescuento <= 100) {
+        if (cantidadDescuento <= 100 && cantidadDescuento > 0) {
             cantidadDescuento = (cantidadDescuento / 100);
 
             AgregarCodigoAListaDeDescuentos(fila);
@@ -461,7 +461,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(iv), fila, 6);
             ActualizarDescuentoFinal();
         } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 0 y 100.",
+            JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 1 y 100.",
                     "Error en el ingreso de los datos", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -747,6 +747,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         jppPuntoVenta = new javax.swing.JPopupMenu();
         jmIAgregarDescuento = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmIQuitarDeLaLista = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -788,6 +789,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             }
         });
         jppPuntoVenta.add(jmIAgregarDescuento);
+        jppPuntoVenta.add(jSeparator2);
 
         jmIQuitarDeLaLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CancelIconn.png"))); // NOI18N
         jmIQuitarDeLaLista.setText("Quitar de la lista");
@@ -1090,6 +1092,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public static javax.swing.JSpinner jSDiasPlazo_PuntoDeVenta;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem jmIAgregarDescuento;
     private javax.swing.JMenuItem jmIQuitarDeLaLista;
     private javax.swing.JPopupMenu jppPuntoVenta;
