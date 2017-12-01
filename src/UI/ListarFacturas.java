@@ -156,11 +156,7 @@ public class ListarFacturas extends javax.swing.JPanel {
                             } else if (i < 8) {
                                 filas[i] = listaDeFacturas.getObject(i + 1);
                             } else if (i == 8) {
-//                                if (listaDeFacturas.getString(i).equals("")) {
-//                                    filas[i] = "--";
-//                                } else {
                                 filas[i] = listaDeFacturas.getObject(i);
-//                                }
                             }
                         }
                         modelo.addRow(filas);

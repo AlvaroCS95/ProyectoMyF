@@ -36,7 +36,7 @@ public class EditarCarga extends javax.swing.JFrame {
         this.IdCarga = idCamion;
         this.usuario = usu;
         txtIdCarga_EditarCarga.setText("" + IdCarga);
-       
+
         ListarTodasLasPlacas();
         ListarTodasLosUsuarios();
         jComboPlacas_EditarCarga.setSelectedItem(PlacaDeCamion);
@@ -212,7 +212,7 @@ public class EditarCarga extends javax.swing.JFrame {
             while (resultadoConsulta.next()) {
                 if (resultadoConsulta.getString(2).equals(jComboUsuarios_EditarCarga.getSelectedItem().toString())) {
                     id = Integer.parseInt(resultadoConsulta.getString(1));
-                    
+
                     return id;
                 }
             }
@@ -220,31 +220,40 @@ public class EditarCarga extends javax.swing.JFrame {
         return id;
     }
     private void btAceptar_EditarCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptar_EditarCargaActionPerformed
-        try {                                                      
-            
+        try {
+
             Carga laCarga = new Carga();
             laCarga.setIdCamion(jComboPlacas_EditarCarga.getSelectedItem().toString());
             laCarga.setUsuario(ObtenerIdUsuario());
-            
+
             laCarga.setIdCarga(Integer.parseInt(txtIdCarga_EditarCarga.getText()));
             CoordinadorDeCamion elCoordinadorDeCamion = new CoordinadorDeCamion();
             try {
-                boolean Exito = elCoordinadorDeCamion.EditarCarga(laCarga);
-                if (Exito == false) {
-                    getToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "Se produjo un error a la hora de actualizar la carga");
+                ResultSet Exito = elCoordinadorDeCamion.EditarCarga(laCarga);
+                if (Exito.next()) {
+                    if (Exito.getString(1).equals("1")) {
+                        JOptionPane.showMessageDialog(null, "Se edito con exito la carga");
+                        VisualizaryEditarCargas.ListarCargas();
+                        dispose();
+                    } else if (Exito.getString(1).equals("3")) {
+                        getToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "La carga no se puede editar porque se encuentra en ruta");
+                        
+                        dispose();
+                    } else {
+                        getToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "Se produjo un error a la hora de actualizar la carga");
+
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Se edito con exito la carga");
-                    VisualizaryEditarCargas.ListarCargas();
-                    dispose();
                 }
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EditarCarga.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(EditarCarga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(EditarCarga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -254,11 +263,9 @@ public class EditarCarga extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAceptar_EditarCargaActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAceptar_EditarCarga;

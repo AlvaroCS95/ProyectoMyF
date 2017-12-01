@@ -77,7 +77,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                         }
                         break;
                     case 1: // venta a contado
-                        if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")) {// pago en efectivo
+                        if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equalsIgnoreCase("Efectivo")) {// pago en efectivo
                             if (ValidarPagoEfectivo()) {
                                 CrearFacturaDeVentaContado();
                                 AgregarDetalleAFactura();
@@ -96,7 +96,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                                 JOptionPane.showMessageDialog(null, "¡Debe ingresar un monto de pago que sea mayor o igual al total a pagar!",
                                         "¡Error!", JOptionPane.ERROR_MESSAGE);
                             }
-                        } else if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Seleccione...")) {
+                        } else if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equalsIgnoreCase("Seleccione...")) {
                             JOptionPane.showMessageDialog(null, "!Debe selecionar una forma de pago!",
                                     "¡Faltan datos requeridos!", JOptionPane.ERROR_MESSAGE);
                         } else {
@@ -164,8 +164,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public boolean ValidarPagoNOEfectivo() {
-        if (!cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")
-                && !cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Seleccione...")) {
+        if (!cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equalsIgnoreCase("Efectivo")
+                && !cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equalsIgnoreCase("Seleccione...")) {
             if (!txtNDeReferencia.getText().isEmpty()) {
                 return true;
             }
@@ -189,7 +189,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
     public boolean ExigirAbono() {
         String formaPago = cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString();
-        if (formaPago.equals("Efectivo")) {
+        if (formaPago.equalsIgnoreCase("Efectivo")) {
             if (!txtMontoDePago_PuntoVenta.getText().isEmpty()) {
                 return true;// exito
             } else {
@@ -197,7 +197,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return false;// error
             }
-        } else if (formaPago.equals("Seleccione...")) {
+        } else if (formaPago.equalsIgnoreCase("Seleccione...")) {
             JOptionPane.showMessageDialog(null, "¡Debe selecionar una forma de pago!",
                     "¡Advertencia!", JOptionPane.WARNING_MESSAGE);
             return false;// error
@@ -362,7 +362,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public boolean ConsultarSiYaTieneDescuento(String codigo) {
         boolean tieneDescuento = false;
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).equals(codigo)) {
+            if (lista.get(i).toString().equalsIgnoreCase(codigo)) {
                 tieneDescuento = true;
             }
         }
@@ -372,8 +372,8 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     public float ObtnerPrecioAcumulado(String codigo) {
         float precioAcumulado = 0;
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
-            if (TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString().equals(codigo)) {
-                precioAcumulado += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
+            if (TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString().equalsIgnoreCase(codigo)) {
+                precioAcumulado += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 5).toString());
             }
         }
         return precioAcumulado;
@@ -383,7 +383,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         float cantidadAcumulada;
         cantidadAcumulada = Float.parseFloat(txtCantidadDeProducto_PuntoDeVenta.getText());
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
-            if (TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString().equals(codigo)) {
+            if (TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString().equalsIgnoreCase(codigo)) {
                 cantidadAcumulada += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 3).toString());
             }
         }
@@ -412,7 +412,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         String codigoActual;
         for (int i = 0; i < cantidadFilas; i++) {
             codigoActual = TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString();
-            if (codigoActual.equals(codigoAEliminar)) {
+            if (codigoActual.equalsIgnoreCase(codigoAEliminar)) {
                 modelo.removeRow(i);
                 i--;
                 cantidadFilas--;
@@ -428,7 +428,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         float totalDescuento = 0;
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
-            totalDescuento += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
+            totalDescuento += Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 5).toString());
         }
         String ca = formato.format(totalDescuento);
         txtDescuento_PuntoDeVenta.setText(ca.replaceAll(",", "."));
@@ -442,14 +442,23 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
             AgregarCodigoAListaDeDescuentos(fila);
             float subtotal = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 7).toString());
-            float descuentoAcumulado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+            float iv = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+            subtotal = (subtotal - iv);
+            float descuentoAcumulado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 5).toString());
             float descuento = 0, nuevoTotal = 0;
 
             nuevoTotal = subtotal - (subtotal * cantidadDescuento);
             descuento = (subtotal * cantidadDescuento) + descuentoAcumulado;
+            String nuevoIV = "0";
+            if (iv != 0) {
+                nuevoIV = "" + (nuevoTotal * 0.13);
+                iv = Float.parseFloat(nuevoIV);
+            }
+            nuevoTotal = nuevoTotal + iv;
 
-            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(descuento), fila, 6);
+            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(descuento), fila, 5);
             TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(nuevoTotal), fila, 7);
+            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(iv), fila, 6);
             ActualizarDescuentoFinal();
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 0 y 100.",
@@ -626,7 +635,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
         }
 
-        if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equals("Efectivo")) {
+        if (cmbxFormaDePago_PuntoDeVenta.getSelectedItem().toString().equalsIgnoreCase("Efectivo")) {
             MontoCancelado = Float.parseFloat(txtMontoDePago_PuntoVenta.getText());
             Vuelto = TotalVendido - MontoCancelado;
             if (Vuelto < 0) {
@@ -725,7 +734,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public void QuitarProductoDeLaLista() {
-        float descuentoEncontrado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+        float descuentoEncontrado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 5).toString());
         String codigo = TablaFacturacion_PuntoDeVenta.getValueAt(fila, 0).toString();
         modelo.removeRow(fila);
         RecalcularDescuento(descuentoEncontrado);
@@ -816,7 +825,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código ", "Nombre del producto", "Precio", "Cantidad", "UME", "IV/U", "Descuento", "Sub total"
+                "Código ", "Nombre del producto", "Precio", "Cantidad", "UME", "Descuento", "IV/U", "Sub total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
