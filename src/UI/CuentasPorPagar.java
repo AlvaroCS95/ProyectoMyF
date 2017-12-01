@@ -9,12 +9,14 @@ import LogicaDeNegocios.CoordinadorDeCuentasPorCobrar;
 import LogicaDeNegocios.CoordinadorDeCuentasPorPagar;
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
 import static UI.PuntoDeVenta.listaParaMostrar;
+import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -242,7 +244,7 @@ public class CuentasPorPagar extends javax.swing.JPanel {
             String cli = tbCuentasPorPagar.getValueAt(FilaSeleccionadaParaEliminar, 5).toString();
             IngresarAbono elAbono = new IngresarAbono(null, true, IdCuenta, monto, abono, cli);
             elAbono.setVisible(true);
-        }  catch (ArrayIndexOutOfBoundsException d) {
+        } catch (ArrayIndexOutOfBoundsException d) {
             JOptionPane.showMessageDialog(null, "¡Debe seleccionar alguna factura!", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_AgregarAbonosActionPerformed
@@ -250,6 +252,10 @@ public class CuentasPorPagar extends javax.swing.JPanel {
     private void tbCuentasPorPagarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCuentasPorPagarMousePressed
         FilaSeleccionadaParaEliminar = tbCuentasPorPagar.getSelectedRow();
         SeleccionDeFila = true;
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Point p = evt.getPoint();
+            FilaSeleccionadaParaEliminar = tbCuentasPorPagar.rowAtPoint(p);
+        }
     }//GEN-LAST:event_tbCuentasPorPagarMousePressed
 
     private void cbxMostar_CuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMostar_CuentasActionPerformed

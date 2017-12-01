@@ -9,6 +9,7 @@ import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
 import static UI.GestorDeRutas.filas;
+import java.awt.Point;
 import java.text.SimpleDateFormat;
 
 import java.awt.event.KeyAdapter;
@@ -28,6 +29,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -42,7 +44,7 @@ public class IngresarCarga extends javax.swing.JPanel {
     static DefaultTableModel modelo;
     static String usuario, CuerpoDelTextoAImprimir;
     Carga laCarga;
-    static int fila;
+    static int fila, idRUta;
     static String fecha;
     public static Date date = new Date();
     public static DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -566,7 +568,7 @@ public static void VisualizarCamion(JTable Listar) {
 
                     String Descripcion = TablaProductosCargados_IngresarCarga.getValueAt(i, 1).toString();
                     String des = "";
-                       elCodigo = String.format("%1$-4s", elCodigo);
+                    elCodigo = String.format("%1$-4s", elCodigo);
                     if (Descripcion.length() >= 10) {
 
                         des = Descripcion.replaceAll(" ", "");
@@ -593,7 +595,7 @@ public static void VisualizarCamion(JTable Listar) {
                 } else if (respuest == 2) {
                     JOptionPane.showMessageDialog(null, "El usurio seleccionado ya posee una carga\n"
                             + "asignada para el día " + fecha);
-                    
+
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(IngresarCarga.class.getName()).log(Level.SEVERE, null, ex);
@@ -633,28 +635,27 @@ public static void VisualizarCamion(JTable Listar) {
         return estáEnLaTabla;
     }
 
-    public static void cargarProducto(float cantidad, float existencias, String codigo, String nombre,int tipo) {
-          if(tipo==1){
-        if (!estáEnLaTabla(codigo)) {
-            existencias = existencias - cantidad;
+    public static void cargarProducto(float cantidad, float existencias, String codigo, String nombre, int tipo) {
+        if (tipo == 1) {
+            if (!estáEnLaTabla(codigo)) {
+                existencias = existencias - cantidad;
 
-            modelo = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
-            filas = new Object[modelo.getColumnCount()];
-            filas[0] = codigo;
-            filas[1] = nombre;
-            filas[2] = existencias;
-            filas[3] = "" + cantidad;
-            modelo.addRow(filas);
-            TablaProductosCargados_IngresarCarga.setModel(modelo);
-            int fila = DevolverPosicion(codigo);
-            TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
-        } 
-        else{
-          JOptionPane.showMessageDialog(null, "             ¡¡Producto ingresado anteriormente!!  "
-                                            + "\n si desea cambiar la cantidad ingresada, edite cantidad del"
-                                            + "\n       producto en la tabla de productos cargados","ERROR",JOptionPane.ERROR_MESSAGE);
-        }                  
-          }else if(tipo==2){
+                modelo = (DefaultTableModel) TablaProductosCargados_IngresarCarga.getModel();
+                filas = new Object[modelo.getColumnCount()];
+                filas[0] = codigo;
+                filas[1] = nombre;
+                filas[2] = existencias;
+                filas[3] = "" + cantidad;
+                modelo.addRow(filas);
+                TablaProductosCargados_IngresarCarga.setModel(modelo);
+                int fila = DevolverPosicion(codigo);
+                TablaProductos1_IngresarCargas.setValueAt("" + existencias, fila, 3);
+            } else {
+                JOptionPane.showMessageDialog(null, "             ¡¡Producto ingresado anteriormente!!  "
+                        + "\n si desea cambiar la cantidad ingresada, edite cantidad del"
+                        + "\n       producto en la tabla de productos cargados", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (tipo == 2) {
             existencias = existencias - cantidad;
 
             TablaProductosCargados_IngresarCarga.setValueAt("" + existencias, fila, 2);
@@ -670,7 +671,7 @@ public static void VisualizarCamion(JTable Listar) {
             String codigo = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 0).toString();
             String nombre = TablaProductos1_IngresarCargas.getValueAt(TablaProductos1_IngresarCargas.getSelectedRow(), 1).toString();
             Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
-            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto,1);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto, 1);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregar_IngresarCargaActionPerformed
@@ -709,11 +710,11 @@ public static void VisualizarCamion(JTable Listar) {
             float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(TablaProductosCargados_IngresarCarga.getSelectedRow(), 3).toString());
             existencias = existencias + cantidad;
             Producto producto = new Producto(codigo, nombre, 0, existencias, 0, 0, false);
-            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto,2);
+            IngresarDetalleDeCarga detalleCarga = new IngresarDetalleDeCarga(producto, 2);
             detalleCarga.setVisible(true);
         }
     }//GEN-LAST:event_btEditar_IngresarCargaActionPerformed
-    public  void Eliminar() {
+    public void Eliminar() {
         boolean eliminado = false;
         if (TablaProductosCargados_IngresarCarga.getSelectedRowCount() > 0) {
 
@@ -745,12 +746,16 @@ public static void VisualizarCamion(JTable Listar) {
     }//GEN-LAST:event_JdiaAncestorAdded
 
     private void TablaRutas_IngresarCargaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRutas_IngresarCargaMousePressed
-        // TODO add your handling code here:
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Point p = evt.getPoint();
+             idRUta = TablaRutas_IngresarCarga.rowAtPoint(p);
+//            idRUta = TablaRutas_IngresarCarga.geti();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_TablaRutas_IngresarCargaMousePressed
 
     private void DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetallesActionPerformed
-        int id = (int) TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0);
-        String Nombre = TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 1).toString();
+        int id = (int) TablaRutas_IngresarCarga.getValueAt(idRUta, 0);
+        String Nombre = TablaRutas_IngresarCarga.getValueAt(idRUta, 1).toString();
         DetallesDeRuta losDetalles = new DetallesDeRuta(null, true, id, Nombre);
         losDetalles.setVisible(true);
     }//GEN-LAST:event_DetallesActionPerformed

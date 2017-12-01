@@ -596,6 +596,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JTIngresoDetalleFacturaCompraMouseClicked"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JTIngresoDetalleFacturaCompraMousePressed"/>
                   </Events>
                 </Component>
               </SubComponents>

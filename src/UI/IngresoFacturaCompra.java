@@ -13,10 +13,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Atxy2k.CustomTextField.RestrictedTextField;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingUtilities;
 
 public class IngresoFacturaCompra extends javax.swing.JPanel {
-    
+
     String tx_idFacturaCompra, tx_nPedido, tx_nEntrega, tx_fechaDeCompra, tx_nDeReferencia;
     int tx_idProveedor, tx_idTipoPago, plazoDias, fila;
     boolean tx_tipoDeCompra;
@@ -25,16 +27,16 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
     ResultSet resultadoConsulta;
     static DefaultTableModel modelo;
     static Object[] filas;
-    
+
     public IngresoFacturaCompra() {
         initComponents();
         RestrictedTextField restriccion = new RestrictedTextField(txtN_Referencia);
         restriccion.setLimit(10);
     }
-    
+
     public void IngresarFacturaCompra() {
         if (VerificarCamposVacios()) {
-            
+
             tx_idFacturaCompra = txtNumeroDeFactura_IngresarFacturaCompra.getText();
             tx_nPedido = txtN_Pedido.getText();
             tx_nEntrega = txtN_Entrega.getText();
@@ -49,34 +51,34 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             tx_montoTotal = Float.parseFloat(txtMontoDeCompra_IngresarFacturaCompra.getText());
             plazoDias = Integer.parseInt(txtPlazoDias_IngresarFacturaCompra.getText());
             montoCanclado = Float.parseFloat(txtMontoCancelado_IngresarFacturaCompra.getText());
-            
+
             FacturaDeCompra nuevaFactura = new FacturaDeCompra(tx_idFacturaCompra, tx_nPedido, tx_nEntrega,
                     tx_idProveedor, tx_idTipoPago, tx_nDeReferencia, tx_fechaDeCompra, tx_tipoDeCompra,
                     tx_montoTotal, montoCanclado, plazoDias);
-            
+
             CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-            
+
             boolean resultadoInsercion = coordinador.CrearFacturaCompra(nuevaFactura);
             if (resultadoInsercion) {
-                
+
                 JOptionPane.showMessageDialog(null, "¡Factura N° "
                         + tx_idFacturaCompra + " ha sido agregada exitosamente!");
                 EstablecerDatosDeFactura("# " + txtNumeroDeFactura_IngresarFacturaCompra.getText());
                 LimpiarCampos();
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "¡Error en ingreso, verifique los datos!");
             }
         }
     }
-    
+
     public void EstablecerDatosDeFactura(String factura) {
         jLDetalles.setText("Ingreso de los detalles de la factura  de compra "
                 + factura);
     }
-    
+
     public void LimpiarCampos() {
-        
+
         txtNumeroDeFactura_IngresarFacturaCompra.setText("");
         txtN_Pedido.setText("0");
         txtN_Entrega.setText("0");
@@ -88,66 +90,66 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         txtMontoDeCompra_IngresarFacturaCompra.setText("");
         txtMontoCancelado_IngresarFacturaCompra.setText("");
         txtPlazoDias_IngresarFacturaCompra.setText("");
-        
+
     }
-    
+
     public static void ListarProveedores() {
         listaParaMostrar.clear();
-        
+
         cbxProveedor_IngresarFacturaCompra.removeAllItems();
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
         listaParaMostrar = coordinador.ListarNombreDeProveedores();
-        
+
         cbxProveedor_IngresarFacturaCompra.addItem("Seleccione...");
         for (int i = 0; i < listaParaMostrar.size(); i++) {
-            
+
             cbxProveedor_IngresarFacturaCompra.addItem(listaParaMostrar.get(i));
         }
     }
-    
+
     public static void ListarTiposDePagoFC() {
         listaParaMostrar.clear();
-        
+
         cbxTipoPago_FacturaCompra.removeAllItems();
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
         listaParaMostrar = coordinador.ListarTiposDePago();
-        
+
         cbxTipoPago_FacturaCompra.addItem("Seleccione...");
         for (int i = 0; i < listaParaMostrar.size(); i++) {
-            
+
             cbxTipoPago_FacturaCompra.addItem(listaParaMostrar.get(i));
         }
     }
-    
+
     public int ObtenerIdTipoPagoSeleccionado() {
-        
+
         String tipoPagoSeleccionado = cbxTipoPago_FacturaCompra.getSelectedItem().toString();
-        
+
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-        
+
         return coordinador.ObtenerIdTipoPago(tipoPagoSeleccionado);
     }
-    
+
     public int ObtenerIdProveedorSeleccionado() {
-        
+
         String proveedorSeleccionado = cbxProveedor_IngresarFacturaCompra.getSelectedItem().toString();
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
-        
+
         return coordinador.ObtnerIdProveedor(proveedorSeleccionado);
     }
-    
+
     public String ObtenerFecha() {
-        
+
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         return String.valueOf(formatoDeFecha.format(jDCFecha_Compra.getDate()));
     }
-    
+
     public void EstablecerTipoCompra() {
-        
+
         switch (cbxTipoCompra_IngresarFacturaCompra.getSelectedItem().toString()) {
-            
+
             case "Contado":
-                
+
                 tx_tipoDeCompra = true;
                 txtPlazoDias_IngresarFacturaCompra.setEnabled(false);
                 txtMontoCancelado_IngresarFacturaCompra.setEnabled(false);
@@ -156,10 +158,10 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 txtN_Referencia.setEnabled(true);
                 txtN_Referencia.setText("0");
                 cbxTipoPago_FacturaCompra.setEnabled(true);
-                
+
                 break;
             case "Credito":
-                
+
                 tx_tipoDeCompra = false;
                 cbxTipoPago_FacturaCompra.setSelectedItem("Seleccione...");
                 cbxTipoPago_FacturaCompra.setEnabled(false);
@@ -169,37 +171,37 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 txtPlazoDias_IngresarFacturaCompra.setText("");
                 txtN_Referencia.setEnabled(false);
                 txtN_Referencia.setText("0");
-                
+
                 break;
         }
     }
-    
+
     public boolean VerificarCamposVacios() {
-        
+
         String mensaje = "";
-        
+
         if (txtNumeroDeFactura_IngresarFacturaCompra.getText().isEmpty()) {
-            
+
             mensaje += "¡Debe ingresar el numero de factura de compra!";
         } else if (cbxProveedor_IngresarFacturaCompra.getSelectedItem() == "Seleccione...") {
-            
+
             mensaje += "¡Debe selecionar un proveedor!";
         } else if (jDCFecha_Compra.getDate() == null) {
-            
+
             mensaje += "¡Debe selecionar una fecha de compra!";
         } else if (cbxTipoCompra_IngresarFacturaCompra.getSelectedItem() == "Seleccione...") {
-            
+
             mensaje += "¡Debe selecionar un tipo de compra!";
         } else if (cbxTipoPago_FacturaCompra.getSelectedItem() == "Seleccione..."
                 && !cbxTipoCompra_IngresarFacturaCompra.getSelectedItem().toString().equals("Credito")) {
-            
+
             mensaje += "¡Debe selecionar un tipo de pago!";
         } else if (txtMontoDeCompra_IngresarFacturaCompra.getText().isEmpty()) {
-            
+
             mensaje += "¡Debe ingresar el monto de la compra!";
         } else if (!cbxTipoPago_FacturaCompra.getSelectedItem().toString().equals("Efectivo")
                 && txtN_Referencia.getText().isEmpty()) {
-            
+
             mensaje += "¡Debe ingresar el numero de referencia!";
         } else if (((tx_tipoDeCompra == false) && (txtPlazoDias_IngresarFacturaCompra.getText().isEmpty()
                 || txtMontoCancelado_IngresarFacturaCompra.getText().isEmpty()))) {
@@ -215,21 +217,21 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
         return true;
     }
-    
+
     public void ValidacionSoloNumeros(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
-        
+
         if (c == KeyEvent.VK_ENTER) {
-            
+
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(this, "<html><h3><FONT FACE=\"times new roman\">"
                     + "No puede ingresar letras</FONT></h3></html>", "Error", 0);
         }
     }
-    
+
     public String VerificarSiExento() {
         if (jCheckExento.isSelected()) {
             return "Sí";
@@ -237,9 +239,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             return "No";
         }
     }
-    
+
     public void AgregarProductoComoDetalle() {
-        
+
         if (!txtCodigoDetalleFactura.getText().isEmpty() && !txtCantidadDetalleFactura.getText().isEmpty()
                 && !txtPrecioDeCompra.getText().isEmpty()) {
             try {
@@ -250,7 +252,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                 resultadoConsulta = coordinador.BuscarParaAgregarDetalle(codigo);
                 if (resultadoConsulta != null) {
                     modelo = (DefaultTableModel) JTIngresoDetalleFacturaCompra.getModel();
-                    
+
                     filas = new Object[6];
                     for (int i = 0; i < 3; i++) {
                         filas[i] = resultadoConsulta.getObject(i + 1);
@@ -265,7 +267,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                             + "\nPor favor, dirijase al apartado 'Inventario'."
                             + "\nLuego proceda a ingresarlo.", "¡Error de ingreso!", JOptionPane.ERROR_MESSAGE);
                 }
-                
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "¡Error, verifique que los datos sean correctos!");
             } catch (SQLException ex) {
@@ -277,9 +279,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                     + "<b><FONT FACE=\"times new roman\">Precio de compra</FONT></b> son requeridos!</html>",
                     "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
-    
+
     public boolean VerificarUltimoId() {
         String ultimoId;
         CoordinadorDeFacturaCompra coordinador = new CoordinadorDeFacturaCompra();
@@ -293,7 +295,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
         return false;
     }
-    
+
     public boolean VerificarTablaVacía() {
         int cantidadDeArticulos = JTIngresoDetalleFacturaCompra.getRowCount();
         if (cantidadDeArticulos < 1) {
@@ -303,7 +305,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
         }
         return true;
     }
-    
+
     public boolean ObtenerDatoSiExento(int fila) {
         String dato = JTIngresoDetalleFacturaCompra.getValueAt(fila, 5).toString();
         if (dato.equals("Sí")) {
@@ -312,7 +314,7 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             return false;
         }
     }
-    
+
     public void IngresarDetalles() {
         try {
             if (VerificarTablaVacía() && VerificarUltimoId()) {
@@ -345,19 +347,19 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
                     "¡Oh, algo anda mal!", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void LimpiarDetalles() {
         txtPrecioDeCompra.setText("");
         txtCantidadDetalleFactura.setText("");
         txtCodigoDetalleFactura.setText("");
         modelo.setRowCount(0);
     }
-    
+
     public void QuitarDeLaLista() {
         try {
             modelo.removeRow(fila);
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "¡Debe seleccionar un producto para poder eliminarlo!", 
+            JOptionPane.showMessageDialog(null, "¡Debe seleccionar un producto para poder eliminarlo!",
                     "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -613,6 +615,9 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JTIngresoDetalleFacturaCompraMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JTIngresoDetalleFacturaCompraMousePressed(evt);
+            }
         });
         jScrollPane2.setViewportView(JTIngresoDetalleFacturaCompra);
         if (JTIngresoDetalleFacturaCompra.getColumnModel().getColumnCount() > 0) {
@@ -730,6 +735,13 @@ public class IngresoFacturaCompra extends javax.swing.JPanel {
             fila = JTIngresoDetalleFacturaCompra.getSelectedRow();
         }
     }//GEN-LAST:event_JTIngresoDetalleFacturaCompraMouseClicked
+
+    private void JTIngresoDetalleFacturaCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTIngresoDetalleFacturaCompraMousePressed
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Point p = evt.getPoint();
+            fila = JTIngresoDetalleFacturaCompra.rowAtPoint(p);
+        }
+    }//GEN-LAST:event_JTIngresoDetalleFacturaCompraMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBBuscarParaAgregarDetalle;

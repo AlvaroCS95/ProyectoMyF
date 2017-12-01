@@ -7,6 +7,7 @@ import LogicaDeNegocios.CoordinarDeImpresion;
 import static LogicaDeNegocios.CoordinarDeImpresion.date;
 import static LogicaDeNegocios.CoordinarDeImpresion.hourdateFormat;
 import LogicaDeNegocios.IMPRIMIR;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.SwingUtilities;
 
 public class PuntoDeVenta extends javax.swing.JPanel {
 
@@ -435,34 +437,37 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     }
 
     public void AplicarDescuento() {
-        float cantidadDescuento = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el descuento que desea "
-                + "aplicar al producto " + ObtenerNombreProducto() + "."));
-        if (cantidadDescuento <= 100 && cantidadDescuento > 0) {
-            cantidadDescuento = (cantidadDescuento / 100);
+        try {
+            float cantidadDescuento = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el descuento que desea "
+                    + "aplicar al producto " + ObtenerNombreProducto() + "."));
+            if (cantidadDescuento <= 100 && cantidadDescuento > 0) {
+                cantidadDescuento = (cantidadDescuento / 100);
 
-            AgregarCodigoAListaDeDescuentos(fila);
-            float subtotal = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 7).toString());
-            float iv = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
-            subtotal = (subtotal - iv);
-            float descuentoAcumulado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 5).toString());
-            float descuento = 0, nuevoTotal = 0;
+                AgregarCodigoAListaDeDescuentos(fila);
+                float subtotal = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 7).toString());
+                float iv = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 6).toString());
+                subtotal = (subtotal - iv);
+                float descuentoAcumulado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(fila, 5).toString());
+                float descuento = 0, nuevoTotal = 0;
 
-            nuevoTotal = subtotal - (subtotal * cantidadDescuento);
-            descuento = (subtotal * cantidadDescuento) + descuentoAcumulado;
-            String nuevoIV = "0";
-            if (iv != 0) {
-                nuevoIV = "" + (nuevoTotal * 0.13);
-                iv = Float.parseFloat(nuevoIV);
+                nuevoTotal = subtotal - (subtotal * cantidadDescuento);
+                descuento = (subtotal * cantidadDescuento) + descuentoAcumulado;
+                String nuevoIV = "0";
+                if (iv != 0) {
+                    nuevoIV = "" + (nuevoTotal * 0.13);
+                    iv = Float.parseFloat(nuevoIV);
+                }
+                nuevoTotal = nuevoTotal + iv;
+
+                TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(descuento), fila, 5);
+                TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(nuevoTotal), fila, 7);
+                TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(iv), fila, 6);
+                ActualizarDescuentoFinal();
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 1 y 100.",
+                        "Error en el ingreso de los datos", JOptionPane.ERROR_MESSAGE);
             }
-            nuevoTotal = nuevoTotal + iv;
-
-            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(descuento), fila, 5);
-            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(nuevoTotal), fila, 7);
-            TablaFacturacion_PuntoDeVenta.setValueAt(formato.format(iv), fila, 6);
-            ActualizarDescuentoFinal();
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un porcentaje de descuento que este entre 1 y 100.",
-                    "Error en el ingreso de los datos", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException e) {
         }
     }
 
@@ -844,6 +849,9 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaFacturacion_PuntoDeVentaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TablaFacturacion_PuntoDeVentaMousePressed(evt);
+            }
         });
         jScrollPane3.setViewportView(TablaFacturacion_PuntoDeVenta);
         if (TablaFacturacion_PuntoDeVenta.getColumnModel().getColumnCount() > 0) {
@@ -1066,6 +1074,13 @@ public class PuntoDeVenta extends javax.swing.JPanel {
     private void jmIQuitarDeLaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmIQuitarDeLaListaActionPerformed
         QuitarProductoDeLaLista();
     }//GEN-LAST:event_jmIQuitarDeLaListaActionPerformed
+
+    private void TablaFacturacion_PuntoDeVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaFacturacion_PuntoDeVentaMousePressed
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Point p = evt.getPoint();
+            fila = TablaFacturacion_PuntoDeVenta.rowAtPoint(p);
+        }
+    }//GEN-LAST:event_TablaFacturacion_PuntoDeVentaMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

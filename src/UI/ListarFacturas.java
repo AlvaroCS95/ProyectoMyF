@@ -4,6 +4,7 @@ import LogicaDeNegocios.CoordinadorDeFacturaCompra;
 import LogicaDeNegocios.CoordinadorDeFacturaVenta;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class ListarFacturas extends javax.swing.JPanel {
@@ -536,6 +538,9 @@ public class ListarFacturas extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jt_ListarFacturasDeCompraVentaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jt_ListarFacturasDeCompraVentaMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(jt_ListarFacturasDeCompraVenta);
 
@@ -664,6 +669,13 @@ public class ListarFacturas extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         SeleccionFormaDeBusqueda();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jt_ListarFacturasDeCompraVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ListarFacturasDeCompraVentaMousePressed
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Point p = evt.getPoint();
+            fila = jt_ListarFacturasDeCompraVenta.rowAtPoint(p);
+        }
+    }//GEN-LAST:event_jt_ListarFacturasDeCompraVentaMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
