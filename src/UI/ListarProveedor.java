@@ -75,8 +75,8 @@ public class ListarProveedor extends javax.swing.JPanel {
         } else {
             String CedulaDelClienteSeleccionadoAEliminar = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 0).toString();
             String NombreClienteSeleccionadoAEliminar = TablaListarProveedores_ListarProveedores.getValueAt(FilaSeleccionadaParaEliminar, 1).toString();
-            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el cliente: " + NombreClienteSeleccionadoAEliminar
-                    + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar cliente");
+            int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea eliminar el proveedor: " + NombreClienteSeleccionadoAEliminar
+                    + " \ncon la cedula número: " + CedulaDelClienteSeleccionadoAEliminar + "?", "Eliminar proveedor");
             if (OpcionDelUsuario == JOptionPane.YES_OPTION) {
 
                 CoordinadorDeProveedores elCoordinadorDeProveedores = new CoordinadorDeProveedores();

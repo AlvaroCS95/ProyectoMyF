@@ -616,7 +616,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             if (Descripcion.length() >= 10) {
 
                 des = Descripcion.replaceAll(" ", "");
-                des = String.format("%1$-10s", Descripcion);
+                des = String.format("%1$-10s", des);
             } else {
                 des = String.format("%1$-10s", Descripcion);
             }
