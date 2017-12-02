@@ -724,7 +724,7 @@ public void imprimir(int UsuarioActivo, float reintegro){
 
         if (SeleccionDetalleFactura == false) {
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Primero seleccione el producto que quiera agregar a desechados");
+            JOptionPane.showMessageDialog(null, "Primero seleccione el producto que quiera agregar a reintegro");
 
         } else {
             CodigoDelProducto = TablaDetalleFacturaDeVenta_Devoluciones.getValueAt(FilaSeleccionadaDetalleFactura, 0).toString();

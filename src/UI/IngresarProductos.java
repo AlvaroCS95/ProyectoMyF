@@ -339,7 +339,6 @@ public class IngresarProductos extends javax.swing.JPanel {
         if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
-
         }
     }//GEN-LAST:event_txtPrecio_IngresarInventarioKeyTyped
 
