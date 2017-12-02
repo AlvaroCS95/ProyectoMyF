@@ -1,0 +1,28 @@
+
+	        Distribuidora MyF
+	  Aramed de Jesus Sequeira Vega
+		      Cedula: 5-256-190
+	   Tels: 83031359 / 88197499
+	  Email: aramedsequeira@yahoo.es
+			       Nicoya, Guanacaste
+--------------------------------
+
+ 
+-----INFORMACION DE CARGA-----
+
+N.Carga:25
+F.Creacion:01/12/2017
+U.Responsable:Alvaro
+Camion:5285
+____________________________
+Cod     Cant      Descr
+C001     30.0      Chuleta   
+C002     30.0      Bistek    
+C003     30.0      PechugaDes
+C004     30.0      PechugaEnt
+
+
+-------------Fin-------------
+                                    
+                                    
+                                    

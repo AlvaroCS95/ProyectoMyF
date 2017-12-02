@@ -139,7 +139,6 @@ public class IngresarProductos extends javax.swing.JPanel {
 
         if (!Character.isDigit(c)) {
             getToolkit().beep();
-
             evt.consume();
 
         }
@@ -336,7 +335,12 @@ public class IngresarProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_btActualizar_IngresarProductosActionPerformed
 
     private void txtPrecio_IngresarInventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecio_IngresarInventarioKeyTyped
-        ValidarSoloNumeros(evt);
+         char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+
+        }
     }//GEN-LAST:event_txtPrecio_IngresarInventarioKeyTyped
 
     private void btIngUME_IngresarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngUME_IngresarProductosActionPerformed
