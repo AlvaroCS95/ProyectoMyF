@@ -1,0 +1,39 @@
+
+	        Distribuidora MyF
+	  Aramed de Jesus Sequeira Vega
+		      Cedula: 5-256-190
+	   Tels: 83031359 / 88197499
+	  Email: aramedsequeira@yahoo.es
+			       Nicoya, Guanacaste
+--------------------------------
+
+       FACTURA DE DEVOLUCION
+N.Fac:100
+Cli:Los almendros
+Usuario Fac:master
+Fecha V:2017-11-27 18:16:54.0
+Monto de venta:27120.0
+Usuarios dev:4
+Fecha D: 22:07:48 01/12/2017
+*Detalle
+
+      Productos desechados
+
+Cod   Cant     Descr
+C004    10.0      Pechuga Ente
+*jskahdkjasd
+
+      Productos Reintegrados
+
+Cod   Cant     Descr
+C004    10.0      Pechuga Ente
+
+------*---------------*---------
+Total de devolucion:678.0
+Total de  reintegro:678.0
+Total de desecho:678.0
+
+------------Fin--------------
+                                               
+                                               
+                                               

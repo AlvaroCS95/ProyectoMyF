@@ -27,7 +27,8 @@ public class BuscarFacturasDeVenta extends javax.swing.JFrame {
     boolean seleccion = false;
 
     public BuscarFacturasDeVenta() {
-        initComponents();
+          initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

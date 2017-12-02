@@ -32,6 +32,7 @@ public class DetalleProductoDesechado extends javax.swing.JFrame {
 
     public DetalleProductoDesechado(String NumeroFactura,String CodigoProducto,String NombreProducto,float CantidadVendida,float CantidadMaximaParaVender) {
        initComponents();
+       setLocationRelativeTo(null);
         this.NumeroFactura=NumeroFactura;
         this.CodigoProducto=CodigoProducto;
         this.NombreProducto=NombreProducto;
