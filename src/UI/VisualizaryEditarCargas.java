@@ -92,6 +92,7 @@ public class VisualizaryEditarCargas extends javax.swing.JPanel {
             modelo.addColumn("Fecha de Carga");
             modelo.addColumn("Usuario responsable");
             modelo.addColumn("Estado de la carga");
+            modelo.addColumn("Ruta asignada");
 
             filas = new Object[modelo.getColumnCount()];
             CoordinadorDeCamion elCoordinador = new CoordinadorDeCamion();
