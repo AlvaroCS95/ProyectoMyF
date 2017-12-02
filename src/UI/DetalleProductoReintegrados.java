@@ -32,6 +32,7 @@ public class DetalleProductoReintegrados extends javax.swing.JFrame {
     
     public DetalleProductoReintegrados(String NumeroFactura,String CodigoProducto,String NombreProducto,float CantidadVendida,float CantidadMaximaParaReintegrar) {
        initComponents();
+        setLocationRelativeTo(null);
         this.NumeroFactura=NumeroFactura;
         this.CodigoProducto=CodigoProducto;
         this.NombreProducto=NombreProducto;

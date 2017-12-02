@@ -22,6 +22,7 @@ public class IngresarDetalleDeCarga extends javax.swing.JFrame {
     public IngresarDetalleDeCarga(Producto producto,int opcion) {
         initComponents();
         setPreferredSize(null);
+        setLocationRelativeTo(null);
         opcionDeCarga=opcion;
         codigo=producto.getCodigo();
         existencias=producto.getExistencias();

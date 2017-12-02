@@ -35,6 +35,7 @@ public class BuscarFacturasDeVentaQueTieneDevoluciones extends javax.swing.JFram
 
     public BuscarFacturasDeVentaQueTieneDevoluciones() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
