@@ -350,7 +350,7 @@ public static void VisualizarCamion(JTable Listar) {
                 }
             };
             CoordinadorDeUsuarios elCoordinador = new CoordinadorDeUsuarios();
-            ResultSet resultadoConsulta = elCoordinador.ListarUsuariosActivosParaCargas();
+            ResultSet resultadoConsulta = elCoordinador.ListarUsuariosActivos();
 
             modelo.addColumn("Id");
             modelo.addColumn("Usuario");

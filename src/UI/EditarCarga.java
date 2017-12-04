@@ -6,6 +6,7 @@
 package UI;
 
 import LogicaDeNegocios.CoordinadorDeCamion;
+import LogicaDeNegocios.CoordinadorDeRutas;
 import LogicaDeNegocios.CoordinadorDeUsuarios;
 import Modelos.Carga;
 import java.sql.ResultSet;
@@ -39,6 +40,7 @@ public class EditarCarga extends javax.swing.JFrame {
 
         ListarTodasLasPlacas();
         ListarTodasLosUsuarios();
+        ListarTodasLasRutas();
         jComboPlacas_EditarCarga.setSelectedItem(PlacaDeCamion);
         jComboUsuarios_EditarCarga.setSelectedItem(usuario);
         setLocationRelativeTo(null);
@@ -62,7 +64,24 @@ public class EditarCarga extends javax.swing.JFrame {
         }
 
     }
+public static void ListarTodasLasRutas() {
+        try {
+            CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+            ResultSet resultadoConsulta = elCoordinador.ListarRutasActivas();
+            if (resultadoConsulta == null) {
+                JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            while (resultadoConsulta.next()) {
+                jComboRuta_EditarCarga.addItem(resultadoConsulta.getString(2));
+            }
+        } catch (SQLException ex) {
 
+        } catch (ClassNotFoundException ex) {
+
+        }
+
+    }
     public static void ListarTodasLosUsuarios() {
         try {
             CoordinadorDeUsuarios elCoordinador = new CoordinadorDeUsuarios();
@@ -81,7 +100,24 @@ public class EditarCarga extends javax.swing.JFrame {
         }
 
     }
+public int ObtenerIdRuta() throws SQLException, ClassNotFoundException {
+        int id = 0;
+        CoordinadorDeRutas elCoordinador = new CoordinadorDeRutas();
+        ResultSet resultadoConsulta = elCoordinador.ListarRutasActivas();
+        if (resultadoConsulta == null) {
+            JOptionPane.showMessageDialog(null, "Verifique que tenga permisos de administrador", "Error de permisos", JOptionPane.ERROR_MESSAGE);
 
+        } else {
+            while (resultadoConsulta.next()) {
+                if (resultadoConsulta.getString(2).equals(jComboRuta_EditarCarga.getSelectedItem().toString())) {
+                    id = Integer.parseInt(resultadoConsulta.getString(1));
+
+                    return id;
+                }
+            }
+        }
+        return id;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,6 +132,8 @@ public class EditarCarga extends javax.swing.JFrame {
         btSalir_EditarCarga = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jComboUsuarios_EditarCarga = new javax.swing.JComboBox<String>();
+        jLabel6 = new javax.swing.JLabel();
+        jComboRuta_EditarCarga = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,6 +164,10 @@ public class EditarCarga extends javax.swing.JFrame {
 
         jComboUsuarios_EditarCarga.setDoubleBuffered(true);
 
+        jLabel6.setText("Ruta asignada");
+
+        jComboRuta_EditarCarga.setDoubleBuffered(true);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,9 +191,13 @@ public class EditarCarga extends javax.swing.JFrame {
                                     .addComponent(jComboPlacas_EditarCarga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(jLabel5)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboUsuarios_EditarCarga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboRuta_EditarCarga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboUsuarios_EditarCarga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btAceptar_EditarCarga)
@@ -162,11 +208,7 @@ public class EditarCarga extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btAceptar_EditarCarga)
-                        .addGap(36, 36, 36)
-                        .addComponent(btSalir_EditarCarga))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(26, 26, 26)
@@ -177,11 +219,22 @@ public class EditarCarga extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jComboPlacas_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                        .addGap(30, 30, 30))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btAceptar_EditarCarga)
+                        .addGap(43, 43, 43)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboUsuarios_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboUsuarios_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jComboRuta_EditarCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btSalir_EditarCarga))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,6 +278,7 @@ public class EditarCarga extends javax.swing.JFrame {
             Carga laCarga = new Carga();
             laCarga.setIdCamion(jComboPlacas_EditarCarga.getSelectedItem().toString());
             laCarga.setUsuario(ObtenerIdUsuario());
+            laCarga.setIdRuta(ObtenerIdRuta());
 
             laCarga.setIdCarga(Integer.parseInt(txtIdCarga_EditarCarga.getText()));
             CoordinadorDeCamion elCoordinadorDeCamion = new CoordinadorDeCamion();
@@ -271,11 +325,13 @@ public class EditarCarga extends javax.swing.JFrame {
     private javax.swing.JButton btAceptar_EditarCarga;
     private javax.swing.JButton btSalir_EditarCarga;
     public static javax.swing.JComboBox<String> jComboPlacas_EditarCarga;
+    public static javax.swing.JComboBox<String> jComboRuta_EditarCarga;
     public static javax.swing.JComboBox<String> jComboUsuarios_EditarCarga;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtIdCarga_EditarCarga;
     // End of variables declaration//GEN-END:variables
