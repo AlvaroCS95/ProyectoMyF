@@ -514,9 +514,8 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-         // TODO add your handling code here:
         try {
-            File path = new File("src/Manual/Manual de usuario de la aplicación móvil SifacMyF.pdf");
+            File path = new File("src/Manual/Manual Usuario CIFACMYF.pdf");
             Desktop.getDesktop().open(path);
         } catch (IOException ex) {
             ex.printStackTrace();
