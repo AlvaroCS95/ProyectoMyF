@@ -45,6 +45,8 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.Timer;
@@ -103,6 +105,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -291,6 +294,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenu2.setText("Salir");
+        jMenu2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CerrarSesionIcon.png"))); // NOI18N
         jMenuItem1.setText("Salir");
@@ -317,6 +321,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         jMenuBar1.add(jMenu2);
 
         jMenu5.setText("Ayuda");
+        jMenu5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         jMenuItem3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seo.png"))); // NOI18N
@@ -337,6 +342,16 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
             }
         });
         jMenu5.add(jMenuItem4);
+
+        jMenuItem5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Help_Icon_16.png"))); // NOI18N
+        jMenuItem5.setText("Acerca de");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
 
@@ -556,6 +571,24 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         AbrirManualUsuarioDescktop();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+    public void acercade() {
+        Icon icono = new ImageIcon(getClass().getResource("/Imagenes/ucr.png"));
+        String txt = "\n\nEsta aplicación fue desarrollada por estudiantes\n"
+                + "de la Universidad de Costa Rica sede Guanacaste.\n"
+                + "Con el objetivo de completar la práctica para la carrera\n"
+                + "Bachillerato en Informática Empresarial, para la distribuidora M&F.\n\n"
+                + "Desarrolladores:\n"
+                + "Carranza Solano Alvaro\n"
+                + "Carrillo Méndez Dayana\n"
+                + "García Jiménez Laura\n"
+                + "Madrigal Céspedez Christian\n\n"
+                + "Gracias.";
+        JOptionPane.showMessageDialog(null, txt,"Acerca de..." , JOptionPane.INFORMATION_MESSAGE, icono);
+       
+    }
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        acercade();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {
         int OpcionDelUsuario = JOptionPane.showConfirmDialog(null, ConsultaAlUsuario, TituloDelFrame, JOptionPane.YES_NO_OPTION);
@@ -586,6 +619,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private UI.ListarCamiones listarCamiones1;
     private UI.ListarClientes listarClientes1;
