@@ -7,33 +7,19 @@
 			       Nicoya, Guanacaste
 --------------------------------
 
-       FACTURA DE DEVOLUCION
-N.Fac:100
-Cli:Los almendros
-Usuario Fac:master
-Fecha V:2017-11-27 18:16:54.0
-Monto de venta:27120.0
-Usuarios dev:4
-Fecha D: 22:07:48 01/12/2017
-*Detalle
+ 
+-----INFORMACION DE CARGA-----
 
-      Productos desechados
+N.Carga:23
+F.Creacion:01/12/2017
+U.Responsable:Alvaro
+Camion:24548422
+____________________________
+Cod     Cant      Descr
+C002     60.0      Bistek    
 
-Cod   Cant     Descr
-C004    10.0      Pechuga Ente
-*jskahdkjasd
 
-      Productos Reintegrados
-
-Cod   Cant     Descr
-C004    10.0      Pechuga Ente
-
-------*---------------*---------
-Total de devolucion:678.0
-Total de  reintegro:678.0
-Total de desecho:678.0
-
-------------Fin--------------
-                                               
-                                               
-                                               
+-------------Fin-------------
+                                 
+                                 
+                                 

@@ -1,4 +1,4 @@
-/*FINAL */
+
 package AccesoDatos;
 
 import Modelos.Clasificacion;

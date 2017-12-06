@@ -33,7 +33,10 @@ import static UI.VisualizaryEditarCargas.ListarCargas;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -444,6 +447,50 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
         segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
     }
 
+    public void AbrirManualUsuarioDescktop() {
+        try {
+            File temp = new File(System.getProperty("java.io.tmpdir") + "Manual de usuario CIFACMyF-Descktop.pdf");
+            InputStream flujoEntrada = this.getClass().getResourceAsStream("/Manual/Manual Usuario CIFACMYF.pdf");
+            FileOutputStream flujoSalida = new FileOutputStream(temp);
+            FileWriter fw = new FileWriter(temp);
+            byte[] buffer = new byte[1024 * 512];
+            int control; //para contar posiciones de byte
+            while ((control = flujoEntrada.read(buffer)) != -1) {
+                flujoSalida.write(buffer, 0, control);
+            }
+            fw.close();
+            flujoSalida.close();
+            flujoEntrada.close();
+
+            Desktop.getDesktop().open(temp);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Este archivo ya se encuentra abierto.",
+                    "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void AbrirManualUsuarioMovil() {
+        try {
+            File temp = new File(System.getProperty("java.io.tmpdir") + "Manual de usuario SIFACMyF-Movil.pdf");
+            InputStream flujoEntrada = this.getClass().getResourceAsStream("/Manual/Manual de usuario de la aplicación móvil SifacMyF.pdf");
+            FileOutputStream flujoSalida = new FileOutputStream(temp);
+            FileWriter fw = new FileWriter(temp);
+            byte[] buffer = new byte[1024 * 512];
+            int control; //para contar posiciones de byte
+            while ((control = flujoEntrada.read(buffer)) != -1) {
+                flujoSalida.write(buffer, 0, control);
+            }
+            fw.close();
+            flujoSalida.close();
+            flujoEntrada.close();
+
+            Desktop.getDesktop().open(temp);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Este archivo ya se encuentra abierto.",
+                    "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
         int OpcionDelUsuario = YesNoQuestionParaConsultaAlUsuario("¿Seguro que desea cerrar sesion?", "Cerrar sesion");
@@ -486,7 +533,7 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
 
         VisualizarTodosProductosCargas();
         VisualizarUsuariosParaCargas();// TODO add your handling code here:
-       Limpiar();
+        Limpiar();
         try {
             VisualizarRutasParaCargas();
         } catch (ClassNotFoundException ex) {
@@ -503,23 +550,11 @@ public class Inicio extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_puntoDeVenta1AncestorAdded
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        try {
-            File path = new File("src/Manual/Manual de usuario de la aplicación móvil SifacMyF.pdf");
-            Desktop.getDesktop().open(path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        AbrirManualUsuarioMovil();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        try {
-            File path = new File("src/Manual/Manual Usuario CIFACMYF.pdf");
-            Desktop.getDesktop().open(path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        AbrirManualUsuarioDescktop();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private int YesNoQuestionParaConsultaAlUsuario(String ConsultaAlUsuario, String TituloDelFrame) {

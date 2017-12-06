@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package AccesoDatos;
 
 import Modelos.Devolucion;
@@ -12,10 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Christian
- */
 public class GestorDeDevoluciones extends Coneccion {
 
     CallableStatement llamadaAlMetodo;
@@ -34,27 +26,26 @@ public class GestorDeDevoluciones extends Coneccion {
         try {
 
             try {
-            resultadoConsulta = consulta.executeQuery("call IngresarDevolucion"
-                    + "(" + LaDevolucion.getNumeroFactura()+ ",'" + LaDevolucion.getCedulaUsuario()
-                    + "'," + LaDevolucion.getValorTotal()+ "," + LaDevolucion.getReintegroAlCliente()+ ");");
-          exito=true;
-            
-        } catch (Exception e) {
-           return exito=false;        
-        }
-            while(resultadoConsulta.next()){
-            if(resultadoConsulta.getObject(1).equals("2"))
-            {exito=true;
-            
-            }else{
-            
-            exito=false;
+                resultadoConsulta = consulta.executeQuery("call IngresarDevolucion"
+                        + "(" + LaDevolucion.getNumeroFactura() + ",'" + LaDevolucion.getCedulaUsuario()
+                        + "'," + LaDevolucion.getValorTotal() + "," + LaDevolucion.getReintegroAlCliente() + ");");
+                exito = true;
+
+            } catch (Exception e) {
+                return exito = false;
             }
+            while (resultadoConsulta.next()) {
+                if (resultadoConsulta.getObject(1).equals("2")) {
+                    exito = true;
+
+                } else {
+
+                    exito = false;
+                }
             }
-            //llamadaAlMetodo.close();
             return exito;
         } catch (Exception e) {
-            exito=false;
+            exito = false;
             return exito;
         }
     }
