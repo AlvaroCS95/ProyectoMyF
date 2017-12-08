@@ -350,7 +350,7 @@ public static void VisualizarCamion(JTable Listar) {
                 }
             };
             CoordinadorDeUsuarios elCoordinador = new CoordinadorDeUsuarios();
-            ResultSet resultadoConsulta = elCoordinador.ListarUsuariosActivos();
+            ResultSet resultadoConsulta = elCoordinador.ListarUsuariosActivosParaCargas();
 
             modelo.addColumn("Id");
             modelo.addColumn("Usuario");
@@ -543,7 +543,7 @@ public static void VisualizarCamion(JTable Listar) {
                 String placa = TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(), 0).toString();
                 int usuario = Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
                 int Ruta = Integer.parseInt(TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0).toString());
-
+              //  JOptionPane.showMessageDialog(null, "placa"+placa+"\nusu"+usuario+"\nRuta"+Ruta+"\nfecha"+fecha);
                 Carga laCarga = new Carga(placa, usuario, fecha, Ruta);
                 String NombreUsuario = TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 1).toString();
                 ArrayList<DetalleCarga> laListaDetalle = new ArrayList();
@@ -586,6 +586,7 @@ public static void VisualizarCamion(JTable Listar) {
 
                 laCarga.setLaListaDeCarga(laListaDetalle);
                 int respuest = elCoordinador.InsertarCarga(laCarga);
+                 JOptionPane.showMessageDialog(null, respuest);
                 if (respuest == 1) {
                     JOptionPane.showMessageDialog(null, "¡Carga ingresada exitosamente!");
                     IMPRIMIR impresora = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
