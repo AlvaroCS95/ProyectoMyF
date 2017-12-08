@@ -8,31 +8,32 @@
 --------------------------------
 
        FACTURA DE DEVOLUCION
-N.Fac:3
-Cli:la china cr
-Usuario::root
-Fecha V:2017-12-06 20:45:18.0
-Monto de venta:79100.0
-Fecha D: 2017-12-08 12:52:58.0
+N.Fac:17
+Cli:cmc rojas
+Usuario Fac:root
+Fecha V:2017-12-08 13:51:54.0
+Monto de venta:2429.5
+Usuarios dev:1
+Fecha D: 13:26:13 08/12/2017
 *Detalle
 
       Productos desechados
 
 Cod   Cant     Descr
-E002    10.0      Mort jamo
-*wertyuiop
+C001    1.0      Bistek
+*qwertyui
 
       Productos Reintegrados
 
 Cod   Cant     Descr
-E001    10.0      Mortadela
+E001    1.0      Mortadela
 
 ------*---------------*---------
-Total de devolucion:847.5
-Total de  reintegro:1130.0
-Total de desecho:847.5
+Total de devolucion:1500.0
+Total de  reintegro:650.5
+Total de desecho:1500.0
 
 ------------Fin--------------
-                                              
-                                              
-                                              
+                                               
+                                               
+                                               

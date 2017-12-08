@@ -623,7 +623,7 @@ public class PuntoDeVenta extends javax.swing.JPanel {
         for (int i = 0; i < TablaFacturacion_PuntoDeVenta.getRowCount(); i++) {
             codigo = TablaFacturacion_PuntoDeVenta.getValueAt(i, 0).toString();
             cantidadVendida = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 3).toString());
-            descuentoAplicado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 6).toString());
+            descuentoAplicado = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 5).toString());
             precioVendido = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
             Descripcion = TablaFacturacion_PuntoDeVenta.getValueAt(i, 1).toString();
             String des = "";
