@@ -1,26 +1,26 @@
 
 	        Distribuidora MyF
-	  Aramed de Jesus Sequeira Vega
-		      Cedula: 5-256-190
+	       Walter Sequeira Castro
+		      Cedula: 5-0376-0475
 	   Tels: 83031359 / 88197499
 	  Email: aramedsequeira@yahoo.es
 			       Nicoya, Guanacaste
 --------------------------------
 
        FACTURA DE DEVOLUCION
-N.Fac:17
-Cli:cmc rojas
+N.Fac:19
+Cli:la china cr
 Usuario Fac:root
-Fecha V:2017-12-08 13:51:54.0
-Monto de venta:2429.5
+Fecha V:2017-12-08 14:03:04.0
+Monto de venta:1469.0
 Usuarios dev:1
-Fecha D: 13:26:13 08/12/2017
+Fecha D: 13:59:46 08/12/2017
 *Detalle
 
       Productos desechados
 
 Cod   Cant     Descr
-C001    1.0      Bistek
+E001    1.0      Mortadela
 *qwertyui
 
       Productos Reintegrados
@@ -29,9 +29,9 @@ Cod   Cant     Descr
 E001    1.0      Mortadela
 
 ------*---------------*---------
-Total de devolucion:1500.0
-Total de  reintegro:650.5
-Total de desecho:1500.0
+Total de devolucion:734.5
+Total de  reintegro:734.5
+Total de desecho:734.5
 
 ------------Fin--------------
                                                

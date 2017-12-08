@@ -47,7 +47,7 @@ public class IMPRIMIR {
         PrinterMatrix printer = new PrinterMatrix();
       
       String Encabezado
-            = "\n\t        Distribuidora MyF\n"
+            = "\n\t        Nefertiti   \n"
             + "\t       Walter Sequeira Castro\n"
              + "\t\t      Cedula: 5-0376-0475\n"
             + "\t   Tels: 83031359 / 88197499\n"
