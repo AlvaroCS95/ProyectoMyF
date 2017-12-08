@@ -107,10 +107,10 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                 precio = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
                 cantidad = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
                 elCodigo = String.format("%1$-4s", elCodigo);
-                
+                 descr = descr.replaceAll(" ", "");
                 if (descr.length() >= 10) {
 
-                        descr = descr.replaceAll(" ", "");
+                       
                         descr = descr.substring(0, 10);
                     } else {
 
@@ -137,9 +137,10 @@ public class DetallesFacturaCompraVenta extends javax.swing.JDialog {
                 cantidad = jtDetallesFacturaCompra.getValueAt(i, 2).toString();
                 descu = jtDetallesFacturaCompra.getValueAt(i, 3).toString();
                 elCodigo = String.format("%1$-4s", elCodigo);
+                descr = descr.replaceAll(" ", "");
                 if (descr.length() >= 10) {
 
-                        descr = descr.replaceAll(" ", "");
+                        
                         descr = descr.substring(0, 10);
                     } else {
 

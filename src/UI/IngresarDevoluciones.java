@@ -467,9 +467,10 @@ public void imprimir(int UsuarioActivo, float reintegro){
                                     String Detalle = TablaProductosDesechados_Devoluciones.getValueAt(i, 3).toString();
 
                                     String des = "";
-                                    if (Descripcion.length() >= 10) {
+                                    des = Descripcion.replaceAll(" ", "");
+                                    if (des.length() >= 10) {
 
-                                        des = Descripcion.replaceAll(" ", "");
+                                        
                                         des = des.substring(0, 10);
                                     } else {
 

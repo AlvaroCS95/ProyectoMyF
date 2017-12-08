@@ -627,9 +627,10 @@ public class PuntoDeVenta extends javax.swing.JPanel {
             precioVendido = Float.parseFloat(TablaFacturacion_PuntoDeVenta.getValueAt(i, 7).toString());
             Descripcion = TablaFacturacion_PuntoDeVenta.getValueAt(i, 1).toString();
             String des = "";
-            if (Descripcion.length() >= 10) {
+            des = Descripcion.replaceAll(" ", "");
+            if (des.length() >= 10) {
 
-                des = Descripcion.replaceAll(" ", "");
+                
                 des = String.format("%1$-10s", des);
             } else {
                 des = String.format("%1$-10s", Descripcion);

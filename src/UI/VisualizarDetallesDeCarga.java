@@ -34,7 +34,7 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
     static DefaultTableModel modelo;
     int IDCarga;
     static String CuerpoDelTextoAImprimir = "", placa, usuarioResponsable;
-    
+
     public static Date date = new Date();
     public static DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -129,9 +129,9 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
     }
 
     public void imprimir() {
-        CuerpoDelTextoAImprimir="";
-        CuerpoDelTextoAImprimir +="\n-----INFORMACION DE CARGA-----"
-                +"\n\nN.Carga:" + IDCarga
+        CuerpoDelTextoAImprimir = "";
+        CuerpoDelTextoAImprimir += "\n-----INFORMACION DE CARGA-----"
+                + "\n\nN.Carga:" + IDCarga
                 + "\nF.Creacion:" + hourdateFormat.format(date)
                 + "\nU.Responsable:" + usuarioResponsable
                 + "\nCamion:" + placa
@@ -142,7 +142,9 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
             float cantidadVendida = Float.parseFloat(Tabla_VisualizarDetalleDeCarga.getValueAt(i, 2).toString());
             String Descripcion = Tabla_VisualizarDetalleDeCarga.getValueAt(i, 1).toString();
             String des = "";
-            if (Descripcion.length() >= 10) {
+            des = Descripcion.replaceAll(" ", "");
+
+            if (des.length() >= 10) {
 
                 des = Descripcion.replaceAll(" ", "");
                 des = des.substring(0, 10);
@@ -153,13 +155,11 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
             }
 
             CuerpoDelTextoAImprimir += "\n" + codigo + "     " + cantidadVendida + "      " + des;
-            
-            
 
         }
-          CuerpoDelTextoAImprimir+= "\n\n\n-------------Fin-------------";
+        CuerpoDelTextoAImprimir += "\n\n\n-------------Fin-------------";
         IMPRIMIR impresora = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
-          
+
     }
 
     @SuppressWarnings("unchecked")
@@ -377,7 +377,7 @@ public class VisualizarDetallesDeCarga extends javax.swing.JFrame {
     }//GEN-LAST:event_ImprimirActionPerformed
 
     private void txtBuscar_VisualizarDetalleDeCargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar_VisualizarDetalleDeCargaKeyTyped
-       txtBuscar();
+        txtBuscar();
     }//GEN-LAST:event_txtBuscar_VisualizarDetalleDeCargaKeyTyped
 
     /**
