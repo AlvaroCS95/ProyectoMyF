@@ -494,9 +494,10 @@ public void imprimir(int UsuarioActivo, float reintegro){
                                     float Cantidad = Float.parseFloat(TablaReintegro_Devoluciones.getValueAt(i, 2).toString());
 
                                     String des = "";
-                                    if (Descripcion.length() >= 10) {
-
+                                    
                                         des = Descripcion.replaceAll(" ", "");
+                                    if (des.length() >= 10) {
+
                                         des = des.substring(0, 10);
                                     } else {
 
