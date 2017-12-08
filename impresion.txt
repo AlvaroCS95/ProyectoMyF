@@ -10,13 +10,13 @@
  
 -----INFORMACION DE CARGA-----
 
-N.Carga:23
-F.Creacion:01/12/2017
-U.Responsable:Alvaro
-Camion:24548422
+N.Carga:24
+F.Creacion:08/12/2017
+U.Responsable:alvaro14
+Camion:12345
 ____________________________
 Cod     Cant      Descr
-C002     60.0      Bistek    
+E002     10.0      Mort jamo 
 
 
 -------------Fin-------------

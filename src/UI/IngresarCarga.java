@@ -8,9 +8,7 @@ import LogicaDeNegocios.IMPRIMIR;
 import Modelos.Carga;
 import Modelos.DetalleCarga;
 import Modelos.Producto;
-import static UI.GestorDeRutas.filas;
 import java.awt.Point;
-import java.text.SimpleDateFormat;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -33,10 +31,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author usuario
- */
 public class IngresarCarga extends javax.swing.JPanel {
 
     private TableRowSorter trsFiltro;
@@ -543,7 +537,6 @@ public static void VisualizarCamion(JTable Listar) {
                 String placa = TablaListarCamiones_Cargas.getValueAt(TablaListarCamiones_Cargas.getSelectedRow(), 0).toString();
                 int usuario = Integer.parseInt(TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 0).toString());
                 int Ruta = Integer.parseInt(TablaRutas_IngresarCarga.getValueAt(TablaRutas_IngresarCarga.getSelectedRow(), 0).toString());
-              //  JOptionPane.showMessageDialog(null, "placa"+placa+"\nusu"+usuario+"\nRuta"+Ruta+"\nfecha"+fecha);
                 Carga laCarga = new Carga(placa, usuario, fecha, Ruta);
                 String NombreUsuario = TablaUsuarios_IngresarCarga.getValueAt(TablaUsuarios_IngresarCarga.getSelectedRow(), 1).toString();
                 ArrayList<DetalleCarga> laListaDetalle = new ArrayList();
@@ -559,7 +552,6 @@ public static void VisualizarCamion(JTable Listar) {
                         + "\nCamion:" + placa
                         + "\n____________________________\n";
                 CuerpoDelTextoAImprimir += "Cod     Cant      Descr";
-                // JOptionPane.showMessageDialog(null, id);
                 for (int i = 0; i < filas; i++) {
                     String elCodigo = TablaProductosCargados_IngresarCarga.getValueAt(i, 0).toString();
                     float cantidad = Float.parseFloat(TablaProductosCargados_IngresarCarga.getValueAt(i, 3).toString());
@@ -586,7 +578,6 @@ public static void VisualizarCamion(JTable Listar) {
 
                 laCarga.setLaListaDeCarga(laListaDetalle);
                 int respuest = elCoordinador.InsertarCarga(laCarga);
-                 JOptionPane.showMessageDialog(null, respuest);
                 if (respuest == 1) {
                     JOptionPane.showMessageDialog(null, "¡Carga ingresada exitosamente!");
                     IMPRIMIR impresora = new IMPRIMIR(CuerpoDelTextoAImprimir, CantidadDeFilas(CuerpoDelTextoAImprimir), CuerpoDelTextoAImprimir.length());
@@ -749,7 +740,7 @@ public static void VisualizarCamion(JTable Listar) {
     private void TablaRutas_IngresarCargaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaRutas_IngresarCargaMousePressed
         if (SwingUtilities.isRightMouseButton(evt)) {
             Point p = evt.getPoint();
-             idRUta = TablaRutas_IngresarCarga.rowAtPoint(p);
+            idRUta = TablaRutas_IngresarCarga.rowAtPoint(p);
 //            idRUta = TablaRutas_IngresarCarga.geti();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_TablaRutas_IngresarCargaMousePressed
